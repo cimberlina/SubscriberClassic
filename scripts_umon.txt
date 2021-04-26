@@ -1,0 +1,37 @@
+script FlashFirmware flags: e
+
+flash erase 21
+flash erase 22
+flash erase 23
+flash erase 24
+flash erase 25
+flash erase 26
+flash erase 27
+flash erase 28
+flash erase 29
+tftp $TFTP_SERVER get subscriber_release.bin 0x38000
+
+--------------------------------------------------------------
+
+script startup flags: Be
+
+echo "Obtaining DHCP info."
+sleep 10
+echo DHCP IP ADDR : $IPADD
+echo DHCP NETMASK : $NETMASK
+echo DHCP GATEWAY : $GIPADD
+e2p_save_addr
+echo "Transfering control to APPLICATION."
+ether on
+sleep 5
+echo "bye ..."
+load_subscriber
+SetBeginTMR
+
+---------------------------------------------------------------
+
+script monrc flags: e
+
+set IPADD DHCP
+
+---------------------------------------------------------------

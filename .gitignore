@@ -1,0 +1,16 @@
+.metadata/
+*.c~
+RemoteSystemsTempFiles/
+nbproject/
+.settings/
+Debug/
+.DS_store
+Release/
+abonado.*
+.project
+.cproject
+._.DS_store
+settings/
+*.rar
+*.zip
+

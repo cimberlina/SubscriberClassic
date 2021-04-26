@@ -1,0 +1,4 @@
+"C:\Program Files\JetBrains\CLion 2019.3.5\bin\cmake\win\bin\cmake.exe" -G "CodeBlocks - MinGW Makefiles" J:\Projects\eyse\Subscriber\workspace_6.4_classic\Subscriber
+-- Configuring done
+-- Generating done
+-- Build files have been written to: J:/Projects/eyse/Subscriber/workspace_6.4_classic/Subscriber/cmake-build-default
