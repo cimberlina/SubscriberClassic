@@ -2553,10 +2553,13 @@ void MDM_IrqHandler( void )
 	    startup = 1;
 	    t1 = MSEC_TIMER;
 	    t2 = MSEC_TIMER;
-	}
-	t1 = t2;
-	t2 = MSEC_TIMER;
-	delta_t = t2 - t1;
+	} else
+    if( (rxchar == BaseAlarmPkt_numabo) && (rxchar_m1 >= 0xE0) && (rxchar_m1 <= 0xFF) && \
+        (rxchar_m2 >= 0x00) && (rxchar_m2 <= 149) )     {
+        t1 = t2;
+        t2 = MSEC_TIMER;
+        delta_t = t2 - t1;
+    }
 //--------------------------------------------------------------------------
 // aca procesamos el codigo de autoreset para deteccion de preves de tx
     if( (rxchar == (BaseAlarmPkt_numabo + 1)) && (SysFlag4 & ABONUMBER_flag) )	{
@@ -2666,6 +2669,7 @@ void MDM_IrqHandler( void )
 		if( (rxchar == BaseAlarmPkt_numabo) && (delta_t > 80) && (rxchar_m1 >= 0xE0) && (rxchar_m1 <= 0xFF) && \
 		    (rxchar_m2 >= 0x00) && (rxchar_m2 <= 149)   && \
 		    rxabonum_prev(rxchar_m2, 20) && IsWrightTimePoll())	{
+
             SysFlag4 |= ABONUMBER_flag;
 			if(DebugFlag & DBGABORF_flag)	{
 				CommPutChar(DEBUG_COMM,'{',0);

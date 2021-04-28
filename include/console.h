@@ -34,14 +34,14 @@ extern uint8_t	r3kmode;
 -----------------------------------------\r\n\
 NXP LPC1769 Cortex-M3 System-UP by C.M.I.\r\n\
 EYSE (C) 2021 Abonado - EYSE Ingenieria\r\n\
-Version: 6.04CB                  20210329\r\n\
+Version: 6.05CB                  20210430\r\n\
 -----------------------------------------\r\n"
 
-#define	VERSION_ABO		"Version: 6.04CB            20210329\r\n"
+#define	VERSION_ABO		"Version: 6.05CB            20210430\r\n"
 
-#define VERSION_NUMBER  604
+#define VERSION_NUMBER  605
 
-#define VERSION_YEAR	2019
+#define VERSION_YEAR	2021
 
 // ConsoleCommand structure
 typedef struct {
