@@ -2553,13 +2553,11 @@ void MDM_IrqHandler( void )
 	    startup = 1;
 	    t1 = MSEC_TIMER;
 	    t2 = MSEC_TIMER;
-	} else
-    if( (rxchar == BaseAlarmPkt_numabo) && (rxchar_m1 >= 0xE0) && (rxchar_m1 <= 0xFF) && \
-        (rxchar_m2 >= 0x00) && (rxchar_m2 <= 149) )     {
-        t1 = t2;
-        t2 = MSEC_TIMER;
-        delta_t = t2 - t1;
-    }
+	}
+    t1 = t2;
+    t2 = MSEC_TIMER;
+    delta_t = t2 - t1;
+
 //--------------------------------------------------------------------------
 // aca procesamos el codigo de autoreset para deteccion de preves de tx
     if( (rxchar == (BaseAlarmPkt_numabo + 1)) && (SysFlag4 & ABONUMBER_flag) )	{
@@ -2666,7 +2664,7 @@ void MDM_IrqHandler( void )
 		if((rxchar > 0) && (rxchar < 203))	{
 			SysFlag3 |= VALIDRXCHAR_flag;
 		}
-		if( (rxchar == BaseAlarmPkt_numabo) && (delta_t > 80) && (rxchar_m1 >= 0xE0) && (rxchar_m1 <= 0xFF) && \
+		if( (rxchar == BaseAlarmPkt_numabo) && (rxchar_m1 >= 0xE0) && (rxchar_m1 <= 0xFF) && \
 		    (rxchar_m2 >= 0x00) && (rxchar_m2 <= 149)   && \
 		    rxabonum_prev(rxchar_m2, 20) && IsWrightTimePoll())	{
 
@@ -2804,7 +2802,7 @@ void fsm_transmit_cmx( void )
                 preve_timer = TIEMPO_PREVE;
                 SysFlag1 &= ~PREVE_CENTRAL_RX;
 
-				fsmtx_timer1 = 33;							//60
+				fsmtx_timer1 = 43;							//60
 				acumu_buffer_sended=0;
 				state_transmit_tx = FSMTX_WAIT1;
 
