@@ -380,6 +380,9 @@ int con_pakterrors(ConsoleState* state);
 int con_rffilter1(ConsoleState* state);
 int con_rffilter2(ConsoleState* state);
 
+int con_delaydual(ConsoleState* state);
+int con_DeltaT(ConsoleState* state);
+
 extern const ConsoleIO console_io[];
 
 extern unsigned char fsmrhbstate;

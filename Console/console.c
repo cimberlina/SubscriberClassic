@@ -235,6 +235,8 @@ const ConsoleCommand console_commands[] =
     { "r485stat",      con_pakterrors,			0,		MCMI_LEVEL},
     { "rffilter1",     con_rffilter1,			0,		MCMI_LEVEL},
     { "rffilter2",     con_rffilter2,			0,		MCMI_LEVEL},
+    { "delaydual",     con_delaydual,			0,		MCMI_LEVEL},
+    { "DeltaT",        con_DeltaT,			    0,		MCMI_LEVEL},
 	{ "P",             con_poll,               0,		MONI_LEVEL}
 };
 
@@ -8183,6 +8185,108 @@ int con_remptmarm(ConsoleState* state)
         state->conio->puts("ERROR\n\r");
         return -1;
     }
+
+    return 1;
+}
+
+int con_delaydual(ConsoleState* state)
+{
+    uint16_t value;
+    uint8_t retval, temp[8];
+    int error;
+
+    char buffer[32];
+
+    buffer[0] = 0;
+    value = 0;
+
+    if( state->numparams < 2 )	{
+        state->conio->puts("delaydual mseg (entre 0 y 500)\n\r");
+        flash0_read(temp, DF_DELAYDUAL_OFFSET, 4);
+        if((temp[2] == 0x5A) && (temp[3] == 0xA5)) {
+            value = temp[0]*0x100 + temp[1];
+            retval = 1;
+        }
+        else
+            retval = 0;
+
+        Str_Cat(buffer, "delaydual = ");
+        switch(retval)	{
+            case 0:
+                Str_Cat(buffer,itoa(value));
+                Str_Cat(buffer, "  *NOT SET\n\r");
+                break;
+            case 1:
+                Str_Cat(buffer,itoa(value));
+                Str_Cat(buffer, "  *SET\n\r");
+                break;
+            default:
+                Str_Cat(buffer, "ACTIVATION ERROR\n\r");
+                break;
+        }
+        state->conio->puts(buffer);
+        return 1;
+    }
+
+    value = atoi(con_getparam(state->command, 1));
+
+    buffer[0] = (value >> 8) & 0x00FF;
+    buffer[1] = value & 0x00FF;
+    buffer[2] = 0x5A;
+    buffer[3] = 0xA5;
+    error = flash0_write(1, (uint8_t *)buffer, DF_DELAYDUAL_OFFSET, 4);
+
+
+    return 1;
+}
+
+int con_DeltaT(ConsoleState* state)
+{
+    uint16_t value;
+    uint8_t retval, temp[8];
+    int error;
+
+    char buffer[32];
+
+    buffer[0] = 0;
+    value = 0;
+
+    if( state->numparams < 2 )	{
+        state->conio->puts("DeltaT mseg (entre 0 y 500)\n\r");
+        flash0_read(temp, DF_DELTAT_OFFSET, 4);
+        if((temp[2] == 0x5A) && (temp[3] == 0xA5)) {
+            value = temp[0]*0x100 + temp[1];
+            retval = 1;
+        }
+        else
+            retval = 0;
+
+        Str_Cat(buffer, "DeltaT = ");
+        switch(retval)	{
+            case 0:
+                Str_Cat(buffer,itoa(value));
+                Str_Cat(buffer, "  *NOT SET\n\r");
+                break;
+            case 1:
+                Str_Cat(buffer,itoa(value));
+                Str_Cat(buffer, "  *SET\n\r");
+                break;
+            default:
+                Str_Cat(buffer, "ACTIVATION ERROR\n\r");
+                break;
+        }
+        state->conio->puts(buffer);
+        return 1;
+    }
+
+    value = atoi(con_getparam(state->command, 1));
+
+    buffer[0] = (value >> 8) & 0x00FF;
+    buffer[1] = value & 0x00FF;
+    buffer[2] = 0x5A;
+    buffer[3] = 0xA5;
+    error = flash0_write(1, (uint8_t *)buffer, DF_DELTAT_OFFSET, 4);
+
 
     return 1;
 }

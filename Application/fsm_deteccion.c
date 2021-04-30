@@ -14,6 +14,7 @@ uint8_t fsm_rot485_state, fsm_rotrele485_state, fsm_rotEVO_state;
 uint8_t	Rot485_flag;
 time_t rot485timer, rotrele485timer, rotEVOtimer;
 uint16_t lowbatt_timer;
+int dualA_delay, DeltaT;
 
 uint8_t fsm_npd_state;
 #define	NPD_IDLE	0x10
@@ -2011,6 +2012,9 @@ void  AlarmDetectTask(void  *p_arg)
 
 		preve_timer = TIEMPO_PREVE;
 
+        dualA_delay = 0;
+        DeltaT = 0;
+
 		AlarmReadHistory();
 		OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);
 		WDT_Feed();
@@ -2163,6 +2167,19 @@ void  AlarmDetectTask(void  *p_arg)
         SysFlag4 |= RFFILTER2;
     } else  {
         SysFlag4 &= ~RFFILTER2;
+    }
+
+    flash0_read(temp, DF_DELTAT_OFFSET, 4);
+    if((temp[2] == 0x5A) && (temp[3] == 0xA5)) {
+        DeltaT = temp[0]*0x100 + temp[1];
+    } else  {
+        DeltaT = 0;
+    }
+    flash0_read(temp, DF_DELAYDUAL_OFFSET, 4);
+    if((temp[2] == 0x5A) && (temp[3] == 0xA5)) {
+        dualA_delay = temp[0]*0x100 + temp[1];
+    } else  {
+        dualA_delay = 0;
     }
 
 	while(DEF_ON)	{
@@ -2664,8 +2681,8 @@ void MDM_IrqHandler( void )
 		if((rxchar > 0) && (rxchar < 203))	{
 			SysFlag3 |= VALIDRXCHAR_flag;
 		}
-		if( (rxchar == BaseAlarmPkt_numabo) && (rxchar_m1 >= 0xE0) && (rxchar_m1 <= 0xFF) && \
-		    (rxchar_m2 >= 0x00) && (rxchar_m2 <= 149)   && \
+		if( (rxchar == BaseAlarmPkt_numabo) && (delta_t >= DeltaT) && \
+		    (rxchar_m1 >= 0xE0) && (rxchar_m1 <= 0xFF) && (rxchar_m2 >= 0x00) && (rxchar_m2 <= 149)   && \
 		    rxabonum_prev(rxchar_m2, 20) && IsWrightTimePoll())	{
 
             SysFlag4 |= ABONUMBER_flag;
@@ -2802,7 +2819,7 @@ void fsm_transmit_cmx( void )
                 preve_timer = TIEMPO_PREVE;
                 SysFlag1 &= ~PREVE_CENTRAL_RX;
 
-				fsmtx_timer1 = 43;							//60
+				fsmtx_timer1 = 43 + dualA_delay;							//60
 				acumu_buffer_sended=0;
 				state_transmit_tx = FSMTX_WAIT1;
 

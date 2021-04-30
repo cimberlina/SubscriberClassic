@@ -125,6 +125,8 @@ typedef struct	{
 #define DF_PPONWDOG_OFFSET      314     //2
 #define DF_RFFILTER1_OFFSET		316		//2
 #define DF_RFFILTER2_OFFSET		318		//2
+#define DF_DELTAT_OFFSET        320     //4
+#define DF_DELAYDUAL_OFFSET     324     //4
 
 #define	ACKRCVDMON0				0x01
 #define	ACKRCVDMON1				0x02
