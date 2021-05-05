@@ -2504,7 +2504,7 @@ int IsWrightTimePoll( void )
 }
 //*****************************************************************************
 //* Submodulo para el manejo del modem y el enlace de rf
-//*990
+//*
 void MDM_IrqHandler( void )
 {
 	uint16_t status, Control;

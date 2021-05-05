@@ -110,6 +110,8 @@ extern	uint16_t autorst_timer_min, asal_autorst_timer_min, teso_autorst_timer_mi
 extern	uint16_t autorst_timer;
 extern	uint16_t paparst_timer;
 
+extern int dualA_delay, DeltaT;
+
 extern uint32_t amr_timer;
 
 extern uint8_t ppon_state;

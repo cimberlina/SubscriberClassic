@@ -8236,6 +8236,7 @@ int con_delaydual(ConsoleState* state)
     buffer[3] = 0xA5;
     error = flash0_write(1, (uint8_t *)buffer, DF_DELAYDUAL_OFFSET, 4);
 
+    dualA_delay = value;
 
     return 1;
 }
@@ -8287,6 +8288,7 @@ int con_DeltaT(ConsoleState* state)
     buffer[3] = 0xA5;
     error = flash0_write(1, (uint8_t *)buffer, DF_DELTAT_OFFSET, 4);
 
+    DeltaT = value;
 
     return 1;
 }
