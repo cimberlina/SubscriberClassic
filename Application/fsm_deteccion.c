@@ -2533,9 +2533,9 @@ void MDM_IrqHandler( void )
 	rxchar = rd8_cbus(CMXRXDATA_ADDR);
 	
 	
-	if((status & 0x0010) && (status & 0x0020))	{
+	if((status & 0x0010) || (status & 0x0020))	{
 		for(i = 0; i < 5; i++ )	{
-			if((status & 0x0010) && (status & 0x0020))	{
+			if((status & 0x0010) || (status & 0x0020))	{
 				status = rd16_cbus(CMXSTAT_ADDR);
 				rxchar = rd8_cbus(CMXRXDATA_ADDR);
 			} else
@@ -2682,8 +2682,9 @@ void MDM_IrqHandler( void )
 			SysFlag3 |= VALIDRXCHAR_flag;
 		}
 		if( (rxchar == BaseAlarmPkt_numabo) && (delta_t >= DeltaT) && \
-		    (rxchar_m1 >= 0xE0) && (rxchar_m1 <= 0xFF) && (rxchar_m2 >= 0x00) && (rxchar_m2 <= 149)   && \
-		    rxabonum_prev(rxchar_m2, 20) && IsWrightTimePoll())	{
+            (((rxchar_m1 >= 0xE0) && (rxchar_m1 <= 0xEF)) || (rxchar_m1 == 0xFE) || (rxchar_m1 == 0xFF)) && \
+            (rxchar_m2 >= 0x00) && (rxchar_m2 <= 149)   && \
+		    rxabonum_prev(rxchar_m2, 5) && IsWrightTimePoll())	{
 
             SysFlag4 |= ABONUMBER_flag;
 			if(DebugFlag & DBGABORF_flag)	{
