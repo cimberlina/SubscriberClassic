@@ -2157,11 +2157,11 @@ void  AlarmDetectTask(void  *p_arg)
     fsm_rotrele485_state = FSM_ROT485_IDLE;
 
     flash0_read(temp, DF_RFFILTER1_OFFSET, 2);
-    if((temp[0] == 0x5A) && (temp[1] == 0xA5)) {
-        SysFlag4 |= RFFILTER1;
-    } else  {
+    SysFlag4 |= RFFILTER1;
+    if((temp[0] == 0xA5) && (temp[1] == 0x5A)) {
         SysFlag4 &= ~RFFILTER1;
     }
+
     flash0_read(temp, DF_RFFILTER2_OFFSET, 2);
     if((temp[0] == 0x5A) && (temp[1] == 0xA5)) {
         SysFlag4 |= RFFILTER2;
@@ -2175,11 +2175,12 @@ void  AlarmDetectTask(void  *p_arg)
     } else  {
         DeltaT = 0;
     }
+
     flash0_read(temp, DF_DELAYDUAL_OFFSET, 4);
     if((temp[2] == 0x5A) && (temp[3] == 0xA5)) {
         dualA_delay = temp[0]*0x100 + temp[1];
     } else  {
-        dualA_delay = 0;
+        dualA_delay = 5;
     }
 
 	while(DEF_ON)	{
@@ -2451,13 +2452,13 @@ int rxabonum_prev(uint8_t rxchar, int delta)
     abomin = rnumabo - delta;
 
     if(abomin >= 0) {
-        if((rxchar >= abomin) && (rxchar <= (rnumabo-1)))    {
+        if((rxchar >= abomin) && (rxchar <= (rnumabo)))    {
             return TRUE;
         } else  {
             return FALSE;
         }
     } else  {
-        if((rxchar >= 0) && (rxchar <= (rnumabo-1)))    {
+        if((rxchar >= 0) && (rxchar <= (rnumabo)))    {
             return TRUE;
         } else {
             abomin = 150 - (delta - rnumabo);
@@ -2544,212 +2545,214 @@ void MDM_IrqHandler( void )
 		if( i == 5 )
 			modem_error = 1;
 		isrclear = 0;
+        rxchar = 0;
 		return;
-	}
-
-	rxchar_m2 = rxchar_m1;
-	rxchar_m1 = rxchar_m0;
-	rxchar_m0 = rxchar;
-
-
-	if( (TypeAboAns >= 1) && (TypeAboAns <= 4) && (SystemFlag7 & INPATT_CHECK))	{
-		PollingSignature(rxchar);
 	} else {
-        SysFlag0 |= INPATTERN_flag;
-    }
+
+        rxchar_m2 = rxchar_m1;
+        rxchar_m1 = rxchar_m0;
+        rxchar_m0 = rxchar;
 
 
-	if(DebugFlag & DBGRF_ON_flag)	{
-		//CommPutChar(DEBUG_COMM,'{',0);
-		printByte(rxchar);
-		//CommPutChar(DEBUG_COMM,'}',0);
-		CommPutChar(DEBUG_COMM,' ',0);
-	}
+        if ((TypeAboAns >= 1) && (TypeAboAns <= 4) && (SystemFlag7 & INPATT_CHECK)) {
+            PollingSignature(rxchar);
+        } else {
+            SysFlag0 |= INPATTERN_flag;
+        }
 
-	if(startup == 0)    {
-	    startup = 1;
-	    t1 = MSEC_TIMER;
-	    t2 = MSEC_TIMER;
-	}
-    t1 = t2;
-    t2 = MSEC_TIMER;
-    delta_t = t2 - t1;
+
+        if (DebugFlag & DBGRF_ON_flag) {
+            //CommPutChar(DEBUG_COMM,'{',0);
+            printByte(rxchar);
+            //CommPutChar(DEBUG_COMM,'}',0);
+            CommPutChar(DEBUG_COMM, ' ', 0);
+        }
+
+        if (startup == 0) {
+            startup = 1;
+            t1 = MSEC_TIMER;
+            t2 = MSEC_TIMER;
+        }
+        t1 = t2;
+        t2 = MSEC_TIMER;
+        delta_t = t2 - t1;
 
 //--------------------------------------------------------------------------
 // aca procesamos el codigo de autoreset para deteccion de preves de tx
-    if( (rxchar == (BaseAlarmPkt_numabo + 1)) && (SysFlag4 & ABONUMBER_flag) )	{
-        SysFlag1 |= ABOMASUNO_flag;
-        SysFlag4 &= ~ABONUMBER_flag;
-    } else if( SysFlag1 & ABOMASUNO_flag ) {
-        SysFlag1 &= ~ABOMASUNO_flag;
-        if((rxchar >= 0xE0) && (rxchar <= 0xFE))	{
-            SysFlag3 |= VALIDRXCHAR_flag;
-            if(DebugFlag & DBGABORF_flag)	{
-                CommPutChar(DEBUG_COMM,'-',0);
-                printByte(rxchar);
-                CommPutChar(DEBUG_COMM,'-',0);
-                CommPutChar(DEBUG_COMM,'\n',0);
-                CommPutChar(DEBUG_COMM,'\r',0);
-            }
-            //- - - - - - - - - - - - - - - - - - - - -
-            //aca llego un cogigo de autoreset valido
-            {
-                led_dcb[NORMAL_led].led_blink = 2;
-                led_dcb[NORMAL_led].led_cad = 1*0x100+1;
-                led_dcb[NORMAL_led].led_state = LED_IDLE;
+        if ((rxchar == (BaseAlarmPkt_numabo + 1)) && (SysFlag4 & ABONUMBER_flag)) {
+            SysFlag1 |= ABOMASUNO_flag;
+            SysFlag4 &= ~ABONUMBER_flag;
+        } else if (SysFlag1 & ABOMASUNO_flag) {
+            SysFlag1 &= ~ABOMASUNO_flag;
+            if ((rxchar >= 0xE0) && (rxchar <= 0xFE)) {
+                SysFlag3 |= VALIDRXCHAR_flag;
+                if (DebugFlag & DBGABORF_flag) {
+                    CommPutChar(DEBUG_COMM, '-', 0);
+                    printByte(rxchar);
+                    CommPutChar(DEBUG_COMM, '-', 0);
+                    CommPutChar(DEBUG_COMM, '\n', 0);
+                    CommPutChar(DEBUG_COMM, '\r', 0);
+                }
+                //- - - - - - - - - - - - - - - - - - - - -
+                //aca llego un cogigo de autoreset valido
+                {
+                    led_dcb[NORMAL_led].led_blink = 2;
+                    led_dcb[NORMAL_led].led_cad = 1 * 0x100 + 1;
+                    led_dcb[NORMAL_led].led_state = LED_IDLE;
 
-                if( OptoInputs == 0x00)	{
-                    Buzzer_dcb.led_cad = 5*0x100 + 5;
+                    if (OptoInputs == 0x00) {
+                        Buzzer_dcb.led_cad = 5 * 0x100 + 5;
+                        Buzzer_dcb.led_state = LED_IDLE;
+                        Buzzer_dcb.led_blink = 1;
+                    }
+
+                    //--------------------------------------------------------------------
+                    // Manejo los asuntos de autoreset y autoreset data
+                    autoreset_data = rxchar;
+                    SysFlag0 |= AUTORSTDATA_flag;
+                    // Manejo el autoreset data
+                    if ((autoreset_data >= 0xE0) && (autoreset_data <= 0xEF)) {
+                        //actualizo los contadores de autoreset, si corresponde
+                        if (asal_autr_counter && (autoreset_data & bitpat[ASAL_bit]))
+                            asal_autr_counter--;
+                        if (teso_autr_counter && (autoreset_data & bitpat[TESO_bit]))
+                            teso_autr_counter--;
+                        if (ince_autr_counter && (autoreset_data & bitpat[INCE_bit]))
+                            ince_autr_counter--;
+                        if (rotu_autr_counter && (autoreset_data & bitpat[ROTU_bit]))
+                            rotu_autr_counter--;
+                    }
+                    //-------------------------------------------------------------------
+                    // Ponemos la maquinita para evitar falsas preves de TX
+                    switch (fsm_autorstd) {
+                        case FSM_ARSTD_IDLE :
+                            SysFlag1 &= ~PREVE_CENTRAL_TX;
+                            if (autoreset_data == 0xFE) {
+                                prevetimeout = SEC_TIMER + 15 * 60;
+                                count = 1;
+                                fsm_autorstd = FSM_ARSTD_WAIT;
+                            }
+                            break;
+                        case FSM_ARSTD_WAIT :
+                            SysFlag1 &= ~PREVE_CENTRAL_TX;
+                            //if(autoreset_data != 0xFE)	{
+                            if (SEC_TIMER > prevetimeout) {
+                                count = 0;
+                                fsm_autorstd = FSM_ARSTD_IDLE;
+                            } else if (autoreset_data == 0xFE) {
+                                count++;
+                                if (count >= 5) {
+                                    SysFlag1 |= PREVE_CENTRAL_TX;
+                                    fsm_autorstd = FSM_ARSTD_PREVETX;
+                                    count = 0;
+                                }
+                            }
+                            break;
+                        case FSM_ARSTD_PREVETX :
+                            SysFlag1 |= PREVE_CENTRAL_TX;
+                            if ((autoreset_data >= 0xE0) && (autoreset_data < 0xF0)) {
+                                if (count == 0)
+                                    prevetimeout = SEC_TIMER + 15 * 60;
+                                count++;
+                                if (count >= 2) {
+                                    fsm_autorstd = FSM_ARSTD_IDLE;
+                                    SysFlag1 &= ~PREVE_CENTRAL_TX;
+                                }
+                                if (SEC_TIMER > prevetimeout)
+                                    count = 0;
+
+                            }
+                            break;
+                        default:
+                            fsm_autorstd = FSM_ARSTD_IDLE;
+                            SysFlag1 &= ~PREVE_CENTRAL_TX;
+                            break;
+                    }
+                    autoreset_data = 0;
+                    //-------------------------------------------------------------------
+
+                }
+                //- - - - - - - - - - - - - - - - - - - - -
+            }
+
+        } else
+
+//--------------------------------------------------------------------------
+
+        if ((!(SysFlag0 & FSMTX_flag)) && (SysFlag0 & INPATTERN_flag)) {
+            if ((rxchar > 0) && (rxchar < 203)) {
+                SysFlag3 |= VALIDRXCHAR_flag;
+            }
+            if ((rxchar == BaseAlarmPkt_numabo) && (delta_t >= DeltaT) && \
+            (((rxchar_m1 >= 0xE0) && (rxchar_m1 <= 0xEF)) || (rxchar_m1 == 0xFE) || (rxchar_m1 == 0xFF)) && \
+            (rxchar_m2 >= 0x00) && (rxchar_m2 <= 149) && \
+            rxabonum_prev(rxchar_m2, 5) && IsWrightTimePoll()) {
+
+                SysFlag4 |= ABONUMBER_flag;
+                if (DebugFlag & DBGABORF_flag) {
+                    CommPutChar(DEBUG_COMM, '{', 0);
+                    printByte(rxchar);
+                    CommPutChar(DEBUG_COMM, '}', 0);
+                    CommPutChar(DEBUG_COMM, ' ', 0);
+                }
+                //---------------------------------------------------------------------
+                //lo que haya que hacer cuando llega la encuesta a este abonado
+                SysFlag0 |= FSMTX_flag;
+                SysFlag3 &= ~SEND_flag;
+                //SysFlag0 |= RF_POLL_flag;
+                SysFlag3 |= FRFPOLL_flag;
+                SysFlag1 &= ~PREVE_CENTRAL_RX;
+                preve_timer = TIEMPO_PREVE;
+
+
+                //aviso el polling destellando una vez el led de apertura
+                led_dcb[APER_led].led_blink = 1;
+                led_dcb[APER_led].led_cad = 1 * 0x100 + 1;
+                led_dcb[APER_led].led_state = LED_IDLE;
+
+                if (OptoInputs == 0x00) {
+                    Buzzer_dcb.led_cad = 1 * 0x100 + 1;
                     Buzzer_dcb.led_state = LED_IDLE;
                     Buzzer_dcb.led_blink = 1;
                 }
 
-                //--------------------------------------------------------------------
-                // Manejo los asuntos de autoreset y autoreset data
-                autoreset_data = rxchar;
-                SysFlag0 |= AUTORSTDATA_flag;
-                // Manejo el autoreset data
-                if ( ( autoreset_data >= 0xE0 ) &&  ( autoreset_data <= 0xEF ) ) {
-                    //actualizo los contadores de autoreset, si corresponde
-                    if( asal_autr_counter && (autoreset_data & bitpat[ASAL_bit]) )
-                        asal_autr_counter--;
-                    if( teso_autr_counter && (autoreset_data & bitpat[TESO_bit]) )
-                        teso_autr_counter--;
-                    if( ince_autr_counter && (autoreset_data & bitpat[INCE_bit]) )
-                        ince_autr_counter--;
-                    if( rotu_autr_counter && (autoreset_data & bitpat[ROTU_bit]) )
-                        rotu_autr_counter--;
-                }
-                //-------------------------------------------------------------------
-                // Ponemos la maquinita para evitar falsas preves de TX
-                switch(fsm_autorstd)	{
-                    case FSM_ARSTD_IDLE :
-                        SysFlag1 &= ~PREVE_CENTRAL_TX;
-                        if(autoreset_data == 0xFE)	{
-                            prevetimeout = SEC_TIMER + 15*60;
-                            count = 1;
-                            fsm_autorstd = FSM_ARSTD_WAIT;
-                        }
-                        break;
-                    case FSM_ARSTD_WAIT :
-                        SysFlag1 &= ~PREVE_CENTRAL_TX;
-                        //if(autoreset_data != 0xFE)	{
-                        if(SEC_TIMER > prevetimeout)    {
-                            count = 0;
-                            fsm_autorstd = FSM_ARSTD_IDLE;
-                        } else if(autoreset_data == 0xFE)	{
-                            count++;
-                            if(count >= 5)	{
-                                SysFlag1 |= PREVE_CENTRAL_TX;
-                                fsm_autorstd = FSM_ARSTD_PREVETX;
-                                count = 0;
-                            }
-                        }
-                        break;
-                    case FSM_ARSTD_PREVETX :
-                        SysFlag1 |= PREVE_CENTRAL_TX;
-                        if((autoreset_data >= 0xE0) && (autoreset_data < 0xF0))	{
-                            if( count == 0 )
-                                prevetimeout = SEC_TIMER + 15*60;
-                            count++;
-                            if(count >= 2)  {
-                                fsm_autorstd = FSM_ARSTD_IDLE;
-                                SysFlag1 &= ~PREVE_CENTRAL_TX;
-                            }
-                            if(SEC_TIMER > prevetimeout)
-                                count = 0;
 
-                        }
-                        break;
-                    default:
-                        fsm_autorstd = FSM_ARSTD_IDLE;
-                        SysFlag1 &= ~PREVE_CENTRAL_TX;
-                        break;
+                //actualizamos el contador de polling durante el evento de Apertura
+                if (Aper_Poll_counter) {
+                    Aper_Poll_counter--;
                 }
-                autoreset_data = 0;
-                //-------------------------------------------------------------------
-
+                if (VRST_count) {
+                    VRST_count--;
+                }
+                //---------------------------------------------------------------------
+            } else if ((rxchar == NABO2_STOP_TXON) && (SysFlag3 & FMODE_flag)) {
+                SysFlag4 &= ~ABONUMBER_flag;
+                LLAVE_TX_OFF();
+                SysFlag3 &= ~SEND_flag;
+            } else if ((rxchar == NABO1_STOP_TXON)  && (SysFlag3 & FMODE_flag)) {
+                SysFlag4 &= ~ABONUMBER_flag;
+                if (SysFlag3 & SEND_flag) {
+                    Control = rd16_cbus(CMXSTAT_ADDR);
+                    if (Control & 0x1000) {
+                        wr8_cbus(CMXTXDATA_ADDR, BaseAlarmPkt_numabo);
+                    }
+                }
+                //SysFlag3 |= RX201_flag;
+            } else if ((SysFlag4 & ABONUMBER_flag) && (rxchar < 0xE0)) {
+                SysFlag4 &= ~ABONUMBER_flag;
             }
-            //- - - - - - - - - - - - - - - - - - - - -
         }
 
-    } else
+        for (i = 0; i < 10; i++) {
+            status = rd16_cbus(CMXSTAT_ADDR);
+            if (status & 0x8000)
+                rxchar = rd8_cbus(CMXRXDATA_ADDR);
+            else
+                break;
+        }
 
-//--------------------------------------------------------------------------
-
-	if( (!(SysFlag0 & FSMTX_flag)) && (SysFlag0 & INPATTERN_flag))	{
-		if((rxchar > 0) && (rxchar < 203))	{
-			SysFlag3 |= VALIDRXCHAR_flag;
-		}
-		if( (rxchar == BaseAlarmPkt_numabo) && (delta_t >= DeltaT) && \
-            (((rxchar_m1 >= 0xE0) && (rxchar_m1 <= 0xEF)) || (rxchar_m1 == 0xFE) || (rxchar_m1 == 0xFF)) && \
-            (rxchar_m2 >= 0x00) && (rxchar_m2 <= 149)   && \
-		    rxabonum_prev(rxchar_m2, 5) && IsWrightTimePoll())	{
-
-            SysFlag4 |= ABONUMBER_flag;
-			if(DebugFlag & DBGABORF_flag)	{
-				CommPutChar(DEBUG_COMM,'{',0);
-				printByte(rxchar);
-				CommPutChar(DEBUG_COMM,'}',0);
-				CommPutChar(DEBUG_COMM,' ',0);
-			}
-			//---------------------------------------------------------------------
-			//lo que haya que hacer cuando llega la encuesta a este abonado
-			SysFlag0 |= FSMTX_flag;
-			SysFlag3 &= ~SEND_flag;
-			//SysFlag0 |= RF_POLL_flag;
-			SysFlag3 |= FRFPOLL_flag;
-			SysFlag1 &= ~PREVE_CENTRAL_RX;
-			preve_timer = TIEMPO_PREVE;
-
-			
-			//aviso el polling destellando una vez el led de apertura
-			led_dcb[APER_led].led_blink = 1;
-			led_dcb[APER_led].led_cad = 1*0x100+1;
-			led_dcb[APER_led].led_state = LED_IDLE;
-
-			if( OptoInputs == 0x00)	{
-				Buzzer_dcb.led_cad = 1*0x100 + 1;
-				Buzzer_dcb.led_state = LED_IDLE;
-				Buzzer_dcb.led_blink = 1;
-			}
-
-			
-			//actualizamos el contador de polling durante el evento de Apertura
-			if( Aper_Poll_counter )	{
-				Aper_Poll_counter--;
-			}
-			if( VRST_count )	{
-				VRST_count--;
-			}
-			//---------------------------------------------------------------------
-		} else if( rxchar == NABO2_STOP_TXON )	{
-            SysFlag4 &= ~ABONUMBER_flag;
-			LLAVE_TX_OFF();
-			SysFlag3 &= ~SEND_flag;
-		} else if( rxchar == NABO1_STOP_TXON )	{
-            SysFlag4 &= ~ABONUMBER_flag;
-			if( SysFlag3 & SEND_flag )	{
-				Control = rd16_cbus( CMXSTAT_ADDR );
-				if (Control & 0x1000)	{
-					wr8_cbus( CMXTXDATA_ADDR, BaseAlarmPkt_numabo);
-				}
-			}
-			//SysFlag3 |= RX201_flag;
-		} else if((SysFlag4 & ABONUMBER_flag) && (rxchar < 0xE0))  {
-            SysFlag4 &= ~ABONUMBER_flag;
-		}
-	}
-
-	for( i = 0; i < 10; i++ )	{
-		status = rd16_cbus(CMXSTAT_ADDR);
-		if( status & 0x8000 )
-			rxchar = rd8_cbus(CMXRXDATA_ADDR);
-		else
-			break;
-	}
-	
-	isrclear = 0;
+        isrclear = 0;
+    }
 }
 
 void PollingSignature( uint8_t rxchar )
