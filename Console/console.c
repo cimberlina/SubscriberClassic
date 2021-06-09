@@ -1313,7 +1313,7 @@ int con_E2PROM_Write_rfansw(ConsoleState* state)
 	}
 	rfanswtype = atoi(con_getparam(state->command, 2));
 
-	if((rfanswtype > 0) && (rfanswtype < 7))
+	if((rfanswtype > 0) && (rfanswtype < 8))
 		EepromWriteByte(RF_ANSWER_TYPE, (uint8_t)rfanswtype, &error);
 	else	{
 		state->conio->puts("*** RF ANSW TYPE ERROR  ***\n\r");
@@ -1331,7 +1331,7 @@ int con_E2PROM_Write_rfansw(ConsoleState* state)
 	state->conio->puts("PGMD RFANSW = ");
 	conio_printHexWord( state, retval);
 	state->conio->puts("\n\r");
-	if((retval == rfanswtype) && (rfanswtype > 0) && (rfanswtype < 7))
+	if((retval == rfanswtype) && (rfanswtype > 0) && (rfanswtype < 8))
 		TypeAboAns = rfanswtype;
 
 	logCidEvent(account, 1, 681, 0, rfanswtype );

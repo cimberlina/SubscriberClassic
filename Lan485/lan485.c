@@ -861,6 +861,7 @@ void GenerateCIDEventPTm( unsigned char index, unsigned char eventtype, unsigned
 	uint16_t checksum, tempzone, temppart;
 	unsigned char i;
 	uint8_t *currentEventPtr;
+	OS_ERR err;
 
     if((ptm_dcb[index].rtuaddr == LOCKGATE_RTUADDR) && (eventtype != 145) && (eventtype != 627) && (eventtype != 628))
         return;
@@ -995,6 +996,7 @@ void GenerateCIDEventPTm( unsigned char index, unsigned char eventtype, unsigned
 			}
 		}
 	}
+    OSTimeDlyHMSM(0, 0, 0, 500, OS_OPT_TIME_HMSM_STRICT, &err);
 }
 
 void ParsePtmCID_Event( unsigned char event_buffer[] )

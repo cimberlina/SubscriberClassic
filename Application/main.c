@@ -832,56 +832,7 @@ static  void  App_Task_1 (void  *p_arg)
 	//uint32_t offset = 240;
 
 	(void)&p_arg;
-/*
-	for(i = 0; i < 128; i++ )
-		mybuffer[i] = i;
-	if (!flash0_init()) {
-	  CommSendString(DEBUG_COMM, "Flash: Failed to initialize\r\n");
-	}
-	psz = flash0_getPageSize();
-	intToString(psz, buf, 10, 10);
-	CommSendString(DEBUG_COMM, "Flash: Page size = ");
-	CommSendString(DEBUG_COMM, buf);
-	CommSendString(DEBUG_COMM, "\r\n");
 
-	len = flash0_write(mybuffer, offset, 128);
-
-	if (len == 128) {
-		CommSendString(DEBUG_COMM, "Flash: Data written\r\n");
-		OSTimeDlyHMSM(0, 0, 2, 0,
-		              OS_OPT_TIME_HMSM_STRICT,
-		              &os_err);
-		for(i = 0; i < 128; i++ )
-				mybuffer[i] = 0;
-		CommSendString(DEBUG_COMM, "Flash: Reading\r\n");
-		len = flash0_read(mybuffer, offset, 128);
-		if (len == 128) {
-			CommSendString(DEBUG_COMM, "Flash: Verifing\r\n");
-			for(i = 0; i < 128; i++ )	{
-				if (mybuffer[i] != (uint8_t)(i)) {
-					CommSendString(DEBUG_COMM, "Flash: Invalid data\r\n");
-				}
-			}
-			if(i == 128)	{
-				CommSendString(DEBUG_COMM, "Flash: OK\r\n");
-			}
-		} else {
-			CommSendString(DEBUG_COMM, "Flash: Failed to read all data\r\n");
-
-		}
-	} else	{
-		CommSendString(DEBUG_COMM, "Flash: Failed to write data\r\n");
-	}
-
-
-	//CommSendString(DEBUG_COMM, "Master Buffer Dump:\n\r");
-	//i2ctest_wr();
-	//dumpMemory( (uint8_t *)I2CMasterBuffer, Master_Buffer_BUFSIZE);
-
-	//CommSendString(DEBUG_COMM, "Slave Buffer Dump\n\r");
-	//i2ctest_rd();
-	//dumpMemory( (uint8_t *)I2CSlaveBuffer, Slave_Buffer_BUFSIZE);
-*/
 
     Math_Init();
     error = flash0_read(PartDec_group, DF_GROUPVOLU_OFFSET, 10);

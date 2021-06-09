@@ -15,6 +15,7 @@ uint8_t	Rot485_flag;
 time_t rot485timer, rotrele485timer, rotEVOtimer;
 uint16_t lowbatt_timer;
 int dualA_delay, DeltaT;
+int papretries;
 
 uint8_t fsm_npd_state;
 #define	NPD_IDLE	0x10
@@ -2135,9 +2136,11 @@ void  AlarmDetectTask(void  *p_arg)
 
 		paptimerslot = SEC_TIMER;
 		fsm_pap_state = FSMPAP_IDLE;
-		if((TypeAboAns == 5) || (TypeAboAns == 6))	{
+		if((TypeAboAns == 5) || (TypeAboAns == 6) || (TypeAboAns == 7)  || (paptslot > 0))	{
 			error = InitCMX869_PAP();
-		}
+		} else	{
+            error = InitCMX869();
+        }
 
 		oldptalarm = 0x00;
 
@@ -2195,7 +2198,7 @@ void  AlarmDetectTask(void  *p_arg)
 
 		if(modem_error)	{
 			modem_error = 0;
-			if((TypeAboAns == 5) || (TypeAboAns == 6))	{
+			if((TypeAboAns == 5) || (TypeAboAns == 6) || (TypeAboAns == 7)  || (paptslot > 0))	{
 				error = InitCMX869_PAP();
 			} else	{
 				error = InitCMX869();
@@ -2519,7 +2522,9 @@ void MDM_IrqHandler( void )
 	
 	EXTI_ClearEXTIFlag(1);
 	
-	if(SysFlag0 & STARTUP_flag)	{
+	if((SysFlag0 & STARTUP_flag) || (paptslot > 0))	{
+        isrclear = 0;
+        timerIrqCMX = 30;
 		return;
 	}
 
@@ -2534,9 +2539,11 @@ void MDM_IrqHandler( void )
 	rxchar = rd8_cbus(CMXRXDATA_ADDR);
 	
 	
-	if((status & 0x0010) || (status & 0x0020))	{
+	//if((status & 0x0010) || (status & 0x0020))	{
+    if((status & 0x0010) && (status & 0x0020))	{
 		for(i = 0; i < 5; i++ )	{
-			if((status & 0x0010) || (status & 0x0020))	{
+			//if((status & 0x0010) || (status & 0x0020))	{
+            if((status & 0x0010) && (status & 0x0020))	{
 				status = rd16_cbus(CMXSTAT_ADDR);
 				rxchar = rd8_cbus(CMXRXDATA_ADDR);
 			} else
@@ -2823,7 +2830,11 @@ void fsm_transmit_cmx( void )
                 preve_timer = TIEMPO_PREVE;
                 SysFlag1 &= ~PREVE_CENTRAL_RX;
 
-				fsmtx_timer1 = 43 + dualA_delay;							//60
+				if(paptslot > 0)    {
+                    fsmtx_timer1 = 33;
+				} else {
+                    fsmtx_timer1 = 43 + dualA_delay;                            //60
+                }
 				acumu_buffer_sended=0;
 				state_transmit_tx = FSMTX_WAIT1;
 
@@ -2882,10 +2893,22 @@ void load_buffer_tx(void)
 //	if( BaseAlarmPkt_numabo >= 20 )
 //		TypeAboAns = 2;				  //2
 //	else TypeAboAns = 1;
-	if( TypeAboAns > 6)	{
+	if( TypeAboAns > 7)	{
 		TypeAboAns = (uint8_t)EepromReadByte(RF_ANSWER_TYPE, &error);
 	}
 	acumu_buffer_tx = 0;
+    if( !(BaseAlarmPkt_alarm & 0x7F) )	{
+        BaseAlarmPkt_alarm |= 0x80;
+        if( !led_dcb[NORMAL_led].led_blink )	{
+            led_dcb[NORMAL_led].led_cad = 255*0x100 + 0;
+        }
+    } else	{
+        BaseAlarmPkt_alarm &= ~0x80;
+        if( !led_dcb[NORMAL_led].led_blink )	{
+            led_dcb[NORMAL_led].led_cad = 0;
+            led_dcb[NORMAL_led].led_state = LED_IDLE;
+        }
+    }
 	switch (TypeAboAns)
 	{
 		case 1:
@@ -2991,6 +3014,18 @@ void load_buffer_tx(void)
 			acumu_buffer_tx++;
 			buffer_tx[acumu_buffer_tx]=check_sum;
 			break;
+        case 7:
+            check_sum = 0x00;
+            buffer_tx[acumu_buffer_tx] = 0xAC;
+            acumu_buffer_tx++;
+            buffer_tx[acumu_buffer_tx] = papalarmbyte;
+            check_sum += papalarmbyte;
+            acumu_buffer_tx++;
+            buffer_tx[acumu_buffer_tx] = 0x00;
+            check_sum += 0x00;
+            acumu_buffer_tx++;
+            buffer_tx[acumu_buffer_tx]=check_sum;
+            break;
 		default:
 			break;
 	}
@@ -3311,7 +3346,7 @@ void fsm_init_cmx_preve( void )
 	case FSM_ICMX_INIT :
 		if( (!timerInitCMX) && ((SysFlag1 & PREVE_CENTRAL_RX) || (SysFlag1 & PREVE_CENTRAL_TX)) ){
 			timerInitCMX = 30000;
-			if((TypeAboAns == 5) || (TypeAboAns == 6))	{
+			if((TypeAboAns == 5) || (TypeAboAns == 6) || (TypeAboAns == 7)  || (paptslot > 0))	{
 				error = InitCMX869_PAP();
 			} else	{
 				error = InitCMX869();
@@ -3327,7 +3362,7 @@ void fsm_init_cmx_preve( void )
 		} else
 		if(!timerInitCMX)	{
 			timerInitCMX = 30000;
-			if((TypeAboAns == 5) || (TypeAboAns == 6))	{
+			if((TypeAboAns == 5) || (TypeAboAns == 6) || (TypeAboAns == 7)  || (paptslot > 0))	{
 				error = InitCMX869_PAP();
 			} else	{
 				error = InitCMX869();
@@ -3431,10 +3466,13 @@ void fsm_evimd_llavetx( void )
 }
 
 time_t paptimerslot;
+uint8_t papalarmbyte;
 uint8_t fsm_pap_state;
 
 void fsm_pap(void)
 {
+    static int sndretries;
+    static time_t timeout;
 
 	switch(fsm_pap_state)	{
 	case FSMPAP_IDLE:
@@ -3443,7 +3481,13 @@ void fsm_pap(void)
 			fsm_pap_state = FSMPAP_TXING;
 			//---------------------------------------------------------------------
 			//lo que haya que hacer cuando llega la encuesta a este abonado
+			if(TypeAboAns == 7) {
+			    sndretries = 3;
+			} else  {
+			    sndretries = 1;
+			}
 			SysFlag0 |= FSMTX_flag;
+			papalarmbyte = BaseAlarmPkt_alarm;
 			//SysFlag0 |= RF_POLL_flag;
 			SysFlag3 &= ~SEND_flag;
 			SysFlag1 &= ~PREVE_CENTRAL_RX;
@@ -3467,9 +3511,23 @@ void fsm_pap(void)
 		break;
 	case FSMPAP_TXING:
 		if(!(SysFlag0 & FSMTX_flag))	{
-			fsm_pap_state = FSMPAP_IDLE;
+		    sndretries--;
+            paptimerslot = SEC_TIMER;
+		    if(sndretries == 0) {
+                fsm_pap_state = FSMPAP_IDLE;
+            } else  {
+                fsm_pap_state = FSMPAP_WAIT;
+                timeout = MSEC_TIMER + 500;
+		    }
 		}
 		break;
+    case FSMPAP_WAIT:
+        if(MSEC_TIMER >= timeout)   {
+            SysFlag0 |= FSMTX_flag;
+            paptimerslot = SEC_TIMER;
+            fsm_pap_state = FSMPAP_TXING;
+        }
+        break;
 	default:
 		fsm_pap_state = FSMPAP_IDLE;
 		break;

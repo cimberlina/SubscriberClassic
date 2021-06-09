@@ -169,6 +169,7 @@ extern uint8_t fsm_rot485_state;
 extern uint8_t fsm_pap_state;
 #define FSMPAP_IDLE			0x10
 #define FSMPAP_TXING		0x20
+#define FSMPAP_WAIT  		0x30
 
 extern uint8_t	Rot485_flag;
 #define	ROT485_FLAG			0x01
@@ -181,6 +182,8 @@ extern time_t rot485timer;
 
 extern time_t paptimerslot;
 extern uint16_t paptslot;
+
+extern uint8_t papalarmbyte;
 
 extern uint8_t	ptxormask;
 
@@ -214,6 +217,16 @@ extern uint8_t FTXOFF2_state;
 #define FTXOFF2_OFF			0x20
 #define FTXOFF2_WAIT		0x30
 #define FTXOFF2_ON			0x40
+
+extern uint8_t daper_state;
+extern uint8_t daper2_state;
+extern uint8_t daper_stateAP;
+extern uint8_t dasa_state;
+extern uint8_t df220_state;
+extern uint8_t dinc_state;
+extern uint8_t drst_state;
+extern uint8_t dteso_state;
+extern uint8_t drotu_state[16];
 
 
 extern int ftxoff2_timer;

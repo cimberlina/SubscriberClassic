@@ -256,7 +256,7 @@ void logCidEvent(uint16_t account, uint8_t qualifier, uint16_t eventcode, uint8_
 
 	OSSemPost(&LogEventRdyPtr, OS_OPT_POST_1, &err);
 
-
+    OSTimeDlyHMSM(0, 0, 0, 500, OS_OPT_TIME_HMSM_STRICT, &err);
 
 }
 

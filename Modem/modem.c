@@ -188,6 +188,9 @@ uint16_t InitCMX869(void)
 		          OS_OPT_TIME_HMSM_STRICT,
 		          &os_err);
 	control=rd16_cbus( CMXSTAT_ADDR );
+    OSTimeDlyHMSM(0, 0, 0, 500,
+                  OS_OPT_TIME_HMSM_STRICT,
+                  &os_err);
 	return control;
 }
 
@@ -227,5 +230,8 @@ uint16_t InitCMX869_PAP(void)
 		          OS_OPT_TIME_HMSM_STRICT,
 		          &os_err);
 	control=rd16_cbus( CMXSTAT_ADDR );
+    OSTimeDlyHMSM(0, 0, 0, 500,
+                  OS_OPT_TIME_HMSM_STRICT,
+                  &os_err);
 	return control;
 }
