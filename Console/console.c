@@ -3487,7 +3487,7 @@ void FactoryPgm(void)
     OSTimeDlyHMSM(0, 0, 0, 300, OS_OPT_TIME_HMSM_STRICT, &os_err);
     WDT_Feed();
 
-    EepromWriteByte(PREVETIMER_E2P_ADDR, (uint8_t)0x07, &error);
+    EepromWriteByte(PREVETIMER_E2P_ADDR, (uint8_t)12, &error);
     OSTimeDlyHMSM(0, 0, 0, 300, OS_OPT_TIME_HMSM_STRICT, &os_err);
     WDT_Feed();
 
