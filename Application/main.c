@@ -2339,10 +2339,10 @@ void AboBoardInit(void)
 	//************************************************************************************************************************************
 	// Inicializacion del watchdog
 	// Initialize WDT, IRC OSC, interrupt mode, timeout = 5000000us = 5s
-	WDT_Init(WDT_CLKSRC_IRC, WDT_MODE_RESET);
+//	WDT_Init(WDT_CLKSRC_IRC, WDT_MODE_RESET);
 	//Start watchdog with timeout given
-	WDT_Start(WDT_TIMEOUT);
- 	WDT_Feed();
+//	WDT_Start(WDT_TIMEOUT);
+// 	WDT_Feed();
 }
 
 

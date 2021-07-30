@@ -3670,6 +3670,34 @@ void FactoryPgm(void)
 	error = flash0_write(1, buffer, DF_NMAXINCE_OFFSET, 1);
 	WDT_Feed();
 
+	buffer[0] = 0x5A;
+	buffer[1] = 0xA5;
+	error = flash0_write(1, buffer, DF_RFFILTER1_OFFSET, 2);
+	SysFlag4 |= RFFILTER1;
+	WDT_Feed();
+
+	buffer[0] = 0xA5;
+	buffer[1] = 0x5A;
+	error = flash0_write(1, buffer, DF_RFFILTER2_OFFSET, 2);
+	SysFlag4 &= ~RFFILTER2;
+	WDT_Feed();
+
+	buffer[0] = (0 >> 8) & 0x00FF;
+	buffer[1] = 0 & 0x00FF;
+	buffer[2] = 0x5A;
+	buffer[3] = 0xA5;
+	error = flash0_write(1, (uint8_t *)buffer, DF_DELTAT_OFFSET, 4);
+	DeltaT = 0;
+	WDT_Feed();
+
+	buffer[0] = (5 >> 8) & 0x00FF;
+	buffer[1] = 5 & 0x00FF;
+	buffer[2] = 0x5A;
+	buffer[3] = 0xA5;
+	error = flash0_write(1, (uint8_t *)buffer, DF_DELAYDUAL_OFFSET, 4);
+	dualA_delay = 5;
+	WDT_Feed();
+
 }
 
 int factorycmd( ConsoleState* state )
@@ -4065,7 +4093,7 @@ int con_conf_ticket(ConsoleState* state)
     uint8_t dec_group[10];
     int particion;
 
-	uint16_t retval;
+	uint16_t retval, value;
 
 	char *tmpbuf;
 
@@ -4741,7 +4769,7 @@ int con_conf_ticket(ConsoleState* state)
             break;
     }
     state->conio->puts(buffer);
-
+    WDT_Feed();
 
     error = flash0_read(dec_group, DF_GROUPVOLU_OFFSET, 10);
     for(i = 0; i < 80; i++)
@@ -4766,6 +4794,7 @@ int con_conf_ticket(ConsoleState* state)
         Str_Cat(buffer, "Volumetricas: ");
     }
     state->conio->puts("\n\r");
+    WDT_Feed();
 
     //------------------------------------------------------------------
     buffer[0] = 0;
@@ -4790,7 +4819,108 @@ int con_conf_ticket(ConsoleState* state)
             break;
     }
     state->conio->puts(buffer);
+    WDT_Feed();
+
     //------------------------------------------------------------------
+
+    buffer[0] = 0;
+    flash0_read(buffer1, DF_RFFILTER1_OFFSET, 2);
+    if((buffer1[0] == 0x5A) && (buffer1[1] == 0xA5))
+        retval = 1;
+    else
+        retval = 0;
+
+    Str_Cat(buffer, "RFFILTER1 = ");
+    switch(retval)	{
+        case 0:
+            Str_Cat(buffer, "OFF\n\r");
+            break;
+            case 1:
+                Str_Cat(buffer, "ON\n\r");
+                break;
+                default:
+                    Str_Cat(buffer, "ACTIVATION ERROR\n\r");
+                    break;
+    }
+    state->conio->puts(buffer);
+    WDT_Feed();
+
+    //------------------------------------------------------------------
+    buffer[0] = 0;
+    flash0_read(buffer1, DF_RFFILTER2_OFFSET, 2);
+    if((buffer1[0] == 0x5A) && (buffer1[1] == 0xA5))
+        retval = 1;
+    else
+        retval = 0;
+
+    Str_Cat(buffer, "RFFILTER2 = ");
+    switch(retval)	{
+        case 0:
+            Str_Cat(buffer, "OFF\n\r");
+            break;
+            case 1:
+                Str_Cat(buffer, "ON\n\r");
+                break;
+                default:
+                    Str_Cat(buffer, "ACTIVATION ERROR\n\r");
+                    break;
+    }
+    state->conio->puts(buffer);
+    WDT_Feed();
+
+    //------------------------------------------------------------------
+    buffer[0] = 0;
+    flash0_read(buffer1, DF_DELTAT_OFFSET, 4);
+    if((buffer1[2] == 0x5A) && (buffer1[3] == 0xA5)) {
+        value = buffer1[0]*0x100 + buffer1[1];
+        retval = 1;
+    }
+    else
+        retval = 0;
+
+    Str_Cat(buffer, "DeltaT = ");
+    switch(retval)	{
+        case 0:
+            Str_Cat(buffer,itoa(value));
+            Str_Cat(buffer, "  *NOT SET\n\r");
+            break;
+            case 1:
+                Str_Cat(buffer,itoa(value));
+                Str_Cat(buffer, "  *SET\n\r");
+                break;
+                default:
+                    Str_Cat(buffer, "ACTIVATION ERROR\n\r");
+                    break;
+    }
+    state->conio->puts(buffer);
+    WDT_Feed();
+
+    //-------------------------------------------------------------------
+    buffer[0] = 0;
+    flash0_read(buffer1, DF_DELAYDUAL_OFFSET, 4);
+    if((buffer1[2] == 0x5A) && (buffer1[3] == 0xA5)) {
+        value = buffer1[0]*0x100 + buffer1[1];
+        retval = 1;
+    }
+    else
+        retval = 0;
+
+    Str_Cat(buffer, "delaydual = ");
+    switch(retval)	{
+        case 0:
+            Str_Cat(buffer,itoa(value));
+            Str_Cat(buffer, "  *NOT SET\n\r");
+            break;
+            case 1:
+                Str_Cat(buffer,itoa(value));
+                Str_Cat(buffer, "  *SET\n\r");
+                break;
+                default:
+                    Str_Cat(buffer, "ACTIVATION ERROR\n\r");
+                    break;
+    }
+    state->conio->puts(buffer);
+    WDT_Feed();
 
 	return 1;
 }
