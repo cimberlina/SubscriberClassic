@@ -1174,10 +1174,10 @@ static  void  App_Task_1 (void  *p_arg)
     if((temp[0] == 0xAA) && (temp[1] == 0xBB)) {
         SystemFlag7 &= ~INPATT_CHECK;
     } else  {
-        temp[0] = 0x5A;
-        temp[1] = 0xA5;
+        temp[0] = 0xA5;
+        temp[1] = 0x5A;
         error = flash0_write(1, temp, DF_INPATTERN_OFFSET, 2);
-        SystemFlag7 |= INPATT_CHECK;
+        SystemFlag7 &= ~INPATT_CHECK;
     }
 
     WDT_Feed();
@@ -2339,10 +2339,10 @@ void AboBoardInit(void)
 	//************************************************************************************************************************************
 	// Inicializacion del watchdog
 	// Initialize WDT, IRC OSC, interrupt mode, timeout = 5000000us = 5s
-//	WDT_Init(WDT_CLKSRC_IRC, WDT_MODE_RESET);
+	WDT_Init(WDT_CLKSRC_IRC, WDT_MODE_RESET);
 	//Start watchdog with timeout given
-//	WDT_Start(WDT_TIMEOUT);
-// 	WDT_Feed();
+	WDT_Start(WDT_TIMEOUT);
+ 	WDT_Feed();
 }
 
 

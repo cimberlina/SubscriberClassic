@@ -2560,6 +2560,9 @@ void MDM_IrqHandler( void )
         rxchar_m1 = rxchar_m0;
         rxchar_m0 = rxchar;
 
+        if(SysFlag4 & RFFILTER1)    {
+            SysFlag0 &= ~INPATTERN_flag;
+        }
 
         if ((TypeAboAns >= 1) && (TypeAboAns <= 4) && (SystemFlag7 & INPATT_CHECK)) {
             PollingSignature(rxchar);
