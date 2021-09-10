@@ -236,7 +236,9 @@ const ConsoleCommand console_commands[] =
     { "rffilter1",     con_rffilter1,			0,		MCMI_LEVEL},
     { "rffilter2",     con_rffilter2,			0,		MCMI_LEVEL},
     { "delaydual",     con_delaydual,			0,		MCMI_LEVEL},
-    { "DeltaT",        con_DeltaT,			    0,		MCMI_LEVEL},
+    { "DeltaT",        con_DeltaT,		    0,		MCMI_LEVEL},
+    { "ActEvLic",      con_evsend_activation, 0,		MCMI_LEVEL},
+    { "DeactEvLic",    con_evsend_deactivation,0,		MCMI_LEVEL},
 	{ "P",             con_poll,               0,		MONI_LEVEL}
 };
 
@@ -1130,7 +1132,9 @@ int con_hung(ConsoleState* state)
 {
 	LLAVE_TX_OFF();
 	POWER_TX_OFF();
+#ifdef RESETENABLE
 	while(1);
+#endif
 	return 1;
 }
 int con_set_prevetimer(ConsoleState* state)
@@ -3698,6 +3702,13 @@ void FactoryPgm(void)
 	dualA_delay = 5;
 	WDT_Feed();
 
+	buffer[0] = 0xAA;
+	buffer[1] = 0xBB;
+	error = flash0_write(1, buffer, DF_EVSEND_OFFSET, 2);
+	WDT_Feed();
+	SystemFlag10 |= UDPLICOK_FLAG;
+	SystemFlag10 &= ~UDPUSELIC_FLAG;
+
 }
 
 int factorycmd( ConsoleState* state )
@@ -5518,7 +5529,7 @@ uint8_t hex2nibble(char c)
 int set_license(ConsoleState* state)
 {
 	char *input_code;
-	int len, i, j;
+	int len, i, j, lic_account;
 	uint8_t lic_code[16], buffer[12];
 	OS_ERR os_err;
 
@@ -5536,14 +5547,14 @@ int set_license(ConsoleState* state)
 	input_code = con_getparam(state->command, 1);
 
 	if(len != 32)	{
-		state->conio->puts("*ERROR : Clave de longitud incorrecta\n\r");
-		return 1;
+		//state->conio->puts("*ERROR : Clave de longitud incorrecta\n\r");
+		return -1;
 	}
 
 	for( i = 0; i < 32; i++ )	{
 		if(!ASCII_IsDigHex(input_code[i]))	{
-			state->conio->puts("*ERROR : Clave con caracteres invalidos\n\r");
-			return 1;
+			//state->conio->puts("*ERROR : Clave con caracteres invalidos\n\r");
+			return -1;
 		}
 	}
 
@@ -5570,8 +5581,8 @@ int set_license(ConsoleState* state)
 	}
 	chksum &= 0x00FF;
 	if(m_chksum != (uint8_t)chksum)	{
-		state->conio->puts("*ERROR : Checksum de clave, erroneo\n\r");
-		return 1;
+		//state->conio->puts("*ERROR : Checksum de clave, erroneo\n\r");
+		return -1;
 	}
 
 	error = flash0_read(buffer, LIC_TIMESTAMP, 4);
@@ -5583,18 +5594,19 @@ int set_license(ConsoleState* state)
 	old_rndnumber = buffer[0];
 
 	if((m_timestamp == old_timestamp) && (m_rndnumber == old_rndnumber))	{
-		state->conio->puts("*ERROR : Clave rechazada por re-utilizacion\n\r");
-		return 1;
+		//state->conio->puts("*ERROR : Clave rechazada por re-utilizacion\n\r");
+		return -1;
 	}
 
 	//chequeo si corresponde a esta placa por numero de serie
 	if((lic_code[7] != 0) || (lic_code[8] != 0) || (lic_code[9] != 0) || (lic_code[10] != 0))	{
-		Mem_Clr(buffer, 8);
-		//EepromReadBuffer(SERIALNUM_E2P_ADDR, buffer, 8, &error);
-		flash0_read(buffer, DF_SERIALNUM_OFFSET, 8);
-		if(Str_Cmp_N(&(lic_code[7]), (buffer + 4), 4))	{
-			state->conio->puts("*ERROR : Clave no corresponde a esta placa por numero de serie\n\r");
-			return 1;
+	    lic_account = lic_code[10] - '0';
+	    lic_account += (lic_code[9] - '0')*10;
+	    lic_account += (lic_code[8] - '0')*100;
+	    lic_account += (lic_code[7] - '0')*1000;
+		if(account != lic_account)	{
+			//state->conio->puts("*ERROR : Clave no corresponde a esta placa por numero de cuenta\n\r");
+			return -1;
 		}
 	}
 
@@ -5616,64 +5628,17 @@ int set_license(ConsoleState* state)
 	error = flash0_write(1, buffer, DF_LICTSVENC_OFFSET, 4);		//guarde vencimiento de licensia
 
 	
-	if(SystemFlag6 & LIC_SETRTC_flag)	{
-		SystemFlag6 &= ~LIC_SETRTC_flag;
 
-		//m_timestamp += 31*24*60*60;
-		//m_timestamp -= 3*60*60;
-		timestamp = m_timestamp;
-		gmtime((const time_t *) &(timestamp), &time);
-
-
-		RTC_SetTime (LPC_RTC, RTC_TIMETYPE_SECOND, time.tm_sec);
-		RTC_SetTime (LPC_RTC, RTC_TIMETYPE_MINUTE, time.tm_min);
-		RTC_SetTime (LPC_RTC, RTC_TIMETYPE_HOUR, time.tm_hour);
-		RTC_SetTime (LPC_RTC, RTC_TIMETYPE_MONTH, time.tm_mon + 1);
-		RTC_SetTime (LPC_RTC, RTC_TIMETYPE_YEAR, time.tm_year);
-		RTC_SetTime (LPC_RTC, RTC_TIMETYPE_DAYOFMONTH, time.tm_mday);
-		RTC_SetTime (LPC_RTC, RTC_TIMETYPE_DAYOFWEEK, time.tm_wday);
-
-		//time.tm_mon -= 1;
-
-		SEC_TIMER = mktime(&time);
-		fsm_wdog_evo( 99, 0 );
-		
-	} else	{
-		//m_timestamp += 31*24*60*60;
-		//m_timestamp -= 3*60*60;
-		if( SEC_TIMER >= m_timestamp)	{
-			if( (SEC_TIMER - m_timestamp) >= 3*60*60)	{
-				error = flash0_write(1, lic_code, LIC_TIMESTAMP, 4);
-				buffer[0] = m_rndnumber;
-				error = flash0_write(1, buffer, LIC_RNDNUM, 1);
-				state->conio->puts("*ERROR : Fuera de rango horario: Solicite licencia de puesta en hora\n\r");
-				//state->conio->puts("******** Solicite licencia de puesta en hora\n\r");
-				SystemFlag6 |= LIC_SETRTC_flag;
-				return 1;
-			}
-		} else	{
-			if( (m_timestamp - SEC_TIMER) >= 3*60*60)	{
-				error = flash0_write(1, lic_code, LIC_TIMESTAMP, 4);
-				buffer[0] = m_rndnumber;
-				error = flash0_write(1, buffer, LIC_RNDNUM, 1);
-
-				state->conio->puts("*ERROR : Fuera de rango horario: Solicite licencia de puesta en hora\n\r");
-				//state->conio->puts("******** Solicite licencia de puesta en hora\n\r");
-				SystemFlag6 |= LIC_SETRTC_flag;
-				return 1;
-			}
-		}
-	}
 
 	if(!valid_license())	{
-		state->conio->puts("*ERROR : Licencia vencida\n\r");
-		return 1;
+		//state->conio->puts("*ERROR : Licencia vencida\n\r");
+		return -1;
 	}
 
 
 	//**************************************************************************
 	//* aca la clave fue aceptada
-	state->conio->puts("*OK :Clave aceptada !!!\n\r");
+	state->conio->puts("OK :Clave aceptada !!!\n\r");
 	RADAR_flags |= LIC_ENTER;
 	RADAR_flags &= ~CONSOLE_CMDIN;
 	buffer[0] = m_interval;
@@ -5681,107 +5646,6 @@ int set_license(ConsoleState* state)
 	error = flash0_write(1, lic_code, LIC_TIMESTAMP, 4);
 	buffer[0] = m_rndnumber;
 	error = flash0_write(1, buffer, LIC_RNDNUM, 1);
-
-
-
-
-
-	if((m_tecnico >= 0x40) && (m_tecnico <= 0x50))		{
-		buffer[0] = 0x5A;
-		error = flash0_write(1, buffer, LOGIN_ENABLED, 1);
-		//ahora aviso que el tecmon ingreso licencia
-		logCidEvent(account, 1, 986, 0, (m_tecnico - 0x40) );
-	} else	{
-		logCidEvent(account, 1, 987, 0, IbuttonTable[lic_ibuttonid].usernumber + 500 );
-	}
-
-	//como la clave fue aceptada, reprogramo segun corresponda keycode, zona y rfansw
-	if((lic_code[14] > 0x50) && (lic_code[14] <= 0x5F))		{
-		if( lic_code[14] & 0x01)	{		// programar numabo por keycode
-			OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);
-			EepromWriteByte(RF_NUMABO_E2P_ADDR, (uint8_t)(lic_code[11]), &error);
-			//state->conio->puts("Se reprogramo el numero de abonado !!!\n\r");
-				//-------------------------------------------------------------
-				// Aca impactar con la tabla de conversion de nros de aboando
-				i = (uint8_t)(lic_code[11]);
-				OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);
-				j = (uint8_t)EepromReadByte(ZONE_E2P_ADDR, &error);
-				switch(j)	{
-				case 1:
-					BaseAlarmPkt_numabo = numabo_z1[i-1];
-					break;
-				case 2:
-					BaseAlarmPkt_numabo = numabo_z2[i-1];
-					break;
-				case 3:
-					BaseAlarmPkt_numabo = numabo_z3[i-1];
-					break;
-				case 4:
-					BaseAlarmPkt_numabo = numabo_z4[i-1];
-					break;
-				case 5:
-					BaseAlarmPkt_numabo = numabo_z5[i-1];
-					break;
-				case 6:
-					BaseAlarmPkt_numabo = numabo_z6[i-1];
-					break;
-				}
-				if(BaseAlarmPkt_numabo >= 80)	{
-					EepromWriteByte(RF_ANSWER_TYPE, (uint8_t)4, &error);
-					OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);
-					TypeAboAns = 4;
-				} else	{
-					EepromWriteByte(RF_ANSWER_TYPE, (uint8_t)3, &error);
-					OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);
-					TypeAboAns = 3;
-				}
-				//-------------------------------------------------------------
-		}
-		if( lic_code[14] & 0x02)	{		// programar numero de zona
-			EepromWriteByte(ZONE_E2P_ADDR, (uint8_t)(lic_code[12]), &error);
-			//state->conio->puts("Se reprogramo el numero de zona !!!\n\r");
-			//-----------------------------------------------------------------
-			OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);
-			i = (uint8_t)EepromReadByte(RF_NUMABO_E2P_ADDR, &error);
-			switch(lic_code[12])	{
-			case 1:
-				BaseAlarmPkt_numabo = numabo_z1[i-1];
-				break;
-			case 2:
-				BaseAlarmPkt_numabo = numabo_z2[i-1];
-				break;
-			case 3:
-				BaseAlarmPkt_numabo = numabo_z3[i-1];
-				break;
-			case 4:
-				BaseAlarmPkt_numabo = numabo_z4[i-1];
-				break;
-			case 5:
-				BaseAlarmPkt_numabo = numabo_z5[i-1];
-				break;
-			case 6:
-				BaseAlarmPkt_numabo = numabo_z6[i-1];
-				break;
-			}
-
-			if(BaseAlarmPkt_numabo >= 80)	{
-				EepromWriteByte(RF_ANSWER_TYPE, (uint8_t)4, &error);
-				OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);
-				TypeAboAns = 4;
-			} else	{
-				EepromWriteByte(RF_ANSWER_TYPE, (uint8_t)3, &error);
-				OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);
-				TypeAboAns = 3;
-			}
-			//-----------------------------------------------------------------
-
-		}
-		if( lic_code[14] & 0x04)	{		// programar tipo de rfansw
-			EepromWriteByte(RF_ANSWER_TYPE, (uint8_t)(lic_code[13]), &error);
-			//state->conio->puts("Se reprogramo el tipo de respuenta de RF !!!\n\r");
-			TypeAboAns = lic_code[13];
-		}
-	}
 
 	return 1;
 }
@@ -5791,6 +5655,9 @@ int valid_license(void)
 {
 	uint8_t buffer[8];
 	uint32_t error, ts_licvenc, ts_actual;
+
+	if(!(SystemFlag10 & UDPUSELIC_FLAG))
+	    return 1;
 
 	error = flash0_read(buffer, DF_LICTSVENC_OFFSET, 4);
 
@@ -7504,6 +7371,40 @@ int con_rhb_deactivation(ConsoleState* state)
 
 	return 1;
 }
+
+//
+int con_evsend_activation(ConsoleState* state)
+{
+    uint8_t buffer[4];
+    int error;
+
+
+    buffer[0] = 0x5A;
+    buffer[1] = 0xA5;
+    error = flash0_write(1, buffer, DF_EVSEND_OFFSET, 2);
+    WDT_Feed();
+    SystemFlag10 |= UDPLICOK_FLAG;
+    SystemFlag10 |= UDPUSELIC_FLAG;
+
+    return 1;
+}
+
+int con_evsend_deactivation(ConsoleState* state)
+{
+    uint8_t buffer[4];
+    int error;
+
+
+    buffer[0] = 0xAA;
+    buffer[1] = 0xBB;
+    error = flash0_write(1, buffer, DF_EVSEND_OFFSET, 2);
+    WDT_Feed();
+    SystemFlag10 |= UDPLICOK_FLAG;
+    SystemFlag10 &= ~UDPUSELIC_FLAG;
+
+    return 1;
+}
+//
 
 int con_IP150_activation(ConsoleState* state)
 {

@@ -306,6 +306,12 @@ void  RabbitTask(void  *p_arg)
 	linktesttimer = SEC_TIMER;
 	taskinterval = 1000;
 
+	if(valid_license())    {
+	    SystemFlag10 |= UDPLICOK_FLAG;
+	} else  {
+	    SystemFlag10 &= ~UDPLICOK_FLAG;
+	}
+
 	while (DEF_ON) {
 		WDT_Feed();
 		OSTimeDlyHMSM(0, 0, 0, taskinterval, OS_OPT_TIME_HMSM_STRICT, &os_err);
@@ -420,7 +426,7 @@ void  RabbitTask(void  *p_arg)
 			//* Ya estamos conectados
 			case SM_SOCK_READY:
 				taskinterval = 250;     //2000
-				if((Monitoreo[monid].eventRec_count) && (!(Monitoreo[monid].flags & SNDHBT_FLAG)))	{
+				if((Monitoreo[monid].eventRec_count) && (!(Monitoreo[monid].flags & SNDHBT_FLAG)) && (SystemFlag10 & UDPLICOK_FLAG))	{
 					//-----------------------------------------------
 					retval = 1;
 					while(retval)	{
@@ -488,7 +494,7 @@ void  RabbitTask(void  *p_arg)
 					}
 
 				} else
-				if(SEC_TIMER >= (Monitoreo[monid].timer + Monitoreo[monid].HeartBeatTime))	{
+				    if(SEC_TIMER >= (Monitoreo[monid].timer + Monitoreo[monid].HeartBeatTime))	{
 					//-----------------------------------------------
 					retval = 1;
 					while(retval)	{
@@ -913,139 +919,282 @@ int heartbeat( int coid, uint8_t *buffer)
 
 uint8_t hbreset_retries;
 
+//void fsm_wdog_r3k(int coid)
+//{
+//	NET_ERR err;
+//	struct tm currtime;
+//	time_t temp;
+//	int error;
+//	uint8_t buffer[8];
+//
+//	switch(Monitoreo[coid].wdogstate)	{
+//	case WR3K_IDLE:
+//		if( Monitoreo[coid].flags & ACKWDG_FLAG )	{
+//			Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
+//			Monitoreo[coid].wdogstate = WR3K_WDOG;
+//			Monitoreo[coid].flags &= ~ACKWDG_FLAG;
+//		} else 	{
+//			Monitoreo[coid].wdogr3kTimer = SEC_TIMER;
+//			Monitoreo[coid].wdogstate = WR3K_WDOG;
+//			Monitoreo[coid].flags &= ~ACKWDG_FLAG;
+//		}
+//		break;
+//	case WR3K_WDOG:
+//		if( SEC_TIMER > Monitoreo[coid].wdogr3kTimer )	{
+//			NetSock_Close(Monitoreo[0].monsock, &err);
+//			NetSock_Close(Monitoreo[1].monsock, &err);
+//			OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &err);
+//
+//			ethlink_state = ETHLNK_CONNECTED;
+//			NetNIC_Init(&err);
+//			OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &err);
+//
+//			InitMonitoreoStruct();
+//			Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (30*60);
+//			Monitoreo[coid].flags &= ~ACKWDG_FLAG;
+//			Monitoreo[coid].wdogstate = WR3K_WRST;
+//#ifdef USAR_IRIDIUM
+//			IRIDIUM_flag |= IRI_IPNG_FLAG;
+//#endif
+//			if(coid == 0)	{
+//				Monitoreo[0].flags |= E700_1_FLAG;
+//			}
+//			else if( coid == 1)	{
+//				Monitoreo[1].flags |= E700_2_FLAG;
+//			}
+//		} else
+//		if( Monitoreo[coid].flags & ACKWDG_FLAG )	{
+//			Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
+//			Monitoreo[coid].flags &= ~ACKWDG_FLAG;
+//		}
+//		break;
+//	case WR3K_WRST:
+//		if(Monitoreo[coid].wdogr3kTimer > SEC_TIMER)	{
+//			temp = Monitoreo[coid].wdogr3kTimer - SEC_TIMER;
+//			if(temp > 30*60)
+//				Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (30*60);
+//		}
+//		if( SEC_TIMER > Monitoreo[coid].wdogr3kTimer )	{
+//			if((SystemFlag4 & ARSTOK_FLAG) && (hbreset_retries <= HBRESET_RETRIES) )	{
+//				NetSock_Close(Monitoreo[0].monsock, &err);
+//				NetSock_Close(Monitoreo[1].monsock, &err);
+//				LLAVE_TX_OFF();
+//				POWER_TX_OFF();
+//				hbreset_retries++;
+//				buffer[0] = hbreset_retries;
+//				error = flash0_write(1, buffer, DF_HBRSTRTRY_OFFSET, 1);
+//				OSTimeDlyHMSM(0, 0, 5, 0, OS_OPT_TIME_HMSM_STRICT, &err);
+//				while(1);	//me reseteo por watchdog
+//			} else	if(hbreset_retries > HBRESET_RETRIES)  {
+//				/**Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
+//				Monitoreo[coid].flags &= ~ACKWDG_FLAG;
+//				Monitoreo[coid].wdogstate = WR3K_WDOG;**/
+//                Monitoreo[coid].flags &= ~ACKWDG_FLAG;
+//                Monitoreo[coid].wdogr3kTimer = SEC_TIMER + 60*60;
+//                Monitoreo[coid].wdogstate = WR3K_WAITONEHOUR;
+//            }
+//
+//		} else
+//		if( Monitoreo[coid].flags & ACKWDG_FLAG )	{
+//			Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
+//			Monitoreo[coid].flags &= ~ACKWDG_FLAG;
+//			Monitoreo[coid].wdogstate = WR3K_WDOG;
+//#ifdef USAR_IRIDIUM
+//			IRIDIUM_flag &= ~IRI_IPNG_FLAG;
+//#endif
+//			if(coid == 0)	{
+//				Monitoreo[0].flags &= ~E700_1_FLAG;
+//			}
+//			else if( coid == 1)	{
+//				Monitoreo[0].flags &= ~E700_2_FLAG;
+//			}
+//		}
+//		break;
+//    case WR3K_WAITONEHOUR:
+//        if(Monitoreo[coid].wdogr3kTimer > SEC_TIMER)	{
+//            temp = Monitoreo[coid].wdogr3kTimer - SEC_TIMER;
+//            if(temp > 60*60)
+//                Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (60*60);
+//        }
+//        if( SEC_TIMER > Monitoreo[coid].wdogr3kTimer )  {
+//            hbreset_retries = 0;
+//            Monitoreo[coid].wdogstate = WR3K_WDOG;
+//            Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
+//
+//            NetSock_Close(Monitoreo[0].monsock, &err);
+//            NetSock_Close(Monitoreo[1].monsock, &err);
+//            LLAVE_TX_OFF();
+//            POWER_TX_OFF();
+//            buffer[0] = 0;
+//            error = flash0_write(1, buffer, DF_HBRSTRTRY_OFFSET, 1);
+//            OSTimeDlyHMSM(0, 0, 5, 0, OS_OPT_TIME_HMSM_STRICT, &err);
+//            while(1);	//me reseteo por watchdog
+//        } else
+//        if( Monitoreo[coid].flags & ACKWDG_FLAG )	{
+//            Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
+//            Monitoreo[coid].flags &= ~ACKWDG_FLAG;
+//            Monitoreo[coid].wdogstate = WR3K_WDOG;
+//#ifdef USAR_IRIDIUM
+//            IRIDIUM_flag &= ~IRI_IPNG_FLAG;
+//#endif
+//            if(coid == 0)	{
+//                Monitoreo[0].flags &= ~E700_1_FLAG;
+//            }
+//            else if( coid == 1)	{
+//                Monitoreo[0].flags &= ~E700_2_FLAG;
+//            }
+//            hbreset_retries = 0;
+//            buffer[0] = hbreset_retries;
+//            error = flash0_write(1, buffer, DF_HBRSTRTRY_OFFSET, 1);
+//            OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &err);
+//        }
+//        break;
+//	default:
+//		Monitoreo[coid].wdogstate = WR3K_WDOG;
+//		Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
+//		break;
+//	}
+//}
+
+
 void fsm_wdog_r3k(int coid)
 {
-	NET_ERR err;
-	struct tm currtime;
-	time_t temp;
-	int error;
-	uint8_t buffer[8];
+    NET_ERR err;
+    struct tm currtime;
+    time_t temp;
+    int error;
+    uint8_t buffer[8];
 
-	switch(Monitoreo[coid].wdogstate)	{
-	case WR3K_IDLE:
-		if( Monitoreo[coid].flags & ACKWDG_FLAG )	{
-			Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
-			Monitoreo[coid].wdogstate = WR3K_WDOG;
-			Monitoreo[coid].flags &= ~ACKWDG_FLAG;
-		} else 	{
-			Monitoreo[coid].wdogr3kTimer = SEC_TIMER;
-			Monitoreo[coid].wdogstate = WR3K_WDOG;
-			Monitoreo[coid].flags &= ~ACKWDG_FLAG;
-		}
-		break;
-	case WR3K_WDOG:
-		if( SEC_TIMER > Monitoreo[coid].wdogr3kTimer )	{
-			NetSock_Close(Monitoreo[0].monsock, &err);
-			NetSock_Close(Monitoreo[1].monsock, &err);
-			OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &err);
+//    if(!(SystemFlag10 & UDPLICOK_FLAG))
+//        return;
 
-			ethlink_state = ETHLNK_CONNECTED;
-			NetNIC_Init(&err);
-			OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &err);
-
-			InitMonitoreoStruct();
-			Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (30*60);
-			Monitoreo[coid].flags &= ~ACKWDG_FLAG;
-			Monitoreo[coid].wdogstate = WR3K_WRST;
-#ifdef USAR_IRIDIUM
-			IRIDIUM_flag |= IRI_IPNG_FLAG;
-#endif
-			if(coid == 0)	{
-				Monitoreo[0].flags |= E700_1_FLAG;
-			}
-			else if( coid == 1)	{
-				Monitoreo[1].flags |= E700_2_FLAG;
-			}
-		} else
-		if( Monitoreo[coid].flags & ACKWDG_FLAG )	{
-			Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
-			Monitoreo[coid].flags &= ~ACKWDG_FLAG;
-		}
-		break;
-	case WR3K_WRST:
-		if(Monitoreo[coid].wdogr3kTimer > SEC_TIMER)	{
-			temp = Monitoreo[coid].wdogr3kTimer - SEC_TIMER;
-			if(temp > 30*60)
-				Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (30*60);
-		}
-		if( SEC_TIMER > Monitoreo[coid].wdogr3kTimer )	{
-			if((SystemFlag4 & ARSTOK_FLAG) && (hbreset_retries <= HBRESET_RETRIES) )	{
-				NetSock_Close(Monitoreo[0].monsock, &err);
-				NetSock_Close(Monitoreo[1].monsock, &err);
-				LLAVE_TX_OFF();
-				POWER_TX_OFF();
-				hbreset_retries++;
-				buffer[0] = hbreset_retries;
-				error = flash0_write(1, buffer, DF_HBRSTRTRY_OFFSET, 1);
-				OSTimeDlyHMSM(0, 0, 5, 0, OS_OPT_TIME_HMSM_STRICT, &err);
-				while(1);	//me reseteo por watchdog
-			} else	if(hbreset_retries > HBRESET_RETRIES)  {
-				/**Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
-				Monitoreo[coid].flags &= ~ACKWDG_FLAG;
-				Monitoreo[coid].wdogstate = WR3K_WDOG;**/
+    switch(Monitoreo[coid].wdogstate)	{
+        case WR3K_IDLE:
+            if( Monitoreo[coid].flags & ACKWDG_FLAG )	{
+                Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
+                Monitoreo[coid].wdogstate = WR3K_WDOG;
                 Monitoreo[coid].flags &= ~ACKWDG_FLAG;
-                Monitoreo[coid].wdogr3kTimer = SEC_TIMER + 60*60;
-                Monitoreo[coid].wdogstate = WR3K_WAITONEHOUR;
+            } else 	{
+                Monitoreo[coid].wdogr3kTimer = SEC_TIMER;
+                Monitoreo[coid].wdogstate = WR3K_WDOG;
+                Monitoreo[coid].flags &= ~ACKWDG_FLAG;
             }
+            break;
+        case WR3K_WDOG:
+            if( SEC_TIMER > Monitoreo[coid].wdogr3kTimer )	{
+                NetSock_Close(Monitoreo[0].monsock, &err);
+                NetSock_Close(Monitoreo[1].monsock, &err);
+                OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &err);
 
-		} else
-		if( Monitoreo[coid].flags & ACKWDG_FLAG )	{
-			Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
-			Monitoreo[coid].flags &= ~ACKWDG_FLAG;
-			Monitoreo[coid].wdogstate = WR3K_WDOG;
-#ifdef USAR_IRIDIUM
-			IRIDIUM_flag &= ~IRI_IPNG_FLAG;
+                ethlink_state = ETHLNK_CONNECTED;
+                NetNIC_Init(&err);
+                OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &err);
+
+                InitMonitoreoStruct();
+                Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (30*60);
+                Monitoreo[coid].flags &= ~ACKWDG_FLAG;
+#ifdef RESETENABLE
+                Monitoreo[coid].wdogstate = WR3K_WRST;
 #endif
-			if(coid == 0)	{
-				Monitoreo[0].flags &= ~E700_1_FLAG;
-			}
-			else if( coid == 1)	{
-				Monitoreo[0].flags &= ~E700_2_FLAG;
-			}
-		}
-		break;
-    case WR3K_WAITONEHOUR:
-        if(Monitoreo[coid].wdogr3kTimer > SEC_TIMER)	{
-            temp = Monitoreo[coid].wdogr3kTimer - SEC_TIMER;
-            if(temp > 60*60)
-                Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (60*60);
-        }
-        if( SEC_TIMER > Monitoreo[coid].wdogr3kTimer )  {
-            hbreset_retries = 0;
+#ifdef USAR_IRIDIUM
+                IRIDIUM_flag |= IRI_IPNG_FLAG;
+#endif
+                if(coid == 0)	{
+                    Monitoreo[0].flags |= E700_1_FLAG;
+                }
+                else if( coid == 1)	{
+                    Monitoreo[1].flags |= E700_2_FLAG;
+                }
+            } else
+            if( Monitoreo[coid].flags & ACKWDG_FLAG )	{
+                Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
+                Monitoreo[coid].flags &= ~ACKWDG_FLAG;
+            }
+            break;
+        case WR3K_WRST:
+            if(Monitoreo[coid].wdogr3kTimer > SEC_TIMER)	{
+                temp = Monitoreo[coid].wdogr3kTimer - SEC_TIMER;
+                if(temp > 30*60)
+                    Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (30*60);
+            }
+            if( SEC_TIMER > Monitoreo[coid].wdogr3kTimer )	{
+                if((SystemFlag4 & ARSTOK_FLAG) && (hbreset_retries < HBRESET_RETRIES) )	{
+                    NetSock_Close(Monitoreo[0].monsock, &err);
+                    NetSock_Close(Monitoreo[1].monsock, &err);
+                    LLAVE_TX_OFF();
+                    POWER_TX_OFF();
+                    hbreset_retries++;
+                    buffer[0] = hbreset_retries;
+                    error = flash0_write(1, buffer, DF_HBRSTRTRY_OFFSET, 1);
+                    OSTimeDlyHMSM(0, 0, 5, 0, OS_OPT_TIME_HMSM_STRICT, &err);
+                    while(1);	//me reseteo por watchdog
+                } else	if(hbreset_retries > HBRESET_RETRIES)  {
+                    Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
+                    Monitoreo[coid].flags &= ~ACKWDG_FLAG;
+                    Monitoreo[coid].wdogstate = WR3K_WDOG;
+//                            Monitoreo[coid].flags &= ~ACKWDG_FLAG;
+//                            Monitoreo[coid].wdogr3kTimer = SEC_TIMER + 60*60;
+//                            Monitoreo[coid].wdogstate = WR3K_WAITONEHOUR;
+                }
+
+            } else
+            if( Monitoreo[coid].flags & ACKWDG_FLAG )	{
+                Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
+                Monitoreo[coid].flags &= ~ACKWDG_FLAG;
+                Monitoreo[coid].wdogstate = WR3K_WDOG;
+#ifdef USAR_IRIDIUM
+                IRIDIUM_flag &= ~IRI_IPNG_FLAG;
+#endif
+                if(coid == 0)	{
+                    Monitoreo[0].flags &= ~E700_1_FLAG;
+                }
+                else if( coid == 1)	{
+                    Monitoreo[0].flags &= ~E700_2_FLAG;
+                }
+            }
+            break;
+        case WR3K_WAITONEHOUR:
+            if(Monitoreo[coid].wdogr3kTimer > SEC_TIMER)	{
+                temp = Monitoreo[coid].wdogr3kTimer - SEC_TIMER;
+                if(temp > 60*60)
+                    Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (60*60);
+            }
+            if( SEC_TIMER > Monitoreo[coid].wdogr3kTimer )  {
+                hbreset_retries = 0;
+                Monitoreo[coid].wdogstate = WR3K_WDOG;
+                Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
+
+                NetSock_Close(Monitoreo[0].monsock, &err);
+                NetSock_Close(Monitoreo[1].monsock, &err);
+                LLAVE_TX_OFF();
+                POWER_TX_OFF();
+                buffer[0] = 0;
+                error = flash0_write(1, buffer, DF_HBRSTRTRY_OFFSET, 1);
+                OSTimeDlyHMSM(0, 0, 5, 0, OS_OPT_TIME_HMSM_STRICT, &err);
+                while(1);	//me reseteo por watchdog
+            } else
+            if( Monitoreo[coid].flags & ACKWDG_FLAG )	{
+                Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
+                Monitoreo[coid].flags &= ~ACKWDG_FLAG;
+                Monitoreo[coid].wdogstate = WR3K_WDOG;
+#ifdef USAR_IRIDIUM
+                IRIDIUM_flag &= ~IRI_IPNG_FLAG;
+#endif
+                if(coid == 0)	{
+                    Monitoreo[0].flags &= ~E700_1_FLAG;
+                }
+                else if( coid == 1)	{
+                    Monitoreo[0].flags &= ~E700_2_FLAG;
+                }
+                hbreset_retries = 0;
+                buffer[0] = hbreset_retries;
+                error = flash0_write(1, buffer, DF_HBRSTRTRY_OFFSET, 1);
+                OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &err);
+            }
+            break;
+        default:
             Monitoreo[coid].wdogstate = WR3K_WDOG;
             Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
-
-            NetSock_Close(Monitoreo[0].monsock, &err);
-            NetSock_Close(Monitoreo[1].monsock, &err);
-            LLAVE_TX_OFF();
-            POWER_TX_OFF();
-            buffer[0] = 0;
-            error = flash0_write(1, buffer, DF_HBRSTRTRY_OFFSET, 1);
-            OSTimeDlyHMSM(0, 0, 5, 0, OS_OPT_TIME_HMSM_STRICT, &err);
-            while(1);	//me reseteo por watchdog
-        } else
-        if( Monitoreo[coid].flags & ACKWDG_FLAG )	{
-            Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
-            Monitoreo[coid].flags &= ~ACKWDG_FLAG;
-            Monitoreo[coid].wdogstate = WR3K_WDOG;
-#ifdef USAR_IRIDIUM
-            IRIDIUM_flag &= ~IRI_IPNG_FLAG;
-#endif
-            if(coid == 0)	{
-                Monitoreo[0].flags &= ~E700_1_FLAG;
-            }
-            else if( coid == 1)	{
-                Monitoreo[0].flags &= ~E700_2_FLAG;
-            }
-            hbreset_retries = 0;
-            buffer[0] = hbreset_retries;
-            error = flash0_write(1, buffer, DF_HBRSTRTRY_OFFSET, 1);
-            OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &err);
-        }
-        break;
-	default:
-		Monitoreo[coid].wdogstate = WR3K_WDOG;
-		Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
-		break;
-	}
+            break;
+    }
 }

@@ -175,6 +175,10 @@ void  AutoprotectTask(void  *p_arg)
 				  	  OS_OPT_TIME_HMSM_STRICT,
 				  	  &os_err);
 		if( !(SysFlag0 & STARTUP_flag))	{
+		    if(!(DebugFlag & MSGSYSUP_flag))   {
+		        CommSendString(DEBUG_COMM, "\n***  System-UP  ***\n\r");
+		        DebugFlag |= MSGSYSUP_flag;
+		    }
 			//----------------------------------------------
 			// proceso la linea de apertura2
 			GPIO_SetDir(0, (1 << 29), 0);		//la mando como entrada

@@ -959,6 +959,14 @@ static  void  App_Task_1 (void  *p_arg)
         SystemFlag6 &= ~ENARHB_FLAG;
     }
 
+    flash0_read(temp, DF_EVSEND_OFFSET, 2);
+    if((temp[0] == 0x5A) && (temp[1] == 0xA5)) {
+        SystemFlag10 |= UDPUSELIC_FLAG;
+    } else  {
+        SystemFlag10 &= ~UDPUSELIC_FLAG;
+        SystemFlag10 |= UDPLICOK_FLAG;
+    }
+
 	//Cargo el tiempo de autoreset
 	flash0_read(temp, DF_AUTORST_OFFSET, 2);
     if(temp[0] == 0x5A)  {
@@ -1056,7 +1064,7 @@ static  void  App_Task_1 (void  *p_arg)
 	flash0_read(temp, DF_HBRSTRTRY_OFFSET, 1);
 	if(temp[0] <= HBRESET_RETRIES)	{
 		hbreset_retries = temp[0];
-	} else if(temp[0] >= HBRESET_RETRIES + 1)	{
+	} else if(temp[0] > HBRESET_RETRIES + 1)	{
 		temp[0] = 0;
 		error = flash0_write(1, temp, DF_HBRSTRTRY_OFFSET, 1);
 		hbreset_retries = 0;
@@ -1404,13 +1412,19 @@ static  void  App_Task_1 (void  *p_arg)
 
 
 		//autoreseteo higienico
+#ifdef RESETENABLE
 		if(!(((Monitoreo[0].eventRec_count > 0) && (Monitoreo[0].inuse != 0)) || ((Monitoreo[1].eventRec_count > 0) && (Monitoreo[1].inuse != 0))) )	{
 			if((currtime.tm_hour == 19) && (currtime.tm_min == rndminute) && (currtime.tm_sec == 0))	{
 				LLAVE_TX_OFF();
 				POWER_TX_OFF();
+				temp[0] = 0;
+				error = flash0_write(1, temp, DF_HBRSTRTRY_OFFSET, 1);
+
 				while(1);
+
 			}
 		}
+#endif
 
 
 #ifdef  ABOSOLITARIO
@@ -1504,6 +1518,11 @@ static  void  App_Task_1 (void  *p_arg)
 		if((currtime.tm_min == 59) && (currtime.tm_sec == 59) &&  (!(SystemFlag4 & LICACT_DONE)))	{
 			SystemFlag4 |= LICACT_DONE;
 
+			if(valid_license())    {
+			    SystemFlag10 |= UDPLICOK_FLAG;
+			} else  {
+			    SystemFlag10 &= ~UDPLICOK_FLAG;
+			}
             if(!valid_license()) {
                 lic_ibuttonid = 0; 
                 error = flash0_read(temp, LOGIN_ENABLED, 1);
@@ -2339,10 +2358,12 @@ void AboBoardInit(void)
 	//************************************************************************************************************************************
 	// Inicializacion del watchdog
 	// Initialize WDT, IRC OSC, interrupt mode, timeout = 5000000us = 5s
+#ifdef RESETENABLE
 	WDT_Init(WDT_CLKSRC_IRC, WDT_MODE_RESET);
 	//Start watchdog with timeout given
 	WDT_Start(WDT_TIMEOUT);
  	WDT_Feed();
+#endif
 }
 
 
@@ -4380,31 +4401,41 @@ void fsm_console_enter(void)
 void HardFault_Handler(void)
 {
     CommSendString(DEBUG_COMM, "HARD_FAULT\n\r");
+#ifdef RESETENABLE
     while(1);
+#endif
 }
 
 void NMI_Handler( void )
 {
     CommSendString(DEBUG_COMM, "NMI_FAULT\n\r");
+#ifdef RESETENABLE
     while(1);
+#endif
 }
 
 void MemManage_Handler( void )
 {
     CommSendString(DEBUG_COMM, "MEMMANAGE_FAULT\n\r");
+#ifdef RESETENABLE
     while(1);
+#endif
 }
 
 void BusFault_Handler( void )
 {
     CommSendString(DEBUG_COMM, "BUS_FAULT\n\r");
+#ifdef RESETENABLE
     while(1);
+#endif
 }
 
 void UsageFault_Handler( void )
 {
     CommSendString(DEBUG_COMM, "USAGE_FAULT\n\r");
+#ifdef RESETENABLE
     while(1);
+#endif
 }
 
 void RIT_IRQHandler( void )

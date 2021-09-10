@@ -11,6 +11,9 @@ uint8_t         PTMSIGNAL_flag;
 time_t          ptmsignal_timer;
 uint8_t         ptmsignal_state;
 
+unsigned int lap485_count;
+#define VALIDPTMSTATUSLAPS 10
+
 OS_TCB		LAN485_Task_TCB;
 CPU_STK		LAN485_Task_Stk[LAN485_Task_STK_SIZE];
 
@@ -220,6 +223,7 @@ void  LAN485_Task(void  *p_arg)
 	lan485errorpkt = 0;
 	accumulated_errors = 0;
     totalpakets = 0;
+    lap485_count = 0;
 
 	while(DEF_ON)	{
 		WDT_Feed();
@@ -266,6 +270,8 @@ void  LAN485_Task(void  *p_arg)
 		if(ptm_index == MAXQTYPTM )	{
 			retval = AnyPTM_KeyRejected();
 			ptm_index = 0;
+			if(lap485_count < VALIDPTMSTATUSLAPS + 2)
+			    lap485_count++;
 
             lan485errorpkt = lan485errorcurrent;
             lan485errorcurrent = 0;
@@ -281,6 +287,8 @@ void  LAN485_Task(void  *p_arg)
 			if(ptm_index == MAXQTYPTM )	{
 				retval = AnyPTM_KeyRejected();
 				ptm_index = 0;
+				if(lap485_count < VALIDPTMSTATUSLAPS + 2)
+				    lap485_count++;
                 lan485errorpkt = lan485errorcurrent;
                 lan485errorcurrent = 0;
 			}
@@ -677,15 +685,17 @@ void PTm_process_answer( int nread, unsigned char * rxbuffer, unsigned char inde
 								ptm_dcb[index].event_alarm &= ~EVEALRM_TAMPER;
 							}
 						}
-                        if( diff & 0x40 )    {
-                            if( rxbuffer[3] & 0x40 )    {   //colocaron jumper de Z24 en el PTM
-                                GenerateCIDEventPTm(index, 'E', 813, 0);
-                            } else  {                       //sacaron jumper de Z24 en el PTM
-                                GenerateCIDEventPTm(index, 'E', 814, 0);
-                                ptmstatus0[index] &= ~0x40;
-                                ptmstatus1[index] &= ~0x40;
-                            }
-                        }
+						if(lap485_count > VALIDPTMSTATUSLAPS)    {
+						    if( diff & 0x40 )    {
+						        if( rxbuffer[3] & 0x40 )    {   //colocaron jumper de Z24 en el PTM
+						            GenerateCIDEventPTm(index, 'E', 813, 0);
+						        } else  {                       //sacaron jumper de Z24 en el PTM
+						            GenerateCIDEventPTm(index, 'E', 814, 0);
+						            ptmstatus0[index] &= ~0x40;
+						            ptmstatus1[index] &= ~0x40;
+						        }
+						    }
+						}
 
 						//-----------------------------------------------
 						//sistema de puertas esclusas del HSBC
