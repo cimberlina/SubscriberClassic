@@ -1142,7 +1142,7 @@ static  void  App_Task_1 (void  *p_arg)
 
     WDT_Feed();
     i = (uint8_t)EepromReadByte(OPENPTM_E2P_ADDR , &error);
-    if(i != 0xA5)   {
+    if(i == 0x5A)   {
         SystemFlag5 |= OPENPTM;
     } else {
         SystemFlag5 &= ~OPENPTM;

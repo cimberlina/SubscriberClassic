@@ -61,6 +61,8 @@
         PUBLIC  __Vectors
         PUBLIC  __Vectors_End
         PUBLIC  __Vectors_Size
+        PUBLIC  Reset_Handler
+        PUBLIC  Label
 
         DATA
 
@@ -157,6 +159,7 @@ NMI_Handler
         SECTION .text:CODE:REORDER(1)
 HardFault_Handler
         B HardFault_Handler
+
 
         PUBWEAK MemManage_Handler
         SECTION .text:CODE:REORDER(1)

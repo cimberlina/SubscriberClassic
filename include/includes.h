@@ -49,7 +49,7 @@
 //#define	USAR_IRIDIUM1H	1
 //#define	USAR_IRIDIUM	1
 
-//#define RESETENABLE     1
+#define RESETENABLE     1
 
 
 #define PGM1_ON() 	GPIO_SetValue(0, 1<<27)

@@ -1128,10 +1128,13 @@ int con_poll(ConsoleState* state)
 	return 1;
 }
 
+
+
 int con_hung(ConsoleState* state)
 {
 	LLAVE_TX_OFF();
 	POWER_TX_OFF();
+
 #ifdef RESETENABLE
 	while(1);
 #endif
@@ -5099,7 +5102,7 @@ int con_set_OPENPTM(ConsoleState* state)
 		retval = 0x5A;
 		SystemFlag5 |= OPENPTM;
 	} else	{
-		GPIO_SetValue(0, 1<<27);
+		//GPIO_SetValue(0, 1<<27);
 		retval = 0xA5;
 		SystemFlag5 &= ~OPENPTM;
 		if(numabo == 255)
