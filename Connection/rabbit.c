@@ -1065,9 +1065,6 @@ void fsm_wdog_r3k(int coid)
     int error;
     uint8_t buffer[8];
 
-//    if(!(SystemFlag10 & UDPLICOK_FLAG))
-//        return;
-
     switch(Monitoreo[coid].wdogstate)	{
         case WR3K_IDLE:
             if( Monitoreo[coid].flags & ACKWDG_FLAG )	{
@@ -1093,9 +1090,9 @@ void fsm_wdog_r3k(int coid)
                 InitMonitoreoStruct();
                 Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (30*60);
                 Monitoreo[coid].flags &= ~ACKWDG_FLAG;
-#ifdef RESETENABLE
+
                 Monitoreo[coid].wdogstate = WR3K_WRST;
-#endif
+
 #ifdef USAR_IRIDIUM
                 IRIDIUM_flag |= IRI_IPNG_FLAG;
 #endif
@@ -1129,12 +1126,9 @@ void fsm_wdog_r3k(int coid)
                     OSTimeDlyHMSM(0, 0, 5, 0, OS_OPT_TIME_HMSM_STRICT, &err);
                     while(1);	//me reseteo por watchdog
                 } else	if(hbreset_retries > HBRESET_RETRIES)  {
-                    Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
+                    Monitoreo[coid].wdogr3kTimer = SEC_TIMER + SEC_TIMER + 60*60;
                     Monitoreo[coid].flags &= ~ACKWDG_FLAG;
-                    Monitoreo[coid].wdogstate = WR3K_WDOG;
-//                            Monitoreo[coid].flags &= ~ACKWDG_FLAG;
-//                            Monitoreo[coid].wdogr3kTimer = SEC_TIMER + 60*60;
-//                            Monitoreo[coid].wdogstate = WR3K_WAITONEHOUR;
+                    Monitoreo[coid].wdogstate = WR3K_WAITONEHOUR;
                 }
 
             } else
@@ -1151,6 +1145,11 @@ void fsm_wdog_r3k(int coid)
                 else if( coid == 1)	{
                     Monitoreo[0].flags &= ~E700_2_FLAG;
                 }
+            } else
+            if( DebugFlag & NETRSTHAB_flag) {
+                Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
+                Monitoreo[coid].flags &= ~ACKWDG_FLAG;
+                Monitoreo[coid].wdogstate = WR3K_WDOG;
             }
             break;
         case WR3K_WAITONEHOUR:

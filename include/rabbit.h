@@ -149,7 +149,7 @@ extern uint8_t SysCONN_flag;
 
 
 extern uint8_t hbreset_retries;
-#define HBRESET_RETRIES 1
+#define HBRESET_RETRIES 5
 
 void GetServerAdd( void );
 void GetPortNumber(void);

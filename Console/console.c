@@ -239,6 +239,8 @@ const ConsoleCommand console_commands[] =
     { "DeltaT",        con_DeltaT,		    0,		MCMI_LEVEL},
     { "ActEvLic",      con_evsend_activation, 0,		MCMI_LEVEL},
     { "DeactEvLic",    con_evsend_deactivation,0,		MCMI_LEVEL},
+    { "set NETRSTHAB",	con_netrsthab,		    0,		MCMI_LEVEL},
+    { "set HIGRSTHAB",	con_higrsthab,		    0,		MCMI_LEVEL},
 	{ "P",             con_poll,               0,		MONI_LEVEL}
 };
 
@@ -1135,9 +1137,8 @@ int con_hung(ConsoleState* state)
 	LLAVE_TX_OFF();
 	POWER_TX_OFF();
 
-#ifdef RESETENABLE
 	while(1);
-#endif
+
 	return 1;
 }
 int con_set_prevetimer(ConsoleState* state)
@@ -7821,6 +7822,86 @@ int con_PPONWDOG(ConsoleState* state)
         WDT_Feed();
         SysFlag4 &= ~USEPPONWDOG_flag;
 
+    }
+
+    return 1;
+}
+
+int con_netrsthab(ConsoleState* state)
+{
+    uint8_t buffer[4];
+    int error, value;
+
+    if( state->numparams < 3 )	{
+        state->conio->puts("set NETRSTHAB 0|1 (0:Deshabilitado, 1:Habilitado)\n\r");
+        flash0_read(buffer, DF_NRSTHAB_OFFSET, 2);
+        if((buffer[0] == 0xA5) && (buffer[1] == 0x5A))  {
+            state->conio->puts("Reset Interrupcion de Red DESHABILITADO\n\r");
+        } else if((buffer[0] == 0x5A) && (buffer[1] == 0xA5))   {
+            state->conio->puts("Reset Interrupcion de Red HABILITADO\n\r");
+        } else  {
+            state->conio->puts("Reset Interrupcion de Red NO CONFIGURADO\n\r");
+        }
+        return 1;
+    }
+
+    value = atoi(con_getparam(state->command, 2));
+
+    switch(value)	{
+        case 0:
+            buffer[0] = 0xA5;
+            buffer[1] = 0x5A;
+            error = flash0_write(1, buffer, DF_NRSTHAB_OFFSET, 2);
+            WDT_Feed();
+            DebugFlag &= ~NETRSTHAB_flag;
+            break;
+        case 1:
+            buffer[0] = 0x5A;
+            buffer[1] = 0xA5;
+            error = flash0_write(1, buffer, DF_NRSTHAB_OFFSET, 2);
+            WDT_Feed();
+            DebugFlag |= NETRSTHAB_flag;
+            break;
+    }
+
+    return 1;
+}
+
+int con_higrsthab(ConsoleState* state)
+{
+    uint8_t buffer[4];
+    int error, value;
+
+    if( state->numparams < 3 )	{
+        state->conio->puts("set HIGRSTHAB 0|1 (0:Deshabilitado, 1:Habilitado)\n\r");
+        flash0_read(buffer, DF_HRSTHAB_OFFSET, 2);
+        if((buffer[0] == 0xA5) && (buffer[1] == 0x5A))  {
+            state->conio->puts("Reset Higienico DESHABILITADO\n\r");
+        } else if((buffer[0] == 0x5A) && (buffer[1] == 0xA5))   {
+            state->conio->puts("Reset Higienico HABILITADO\n\r");
+        } else  {
+            state->conio->puts("Reset Higienico NO CONFIGURADO\n\r");
+        }
+        return 1;
+    }
+
+    value = atoi(con_getparam(state->command, 2));
+
+    switch(value)	{
+        case 0:
+            buffer[0] = 0xA5;
+            buffer[1] = 0x5A;
+            error = flash0_write(1, buffer, DF_HRSTHAB_OFFSET, 2);
+            WDT_Feed();
+            DebugFlag &= ~HIGRSTHAB_flag;
+            break;
+        case 1:
+            buffer[0] = 0x5A;
+            buffer[1] = 0xA5;
+            error = flash0_write(1, buffer, DF_HRSTHAB_OFFSET, 2);
+            WDT_Feed();
+            DebugFlag |= HIGRSTHAB_flag;
+            break;
     }
 
     return 1;

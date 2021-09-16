@@ -1199,6 +1199,23 @@ static  void  App_Task_1 (void  *p_arg)
     }
     WDT_Feed();
 
+    //habilitacion del reset higienico
+    flash0_read(temp, DF_HRSTHAB_OFFSET, 2);
+    if((temp[0] == 0xA5) && (temp[1] == 0x5A)) {
+        DebugFlag &= ~HIGRSTHAB_flag;
+    } else  {
+        DebugFlag |= HIGRSTHAB_flag;
+    }
+    WDT_Feed();
+    //habilitacion del reset por interrupcion de red
+    flash0_read(temp, DF_NRSTHAB_OFFSET, 2);
+    if((temp[0] == 0xA5) && (temp[1] == 0x5A)) {
+        DebugFlag &= ~NETRSTHAB_flag;
+    } else  {
+        DebugFlag |= NETRSTHAB_flag;
+    }
+    WDT_Feed();
+
 	//activacion automatica de wdog de evo
 	for(i = 0; i < MAXQTYPTM; i++)	{
 		if( (ptm_dcb[i].rtuaddr >= 240) && (ptm_dcb[i].rtuaddr <= 243) )	{
@@ -1206,6 +1223,7 @@ static  void  App_Task_1 (void  *p_arg)
 			break;
 		}
 	}
+
 
     i = (uint8_t)EepromReadByte(WDEVOMODE_E2P_ADDR , &error);
 	if(i == 0x5A)	{
@@ -1412,19 +1430,16 @@ static  void  App_Task_1 (void  *p_arg)
 
 
 		//autoreseteo higienico
-#ifdef RESETENABLE
-		if(!(((Monitoreo[0].eventRec_count > 0) && (Monitoreo[0].inuse != 0)) || ((Monitoreo[1].eventRec_count > 0) && (Monitoreo[1].inuse != 0))) )	{
-			if((currtime.tm_hour == 19) && (currtime.tm_min == rndminute) && (currtime.tm_sec == 0))	{
-				LLAVE_TX_OFF();
-				POWER_TX_OFF();
-				temp[0] = 0;
-				error = flash0_write(1, temp, DF_HBRSTRTRY_OFFSET, 1);
-
-				while(1);
-
-			}
+		if(DebugFlag & HIGRSTHAB_flag)  {
+		    if(!(((Monitoreo[0].eventRec_count > 0) && (Monitoreo[0].inuse != 0)) || ((Monitoreo[1].eventRec_count > 0) && (Monitoreo[1].inuse != 0))) )	{
+		        if((currtime.tm_hour == 19) && (currtime.tm_min == rndminute) && (currtime.tm_sec == 0))	{
+		            LLAVE_TX_OFF();
+		            POWER_TX_OFF();
+		            while(1);
+		        }
+		    }
 		}
-#endif
+
 
 
 #ifdef  ABOSOLITARIO
@@ -2358,12 +2373,10 @@ void AboBoardInit(void)
 	//************************************************************************************************************************************
 	// Inicializacion del watchdog
 	// Initialize WDT, IRC OSC, interrupt mode, timeout = 5000000us = 5s
-#ifdef RESETENABLE
 	WDT_Init(WDT_CLKSRC_IRC, WDT_MODE_RESET);
 	//Start watchdog with timeout given
 	WDT_Start(WDT_TIMEOUT);
  	WDT_Feed();
-#endif
 }
 
 
@@ -4401,41 +4414,32 @@ void fsm_console_enter(void)
 void HardFault_Handler(void)
 {
     CommSendString(DEBUG_COMM, "HARD_FAULT\n\r");
-#ifdef RESETENABLE
     while(1);
-#endif
 }
 
 void NMI_Handler( void )
 {
     CommSendString(DEBUG_COMM, "NMI_FAULT\n\r");
-#ifdef RESETENABLE
     while(1);
-#endif
 }
 
 void MemManage_Handler( void )
 {
     CommSendString(DEBUG_COMM, "MEMMANAGE_FAULT\n\r");
-#ifdef RESETENABLE
     while(1);
-#endif
 }
 
 void BusFault_Handler( void )
 {
     CommSendString(DEBUG_COMM, "BUS_FAULT\n\r");
-#ifdef RESETENABLE
     while(1);
-#endif
+
 }
 
 void UsageFault_Handler( void )
 {
     CommSendString(DEBUG_COMM, "USAGE_FAULT\n\r");
-#ifdef RESETENABLE
     while(1);
-#endif
 }
 
 void RIT_IRQHandler( void )

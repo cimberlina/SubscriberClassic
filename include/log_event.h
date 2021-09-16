@@ -128,6 +128,8 @@ typedef struct	{
 #define DF_DELTAT_OFFSET        320     //4
 #define DF_DELAYDUAL_OFFSET     324     //4
 #define DF_EVSEND_OFFSET        328     //2
+#define DF_NRSTHAB_OFFSET       330     //2
+#define DF_HRSTHAB_OFFSET       332     //2
 
 #define	ACKRCVDMON0				0x01
 #define	ACKRCVDMON1				0x02

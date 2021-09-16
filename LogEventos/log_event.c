@@ -1662,12 +1662,12 @@ int con_set1rtc(ConsoleState* state)
 
 
 	//return 1;
-#ifdef RESETENABLE
+
 	LLAVE_TX_OFF();
 	POWER_TX_OFF();
 
 	while(1);
-#endif
+
 }
 
 int con_dumprtc(ConsoleState* state)

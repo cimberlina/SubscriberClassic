@@ -328,6 +328,8 @@ extern uint32_t Timer_prueba, Timpr_llaveon, Timpr_llaveoff, Timpr_gap, Prretrie
 #define	DBGRF_ON_flag		0x01
 #define DBGABORF_flag		0x02
 #define MSGSYSUP_flag       0x04
+#define NETRSTHAB_flag      0x08
+#define HIGRSTHAB_flag      0x08
 
 #define	TIEMPO_PREVE		4200		//7 minutos para indicar preve
 
