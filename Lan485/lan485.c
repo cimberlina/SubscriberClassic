@@ -1337,6 +1337,15 @@ void ParsePtmCID_Event( unsigned char event_buffer[] )
                 return;
     }
 
+    if(currentEvent.cid_partition == 0x55)  {
+        if((currentEvent.cid_eventcode >= 0x100) && (currentEvent.cid_eventcode <= 0x199))  {
+            currentEvent.cid_eventcode = 0x931;
+        } else
+        if((currentEvent.cid_eventcode == 0x401) || (currentEvent.cid_eventcode == 0x408) || (currentEvent.cid_eventcode == 0x403))  {
+            currentEvent.cid_eventcode = 0x801;
+        }
+    }
+
 	WriteEventToFlash(&currentEvent);
 
 	//filtro las señalizacion de uso interno en zonas 189 a 192

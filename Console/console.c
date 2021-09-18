@@ -4937,6 +4937,27 @@ int con_conf_ticket(ConsoleState* state)
     state->conio->puts(buffer);
     WDT_Feed();
 
+    //-------------------------------------------------------------------------
+    flash0_read(buffer, DF_NRSTHAB_OFFSET, 2);
+    if((buffer[0] == 0xA5) && (buffer[1] == 0x5A))  {
+        state->conio->puts("Reset Interrupcion de Red DESHABILITADO\n\r");
+    } else if((buffer[0] == 0x5A) && (buffer[1] == 0xA5))   {
+        state->conio->puts("Reset Interrupcion de Red HABILITADO\n\r");
+    } else  {
+        state->conio->puts("Reset Interrupcion de Red NO CONFIGURADO\n\r");
+    }
+    WDT_Feed();
+    //--------------------------------------------------------------------------
+    flash0_read(buffer, DF_HRSTHAB_OFFSET, 2);
+    if((buffer[0] == 0xA5) && (buffer[1] == 0x5A))  {
+        state->conio->puts("Reset Higienico DESHABILITADO\n\r");
+    } else if((buffer[0] == 0x5A) && (buffer[1] == 0xA5))   {
+        state->conio->puts("Reset Higienico HABILITADO\n\r");
+    } else  {
+        state->conio->puts("Reset Higienico NO CONFIGURADO\n\r");
+    }
+    WDT_Feed();
+
 	return 1;
 }
 

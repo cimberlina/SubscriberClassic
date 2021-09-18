@@ -73,6 +73,8 @@ void  AutoprotectTask(void  *p_arg)
 	OS_ERR	os_err;
 	//int error;
 	uint8_t tempstate;
+	struct tm mytime1;
+	time_t timestamp1;
 
 	(void)p_arg;
 
@@ -176,7 +178,11 @@ void  AutoprotectTask(void  *p_arg)
 				  	  &os_err);
 		if( !(SysFlag0 & STARTUP_flag))	{
 		    if(!(DebugFlag & MSGSYSUP_flag))   {
-		        CommSendString(DEBUG_COMM, "\n***  System-UP  ***\n\r");
+		        timestamp1 = SEC_TIMER;
+		        gmtime((const time_t *) &(timestamp1), &mytime1);
+
+		        CommSendString(DEBUG_COMM, asctime(&mytime1));
+		        CommSendString(DEBUG_COMM, "\n\r***  System-UP  ***\n\r");
 		        DebugFlag |= MSGSYSUP_flag;
 		    }
 			//----------------------------------------------

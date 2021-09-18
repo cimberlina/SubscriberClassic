@@ -1125,7 +1125,7 @@ void fsm_wdog_r3k(int coid)
                     error = flash0_write(1, buffer, DF_HBRSTRTRY_OFFSET, 1);
                     OSTimeDlyHMSM(0, 0, 5, 0, OS_OPT_TIME_HMSM_STRICT, &err);
                     while(1);	//me reseteo por watchdog
-                } else	if(hbreset_retries > HBRESET_RETRIES)  {
+                } else	if(hbreset_retries >= HBRESET_RETRIES)  {
                     Monitoreo[coid].wdogr3kTimer = SEC_TIMER + SEC_TIMER + 60*60;
                     Monitoreo[coid].flags &= ~ACKWDG_FLAG;
                     Monitoreo[coid].wdogstate = WR3K_WAITONEHOUR;
