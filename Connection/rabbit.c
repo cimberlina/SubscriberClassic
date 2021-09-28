@@ -1056,7 +1056,7 @@ uint8_t hbreset_retries;
 //	}
 //}
 
-
+#define NETRSTTIME     30
 void fsm_wdog_r3k(int coid)
 {
     NET_ERR err;
@@ -1079,16 +1079,16 @@ void fsm_wdog_r3k(int coid)
             break;
         case WR3K_WDOG:
             if( SEC_TIMER > Monitoreo[coid].wdogr3kTimer )	{
-                NetSock_Close(Monitoreo[0].monsock, &err);
-                NetSock_Close(Monitoreo[1].monsock, &err);
-                OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &err);
+//                NetSock_Close(Monitoreo[0].monsock, &err);
+//                NetSock_Close(Monitoreo[1].monsock, &err);
+//                OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &err);
 
                 ethlink_state = ETHLNK_CONNECTED;
                 NetNIC_Init(&err);
                 OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &err);
 
-                InitMonitoreoStruct();
-                Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (30*60);
+//                InitMonitoreoStruct();
+                Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (NETRSTTIME*60);
                 Monitoreo[coid].flags &= ~ACKWDG_FLAG;
 
                 Monitoreo[coid].wdogstate = WR3K_WRST;
@@ -1111,8 +1111,8 @@ void fsm_wdog_r3k(int coid)
         case WR3K_WRST:
             if(Monitoreo[coid].wdogr3kTimer > SEC_TIMER)	{
                 temp = Monitoreo[coid].wdogr3kTimer - SEC_TIMER;
-                if(temp > 30*60)
-                    Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (30*60);
+                if(temp > NETRSTTIME*60)
+                    Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (NETRSTTIME*60);
             }
             if( SEC_TIMER > Monitoreo[coid].wdogr3kTimer )	{
                 if((SystemFlag4 & ARSTOK_FLAG) && (hbreset_retries < HBRESET_RETRIES) )	{
@@ -1126,7 +1126,7 @@ void fsm_wdog_r3k(int coid)
                     OSTimeDlyHMSM(0, 0, 5, 0, OS_OPT_TIME_HMSM_STRICT, &err);
                     while(1);	//me reseteo por watchdog
                 } else	if(hbreset_retries >= HBRESET_RETRIES)  {
-                    Monitoreo[coid].wdogr3kTimer = SEC_TIMER + SEC_TIMER + 60*60;
+                    Monitoreo[coid].wdogr3kTimer = SEC_TIMER + SEC_TIMER + 2*NETRSTTIME*60;
                     Monitoreo[coid].flags &= ~ACKWDG_FLAG;
                     Monitoreo[coid].wdogstate = WR3K_WAITONEHOUR;
                 }
@@ -1146,7 +1146,7 @@ void fsm_wdog_r3k(int coid)
                     Monitoreo[0].flags &= ~E700_2_FLAG;
                 }
             } else
-            if( DebugFlag & NETRSTHAB_flag) {
+            if( !(DebugFlag & NETRSTHAB_flag)) {
                 Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
                 Monitoreo[coid].flags &= ~ACKWDG_FLAG;
                 Monitoreo[coid].wdogstate = WR3K_WDOG;
@@ -1156,7 +1156,7 @@ void fsm_wdog_r3k(int coid)
             if(Monitoreo[coid].wdogr3kTimer > SEC_TIMER)	{
                 temp = Monitoreo[coid].wdogr3kTimer - SEC_TIMER;
                 if(temp > 60*60)
-                    Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (60*60);
+                    Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (2*NETRSTTIME*60);
             }
             if( SEC_TIMER > Monitoreo[coid].wdogr3kTimer )  {
                 hbreset_retries = 0;

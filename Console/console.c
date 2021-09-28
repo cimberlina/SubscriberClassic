@@ -241,6 +241,9 @@ const ConsoleCommand console_commands[] =
     { "DeactEvLic",    con_evsend_deactivation,0,		MCMI_LEVEL},
     { "set NETRSTHAB",	con_netrsthab,		    0,		MCMI_LEVEL},
     { "set HIGRSTHAB",	con_higrsthab,		    0,		MCMI_LEVEL},
+    { "gencid",	con_gencid,		    0,		MCMI_LEVEL},
+    { "closerst",	con_closerst,		    0,		MCMI_LEVEL},
+    { "closesoc",	con_closesoc,		    0,		MCMI_LEVEL},
 	{ "P",             con_poll,               0,		MONI_LEVEL}
 };
 
@@ -8427,4 +8430,60 @@ int con_DeltaT(ConsoleState* state)
     DeltaT = value;
 
     return 1;
+}
+
+int con_gencid(ConsoleState* state)
+{
+    uint16_t devnum, evqual, event, particion, zone;
+
+    devnum = atoi( con_getparam(state->command, 1) );
+    evqual = atoi( con_getparam(state->command, 2) );
+    event = atoi( con_getparam(state->command, 3) );
+    particion = atoi( con_getparam(state->command, 4) );
+    zone = atoi( con_getparam(state->command, 5));
+
+    logCidEvent(account, evqual, event, particion, zone);
+
+    return 1;
+}
+
+int con_closerst(ConsoleState* state)
+{
+    NET_ERR err;
+    int error;
+    uint8_t buffer[8];
+
+    NetSock_Close(Monitoreo[0].monsock, &err);
+    NetSock_Close(Monitoreo[1].monsock, &err);
+    LLAVE_TX_OFF();
+    POWER_TX_OFF();
+    buffer[0] = 0;
+    error = flash0_write(1, buffer, DF_HBRSTRTRY_OFFSET, 1);
+    OSTimeDlyHMSM(0, 0, 5, 0, OS_OPT_TIME_HMSM_STRICT, &err);
+
+    OSTimeDlyHMSM(0, 0, 5, 0, OS_OPT_TIME_HMSM_STRICT, &err);
+    while(1);	//me reseteo por watchdog
+    return 1;
+}
+
+int con_closesoc(ConsoleState* state)
+{
+    NET_ERR err;
+
+    //NetSock_Close(Monitoreo[0].monsock, &err);
+    //NetSock_Close(Monitoreo[1].monsock, &err);
+//    state->conio->puts("Wait ... \n\r");
+//    OSTimeDlyHMSM(0, 0, 30, 0, OS_OPT_TIME_HMSM_STRICT, &err);
+
+    ethlink_state = ETHLNK_CONNECTED;
+    NetNIC_Init(&err);
+    OSTimeDlyHMSM(0, 0, 10, 0, OS_OPT_TIME_HMSM_STRICT, &err);
+
+//    InitMonitoreoStruct();
+//    Monitoreo[0].wdogr3kTimer = SEC_TIMER + (5*60);
+//    Monitoreo[0].flags &= ~ACKWDG_FLAG;
+//    Monitoreo[1].wdogr3kTimer = SEC_TIMER + (5*60);
+//    Monitoreo[1].flags &= ~ACKWDG_FLAG;
+    return 1;
+
 }

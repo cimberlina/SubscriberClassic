@@ -1431,13 +1431,13 @@ static  void  App_Task_1 (void  *p_arg)
 
 		//autoreseteo higienico
 		if(DebugFlag & HIGRSTHAB_flag)  {
-		    if(!(((Monitoreo[0].eventRec_count > 0) && (Monitoreo[0].inuse != 0)) || ((Monitoreo[1].eventRec_count > 0) && (Monitoreo[1].inuse != 0))) )	{
+		    //if(!(((Monitoreo[0].eventRec_count > 0) && (Monitoreo[0].inuse != 0)) || ((Monitoreo[1].eventRec_count > 0) && (Monitoreo[1].inuse != 0))) )	{
 		        if((currtime.tm_hour == 19) && (currtime.tm_min == rndminute) && (currtime.tm_sec == 0))	{
 		            LLAVE_TX_OFF();
 		            POWER_TX_OFF();
 		            while(1);
 		        }
-		    }
+		    //}
 		}
 
 
