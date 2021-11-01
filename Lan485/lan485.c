@@ -1890,7 +1890,7 @@ void ProcessEvents( unsigned char event_buffer[], unsigned char index )
 		    case 134:
 			case 130:		// Burglary
 				OSTimeDlyHMSM(0, 0, 0, 500, OS_OPT_TIME_HMSM_STRICT, &os_err);
-				if((ptm_dcb[index].particion == 20) || (ptm_dcb[index].particion == 30) || (ptm_dcb[index].particion == 40))	{
+				if((ptm_dcb[index].particion == 20) || (ptm_dcb[index].particion == 30) || (ptm_dcb[index].particion == 40) || (ptm_dcb[index].particion == 55))	{
 					ptm_dcb[index].flags |= AUTONORMAL;
 				} else
 				if((ptm_dcb[index].particion == 68) || (ptm_dcb[index].particion == 69))	{
@@ -2391,12 +2391,23 @@ void ProcessRestoreByTimeout(void)
 			if(ptm_dcb[index].flags & AUTONORMAL)	{
 				ptm_dcb[index].normstate = PTNORM_WAIT;
 				ptm_dcb[index].flags &= ~AUTONORMAL;
-				ptm_dcb[index].normtimer = SEC_TIMER + 15*60;
+				if(ptm_dcb[index].particion == 55)
+				    ptm_dcb[index].normtimer = SEC_TIMER + 15;
+				else    {
+				    ptm_dcb[index].normtimer = SEC_TIMER + 15*60;
+				}
 			}
 			break;
 		case PTNORM_WAIT:
 			if(ptm_dcb[index].normtimer <= SEC_TIMER)	{
 				ptm_dcb[index].normstate = PTNORM_IDLE;
+				if(ptm_dcb[index].particion == 55)  {
+				    GenerateCIDEventPTm(index, 'R', 931, 0);
+				    ptm_dcb[index].event_alarm &= ~EVEALRM_BURG_TMP;
+				    ptm_dcb[index].event_alarm &= ~EVEALRM_BURG_IMD;
+				    ptm_dcb[index].event_alarm &= ~EVEALRM_ENTRYEXIT;
+				    ptm_dcb[index].event_alarm &= ~EVEALRM_BURG_TERMIC;
+				}
 				if(ptm_dcb[index].event_alarm & EVEALRM_BURG_TMP)	{
 					ptm_dcb[index].event_alarm &= ~EVEALRM_BURG_TMP;
                     ptm_dcb[index].event_alarm &= ~EVEALRM_BURG_IMD;

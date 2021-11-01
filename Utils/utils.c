@@ -311,7 +311,7 @@ void FsmLedsTask( void )
 		//manejo el timer de prevencion de polling rf
 		if(preve_timer > 0)
 			preve_timer--;
-		else	{
+		else if((TypeAboAns != 5) && (TypeAboAns != 6) && (TypeAboAns != 7))	{
 			SysFlag1 |= PREVE_CENTRAL_RX;
 			//preve_timer = TIEMPO_PREVE;
 		}

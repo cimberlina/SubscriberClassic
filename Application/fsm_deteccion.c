@@ -2634,49 +2634,51 @@ void MDM_IrqHandler( void )
                     }
                     //-------------------------------------------------------------------
                     // Ponemos la maquinita para evitar falsas preves de TX
-                    switch (fsm_autorstd) {
-                        case FSM_ARSTD_IDLE :
-                            SysFlag1 &= ~PREVE_CENTRAL_TX;
-                            if (autoreset_data == 0xFE) {
-                                prevetimeout = SEC_TIMER + 15 * 60;
-                                count = 1;
-                                fsm_autorstd = FSM_ARSTD_WAIT;
-                            }
-                            break;
-                        case FSM_ARSTD_WAIT :
-                            SysFlag1 &= ~PREVE_CENTRAL_TX;
-                            //if(autoreset_data != 0xFE)	{
-                            if (SEC_TIMER > prevetimeout) {
-                                count = 0;
-                                fsm_autorstd = FSM_ARSTD_IDLE;
-                            } else if (autoreset_data == 0xFE) {
-                                count++;
-                                if (count >= 5) {
-                                    SysFlag1 |= PREVE_CENTRAL_TX;
-                                    fsm_autorstd = FSM_ARSTD_PREVETX;
-                                    count = 0;
-                                }
-                            }
-                            break;
-                        case FSM_ARSTD_PREVETX :
-                            SysFlag1 |= PREVE_CENTRAL_TX;
-                            if ((autoreset_data >= 0xE0) && (autoreset_data < 0xF0)) {
-                                if (count == 0)
+                    if((TypeAboAns != 5) && (TypeAboAns != 6) && (TypeAboAns != 7))  {
+                        switch (fsm_autorstd) {
+                            case FSM_ARSTD_IDLE :
+                                SysFlag1 &= ~PREVE_CENTRAL_TX;
+                                if (autoreset_data == 0xFE) {
                                     prevetimeout = SEC_TIMER + 15 * 60;
-                                count++;
-                                if (count >= 2) {
-                                    fsm_autorstd = FSM_ARSTD_IDLE;
-                                    SysFlag1 &= ~PREVE_CENTRAL_TX;
+                                    count = 1;
+                                    fsm_autorstd = FSM_ARSTD_WAIT;
                                 }
-                                if (SEC_TIMER > prevetimeout)
-                                    count = 0;
+                                break;
+                                case FSM_ARSTD_WAIT :
+                                    SysFlag1 &= ~PREVE_CENTRAL_TX;
+                                    //if(autoreset_data != 0xFE)	{
+                                    if (SEC_TIMER > prevetimeout) {
+                                        count = 0;
+                                        fsm_autorstd = FSM_ARSTD_IDLE;
+                                    } else if (autoreset_data == 0xFE) {
+                                        count++;
+                                        if (count >= 5) {
+                                            SysFlag1 |= PREVE_CENTRAL_TX;
+                                            fsm_autorstd = FSM_ARSTD_PREVETX;
+                                            count = 0;
+                                        }
+                                    }
+                                    break;
+                                    case FSM_ARSTD_PREVETX :
+                                        SysFlag1 |= PREVE_CENTRAL_TX;
+                                        if ((autoreset_data >= 0xE0) && (autoreset_data < 0xF0)) {
+                                            if (count == 0)
+                                                prevetimeout = SEC_TIMER + 15 * 60;
+                                            count++;
+                                            if (count >= 2) {
+                                                fsm_autorstd = FSM_ARSTD_IDLE;
+                                                SysFlag1 &= ~PREVE_CENTRAL_TX;
+                                            }
+                                            if (SEC_TIMER > prevetimeout)
+                                                count = 0;
 
-                            }
-                            break;
-                        default:
-                            fsm_autorstd = FSM_ARSTD_IDLE;
-                            SysFlag1 &= ~PREVE_CENTRAL_TX;
-                            break;
+                                        }
+                                        break;
+                                        default:
+                                            fsm_autorstd = FSM_ARSTD_IDLE;
+                                            SysFlag1 &= ~PREVE_CENTRAL_TX;
+                                            break;
+                        }
                     }
                     autoreset_data = 0;
                     //-------------------------------------------------------------------
@@ -3195,10 +3197,10 @@ void AlarmReadHistory(void)
 	}
 
 	//memoria de preve
-	if(mybuffer[5] & PREVE_CENTRAL_TX)	{
+	if((mybuffer[5] & PREVE_CENTRAL_TX) && ((TypeAboAns != 5) && (TypeAboAns != 6) && (TypeAboAns != 7)))	{
 		SysFlag1 |= PREVE_CENTRAL_TX;
 	}
-	if(mybuffer[5] & PREVE_CENTRAL_RX)	{
+	if((mybuffer[5] & PREVE_CENTRAL_RX) && ((TypeAboAns != 5) && (TypeAboAns != 6) && (TypeAboAns != 7)))	{
 		SysFlag1 |= PREVE_CENTRAL_RX;
 	}
 
@@ -3577,7 +3579,8 @@ void rf_cortex_signature( void )
 			    if(SystemFlag10 & F220INDICATION1P) {
                     csign_state = CSIGN_IDLE;
 			    } else {
-                    csign_state = CSIGN_RFP3;
+                    //csign_state = CSIGN_RFP3;       // para dos indicaciones de f220
+                    csign_state = CSIGN_IDLE;           // 4 octubre 2021, piden que solo indique con una sola f2200
                     signature_timer = 90;
                 }
 			}

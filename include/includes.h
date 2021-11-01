@@ -386,6 +386,8 @@ void check_fidu_dflash( void );
 void fsm_console_enter(void);
 void fsm_gprs_detection(void);
 
+void account_time(int basehour, int baseminute, int * ahour, int * amin);
+
 void fsm_event_preve(void);
 extern uint8_t epreve_state;
 #define	PRV_NORMAL		0x10

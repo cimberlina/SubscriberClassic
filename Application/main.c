@@ -809,7 +809,29 @@ void  App_InitTCPIP (void)
    (void)&App_IP_NTP_Srvr;
    NVIC_EnableIRQ( NVIC_ETHR - NVIC_WDT );
 }
- 
+
+void account_time(int basehour, int baseminute, int * offset_hour, int * offset_min)
+{
+    int aminutes, ahours;
+
+    aminutes = account % 100;
+    aminutes += baseminute;
+
+    ahours = basehour;
+
+    if( (aminutes >= 60) && (aminutes <= 119)) {
+        ahours++;
+        if(ahours > 23)
+            ahours = 0;
+        aminutes -= 60;
+    } else if( aminutes >= 120) {
+        ahours += 2;
+        aminutes -= 120;
+    }
+
+    *offset_hour = ahours;
+    *offset_min = aminutes;
+}
 
 
 static  void  App_Task_1 (void  *p_arg)
@@ -823,6 +845,9 @@ static  void  App_Task_1 (void  *p_arg)
     int error, rndminute, tempint;
     struct tm currtime;
     time_t tmpSEC_TIMER;
+
+    int E785_hour1, E785_minutes1, E785_hour2, E785_minutes2, E785_hour3, E785_minutes3, E785_hour4, E785_minutes4;
+    int eveg1_hour, eveg1_minutes, eveg2_hour, eveg2_minutes, eveg3_hour, eveg3_minutes, eveg4_hour, eveg4_minutes;
 
 
 
@@ -1398,6 +1423,17 @@ static  void  App_Task_1 (void  *p_arg)
     //---------------------------------------------------
 	last_voluclose = 0;
 
+    account_time(1,0, &E785_hour1, &E785_minutes1);
+    account_time(7,0, &E785_hour2, &E785_minutes2);
+    account_time(13,0, &E785_hour3, &E785_minutes3);
+    account_time(19,0, &E785_hour4, &E785_minutes4);
+
+    account_time(21,0, &eveg1_hour, &eveg1_minutes);     //grupo a tirar el dia 1
+    account_time(20,0, &eveg2_hour, &eveg2_minutes);    //grupo a tirar el dia 3
+    account_time(22,0, &eveg3_hour, &eveg3_minutes);    //grupo a tirar el dia 5
+    account_time(19,0, &eveg4_hour, &eveg4_minutes);    //grupo a tirar el dia 7
+
+
 	while (DEF_ON) {                                          /* Task body, always written as an infinite loop.       */
 
 		WDT_Feed();
@@ -1428,6 +1464,134 @@ static  void  App_Task_1 (void  *p_arg)
         currtime.tm_mday = RTC_GetTime (LPC_RTC, RTC_TIMETYPE_DAYOFMONTH);
 		currtime.tm_wday = RTC_GetTime (LPC_RTC, RTC_TIMETYPE_DAYOFWEEK);
 
+		//********************************************************************************************************************
+		//transmision del estado del abonado
+		if(((currtime.tm_hour == E785_hour1) && (currtime.tm_min == E785_minutes1) && (currtime.tm_sec == 0)) || \
+		   ((currtime.tm_hour == E785_hour2) && (currtime.tm_min == E785_minutes2) && (currtime.tm_sec == 0)) || \
+		   ((currtime.tm_hour == E785_hour3) && (currtime.tm_min == E785_minutes3) && (currtime.tm_sec == 0)) || \
+		   ((currtime.tm_hour == E785_hour4) && (currtime.tm_min == E785_minutes4) && (currtime.tm_sec == 0))
+		)    {
+		    OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &os_err);
+		    if((SysFlag1 & PREVE_CENTRAL_TX) || (SysFlag1 & PREVE_CENTRAL_RX))
+		        logCidEvent(account, 1, 785, 0, (uint16_t)170);
+		    else
+		        logCidEvent(account, 1, 785, 0, (uint16_t)BaseAlarmPkt_alarm);
+		}
+
+		//transmision de eventos del grupo 1, dia domingo
+		if((currtime.tm_hour == eveg1_hour) && (currtime.tm_min == eveg1_minutes) && (currtime.tm_sec == 0) && (currtime.tm_wday == 1))    {
+		    OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &os_err);
+		    //-------------------------------------------------------------------------------------
+		    log_nivel_portadora();
+		    //-------------------------------------------------------------------------------------
+		    for( i = 0; i < MAXQTYPTM; i++) {
+		        if(ptm_dcb[i].rtuaddr == 0x00)
+		            continue;
+		        else {
+		            if(PTM_dev_status[i] & 0x02)    {
+		                GenerateCIDEventPTm(i, 'E', 917, 0);
+		            }
+		        }
+		    }
+		    //-------------------------------------------------------------------------------------
+		}
+
+		//transmision de eventos del grupo 2, dia martes
+		if((currtime.tm_hour == eveg2_hour) && (currtime.tm_min == eveg2_minutes) && (currtime.tm_sec == 0) && (currtime.tm_wday == 3))    {
+		    OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &os_err);
+		    //-------------------------------------------------------------------------------------
+		    for( i = 0; i < MAXQTYPTM; i++) {
+		        if(ptm_dcb[i].rtuaddr == 0x00)
+		            continue;
+		        else {
+		            if(PTM_dev_status[i] & 0x40)    {
+		                GenerateCIDEventPTm(i, 'E', 530, 1);
+		            } else  {
+		                GenerateCIDEventPTm(i, 'E', 530, 0);
+		            }
+		        }
+		    }
+		    //-------------------------------------------------------------------------------------
+		    temp[0] = EepromReadByte(OPENPTM_E2P_ADDR, &error);
+		    if(temp[0] != 0xA5)	{
+		        logCidEvent(account, 1, 990, 0, 1 );
+		    } else	{
+		        logCidEvent(account, 1, 990, 0, 0 );
+		    }
+		    //-------------------------------------------------------------------------------------
+		}
+
+		//transmision de eventos del grupo 3, dia jueves
+		if((currtime.tm_hour == eveg3_hour) && (currtime.tm_min == eveg3_minutes) && (currtime.tm_sec == 0) && (currtime.tm_wday == 5))    {
+		    OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &os_err);
+		    //-------------------------------------------------------------------------------------
+		    if(RADAR2_flags & RADAR_DETECTED_FLAG)	{
+		        logCidEvent(account, 1, 995, 0, 1);
+		        if(!(SystemFlag3 & RADAR_ENABLE))	{
+		            logCidEvent(account, 1, 996, 0, 0);
+		        }
+		    } else {
+		        logCidEvent(account, 1, 995, 0, 0);
+		    }
+		    //-------------------------------------------------------------------------------------
+		    if(SystemFlag6 & ENARHB_FLAG)   {
+		        logCidEvent(account, 1, 815, 0, 1);
+		    } else  {
+		        logCidEvent(account, 1, 815, 0, 0);
+		    }
+		    //-------------------------------------------------------------------------------------
+		    //ahora envio la version de los ptm instalados
+		    for( i = 0; i < MAXQTYPTM; i++) {
+		        if( (ptm_dcb[i].rtuaddr != 0x00) && (ptm_dcb[i].rtuaddr != 240) && (ptm_dcb[i].rtuaddr != 241) && (ptm_dcb[i].rtuaddr != 242) && (ptm_dcb[i].rtuaddr != 230)) {
+		            GenerateCIDEventPTm(i, 'E', 915, ptm_dcb[i].version);
+		        }
+		    }
+		    //-------------------------------------------------------------------------------------
+		}
+
+		//transmision de eventos del grupo 4, dia sabado
+		if((currtime.tm_hour == eveg4_hour) && (currtime.tm_min == eveg4_minutes) && (currtime.tm_sec == 0) && (currtime.tm_wday == 7))    {
+		    OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &os_err);
+		    //-------------------------------------------------------------------------------------
+		    if( dhcpinuse == 1) {
+		        logCidEvent(account, 1, 980, 0, 1);
+		    } else  {
+		        logCidEvent(account, 1, 980, 0, 0);
+		    }
+
+		    if (!(GPIO_ReadValue(1) & (1<<29))) {
+		        logCidEvent(account, 1, 980, 0, 11);
+		    } else  {
+		        logCidEvent(account, 1, 980, 0, 10);
+		    }
+		    //-------------------------------------------------------------------------------------
+		    logCidEvent(account, 1, 981, 0, VERSION_NUMBER);
+		    //-------------------------------------------------------------------------------------
+		    //ahora envio los tres ultimos digitos del numero de serie
+		    flash0_read(temp, DF_SERIALNUM_OFFSET, 8);
+		    temp[8] = 0;
+		    error = atoi(temp);
+		    tempint = error % 1000;
+		    logCidEvent(account, 1, 982, 0, tempint);
+		    error /= 1000;
+		    tempint = error % 1000;
+		    logCidEvent(account, 1, 983, 0, tempint);
+		    //-------------------------------------------------------------------------------------
+		    //notificamos si el numero de serie en E2Prom es diferente del que esta en dflash
+		    EepromReadBuffer(SERIALNUM_E2P_ADDR, temp2, 8, &error);
+		    temp2[8] = 0;
+		    tempint = atoi(temp2);
+		    error = atoi(temp);
+		    if(error != tempint)    {
+		        error = tempint % 1000;
+		        logCidEvent(account, 1, 984, 0, error);
+		        tempint /= 1000;
+		        error = tempint % 1000;
+		        logCidEvent(account, 1, 985, 0, error);
+		    }
+		    //-------------------------------------------------------------------------------------
+		}
+		//********************************************************************************************************************
 
 		//autoreseteo higienico
 		if(DebugFlag & HIGRSTHAB_flag)  {
@@ -1578,63 +1742,6 @@ static  void  App_Task_1 (void  *p_arg)
 
 #endif
 
-		//Registro diario del nivel de portadora y recordatorio de problema en tamper
-		if((currtime.tm_hour == 4) && (currtime.tm_min == 0) && (currtime.tm_sec == 0) && (!(SystemFlag4 & NPMEAS_DONE)))	{	
-			log_nivel_portadora();
-			SystemFlag4 |= NPMEAS_DONE;
-
-            for( i = 0; i < MAXQTYPTM; i++) {
-                if(ptm_dcb[i].rtuaddr == 0x00)
-                    continue;
-                else {
-                    if(PTM_dev_status[i] & 0x02)    {
-                        GenerateCIDEventPTm(i, 'E', 917, 0);
-                    }
-                }
-            }
-            if(currtime.tm_wday == 1 )  {
-                for( i = 0; i < MAXQTYPTM; i++) {
-                    if(ptm_dcb[i].rtuaddr == 0x00)
-                        continue;
-                    else {
-                        if(PTM_dev_status[i] & 0x40)    {
-                            GenerateCIDEventPTm(i, 'E', 530, 1);
-                        } else  {
-                            GenerateCIDEventPTm(i, 'E', 530, 0);
-                        }
-                    }
-                }
-                temp[0] = EepromReadByte(OPENPTM_E2P_ADDR, &error);
-
-
-                if(temp[0] != 0xA5)	{
-                    logCidEvent(account, 1, 990, 0, 1 );
-                } else	{
-                    logCidEvent(account, 1, 990, 0, 0 );
-                }
-            }
-
-			// aca voy a indicar si esta presente y activado el radar
-			if(currtime.tm_wday == 6)	{
-				if(RADAR2_flags & RADAR_DETECTED_FLAG)	{
-					logCidEvent(account, 1, 995, 0, 1);
-					if(!(SystemFlag3 & RADAR_ENABLE))	{
-						logCidEvent(account, 1, 996, 0, 0);
-					}
-				} else {
-					logCidEvent(account, 1, 995, 0, 0);
-				}
-			}
-
-            OSTimeDlyHMSM(0, 0, 1, 0,
-                          OS_OPT_TIME_HMSM_STRICT,
-                          &os_err);
-		}
-		if((currtime.tm_hour == 4) && (currtime.tm_min == 1) && (currtime.tm_sec == 0))	{
-			SystemFlag4 &= ~NPMEAS_DONE;
-
-		}
-
 		//Sincronizacion de timestamp
         if((currtime.tm_hour == 8) && (currtime.tm_min == 30) && (currtime.tm_sec == 0))	{
 			temp[0] = 0;
@@ -1659,97 +1766,10 @@ static  void  App_Task_1 (void  *p_arg)
                 //SystemFlag3 |= NAPER_F220V;
             }
             OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &os_err);
-			if((SysFlag1 & PREVE_CENTRAL_TX) || (SysFlag1 & PREVE_CENTRAL_RX))
-				logCidEvent(account, 1, 785, 0, (uint16_t)170);	
-			else
-				logCidEvent(account, 1, 785, 0, (uint16_t)BaseAlarmPkt_alarm);
+
         }
 
-        if((currtime.tm_hour == 18) && (currtime.tm_min == 0) && (currtime.tm_sec == 0))    {
-            OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &os_err);
-            if((SysFlag1 & PREVE_CENTRAL_TX) || (SysFlag1 & PREVE_CENTRAL_RX))
-                logCidEvent(account, 1, 785, 0, (uint16_t)170); 
-            else
-                logCidEvent(account, 1, 785, 0, (uint16_t)BaseAlarmPkt_alarm);
-        }
 
-        if((currtime.tm_hour == 13) && (currtime.tm_min == 0) && (currtime.tm_sec == 0))    {
-            OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &os_err);
-            if((SysFlag1 & PREVE_CENTRAL_TX) || (SysFlag1 & PREVE_CENTRAL_RX))
-                logCidEvent(account, 1, 785, 0, (uint16_t)170);
-            else
-                logCidEvent(account, 1, 785, 0, (uint16_t)BaseAlarmPkt_alarm);
-        }
-
-        if((currtime.tm_hour == 23) && (currtime.tm_min == 0) && (currtime.tm_sec == 0))    {
-            OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &os_err);
-            if((SysFlag1 & PREVE_CENTRAL_TX) || (SysFlag1 & PREVE_CENTRAL_RX))
-                logCidEvent(account, 1, 785, 0, (uint16_t)170);
-            else
-                logCidEvent(account, 1, 785, 0, (uint16_t)BaseAlarmPkt_alarm);
-        }
-
-        //Envio el numero de version a las 21:00hs
-        if((currtime.tm_hour == 21) && (currtime.tm_min == 0) && (currtime.tm_sec == 0) && (!(SystemFlag5 & VERSION_SENT)))   {
-
-			if( dhcpinuse == 1) {
-                logCidEvent(account, 1, 980, 0, 1);
-            } else  {
-                logCidEvent(account, 1, 980, 0, 0);
-			}
-
-            if (!(GPIO_ReadValue(1) & (1<<29))) {
-                logCidEvent(account, 1, 980, 0, 11);
-            } else  {
-                logCidEvent(account, 1, 980, 0, 10);
-            }
-
-            logCidEvent(account, 1, 981, 0, VERSION_NUMBER);
-            SystemFlag5 |= VERSION_SENT;
-            //ahora envio los tres ultimos digitos del numero de serie
-            flash0_read(temp, DF_SERIALNUM_OFFSET, 8);
-            temp[8] = 0;
-            error = atoi(temp);
-            tempint = error % 1000;
-            logCidEvent(account, 1, 982, 0, tempint);
-            error /= 1000;
-            tempint = error % 1000;
-            logCidEvent(account, 1, 983, 0, tempint);
-            //notificamos si el numero de serie en E2Prom es diferente del que esta en dflash
-            EepromReadBuffer(SERIALNUM_E2P_ADDR, temp2, 8, &error);
-            temp2[8] = 0;
-            tempint = atoi(temp2);
-            error = atoi(temp);
-            if(error != tempint)    {
-                error = tempint % 1000;
-                logCidEvent(account, 1, 984, 0, error);
-                tempint /= 1000;
-                error = tempint % 1000;
-                logCidEvent(account, 1, 985, 0, error);
-            }
-
-
-
-            //envio de estado de activacion del RHB
-            if(SystemFlag6 & ENARHB_FLAG)   {
-                logCidEvent(account, 1, 815, 0, 1);
-            } else  {
-                logCidEvent(account, 1, 815, 0, 0);
-            }
-        }
-        if((currtime.tm_hour == 21) && (currtime.tm_min == 10) && (currtime.tm_sec == 0))    {
-            SystemFlag5 &= ~VERSION_SENT;
-        }
-
-        if((currtime.tm_hour == 2) && (currtime.tm_min == 0) && (currtime.tm_sec == 0))    {
-            OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &os_err);
-            //ahora envio la version de los ptm instalados
-            for( i = 0; i < MAXQTYPTM; i++) {
-                if( (ptm_dcb[i].rtuaddr != 0x00) && (ptm_dcb[i].rtuaddr != 240) && (ptm_dcb[i].rtuaddr != 241) && (ptm_dcb[i].rtuaddr != 242) && (ptm_dcb[i].rtuaddr != 230)) {
-                    GenerateCIDEventPTm(i, 'E', 915, ptm_dcb[i].version);
-                }
-            }
-        }
 		// Desactivacion de reles de control para Patagonia, electroiman y pir, si corresponde
 		if((currtime.tm_hour == 7) && (currtime.tm_min == 0) && (currtime.tm_sec == 0) && (!(SystemFlag4 & DOORPAT_FLAG)))	{
 			STRIKE_Flag |= STRIKE1_OFF_FLAG;
@@ -1868,36 +1888,47 @@ static  void  App_Task_1 (void  *p_arg)
         		ComPutChar(DEBUG_COMM, BaseAlarmPkt_numabo);
         		delay_us(200);
         		crc = BaseAlarmPkt_numabo;
-        		if( ((SysFlag1 & PREVE_CENTRAL_TX) || (SysFlag1 & PREVE_CENTRAL_RX)) && (BaseAlarmPkt_alarm == 0x80) )	{
-					ComPutChar(DEBUG_COMM, 0x80);;													//1
-					delay_us(200);
-					crc += 0x80;
-				} else	{
-					ComPutChar(DEBUG_COMM, BaseAlarmPkt_alarm);										//1
-					delay_us(200);
-					crc += BaseAlarmPkt_alarm;
-				}
+        		if((TypeAboAns == 5) || (TypeAboAns == 6) || (TypeAboAns == 7)) {
+        		    ComPutChar(DEBUG_COMM, BaseAlarmPkt_alarm);										//1
+        		    delay_us(200);
+        		    crc += BaseAlarmPkt_alarm;
+        		} else {
+        		    if( ((SysFlag1 & PREVE_CENTRAL_TX) || (SysFlag1 & PREVE_CENTRAL_RX)) && (BaseAlarmPkt_alarm == 0x80) )	{
+        		        ComPutChar(DEBUG_COMM, 0x80);;													//1
+        		        delay_us(200);
+        		        crc += 0x80;
+        		    } else	{
+        		        ComPutChar(DEBUG_COMM, BaseAlarmPkt_alarm);										//1
+        		        delay_us(200);
+        		        crc += BaseAlarmPkt_alarm;
+        		    }
+        		}
          		ComPutChar(DEBUG_COMM, BaseAlarmPkt_estado_dispositivos);
         		delay_us(200);
         		crc += BaseAlarmPkt_estado_dispositivos;
         		ComPutChar(DEBUG_COMM, BaseAlarmPkt_memoria_dispositivos);
         		delay_us(200);
         		crc +=  BaseAlarmPkt_memoria_dispositivos;
-        		if( ((SysFlag1 & PREVE_CENTRAL_TX) || (SysFlag1 & PREVE_CENTRAL_RX)) && (BaseAlarmPkt_alarm == 0x80) )	{
-					if(SysFlag1 & PREVE_CENTRAL_TX)	{
-						ComPutChar(DEBUG_COMM, 0x01);
-						crc += 0x01;
-					}
-					else if(SysFlag1 & PREVE_CENTRAL_RX)	{
-						ComPutChar(DEBUG_COMM, 0x02);													//4
-						crc += 0x02;
-					}
-					delay_us(200);
+        		if((TypeAboAns == 5) || (TypeAboAns == 6) || (TypeAboAns == 7)) {
+        		    ComPutChar(DEBUG_COMM, 0x00);									//1
+        		    delay_us(200);
+        		} else {
+        		    if( ((SysFlag1 & PREVE_CENTRAL_TX) || (SysFlag1 & PREVE_CENTRAL_RX)) && (BaseAlarmPkt_alarm == 0x80) )	{
+        		        if(SysFlag1 & PREVE_CENTRAL_TX)	{
+        		            ComPutChar(DEBUG_COMM, 0x01);
+        		            crc += 0x01;
+        		        }
+        		        else if(SysFlag1 & PREVE_CENTRAL_RX)	{
+        		            ComPutChar(DEBUG_COMM, 0x02);													//4
+        		            crc += 0x02;
+        		        }
+        		        delay_us(200);
 
-				} else	{
-					ComPutChar(DEBUG_COMM, 0x00);													//4
-					delay_us(200);
-				}
+        		    } else	{
+        		        ComPutChar(DEBUG_COMM, 0x00);													//4
+        		        delay_us(200);
+        		    }
+        		}
         		ComPutChar(DEBUG_COMM, (unsigned char)(crc & 0x00FF));
         		delay_us(200);
         		SystemFlag |= R3KSERSPACE;
