@@ -1,4 +1,4 @@
-"C:\Program Files\JetBrains\CLion 2019.3.5\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - MinGW Makefiles" C:\Projects\Subscriber_Classic\SubscriberClassic
+"C:\Program Files\JetBrains\CLion 2019.3.5\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" C:\Projects\Subscriber_Classic\SubscriberClassic
 -- The C compiler identification is GNU 8.1.0
 -- The CXX compiler identification is GNU 8.1.0
 -- Detecting C compiler ABI info

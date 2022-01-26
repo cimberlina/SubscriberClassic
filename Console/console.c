@@ -3115,7 +3115,7 @@ int cfg3_ptmdev(ConsoleState* state)
 
 	if( state->numparams != 7 )	{
 		state->conio->puts("\tUsage : config ptm devnum rtuaddr cuenta particion disp\n\r\tej: config ptm 05 27 1234 15 T\n\r");
-		state->conio->puts("\t\t devnum: 	nro de modulo en el rango de 0 a 31\n\r");
+		state->conio->puts("\t\t devnum: 	nro de modulo en el rango de 0 a 24\n\r");
 		state->conio->puts("\t\t rtuaddr:   dirrecion en red LAN, rango de 1 a 254\n\r");
 		state->conio->puts("\t\t cuenta:    Numero de cuenta del PTm en el sistema de monitoreo, rango 0000 a 9999\n\r");
 		state->conio->puts("\t\t particion: Numero de particion del PTm, rango 00 a 99\n\r");
@@ -3143,7 +3143,7 @@ int cfg3_ptmdev(ConsoleState* state)
 		state->conio->puts("*** Error en el numero de cuenta\n\r");
 		return 1;
 	}
-	if( (devnum < 0) || (devnum > 31) )	{
+	if( (devnum < 0) || (devnum > 24) )	{
 		state->conio->puts("*** Error en el numero de dispositivo\n\r");
 		return 1;
 	}

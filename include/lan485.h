@@ -11,7 +11,8 @@
 #define	ANS_PKT_OK		0
 #define	ANS_CHK_NG		1
 
-#define MAXQTYPTM	20
+#define MAXQTYPTM	25
+
 
 
 #define ASALPBT_FIRSTZONE	0x005

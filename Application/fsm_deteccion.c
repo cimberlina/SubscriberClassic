@@ -2538,7 +2538,7 @@ void MDM_IrqHandler( void )
 
 	rxchar = rd8_cbus(CMXRXDATA_ADDR);
 	
-	
+
 	//if((status & 0x0010) || (status & 0x0020))	{
     if((status & 0x0010) && (status & 0x0020))	{
 		for(i = 0; i < 5; i++ )	{
