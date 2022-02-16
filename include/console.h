@@ -34,12 +34,12 @@ extern uint8_t	r3kmode;
 -----------------------------------------\r\n\
 NXP LPC1769 Cortex-M3 System-UP by C.M.I.\r\n\
 EYSE (C) 2021 Abonado - EYSE Ingenieria\r\n\
-Version: 6.21CB                  20220119\r\n\
+Version: 6.22SB                  20220209\r\n\
 -----------------------------------------\r\n"
 
-#define	VERSION_ABO		"Version: 6.21CB            20220119\r\n"
+#define	VERSION_ABO		"Version: 6.22SB            20220209\r\n"
 
-#define VERSION_NUMBER  621
+#define VERSION_NUMBER  622
 
 #define VERSION_YEAR	2021
 

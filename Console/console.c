@@ -3694,7 +3694,7 @@ void FactoryPgm(void)
 	WDT_Feed();
 
 	buffer[0] = (0 >> 8) & 0x00FF;
-	buffer[1] = 0 & 0x00FF;
+	buffer[1] = 5 & 0x00FF;
 	buffer[2] = 0x5A;
 	buffer[3] = 0xA5;
 	error = flash0_write(1, (uint8_t *)buffer, DF_DELTAT_OFFSET, 4);
@@ -3702,7 +3702,7 @@ void FactoryPgm(void)
 	WDT_Feed();
 
 	buffer[0] = (5 >> 8) & 0x00FF;
-	buffer[1] = 5 & 0x00FF;
+	buffer[1] = 0 & 0x00FF;
 	buffer[2] = 0x5A;
 	buffer[3] = 0xA5;
 	error = flash0_write(1, (uint8_t *)buffer, DF_DELAYDUAL_OFFSET, 4);
@@ -3715,6 +3715,24 @@ void FactoryPgm(void)
 	WDT_Feed();
 	SystemFlag10 |= UDPLICOK_FLAG;
 	SystemFlag10 &= ~UDPUSELIC_FLAG;
+
+    buffer[0] = 0x5A;
+    buffer[1] = 0xA5;
+    error = flash0_write(1, buffer, DF_NRSTHAB_OFFSET, 2);
+    WDT_Feed();
+    DebugFlag |= NETRSTHAB_flag;
+
+    buffer[0] = 0x5A;
+    buffer[1] = 0xA5;
+    error = flash0_write(1, buffer, DF_HRSTHAB_OFFSET, 2);
+    WDT_Feed();
+    DebugFlag |= HIGRSTHAB_flag;
+
+    buffer[0] = 0xAA;
+    buffer[1] = 0xBB;
+    error = flash0_write(1, buffer, DF_INPATTERN_OFFSET, 2);
+    WDT_Feed();
+    SystemFlag7 &= ~INPATT_CHECK;
 
 }
 

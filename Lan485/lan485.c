@@ -4,7 +4,6 @@
  *  Created on: Mar 14, 2013
  *      Author: claudio
  */
-
 #include "includes.h"
 
 uint8_t         PTMSIGNAL_flag;
@@ -383,7 +382,7 @@ void  LAN485_Task(void  *p_arg)
 					diag485[7] &= ~(1 << (temp_partition));
 				}
 				//- - - - - - - - - - - - - - - - - - - - -
-				if( ptm_dcb[ptm_index].com_error_counter >= 30 )	{
+				if( ((ptm_dcb[ptm_index].com_error_counter >= 30) && (ptm_dcb[ptm_index].particion < 240) ) || ((ptm_dcb[ptm_index].particion >= 240) && (ptm_dcb[ptm_index].particion <= 242) && (ptm_dcb[ptm_index].com_error_counter >= 90)) )	{
 					SendProblem485(ptm_index, 'E');
 					PTM_dev_status[ptm_index] = 0x00;
 					ptm_dcb[ptm_index].state485 = P485_NG;
@@ -443,7 +442,7 @@ void  LAN485_Task(void  *p_arg)
 					}
 					//- - - - - - - - - - - - - - - - - - - - -
 				} else
-				if( ptm_dcb[ptm_index].com_error_counter >= 30 )	{
+				if( ((ptm_dcb[ptm_index].com_error_counter >= 30) && (ptm_dcb[ptm_index].particion < 240) ) || ((ptm_dcb[ptm_index].particion >= 240) && (ptm_dcb[ptm_index].particion <= 242) && (ptm_dcb[ptm_index].com_error_counter >= 90)) )	{
 					ptm_dcb[ptm_index].state485 = P485_NG;
 					ptm_dcb[ptm_index].flags |= COMM_TROUBLE;
 					PTM485NG_HistoryWrite();
