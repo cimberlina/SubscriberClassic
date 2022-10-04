@@ -53,32 +53,32 @@
 				{
 					"backtrace" : 2,
 					"isSystem" : true,
-					"path" : "C:/Projects/Subscriber_Classic/SubscriberClassic/include"
+					"path" : "C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/include"
 				},
 				{
 					"backtrace" : 2,
 					"isSystem" : true,
-					"path" : "C:/Projects/Subscriber_Classic/SubscriberClassic/include_iar"
+					"path" : "C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/include_iar"
 				},
 				{
 					"backtrace" : 2,
 					"isSystem" : true,
-					"path" : "C:/Projects/Subscriber_Classic/SubscriberClassic/Application"
+					"path" : "C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Application"
 				},
 				{
 					"backtrace" : 2,
 					"isSystem" : true,
-					"path" : "C:/Projects/Subscriber_Classic/SubscriberClassic/include/cmsis_drivers"
+					"path" : "C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/include/cmsis_drivers"
 				},
 				{
 					"backtrace" : 2,
 					"isSystem" : true,
-					"path" : "C:/Projects/Subscriber_Classic/SubscriberClassic/include/Net"
+					"path" : "C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/include/Net"
 				},
 				{
 					"backtrace" : 2,
 					"isSystem" : true,
-					"path" : "C:/Projects/Subscriber_Classic/SubscriberClassic/include_cmsis_iar"
+					"path" : "C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/include_cmsis_iar"
 				}
 			],
 			"language" : "C",

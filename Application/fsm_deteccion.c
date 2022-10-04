@@ -1186,7 +1186,7 @@ void fsm_deteccion_apertura( void )
 				daper_state = APER_IDLE;
 			} else
 			if( !timerdbncaper)	{
-				SystemFlag3 |= NAPER_flag;
+				//SystemFlag3 |= NAPER_flag;
 				daper_state = APER_ALRM;
 				BaseAlarmPkt_alarm |= bitpat[APER_bit];
 				if(SystemFlag2 & APE1WDOG_FLAG)	{
@@ -4095,7 +4095,11 @@ void recharge_alarm(uint8_t alarm)
 					else	{
 						if(paptslot == 0)	{
 							asal_autr_counter = AUTORESET_POLL_COUNT;
-							asal_autorst_timer_min = 25*60;
+                            if(SystemFlag11 & APERASAL_FLAG) {
+                                asal_autorst_timer_min = 75 * 60;
+                            } else {
+                                asal_autorst_timer_min = 25 * 60;
+                            }
 						} else	{
 							asal_autr_counter = 0;
 							asal_autorst_timer_min = paparst_timer*60;
@@ -4312,7 +4316,7 @@ void recharge5min_alarm(void)
             teso_state = AUTR_ALRMED;
             teso_autr_timer = SEC_TIMER;
             teso_autr_counter = 0;
-            teso_autorst_timer_min = 3*60;
+            teso_autorst_timer_min = 5*60;
             led_dcb[TESO_led].led_cad = 255*0x100 + 0;
         }
 
@@ -4322,7 +4326,7 @@ void recharge5min_alarm(void)
             asal_state = AUTR_ALRMED;
             asal_autr_timer = SEC_TIMER;
             asal_autr_counter = 0;
-            asal_autorst_timer_min = 3*60;
+            asal_autorst_timer_min = 5*60;
             led_dcb[ASAL_led].led_cad = 255*0x100 + 0;
         }
 
@@ -4333,7 +4337,7 @@ void recharge5min_alarm(void)
             ince_state = AUTR_ALRMED;
             ince_autr_timer = SEC_TIMER;
             ince_autr_counter = 0;
-            ince_autorst_timer_min = 3*60;
+            ince_autorst_timer_min = 5*60;
             led_dcb[INCE_led].led_cad = 255*0x100 + 0;
         }
 

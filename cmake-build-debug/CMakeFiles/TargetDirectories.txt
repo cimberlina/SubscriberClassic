@@ -1,3 +1,3 @@
-C:/Projects/Subscriber_Classic/SubscriberClassic/cmake-build-debug/CMakeFiles/Subscriber.dir
-C:/Projects/Subscriber_Classic/SubscriberClassic/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Projects/Subscriber_Classic/SubscriberClassic/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/cmake-build-debug/CMakeFiles/Subscriber.dir
+C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/cmake-build-debug/CMakeFiles/rebuild_cache.dir

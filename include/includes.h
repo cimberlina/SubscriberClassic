@@ -42,7 +42,7 @@
 #define __UINT64_T_TYPE__ unsigned long long int
 #endif
 
-
+//#define NOEVENTS    1
 
 //#define USAR_LICENSIA	1
 //#define	USAR_IRIDIUM6	1
@@ -50,6 +50,7 @@
 //#define	USAR_IRIDIUM	1
 
 #define RESETENABLE     1
+
 
 
 #define PGM1_ON() 	GPIO_SetValue(0, 1<<27)
@@ -205,6 +206,10 @@ extern uint8_t SystemFlag10;
 #define IBUTTONREAD         0x08
 #define UDPLICOK_FLAG       0x10
 #define UDPUSELIC_FLAG      0x20
+
+extern uint32_t SystemFlag11;
+#define DONTSENDEVENTS  (1 << 0)
+#define APERASAL_FLAG   (1 << 1)
 
 
 #define PART5_REDU_FLAGS		0

@@ -352,7 +352,7 @@ extern uint32_t Timer_prueba, Timpr_llaveon, Timpr_llaveoff, Timpr_gap, Prretrie
 
 
 #define	AUTORESET_BLINK_CAD		3*0x100 + 3
-#define	AUTORESET_POLL_COUNT	1
+#define	AUTORESET_POLL_COUNT	3
 
 #ifdef	AUTORST_PRUEBA
 #define	AUTORST_TIMER_MIN		2

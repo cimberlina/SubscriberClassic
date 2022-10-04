@@ -195,7 +195,7 @@ void InitMonitoreoStruct(void)
 		Monitoreo[i].rxsm_flags = 0x0000;
 		Monitoreo[i].rxsm_timer = 0;
 		Monitoreo[i].reconnect = 0;
-		if(Monitoreo[i].inuse == TRUE)
+		if((Monitoreo[i].inuse == TRUE) && (!(SystemFlag11 & DONTSENDEVENTS)))
 		    ReloadUnAckEvents(i);
 	}
 		//la siguiente inicializacion se debe cargar desde EEPROM de inicializacion

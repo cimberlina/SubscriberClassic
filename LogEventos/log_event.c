@@ -82,7 +82,7 @@ void RawCID_LogEvent( uint8_t *cidbuff)
 
 
 	for( i = 0; i < CENTRALOFFICEMAX; i++ )	{
-		if(Monitoreo[i].inuse == TRUE )
+		if((Monitoreo[i].inuse == TRUE) && (!(SystemFlag11 & DONTSENDEVENTS)) )
 			WriteEventToTxBuffer(i, &currentEvent);
 	}
 }
@@ -198,7 +198,7 @@ void logCidEvent(uint16_t account, uint8_t qualifier, uint16_t eventcode, uint8_
 
 	if(eventcode < 999)	{
 		for( i = 0; i < CENTRALOFFICEMAX; i++ )	{
-			if(Monitoreo[i].inuse == TRUE )	{
+			if((Monitoreo[i].inuse == TRUE) && (!(SystemFlag11 & DONTSENDEVENTS)) )	{
 				switch(Monitoreo[i].protocol)	{
 				case AP_NTSEC4:
 				case AP_NTSEC5:

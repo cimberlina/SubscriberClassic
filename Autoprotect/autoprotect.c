@@ -274,6 +274,7 @@ void fsm_AP_apertura(void)
 			SystemFlag4 |= ARSTOK_FLAG;
 			SysFlag_AP_Apertura &= ~AP_APR_IBUTTON_OK;
 			lic_ibuttonid = 0;
+            SystemFlag11 &= ~APERASAL_FLAG;
 			if(SysFlag_AP_Apertura & AP_APR_APRLINE)	{
 				tout_AP_apertura = 60;
 				AP_apertura_state = AP_APER_WAIT_IBUTT;
@@ -290,6 +291,7 @@ void fsm_AP_apertura(void)
 			SystemFlag4 |= ARSTOK_FLAG;
 			SysFlag1 |= AP_APERLED_CTRL;
 			if(SysFlag_AP_Apertura & AP_APR_IBUTTON_OK )	{
+                SystemFlag3 |= NAPER_flag;
 				SysFlag_AP_Apertura &= ~AP_APR_IBUTTON_OK;
 				SysFlag_AP_Apertura |= AP_APR_VALID;
 				AP_apertura_state = AP_APER_OP_NORMAL;
@@ -305,8 +307,9 @@ void fsm_AP_apertura(void)
 			if(!tout_AP_apertura){
 				tout_AP_apertura = 60*6;
 				SysFlag_AP_GenAlarm |= bitpat[ASAL_bit];
-				SysFlag_AP_GenAlarm |= bitpat[ROTU_bit];
-				AP_apertura_state = AP_APER_WAIT_PREVE;
+                SystemFlag11 |= APERASAL_FLAG;
+				//SysFlag_AP_GenAlarm |= bitpat[ROTU_bit];
+				AP_apertura_state = AP_APER_OP_PREVE;
 				fsmAperWriteHistory();
 				AP_Aper_led_dcb.led_cad = WAIT_PREVE_LED_CADENCE;
 				AP_Aper_led_dcb.led_state = LED_IDLE;
@@ -386,6 +389,7 @@ void fsm_AP_apertura(void)
 			SysFlag1 |= AP_APERLED_CTRL;
 			//POWER_TX_OFF();
 			if(SysFlag_AP_Apertura & AP_APR_IBUTTON_OK )	{
+                SystemFlag3 |= NAPER_flag;
 				SysFlag_AP_Apertura &= ~AP_APR_IBUTTON_OK;
 				SysFlag_AP_Apertura |= AP_APR_VALID;
 				AP_apertura_state = AP_APER_OP_NORMAL;

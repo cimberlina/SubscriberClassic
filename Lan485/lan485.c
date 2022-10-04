@@ -992,7 +992,7 @@ void GenerateCIDEventPTm( unsigned char index, unsigned char eventtype, unsigned
 
 
 	for( i = 0; i < CENTRALOFFICEMAX; i++ )	{
-		if(Monitoreo[i].inuse == TRUE )	{
+		if((Monitoreo[i].inuse == TRUE) && (!(SystemFlag11 & DONTSENDEVENTS)) )	{
 			switch(Monitoreo[i].protocol)	{
 			case AP_NTSEC4:
 			case AP_NTSEC5:
@@ -1461,7 +1461,7 @@ void ParsePtmCID_Event( unsigned char event_buffer[] )
 
 
 	for( i = 0; i < CENTRALOFFICEMAX; i++ )	{
-		if(Monitoreo[i].inuse == TRUE )	{
+		if((Monitoreo[i].inuse == TRUE) && (!(SystemFlag11 & DONTSENDEVENTS)) )	{
 			switch(Monitoreo[i].protocol)	{
 			case AP_NTSEC4:
 			case AP_NTSEC5:
@@ -3416,7 +3416,7 @@ void fsm_ptmsignalling( void )
         case PTMSIGNAL_IDLE:
             if(PTMSIGNAL_flag & PTMSIG_PANIC)   {
                 PTMSIGNAL_flag &= ~PTMSIG_PANIC;
-                if(SysFlag_AP_Apertura & AP_APR_VALID)	{
+                if(SysFlag_AP_Apertura & sAP_APR_VALID)	{
                     rotu_autr_counter = 0;
                     rotu_autorst_timer_min = 2*60;
                     ptmsignal_timer = SEC_TIMER + 2*60;

@@ -130,7 +130,7 @@ void fsm_pgm1( void );
 
 uint8_t SystemFlag, SystemFlag1, SystemFlag2, SystemFlag3, SystemFlag4, SystemFlag5, SystemFlag6;
 uint8_t SystemFlag7, SystemFlag8, SystemFlag10;
-uint32_t SystemFlag9;
+uint32_t SystemFlag9, SystemFlag11;
 uint8_t	EVOWD_Flag;
 uint8_t SIRENA_Flag, STRIKE_Flag;
 
@@ -322,6 +322,11 @@ int  main (void)
     SystemFlag6 = 0x00;
     SystemFlag7 |= IP150_ALIVE;
     SystemFlag8 = 0x00;
+    SystemFlag11 = 0x00;
+
+#ifdef NOEVENTS
+    SystemFlag11 |= DONTSENDEVENTS;
+#endif
 
     EVOWD_Flag = 0x00;
     SIRENA_Flag = 0x00;
@@ -4423,7 +4428,8 @@ void fsm_console_enter(void)
                    asal_autr_timer = (SEC_TIMER + 60*120 - asal_autorst_timer_min);
                 }
             } else  {
-               fsm_conent_state = FCS_CONIN; 
+               fsm_conent_state = FCS_CONIN;
+               recharge5min_alarm();
             }
             break;
         case FCS_NORMAL:

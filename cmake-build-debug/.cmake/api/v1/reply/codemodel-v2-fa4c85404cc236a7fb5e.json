@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "Subscriber::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Subscriber-Debug-513122746f4aab590a95.json",
+					"jsonFile" : "target-Subscriber-Debug-32bc59be22205ce3ee9c.json",
 					"name" : "Subscriber",
 					"projectIndex" : 0
 				}
@@ -49,12 +49,12 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Projects/Subscriber_Classic/SubscriberClassic/cmake-build-debug",
-		"source" : "C:/Projects/Subscriber_Classic/SubscriberClassic"
+		"build" : "C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/cmake-build-debug",
+		"source" : "C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic"
 	},
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 3
+		"minor" : 4
 	}
 }
