@@ -5475,7 +5475,7 @@ int con_wdevo_timer(ConsoleState* state)
 		return 1;
 	}
 	cuenta = atoi(con_getparam(state->command, 2));
-	if((cuenta >= 0) && (cuenta <= 250))
+	if((cuenta >= 90) && (cuenta <= 240))
 		EepromWriteWord(WDEVOTIMER_E2P_ADDR, cuenta, &error);
 	else	{
 		state->conio->puts("*** WDEVO TIMER OUT OF RANGE  ***\n\r");

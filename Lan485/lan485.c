@@ -382,12 +382,36 @@ void  LAN485_Task(void  *p_arg)
 					diag485[7] &= ~(1 << (temp_partition));
 				}
 				//- - - - - - - - - - - - - - - - - - - - -
-				if( ((ptm_dcb[ptm_index].com_error_counter >= 30) && (ptm_dcb[ptm_index].particion < 240) ) || ((ptm_dcb[ptm_index].particion >= 240) && (ptm_dcb[ptm_index].particion <= 242) && (ptm_dcb[ptm_index].com_error_counter >= 90)) )	{
-					SendProblem485(ptm_index, 'E');
-					PTM_dev_status[ptm_index] = 0x00;
-					ptm_dcb[ptm_index].state485 = P485_NG;
-					ptm_dcb[ptm_index].flags |= COMM_TROUBLE;
-					PTM485NG_HistoryWrite();
+				if( ((ptm_dcb[ptm_index].com_error_counter >= 90) && (ptm_dcb[ptm_index].particion < 240) ) || ((ptm_dcb[ptm_index].particion >= 240) && (ptm_dcb[ptm_index].particion <= 242) && (ptm_dcb[ptm_index].com_error_counter >= 90)) )	{
+					switch(ptm_dcb[ptm_index].particion)    {
+                        case 10:
+                        case 55:
+                        case 56:
+                        case 57:
+                        case 58:
+                        case 59:
+                        case 66:
+                        case 67:
+                        case 92:
+                        case 93:
+                        case 94:
+                        case 95:
+                        case 96:
+                        case 97:
+                        case 98:
+                            GenerateCIDEventPTm(ptm_index, 1, 386,0);
+                            ptm_dcb[ptm_index].state485 = P485_NG;
+                            PTM_dev_status[ptm_index] = 0x00;
+                            break;
+                        default:
+                            SendProblem485(ptm_index, 'E');
+                            PTM_dev_status[ptm_index] = 0x00;
+                            ptm_dcb[ptm_index].state485 = P485_NG;
+                            ptm_dcb[ptm_index].flags |= COMM_TROUBLE;
+                            PTM485NG_HistoryWrite();
+                            break;
+                    }
+
 					//- - - - - - - - - - - - - - - - - - - - -
 					if( temp_pt < 8)	{
 						diag485[temp_partition] |= (1 << (temp_pt));
@@ -406,7 +430,8 @@ void  LAN485_Task(void  *p_arg)
 				}
 				//- - - - - - - - - - - - - - - - - - - - -
 				if( ptm_dcb[ptm_index].com_error_counter == 0 )	{
-					if(BaseAlarmPkt_alarm & bitpat[APER_bit])	{
+					//if(BaseAlarmPkt_alarm & bitpat[APER_bit])	{
+                    if(SysFlag_AP_Apertura & AP_APR_VALID)  {
 						ptm_dcb[ptm_index].timeout485 = 180;
 					} else	{
 						ptm_dcb[ptm_index].timeout485 = 10800;
@@ -430,10 +455,33 @@ void  LAN485_Task(void  *p_arg)
 				}
 				//- - - - - - - - - - - - - - - - - - - - -
 				if(!(ptm_dcb[ptm_index].timeout485))	{
-					ptm_dcb[ptm_index].flags &= ~COMM_TROUBLE;
-					SendProblem485(ptm_index, 'R');
-					ptm_dcb[ptm_index].state485 = P485_IDLE;
-					PTM485NG_HistoryWrite();
+                    switch(ptm_dcb[ptm_index].particion)    {
+                        case 10:
+                        case 55:
+                        case 56:
+                        case 57:
+                        case 58:
+                        case 59:
+                        case 66:
+                        case 67:
+                        case 92:
+                        case 93:
+                        case 94:
+                        case 95:
+                        case 96:
+                        case 97:
+                        case 98:
+                            GenerateCIDEventPTm(ptm_index, 3, 386,0);
+                            ptm_dcb[ptm_index].state485 = P485_NG;
+                            PTM_dev_status[ptm_index] = 0x00;
+                            break;
+                        default:
+                            ptm_dcb[ptm_index].flags &= ~COMM_TROUBLE;
+                            SendProblem485(ptm_index, 'R');
+                            ptm_dcb[ptm_index].state485 = P485_IDLE;
+                            PTM485NG_HistoryWrite();
+                            break;
+                    }
 					//- - - - - - - - - - - - - - - - - - - - -
 					if( temp_pt < 8)	{
 						diag485[temp_partition] &= ~(1 << (temp_pt));
@@ -442,10 +490,33 @@ void  LAN485_Task(void  *p_arg)
 					}
 					//- - - - - - - - - - - - - - - - - - - - -
 				} else
-				if( ((ptm_dcb[ptm_index].com_error_counter >= 30) && (ptm_dcb[ptm_index].particion < 240) ) || ((ptm_dcb[ptm_index].particion >= 240) && (ptm_dcb[ptm_index].particion <= 242) && (ptm_dcb[ptm_index].com_error_counter >= 90)) )	{
-					ptm_dcb[ptm_index].state485 = P485_NG;
-					ptm_dcb[ptm_index].flags |= COMM_TROUBLE;
-					PTM485NG_HistoryWrite();
+				if( ((ptm_dcb[ptm_index].com_error_counter >= 90) && (ptm_dcb[ptm_index].particion < 240) ) || ((ptm_dcb[ptm_index].particion >= 240) && (ptm_dcb[ptm_index].particion <= 242) && (ptm_dcb[ptm_index].com_error_counter >= 90)) )	{
+                    switch(ptm_dcb[ptm_index].particion)    {
+                        case 10:
+                        case 55:
+                        case 56:
+                        case 57:
+                        case 58:
+                        case 59:
+                        case 66:
+                        case 67:
+                        case 92:
+                        case 93:
+                        case 94:
+                        case 95:
+                        case 96:
+                        case 97:
+                        case 98:
+                            //GenerateCIDEventPTm(ptm_index, 1, 386,0);
+                            ptm_dcb[ptm_index].state485 = P485_NG;
+                            PTM_dev_status[ptm_index] = 0x00;
+                            break;
+                        default:
+                            ptm_dcb[ptm_index].state485 = P485_NG;
+                            ptm_dcb[ptm_index].flags |= COMM_TROUBLE;
+                            PTM485NG_HistoryWrite();
+                            break;
+                    }
 					//- - - - - - - - - - - - - - - - - - - - -
 					if( temp_pt < 8)	{
 						diag485[temp_partition] |= (1 << (temp_pt));
@@ -507,6 +578,7 @@ void SendProblem485(uint8_t ptm_index, uint8_t erevent)
 		ParsePtmCID_Event(rxbuffer);
 	}
 }
+
 
 void LAN485_Send( unsigned char sendbuffer[], int bufflen )
 {
@@ -3416,7 +3488,7 @@ void fsm_ptmsignalling( void )
         case PTMSIGNAL_IDLE:
             if(PTMSIGNAL_flag & PTMSIG_PANIC)   {
                 PTMSIGNAL_flag &= ~PTMSIG_PANIC;
-                if(SysFlag_AP_Apertura & sAP_APR_VALID)	{
+                if(SysFlag_AP_Apertura & AP_APR_VALID)	{
                     rotu_autr_counter = 0;
                     rotu_autorst_timer_min = 2*60;
                     ptmsignal_timer = SEC_TIMER + 2*60;

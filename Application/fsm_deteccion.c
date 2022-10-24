@@ -1039,16 +1039,18 @@ void fsm_deteccion_rotura( void )
 			case ROTU_WAIT:
 				if(!dbnc_rotu_timer)	{
 					drotu_state[i] = ROTU_ALRM;
-					if( !(BaseAlarmPkt_alarm & bitpat[ROTU_bit]) )	{
-						BaseAlarmPkt_alarm |= bitpat[ROTU_bit];
-						AlarmWriteHistory();
-						SysFlag3 |= SEND_flag;
-						SysFlag3 |= SENDM_flag;
-					}
-					BaseAlarmPkt_alarm |= bitpat[ROTU_bit];
+					if(i <= 2) {
+                        if (!(BaseAlarmPkt_alarm & bitpat[ROTU_bit])) {
+                            BaseAlarmPkt_alarm |= bitpat[ROTU_bit];
+                            AlarmWriteHistory();
+                            SysFlag3 |= SEND_flag;
+                            SysFlag3 |= SENDM_flag;
+                        }
+                        BaseAlarmPkt_alarm |= bitpat[ROTU_bit];
 
-					OSTimeDlyHMSM(0, 0, 0, 700, OS_OPT_TIME_HMSM_STRICT, &os_err);
-					vreal = get_vreal(i);
+                        OSTimeDlyHMSM(0, 0, 0, 700, OS_OPT_TIME_HMSM_STRICT, &os_err);
+                        vreal = get_vreal(i);
+                    }
 					logCidEvent(account, 1, 380, i+2, vreal);
 
 				} else if(Status_Zonas[i] != ALRM_ROTU)	{
@@ -2214,12 +2216,19 @@ void  AlarmDetectTask(void  *p_arg)
 		//reporto cualquier problem de comunicacion en la 485 con rotura a policia
 		Rot485_flag &= ~ROT485_FLAG;
         Rot485_flag &= ~ROT485RELE85_FLAG;
+        Rot485_flag &= ~ROT485PTM_FLAG;
+        Rot485_flag &= ~ROT485CID_FLAG;
 		for( i = 0; i < MAXQTYPTM; i++ )	{
 			if(ptm_dcb[i].rtuaddr == 0x00)
 				continue;
 			if(ptm_dcb[i].flags & COMM_TROUBLE )	{
 				if(!((ptm_dcb[i].rtuaddr >= 230) && (ptm_dcb[i].rtuaddr < 236)))	{
 					Rot485_flag |= ROT485_FLAG;
+                    if((ptm_dcb[i].rtuaddr >= 240) && (ptm_dcb[i].rtuaddr < 243)) {
+                        Rot485_flag |= ROT485CID_FLAG;
+                    } else {
+                        Rot485_flag |= ROT485PTM_FLAG;
+                    }
 				} else  {
                     Rot485_flag |= ROT485RELE85_FLAG;
 				}
@@ -2372,13 +2381,26 @@ void fsm_rotura485( void )
 			currtime.tm_sec = RTC_GetTime (LPC_RTC, RTC_TIMETYPE_SECOND);
 			currtime.tm_min = RTC_GetTime (LPC_RTC, RTC_TIMETYPE_MINUTE);
 			currtime.tm_hour = RTC_GetTime (LPC_RTC, RTC_TIMETYPE_HOUR);
-			if((currtime.tm_hour == 22) && (currtime.tm_min == 15) && (currtime.tm_sec == 0) && (!(SystemFlag4 & RS485F220_DONE)))	{
-				SystemFlag4 |= RS485F220_DONE;
-				SystemFlag3 |= NAPER_flag;
-			}
-			if((currtime.tm_hour == 22) && (currtime.tm_min == 15) && (currtime.tm_sec == 10) )	{
-				SystemFlag4 &= ~RS485F220_DONE;
-			}
+            if(Rot485_flag & ROT485PTM_FLAG) {
+                if ((currtime.tm_hour == 22) && (currtime.tm_min == 15) && (currtime.tm_sec == 0) &&
+                    (!(SystemFlag4 & RS485F220_DONE))) {
+                    SystemFlag4 |= RS485F220_DONE;
+                    SystemFlag3 |= NAPER_flag;
+                }
+                if ((currtime.tm_hour == 22) && (currtime.tm_min == 15) && (currtime.tm_sec == 10)) {
+                    SystemFlag4 &= ~RS485F220_DONE;
+                }
+            }
+            if(Rot485_flag & ROT485CID_FLAG) {
+                if ((currtime.tm_hour == 23) && (currtime.tm_min == 30) && (currtime.tm_sec == 0) &&
+                    (!(SystemFlag4 & RS485F220_DONE))) {
+                    SystemFlag4 |= RS485F220_DONE;
+                    SystemFlag3 |= NAPER_flag;
+                }
+                if ((currtime.tm_hour == 23) && (currtime.tm_min == 30) && (currtime.tm_sec == 10)) {
+                    SystemFlag4 &= ~RS485F220_DONE;
+                }
+            }
 		}
 //		if( (!(BaseAlarmPkt_alarm & bitpat[ROTU_bit]) ) && (!(SysFlag_AP_GenAlarm & bitpat[ROTU_bit])))	{
 //			fsm_rot485_state = FSM_ROT485_WAIT;
@@ -2409,8 +2431,8 @@ void fsm_roturaEVO( void )
 		if(SEC_TIMER > rotEVOtimer + 180)	{
 			fsm_rotEVO_state = FSM_ROT485_ROT;
 			SysFlag_AP_GenAlarm |= bitpat[ROTU_bit];
-			SystemFlag3 |= NAPER_flag;
-			SystemFlag3 |= NAPER_F220V;
+			//SystemFlag3 |= NAPER_flag;
+			//SystemFlag3 |= NAPER_F220V;
 		}
 		break;
 	case FSM_ROT485_ROT:
@@ -2419,11 +2441,11 @@ void fsm_roturaEVO( void )
 		} else	{
 			SysFlag_AP_GenAlarm |= bitpat[ROTU_bit];
 			BaseAlarmPkt_alarm |= bitpat[ROTU_bit];
-			if((currtime.tm_hour == 22) && (currtime.tm_min == 15) && (currtime.tm_sec == 0) && (!(SystemFlag4 & RS485F220_DONE)))	{
+			if((currtime.tm_hour == 1) && (currtime.tm_min == 30) && (currtime.tm_sec == 0) && (!(SystemFlag4 & RS485F220_DONE)))	{
 				SystemFlag4 |= RS485F220_DONE;
 				SystemFlag3 |= NAPER_flag;
 			}
-			if((currtime.tm_hour == 22) && (currtime.tm_min == 15) && (currtime.tm_sec == 10) )	{
+			if((currtime.tm_hour == 1) && (currtime.tm_min == 30) && (currtime.tm_sec == 10) )	{
 				SystemFlag4 &= ~RS485F220_DONE;
 			}
 		}

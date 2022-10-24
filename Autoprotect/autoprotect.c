@@ -423,6 +423,7 @@ void fsm_AP_apertura(void)
 			if(!tout_AP_apertura)	{
 				SysFlag_AP_Apertura &= ~AP_APR_VALID;
 				AP_apertura_state = AP_APER_IDLE;
+                SystemFlag11 &= ~FIRSTCMD_FLAG;
 				SystemFlag4 |= ARSTOK_FLAG;
 				Buzzer_dcb.led_cad = 0;
 				Buzzer_dcb.led_state = LED_IDLE;
@@ -462,6 +463,7 @@ void fsm_AP_apertura(void)
 			if(!tout_AP_apertura)	{
 				SysFlag_AP_Apertura &= ~AP_APR_VALID;
 				AP_apertura_state = AP_APER_IDLE;
+                SystemFlag11 &= ~FIRSTCMD_FLAG;
 				SystemFlag4 |= ARSTOK_FLAG;
 				Buzzer_dcb.led_cad = 0;
 				Buzzer_dcb.led_state = LED_IDLE;
@@ -484,6 +486,7 @@ void fsm_AP_apertura(void)
 			break;
 		default:
 			AP_apertura_state = AP_APER_IDLE;
+            SystemFlag11 &= ~FIRSTCMD_FLAG;
 			Buzzer_dcb.led_cad = 0;
 			Buzzer_dcb.led_state = LED_IDLE;
 			SystemFlag4 |= ARSTOK_FLAG;
@@ -493,8 +496,32 @@ void fsm_AP_apertura(void)
 	}
 }
 
+void fsm_AP_reset(void)
+{
+    switch(AP_reset_state)  {
+        case AP_RST_IDLE:
+            if(SysFlag_AP_Reset & AP_RST_SYSRESET)	{
+                logCidEvent(account, 1, 388, 0, 0);
+                tout_AP_reset = 60*3;
+                SysFlag_AP_Reset &= ~AP_RST_SYSRESET;
+                AP_reset_state = AP_RST_WTOUT;
+                fsmAperWriteHistory();
+            }
+            break;
+        case AP_RST_WTOUT:
+            if(!tout_AP_reset)  {
+                logCidEvent(account, 3, 388, 0, 0);
+                AP_reset_state = AP_RST_IDLE;
+                fsmAperWriteHistory();
+            }
+            break;
+        default:
+            AP_reset_state = AP_RST_IDLE;
+            break;
+    }
+}
 
-
+/*
 void fsm_AP_reset(void)
 {
 	switch(AP_reset_state)	{
@@ -537,6 +564,7 @@ void fsm_AP_reset(void)
 			break;
 	}
 }
+*/
 
 void fsm_AP_zvolt(void)
 {

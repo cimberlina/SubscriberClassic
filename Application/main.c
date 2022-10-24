@@ -3914,7 +3914,7 @@ void fsm_wdog_evo( uint8_t this, uint8_t partition )
             e602mon_timer = SEC_TIMER;
             EVOWD_Flag &= ~0x80;
             if(BaseAlarmPkt_alarm & bitpat[APER_bit])	{
-                wdogevotimer[this] = SEC_TIMER + 16*60;
+                wdogevotimer[this] = SEC_TIMER + 3*60;
             } else	{
                 wdogevotimer[this] = SEC_TIMER + wdtimer*60;
             }
@@ -3929,7 +3929,7 @@ void fsm_wdog_evo( uint8_t this, uint8_t partition )
             if( EVOWD_Flag & (1 << this))	{
                 EVOWD_Flag &= ~(1 << this);
                 if(BaseAlarmPkt_alarm & bitpat[APER_bit])	{
-                    wdogevotimer[this] = SEC_TIMER + 16*60;
+                    wdogevotimer[this] = SEC_TIMER + 3*60;
                 } else	{
                     wdogevotimer[this] = SEC_TIMER + wdtimer*60;
                 }
@@ -3952,7 +3952,7 @@ void fsm_wdog_evo( uint8_t this, uint8_t partition )
             if( EVOWD_Flag & (1 << this))	{
                 EVOWD_Flag &= ~(1 << this);
                 if(BaseAlarmPkt_alarm & bitpat[APER_bit])	{
-                    wdogevotimer[this] = SEC_TIMER + 16*60;
+                    wdogevotimer[this] = SEC_TIMER + 3*60;
                 } else	{
                     wdogevotimer[this] = SEC_TIMER + wdtimer*60;
                 }
@@ -3961,7 +3961,7 @@ void fsm_wdog_evo( uint8_t this, uint8_t partition )
                 Rot485_flag &= ~ROTEVO_FLAG;
                 diag485[6] &= ~(1 << (5 + this));
             } else
-            if((currtime.tm_hour == 8) && (currtime.tm_min == this*10) && (currtime.tm_sec == 0))	{
+            if((currtime.tm_hour == 1) && (currtime.tm_min == 30) && (currtime.tm_sec == 0))	{
                 logCidEvent(account, 1, 943, partition, 0);
                 Rot485_flag |= ROTEVO_FLAG;
                 diag485[6] |= (1 << (5 + this));
@@ -4415,10 +4415,11 @@ void fsm_console_enter(void)
                 fsm_conent_state = FCS_NORMAL;
             } else 
 #endif
-            if(RADAR_flags & CONSOLE_CMDIN)   {
+            if((RADAR_flags & CONSOLE_CMDIN) && (!(SystemFlag11 & FIRSTCMD_FLAG)))   {
                 fsm_conent_state = FCS_ALRM;
                 RADAR_flags &= ~CONSOLE_CMDIN;
-                SysFlag_AP_GenAlarm |= bitpat[ASAL_bit];
+                SysFlag_AP_GenAlarm |= bitpat[ASAL_bit];\
+                SystemFlag11 |= FIRSTCMD_FLAG;
             }
             break;
         case FCS_ALRM:

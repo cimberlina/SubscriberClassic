@@ -177,6 +177,9 @@ extern uint8_t	Rot485_flag;
 #define	ROT232_FLAG			0x04
 #define	ROTEVO_FLAG			0x10
 #define ROT485RELE85_FLAG   0x20
+#define ROT485PTM_FLAG      0x40
+#define ROT485CID_FLAG      0x80
+#define ROTWDGEVO_FLAG      0x08
 
 extern time_t rot485timer;
 

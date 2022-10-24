@@ -190,6 +190,8 @@ void fsm_rfdlybornera_teso( void );
 
 void fsm_ptmsignalling( void );
 
+void SendProblem386(uint8_t ptm_index, uint8_t erevent);
+
 
 //eventos de alarmas que necesitan normalizacion
 #define	EVEALRM_PANIC		0x0001
