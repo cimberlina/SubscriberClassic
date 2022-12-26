@@ -227,6 +227,7 @@ void  LAN485_Task(void  *p_arg)
 	while(DEF_ON)	{
 		WDT_Feed();
 
+
 #ifdef USAR_IRIDIUM
 		//----------------------
 		if(IRIDIUM_flag & IRI_USEIRIDIUM_FLAG)	{
@@ -399,7 +400,7 @@ void  LAN485_Task(void  *p_arg)
                         case 96:
                         case 97:
                         case 98:
-                            GenerateCIDEventPTm(ptm_index, 1, 386,0);
+                            GenerateCIDEventPTm(ptm_index, 'E', 386,0);
                             ptm_dcb[ptm_index].state485 = P485_NG;
                             PTM_dev_status[ptm_index] = 0x00;
                             break;
@@ -454,6 +455,9 @@ void  LAN485_Task(void  *p_arg)
 					diag485[7] |= (1 << (temp_partition));
 				}
 				//- - - - - - - - - - - - - - - - - - - - -
+                if((ptm_dcb[ptm_index].timeout485 > 180) && (SysFlag_AP_Apertura & AP_APR_VALID))   {
+                    ptm_dcb[ptm_index].timeout485 = 179;
+                }
 				if(!(ptm_dcb[ptm_index].timeout485))	{
                     switch(ptm_dcb[ptm_index].particion)    {
                         case 10:
@@ -471,8 +475,8 @@ void  LAN485_Task(void  *p_arg)
                         case 96:
                         case 97:
                         case 98:
-                            GenerateCIDEventPTm(ptm_index, 3, 386,0);
-                            ptm_dcb[ptm_index].state485 = P485_NG;
+                            GenerateCIDEventPTm(ptm_index, 'R', 386,0);
+                            ptm_dcb[ptm_index].state485 = P485_IDLE;
                             PTM_dev_status[ptm_index] = 0x00;
                             break;
                         default:
@@ -627,7 +631,10 @@ void LAN485_Send( unsigned char sendbuffer[], int bufflen )
 	CommInit(COMM2, &err);
 	GPIO_ClearValue(0, 1<<21);
 
-	//printBuffByteRow( sendbuffer, bufflen);
+    if(DebugFlag & LAN485DBG_flag) {
+        CommSendString(DEBUG_COMM, "POLL: ");
+        printBuffByteRow(sendbuffer, bufflen);
+    }
 
 }
 
@@ -717,7 +724,10 @@ void PTm_process_answer( int nread, unsigned char * rxbuffer, unsigned char inde
 
 	switch(nread)	{
 		case 7 :
-			//printBuffByteRow( rxbuffer, 7);
+            if(DebugFlag & LAN485DBG_flag) {
+                CommSendString(DEBUG_COMM, "ANSW: ");
+                printBuffByteRow(rxbuffer, 7);
+            }
 			for( i = 1; i < 5; i++ )
 				chksum += rxbuffer[i];
 			if( rxbuffer[5] != chksum )	{
@@ -867,6 +877,10 @@ void PTm_process_answer( int nread, unsigned char * rxbuffer, unsigned char inde
 			}
 			break;
 		case 26 :
+            if(DebugFlag & LAN485DBG_flag) {
+                CommSendString(DEBUG_COMM, "ANSW: ");
+                printBuffByteRow(rxbuffer, 26);
+            }
 			for( i = 1; i < 24; i++ )
 				chksum += rxbuffer[i];
 			if( rxbuffer[24] != chksum )	{
@@ -907,6 +921,10 @@ void PTm_process_answer( int nread, unsigned char * rxbuffer, unsigned char inde
 			}
 			break;
 		case 15:
+            if(DebugFlag & LAN485DBG_flag) {
+                CommSendString(DEBUG_COMM, "ANSW: ");
+                printBuffByteRow(rxbuffer, 15);
+            }
 			//CommSendString(DEBUG_COMM,"E4\n\r");
 			for( i = 1; i < 13; i++ )
 				chksum += rxbuffer[i];
@@ -931,8 +949,9 @@ void PTm_process_answer( int nread, unsigned char * rxbuffer, unsigned char inde
 			//printBuffByteRow( rxbuffer, nread);
             lan485errorcurrent++;
             accumulated_errors++;
-			if( ptm_dcb[index].com_error_counter < 30 )
-				ptm_dcb[index].com_error_counter++;
+			if( ptm_dcb[index].com_error_counter < 91 )
+                //if(ptm_dcb[index].rtuaddr != 240)
+				    ptm_dcb[index].com_error_counter++;
 			break;
 	}
 }

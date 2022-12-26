@@ -211,6 +211,7 @@ extern uint32_t SystemFlag11;
 #define DONTSENDEVENTS  (1 << 0)
 #define APERASAL_FLAG   (1 << 1)
 #define FIRSTCMD_FLAG   (1 << 2)
+#define CONSOLASAL_FLAG (1 << 3)
 
 #define PART5_REDU_FLAGS		0
 #define PART6_REDU_FLAGS		4

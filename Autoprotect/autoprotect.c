@@ -275,6 +275,8 @@ void fsm_AP_apertura(void)
 			SysFlag_AP_Apertura &= ~AP_APR_IBUTTON_OK;
 			lic_ibuttonid = 0;
             SystemFlag11 &= ~APERASAL_FLAG;
+            SystemFlag11 &= ~FIRSTCMD_FLAG;
+            //SystemFlag11 &= ~CONSOLASAL_FLAG;
 			if(SysFlag_AP_Apertura & AP_APR_APRLINE)	{
 				tout_AP_apertura = 60;
 				AP_apertura_state = AP_APER_WAIT_IBUTT;
@@ -291,6 +293,7 @@ void fsm_AP_apertura(void)
 			SystemFlag4 |= ARSTOK_FLAG;
 			SysFlag1 |= AP_APERLED_CTRL;
 			if(SysFlag_AP_Apertura & AP_APR_IBUTTON_OK )	{
+                SystemFlag11 &= ~FIRSTCMD_FLAG;
                 SystemFlag3 |= NAPER_flag;
 				SysFlag_AP_Apertura &= ~AP_APR_IBUTTON_OK;
 				SysFlag_AP_Apertura |= AP_APR_VALID;
@@ -406,7 +409,23 @@ void fsm_AP_apertura(void)
 			if(!tout_AP_apertura)	{
 				POWER_TX_ON();
 				SysFlag4 &= ~LOGICALPWRTXOFF;
-			}
+                SystemFlag11 &= ~APERASAL_FLAG;
+                if(!(SysFlag_AP_Apertura & AP_APR_APRLINE)) {
+                    POWER_TX_ON();
+                    AP_apertura_state = AP_APER_OP_NORMAL;
+                    SystemFlag11 &= ~APERASAL_FLAG;
+                    SysFlag_AP_Apertura &= ~AP_APR_INPREVE;
+                    fsmAperWriteHistory();
+                }
+
+			} else
+            if(!(SysFlag_AP_Apertura & AP_APR_APRLINE)) {
+                POWER_TX_ON();
+                AP_apertura_state = AP_APER_OP_NORMAL;
+                SystemFlag11 &= ~APERASAL_FLAG;
+                SysFlag_AP_Apertura &= ~AP_APR_INPREVE;
+                fsmAperWriteHistory();
+            }
 			break;
 		case AP_APER_WAIT_15MIN:
 			if(Buzzer_dcb.led_blink == 0)	{

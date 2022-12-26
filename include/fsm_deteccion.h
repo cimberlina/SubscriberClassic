@@ -113,6 +113,7 @@ extern	uint16_t paparst_timer;
 extern int dualA_delay, DeltaT;
 
 extern uint32_t amr_timer;
+extern int norm_asal_timer;
 
 extern uint8_t ppon_state;
 #define FSM_PPON_IDLE   0x10
@@ -333,6 +334,7 @@ extern uint32_t Timer_prueba, Timpr_llaveon, Timpr_llaveoff, Timpr_gap, Prretrie
 #define MSGSYSUP_flag       0x04
 #define NETRSTHAB_flag      0x08
 #define HIGRSTHAB_flag      0x08
+#define LAN485DBG_flag      0x20
 
 #define	TIEMPO_PREVE		4200		//7 minutos para indicar preve
 
@@ -355,7 +357,8 @@ extern uint32_t Timer_prueba, Timpr_llaveon, Timpr_llaveoff, Timpr_gap, Prretrie
 
 
 #define	AUTORESET_BLINK_CAD		3*0x100 + 3
-#define	AUTORESET_POLL_COUNT	3
+#define	AUTORESET_POLL_COUNT	1
+
 
 #ifdef	AUTORST_PRUEBA
 #define	AUTORST_TIMER_MIN		2

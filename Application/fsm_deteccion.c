@@ -15,7 +15,9 @@ uint8_t	Rot485_flag;
 time_t rot485timer, rotrele485timer, rotEVOtimer;
 uint16_t lowbatt_timer;
 int dualA_delay, DeltaT;
-int papretries;
+//int papretries;
+
+int norm_asal_timer;
 
 uint8_t fsm_npd_state;
 #define	NPD_IDLE	0x10
@@ -1066,7 +1068,7 @@ void fsm_deteccion_rotura( void )
 					logCidEvent(account, 3, 380, i+2, vreal);
 
 				} else if( Status_Zonas[i] == ALRM_ROTU )	{
-					if( !(BaseAlarmPkt_alarm & bitpat[ROTU_bit]) )	{
+					if( (!(BaseAlarmPkt_alarm & bitpat[ROTU_bit])) && (i <= 2) )	{
 						BaseAlarmPkt_alarm |= bitpat[ROTU_bit];
 						AlarmWriteHistory();
 						SysFlag3 |= SEND_flag;
@@ -1771,7 +1773,7 @@ void autoreset_logo3d( void )
 			}
 			break;
 		case AUTR_ALRMED :
-			if( (asal_autr_counter == 0) && (SEC_TIMER > (asal_autr_timer + asal_autorst_timer_min)) )	{
+			if( (asal_autr_counter == 0) && ((SEC_TIMER > (asal_autr_timer + asal_autorst_timer_min)) || (norm_asal_timer == 0)) )	{
 				asal_autr_counter = 0;
 				asal_state = AUTR_MEMALR;
 				SysFlag2 |= NORM_ASAL;
@@ -1788,6 +1790,8 @@ void autoreset_logo3d( void )
             	BaseAlarmPkt_alarm &= ~bitpat[ASAL_bit];
             	SysFlag3 |= SENDM_flag;
             	set_mem_alrm(ASAL_bit);
+                SystemFlag11 &= ~APERASAL_FLAG;
+                SystemFlag11 &= ~CONSOLASAL_FLAG;
 			}
 			break;
 		case AUTR_MEMALR :
@@ -1887,10 +1891,10 @@ void autoreset_logo3d( void )
 				if(SysFlag_AP_Apertura & AP_APR_VALID)	{
 					if(paptslot == 0)	{
 						rotu_autr_counter = 3;
-						rotu_autorst_timer_min = 2*60;
+						rotu_autorst_timer_min = 5*60;
 					} else	{
 						rotu_autr_counter = 0;
-						rotu_autorst_timer_min = 2*60;
+						rotu_autorst_timer_min = 5*60;
 					}
 				}
 				else	{
@@ -2611,7 +2615,8 @@ void MDM_IrqHandler( void )
 
 //--------------------------------------------------------------------------
 // aca procesamos el codigo de autoreset para deteccion de preves de tx
-        if ((rxchar == (BaseAlarmPkt_numabo + 1)) && (SysFlag4 & ABONUMBER_flag)) {
+        //if ((rxchar == (BaseAlarmPkt_numabo + 1)) && (SysFlag4 & ABONUMBER_flag)) {
+        if (rxchar == (BaseAlarmPkt_numabo + 1)) {
             SysFlag1 |= ABOMASUNO_flag;
             SysFlag4 &= ~ABONUMBER_flag;
         } else if (SysFlag1 & ABOMASUNO_flag) {
@@ -3579,7 +3584,7 @@ void rf_cortex_signature( void )
 		if(SystemFlag3 & NAPER_flag)	{
 			SystemFlag3 &= ~NAPER_flag;
 			SystemFlag3 &= ~NAPER_RFPOLL;
-            signature_timer = 90;
+            signature_timer = 5*60;
 			csign_state = CSIGN_RFP1;
 
 		}
@@ -3589,7 +3594,7 @@ void rf_cortex_signature( void )
 			SystemFlag3 &= ~NAPER_RFPOLL;
 			csign_state = CSIGN_RFP2;
 			SystemFlag3 |= NAPER_F220V;
-			signature_timer = 90;
+			signature_timer = 5*60;
 		}
 		break;
 	case CSIGN_RFP2 :
@@ -3603,7 +3608,7 @@ void rf_cortex_signature( void )
 			    } else {
                     //csign_state = CSIGN_RFP3;       // para dos indicaciones de f220
                     csign_state = CSIGN_IDLE;           // 4 octubre 2021, piden que solo indique con una sola f2200
-                    signature_timer = 90;
+                    signature_timer = 5*60;
                 }
 			}
 		}
@@ -3613,7 +3618,7 @@ void rf_cortex_signature( void )
 			SystemFlag3 &= ~NAPER_RFPOLL;
 			csign_state = CSIGN_RFP4;
 			SystemFlag3 |= NAPER_F220V;
-			signature_timer = 90;
+			signature_timer = 5*60;
 		}
 		break;
 	case CSIGN_RFP4 :
@@ -4109,9 +4114,11 @@ void recharge_alarm(uint8_t alarm)
 						if(paptslot == 0)	{
 							asal_autr_counter = 0;
 							asal_autorst_timer_min = 2*60;
+                            norm_asal_timer = 2*60;
 						} else	{
 							asal_autr_counter = 0;
 							asal_autorst_timer_min = 1*60;
+                            norm_asal_timer = 1*60;
 						}
 					}
 					else	{
@@ -4119,12 +4126,20 @@ void recharge_alarm(uint8_t alarm)
 							asal_autr_counter = AUTORESET_POLL_COUNT;
                             if(SystemFlag11 & APERASAL_FLAG) {
                                 asal_autorst_timer_min = 75 * 60;
-                            } else {
+                                norm_asal_timer = 75*60;
+                            } else
+                            if(SystemFlag11 & CONSOLASAL_FLAG)  {
+                                asal_autorst_timer_min = 120 * 60;
+                                norm_asal_timer = 120*60;
+                            }
+                            else {
                                 asal_autorst_timer_min = 25 * 60;
+                                norm_asal_timer = 25*60;
                             }
 						} else	{
 							asal_autr_counter = 0;
 							asal_autorst_timer_min = paparst_timer*60;
+                            norm_asal_timer = paparst_timer*60;
 						}
 					}
 					led_dcb[ASAL_led].led_cad = 255*0x100 + 0;
@@ -4139,18 +4154,32 @@ void recharge_alarm(uint8_t alarm)
 					if(paptslot == 0)	{
 						asal_autr_counter = 0;
 						asal_autorst_timer_min = 2*60;
+                        norm_asal_timer = 2*60;
 					} else	{
 						asal_autr_counter = 0;
 						asal_autorst_timer_min = 1*60;
+                        norm_asal_timer = 1*60;
 					}
 				}
 				else	{
 					if(paptslot == 0)	{
+                        if(SystemFlag11 & APERASAL_FLAG) {
+                            asal_autorst_timer_min = 75 * 60;
+                            norm_asal_timer = 75*60;
+                        } else
+                        if(SystemFlag11 & CONSOLASAL_FLAG)  {
+                            asal_autorst_timer_min = 120 * 60;
+                            norm_asal_timer = 120*60;
+                        } else  {
+                            asal_autorst_timer_min = autorst_timer*60;
+                            norm_asal_timer = autorst_timer*60;
+                        }
 						asal_autr_counter = AUTORESET_POLL_COUNT;
-						asal_autorst_timer_min = autorst_timer*60;
+
 					} else	{
 						asal_autr_counter = 0;
 						asal_autorst_timer_min = paparst_timer*60;
+                        norm_asal_timer = paparst_timer*60;
 					}
 				}
 				led_dcb[ASAL_led].led_cad = 255*0x100 + 0;
@@ -4279,18 +4308,22 @@ void recharge25min_alarm(uint8_t alarm, uint8_t etype)
 					if(paptslot == 0)	{
 						asal_autr_counter = 0;
 						asal_autorst_timer_min = 1*60;
+                        norm_asal_timer = 1*60;
 					} else	{
 						asal_autr_counter = 0;
 						asal_autorst_timer_min = 2*60;
+                        norm_asal_timer = 2*60;
 					}
 				}
 				else	{
 					if(paptslot == 0)	{
 						asal_autr_counter = AUTORESET_POLL_COUNT;
 						asal_autorst_timer_min = 25*60;
+                        norm_asal_timer = 25*60;
 					} else	{
 						asal_autr_counter = 0;
 						asal_autorst_timer_min = paparst_timer*60;
+                        norm_asal_timer = paparst_timer*60;
 					}
 				}
 				led_dcb[ASAL_led].led_cad = 255*0x100 + 0;
@@ -4349,6 +4382,7 @@ void recharge5min_alarm(void)
             asal_autr_timer = SEC_TIMER;
             asal_autr_counter = 0;
             asal_autorst_timer_min = 5*60;
+            norm_asal_timer = 5*60;
             led_dcb[ASAL_led].led_cad = 255*0x100 + 0;
         }
 

@@ -100,6 +100,7 @@ const ConsoleCommand console_commands[] =
 	{ "we2prom zone", 	con_E2PROM_Write_zone, 	0,		MONI_LEVEL},
 	{ "debug rf", 		con_DBGRF_mode, 		0,		OPER_LEVEL},
 	{ "debug aborf", 	con_DBGABORF_mode,		0,		OPER_LEVEL},
+    { "debug lan", 	con_DBGLAN_mode,		0,		OPER_LEVEL},
 	{ "RDCONFMEM", 		con_E2PROM_read1,		0,		OPER_LEVEL},
 	{ "set prevetimer", con_set_prevetimer, 	0,		MONI_LEVEL},
 
@@ -244,6 +245,7 @@ const ConsoleCommand console_commands[] =
     { "gencid",	con_gencid,		    0,		MCMI_LEVEL},
     { "closerst",	con_closerst,		    0,		MCMI_LEVEL},
     { "closesoc",	con_closesoc,		    0,		MCMI_LEVEL},
+    { "w",             con_evowdog,               0,		MONI_LEVEL},
 	{ "P",             con_poll,               0,		MONI_LEVEL}
 };
 
@@ -1133,6 +1135,14 @@ int con_poll(ConsoleState* state)
 	return 1;
 }
 
+int con_evowdog(ConsoleState* state)
+{
+    EVOWD_Flag |= (1 << 0);
+    EVOWD_Flag |= (1 << 1);
+    EVOWD_Flag |= (1 << 2);
+    return 1;
+}
+
 
 
 int con_hung(ConsoleState* state)
@@ -1541,6 +1551,32 @@ int con_DBGRF_mode(ConsoleState* state)
 	}
 
 	return 1;
+}
+
+int con_DBGLAN_mode(ConsoleState* state)
+{
+    uint16_t fmodetype;
+
+    if( state->numparams < 3 )	{
+        state->conio->puts("DEBUG LAN 0|1\n\r");
+        return 1;
+    }
+    fmodetype = atoi(con_getparam(state->command, 2));
+
+    switch(fmodetype)	{
+        case 0:
+            DebugFlag &= ~LAN485DBG_flag;
+            break;
+        case 1:
+            DebugFlag |= LAN485DBG_flag;
+            break;
+        default:
+            state->conio->puts("*** DEBUG LAN ERROR  ***\n\r");
+            return -1;
+            break;
+    }
+
+    return 1;
 }
 
 int con_DBGABORF_mode(ConsoleState* state)
@@ -5478,6 +5514,8 @@ int con_wdevo_timer(ConsoleState* state)
 	if((cuenta >= 90) && (cuenta <= 240))
 		EepromWriteWord(WDEVOTIMER_E2P_ADDR, cuenta, &error);
 	else	{
+        if(cuenta == 999)
+            EepromWriteWord(WDEVOTIMER_E2P_ADDR, 5, &error);
 		state->conio->puts("*** WDEVO TIMER OUT OF RANGE  ***\n\r");
 		return -1;
 	}

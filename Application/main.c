@@ -2034,7 +2034,12 @@ static  void  App_Task_1 (void  *p_arg)
         			ComPutChar(DEBUG_COMM, '{');
         			sbtimeout = 60;
         		}
-        	}
+        	} else if( inchar == 'w')   {
+                EVOWD_Flag |= (1 << 0);
+                EVOWD_Flag |= (1 << 1);
+                EVOWD_Flag |= (1 << 2);
+                CommSendString(DEBUG_COMM, "w_");
+            }
 
         }
         //------------------------------------------------------------------------
@@ -2412,7 +2417,7 @@ void AboBoardInit(void)
 	WDT_Init(WDT_CLKSRC_IRC, WDT_MODE_RESET);
 	//Start watchdog with timeout given
 	WDT_Start(WDT_TIMEOUT);
- 	WDT_Feed();
+	WDT_Feed();
 }
 
 
@@ -2659,6 +2664,10 @@ void RTC_IRQHandler(void)
 				SysFlag0 |= FSMTX_flag;
 			}
 		}
+
+        if(norm_asal_timer) {
+            norm_asal_timer--;
+        }
 
 		// Clear pending interrupt
 		RTC_ClearIntPending(LPC_RTC, RTC_INT_COUNTER_INCREASE);
@@ -3914,7 +3923,7 @@ void fsm_wdog_evo( uint8_t this, uint8_t partition )
             e602mon_timer = SEC_TIMER;
             EVOWD_Flag &= ~0x80;
             if(BaseAlarmPkt_alarm & bitpat[APER_bit])	{
-                wdogevotimer[this] = SEC_TIMER + 3*60;
+                wdogevotimer[this] = SEC_TIMER + 15*60;
             } else	{
                 wdogevotimer[this] = SEC_TIMER + wdtimer*60;
             }
@@ -3929,7 +3938,7 @@ void fsm_wdog_evo( uint8_t this, uint8_t partition )
             if( EVOWD_Flag & (1 << this))	{
                 EVOWD_Flag &= ~(1 << this);
                 if(BaseAlarmPkt_alarm & bitpat[APER_bit])	{
-                    wdogevotimer[this] = SEC_TIMER + 3*60;
+                    wdogevotimer[this] = SEC_TIMER + 15*60;
                 } else	{
                     wdogevotimer[this] = SEC_TIMER + wdtimer*60;
                 }
@@ -3952,7 +3961,7 @@ void fsm_wdog_evo( uint8_t this, uint8_t partition )
             if( EVOWD_Flag & (1 << this))	{
                 EVOWD_Flag &= ~(1 << this);
                 if(BaseAlarmPkt_alarm & bitpat[APER_bit])	{
-                    wdogevotimer[this] = SEC_TIMER + 3*60;
+                    wdogevotimer[this] = SEC_TIMER + 15*60;
                 } else	{
                     wdogevotimer[this] = SEC_TIMER + wdtimer*60;
                 }
@@ -4389,6 +4398,7 @@ void fsm_console_enter(void)
                 logCidEvent(account, 1, 628, 0, 0);
                 if(!(SysFlag_AP_Apertura & AP_APR_VALID))    {
                     SysFlag_AP_GenAlarm |= bitpat[ASAL_bit];
+                    SystemFlag11 |= CONSOLASAL_FLAG;
                     fsm_conent_state = FCS_ALRM;
                 }
             }
@@ -4406,6 +4416,7 @@ void fsm_console_enter(void)
             if(RADAR_flags & CONSOLE_OUT)   {
                 RADAR_flags &= ~CONSOLE_OUT;
                 fsm_conent_state = FCS_IDLE;
+                RADAR_flags &= ~CONSOLE_CMDIN;
                 logCidEvent(account, 3, 628, 0, 0);
             }
             // OJO reactivar
@@ -4418,7 +4429,7 @@ void fsm_console_enter(void)
             if((RADAR_flags & CONSOLE_CMDIN) && (!(SystemFlag11 & FIRSTCMD_FLAG)))   {
                 fsm_conent_state = FCS_ALRM;
                 RADAR_flags &= ~CONSOLE_CMDIN;
-                SysFlag_AP_GenAlarm |= bitpat[ASAL_bit];\
+                SysFlag_AP_GenAlarm |= bitpat[ASAL_bit];
                 SystemFlag11 |= FIRSTCMD_FLAG;
             }
             break;
@@ -4426,7 +4437,7 @@ void fsm_console_enter(void)
             if(!(SysFlag_AP_Apertura & AP_APR_VALID))  {
                 if(asal_state == AUTR_ALRMED)   {
                    fsm_conent_state = FCS_CONIN;
-                   asal_autr_timer = (SEC_TIMER + 60*120 - asal_autorst_timer_min);
+                   //asal_autr_timer = (SEC_TIMER + 60*10 - asal_autorst_timer_min);
                 }
             } else  {
                fsm_conent_state = FCS_CONIN;
