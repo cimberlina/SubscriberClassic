@@ -10,6 +10,8 @@ uint8_t         PTMSIGNAL_flag;
 time_t          ptmsignal_timer;
 uint8_t         ptmsignal_state;
 
+uint8_t cid_ptm_index;
+
 unsigned int lap485_count;
 #define VALIDPTMSTATUSLAPS 10
 
@@ -405,11 +407,15 @@ void  LAN485_Task(void  *p_arg)
                             PTM_dev_status[ptm_index] = 0x00;
                             break;
                         default:
+                            if(ptm_dcb[ptm_index].rtuaddr == 240 )  {
+                                cid_ptm_index = ptm_index;
+                            }
                             SendProblem485(ptm_index, 'E');
                             PTM_dev_status[ptm_index] = 0x00;
                             ptm_dcb[ptm_index].state485 = P485_NG;
                             ptm_dcb[ptm_index].flags |= COMM_TROUBLE;
                             PTM485NG_HistoryWrite();
+
                             break;
                     }
 
@@ -437,6 +443,10 @@ void  LAN485_Task(void  *p_arg)
 					} else	{
 						ptm_dcb[ptm_index].timeout485 = 10800;
 					}
+                    if( Rot485_flag & CIDRESET_FLAG )   {
+                        Rot485_flag &= ~CIDRESET_FLAG;
+                        ptm_dcb[ptm_index].timeout485 = 1;
+                    }
 					ptm_dcb[ptm_index].state485 = P485_WAIT;
 					//- - - - - - - - - - - - - - - - - - - - -
 					if( temp_pt < 8)	{
@@ -480,10 +490,12 @@ void  LAN485_Task(void  *p_arg)
                             PTM_dev_status[ptm_index] = 0x00;
                             break;
                         default:
+
                             ptm_dcb[ptm_index].flags &= ~COMM_TROUBLE;
                             SendProblem485(ptm_index, 'R');
                             ptm_dcb[ptm_index].state485 = P485_IDLE;
                             PTM485NG_HistoryWrite();
+
                             break;
                     }
 					//- - - - - - - - - - - - - - - - - - - - -

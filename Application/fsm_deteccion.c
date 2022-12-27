@@ -11,7 +11,7 @@
 
 
 uint8_t fsm_rot485_state, fsm_rotrele485_state, fsm_rotEVO_state;
-uint8_t	Rot485_flag;
+uint16_t	Rot485_flag;
 time_t rot485timer, rotrele485timer, rotEVOtimer;
 uint16_t lowbatt_timer;
 int dualA_delay, DeltaT;
@@ -666,6 +666,10 @@ void fsm_deteccion_incendio( void )
 
 	int16_t vreal;
 
+    if(Rot485_flag & NOZSCAN_FLAG)  {
+        return;
+    }
+
 	if(SysFlag_AP_GenAlarm & bitpat[INCE_bit])	{
 		SysFlag_AP_GenAlarm &= ~bitpat[INCE_bit];
 		if( !(BaseAlarmPkt_alarm & bitpat[INCE_bit]) )	{
@@ -753,6 +757,10 @@ void fsm_deteccion_asalto( void )
 {
 
 	int16_t vreal;
+
+    if(Rot485_flag & NOZSCAN_FLAG)  {
+        return;
+    }
 
 	if(SysFlag_AP_GenAlarm & bitpat[ASAL_bit])	{
 		SysFlag_AP_GenAlarm &= ~bitpat[ASAL_bit];
@@ -842,6 +850,10 @@ void fsm_deteccion_asalto( void )
 void fsm_deteccion_tesoro( void )
 {
 	int16_t vreal;
+
+    if(Rot485_flag & NOZSCAN_FLAG)  {
+        return;
+    }
 
 	if(SysFlag_AP_GenAlarm & bitpat[TESO_bit])	{
 		SysFlag_AP_GenAlarm &= ~bitpat[TESO_bit];
@@ -1020,6 +1032,9 @@ void fsm_deteccion_rotura( void )
 	int16_t vreal;
 	OS_ERR os_err;
 
+    if(Rot485_flag & NOZSCAN_FLAG)  {
+        return;
+    }
 	if(SysFlag_AP_GenAlarm & bitpat[ROTU_bit])	{
 		SysFlag_AP_GenAlarm &= ~bitpat[ROTU_bit];
 		if( !(BaseAlarmPkt_alarm & bitpat[ROTU_bit]) )	{
@@ -2013,6 +2028,11 @@ void  AlarmDetectTask(void  *p_arg)
 		fsm_npd_state = NPD_IDLE;
 
 		SysFlag0 |= STARTUP_flag;
+
+        PERIFPWR_OFF();
+        OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &os_err);
+        PERIFPWR_ON();
+
 		SysFlag1 = 0x00;
 		SysFlag2 = 0x00;
 		DebugFlag = 0x00;
@@ -2354,15 +2374,41 @@ void fsm_roturaRele485( void ) {
 void fsm_rotura485( void )
 {
 	struct tm currtime;
+    OS_ERR os_err;
 
 	int version_number = VERSION_NUMBER;
 	switch(fsm_rot485_state)	{
 	case FSM_ROT485_IDLE:
 		if( (Rot485_flag & ROT485_FLAG) && (version_number != 111) )	{
-			fsm_rot485_state = FSM_ROT485_WAIT;
-			rot485timer = SEC_TIMER;
+			if(Rot485_flag & ROT485CID_FLAG)    {
+                rot485timer = SEC_TIMER;
+                fsm_rot485_state = FSM_ROT485_PWAIT1;
+                Rot485_flag |= NOZSCAN_FLAG;
+                PERIFPWR_OFF();
+
+            } else {
+                fsm_rot485_state = FSM_ROT485_WAIT;
+                rot485timer = SEC_TIMER;
+            }
 		}
 		break;
+    case FSM_ROT485_PWAIT1:
+        if(SEC_TIMER > rot485timer + 2) {
+            PERIFPWR_ON();
+            GenerateCIDEventPTm(cid_ptm_index, 'E', 900,0);
+            rot485timer = SEC_TIMER;
+            fsm_rot485_state = FSM_ROT485_PWAIT2;
+            Rot485_flag |= CIDRESET_FLAG;
+        }
+        break;
+    case FSM_ROT485_PWAIT2:
+        if(SEC_TIMER > rot485timer + 7) {
+            Rot485_flag &= ~NOZSCAN_FLAG;
+            rot485timer = SEC_TIMER;
+            fsm_rot485_state = FSM_ROT485_WAIT;
+
+        }
+        break;
 	case FSM_ROT485_WAIT:
 		if( !(Rot485_flag & ROT485_FLAG) )	{
 			fsm_rot485_state = FSM_ROT485_IDLE;
@@ -2373,6 +2419,9 @@ void fsm_rotura485( void )
 			SystemFlag3 |= NAPER_flag;
 			SystemFlag3 |= NAPER_F220V;
 			PTM485NG_HistoryWrite();
+            if( Rot485_flag & CIDRESET_FLAG )   {
+                Rot485_flag &= ~CIDRESET_FLAG;
+            }
 		}
 		break;
     case FSM_ROT485_ROT:

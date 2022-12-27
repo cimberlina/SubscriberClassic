@@ -64,6 +64,8 @@ extern unsigned int dlyedevo_part;
 extern uint8_t DlyBor_time;
 extern int rfdly_time;
 
+extern uint8_t cid_ptm_index;
+
 extern uint8_t         PTMSIGNAL_flag;
 #define PTMSIG_PANIC    0x01
 

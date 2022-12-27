@@ -163,6 +163,9 @@ extern uint8_t fsm_rotrele485_state;
 extern uint8_t fsm_rot485_state;
 #define	FSM_ROT485_IDLE		0x10
 #define	FSM_ROT485_WAIT		0x20
+#define	FSM_ROT485_PWAIT1	0x21
+#define	FSM_ROT485_PWAIT2	0x22
+#define	FSM_ROT485_PWAIT3	0x23
 #define	FSM_ROT485_ROT		0x30
 #define	FSM_ROT485_ROT2		0x31
 #define	FSM_ROT485_WAIT2    0x22
@@ -172,15 +175,16 @@ extern uint8_t fsm_pap_state;
 #define FSMPAP_TXING		0x20
 #define FSMPAP_WAIT  		0x30
 
-extern uint8_t	Rot485_flag;
-#define	ROT485_FLAG			0x01
-#define	ROT491_FLAG			0x02
-#define	ROT232_FLAG			0x04
-#define	ROTEVO_FLAG			0x10
-#define ROT485RELE85_FLAG   0x20
-#define ROT485PTM_FLAG      0x40
-#define ROT485CID_FLAG      0x80
-#define ROTWDGEVO_FLAG      0x08
+extern uint16_t	Rot485_flag;
+#define	ROT485_FLAG			0x0001
+#define	ROT491_FLAG			0x0002
+#define	ROT232_FLAG			0x0004
+#define	ROTEVO_FLAG			0x0010
+#define ROT485RELE85_FLAG   0x0020
+#define ROT485PTM_FLAG      0x0040
+#define ROT485CID_FLAG      0x0080
+#define NOZSCAN_FLAG        0x0008
+#define CIDRESET_FLAG       0x0100
 
 extern time_t rot485timer;
 

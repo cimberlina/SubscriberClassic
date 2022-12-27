@@ -1235,6 +1235,7 @@ int GetTimestampIndexEv_LE( char *contimestamp)
 int con_EvDF_format(ConsoleState* state)
 {
 	auto int temp;
+
 	temp = state->numparams - state->commandparams;
 	if ((state->commandparams == 1) &&
 	    (Str_Cmp(con_getparam(state->command, temp), "yes") == 0)) {
@@ -1429,6 +1430,84 @@ int con_DumpEventByTime(ConsoleState* state)
 	state->conio->puts("\n\r");
 	return 1;
 }
+
+
+int con_DumpEventTypeByTime(ConsoleState* state)
+{
+    uint16_t indexT1, indexT2, i;
+    char buffer[128];
+    EventRecord thisevent;
+    time_t t1, t2;
+
+    switch(state->numparams)	{
+        case 1:
+            i = HowManyEvents();
+            if(i > evflash_wrptr)	{
+                indexT1 = evflash_wrptr;
+                indexT2 = evflash_wrptr -1;
+            } else	{
+                indexT1 = 0;
+                indexT2 = evflash_wrptr -1;
+            }
+            break;
+        case 2:
+            indexT1 = GetTimestampIndexEv_GE(con_getparam(state->command, 1));
+            indexT2 = evflash_wrptr - 1;
+            break;
+        case 3:
+            t1 = ConvTimestamp(con_getparam(state->command, 1));
+            t2 = ConvTimestamp(con_getparam(state->command, 2));
+            if( t1 > t2)	{
+                state->conio->puts("Invalid parameters\n\r");
+                return -1;
+
+            } else if( t2 > t1)	{
+                indexT1 = GetTimestampIndexEv_GE(con_getparam(state->command, 1));
+                indexT2 = GetTimestampIndexEv_LE(con_getparam(state->command, 2));
+            } else	{
+                indexT1 = GetTimestampIndexEv_GE(con_getparam(state->command, 1));
+                indexT2 = evflash_wrptr - 1;
+            }
+            break;
+        default:
+            state->conio->puts("Error en cantidad de parametros\n\r");
+            return -1;
+    }
+
+    if(indexT2 >= indexT1)	{
+        for( i = indexT1; i <= indexT2; i++)	{
+            if(ReadEventFromFlash( i, &thisevent ))	{
+                BufPrintCidEvent( buffer, &thisevent, 128 );
+                state->conio->puts(buffer);
+            } else	{
+                state->conio->puts("\n\r");
+                return 1;
+            }
+        }
+    } else	{
+        for( i = indexT1; i < DF_MAXEVENTS; i++)	{
+            if(ReadEventFromFlash( i, &thisevent ))	{
+                BufPrintCidEvent( buffer, &thisevent, 128 );
+                state->conio->puts(buffer);
+            } else	{
+                state->conio->puts("\n\r");
+                return 1;
+            }
+        }
+        for( i = 0; i <= indexT2; i++)	{
+            if(ReadEventFromFlash( i, &thisevent ))	{
+                BufPrintCidEvent( buffer, &thisevent, 128 );
+                state->conio->puts(buffer);
+            } else	{
+                state->conio->puts("\n\r");
+                return 1;
+            }
+        }
+    }
+    state->conio->puts("\n\r");
+    return 1;
+}
+
 
 int con_setrtc(ConsoleState* state)
 {

@@ -78,7 +78,7 @@ void  ZoneScanTask  (void  *p_arg)
 					  OS_OPT_TIME_HMSM_STRICT,
 					  &os_err);
 	while(DEF_ON)	{
-		if(!(SysFlag0 & STARTUP_flag))	{
+		if((!(SysFlag0 & STARTUP_flag)) && (!(Rot485_flag & NOZSCAN_FLAG)))	{
 		if(!(SysFlag_AP_zvolt & AP_ZVOLT_MEAS_flag))	{
 			//aca exploro las lineas de F220 y Apertura
 			sysinput0 = sysinput1;

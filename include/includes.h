@@ -56,6 +56,9 @@
 #define PGM1_ON() 	GPIO_SetValue(0, 1<<27)
 #define PGM1_OFF() 	GPIO_ClearValue(0, 1<<27 )
 
+#define PERIFPWR_OFF()  GPIO_ClearValue(2, (1 << 8));
+#define PERIFPWR_ON()  GPIO_SetValue(2, (1 << 8));
+
 #define	LAN485_PTM			1
 #define	R3K_SERIAL			1
 //#define AUTORST_PRUEBA		1

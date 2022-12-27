@@ -246,6 +246,7 @@ const ConsoleCommand console_commands[] =
     { "closerst",	con_closerst,		    0,		MCMI_LEVEL},
     { "closesoc",	con_closesoc,		    0,		MCMI_LEVEL},
     { "w",             con_evowdog,               0,		MONI_LEVEL},
+    { "perifpwr",    con_perifpwr,               0,		MONI_LEVEL},
 	{ "P",             con_poll,               0,		MONI_LEVEL}
 };
 
@@ -1572,6 +1573,32 @@ int con_DBGLAN_mode(ConsoleState* state)
             break;
         default:
             state->conio->puts("*** DEBUG LAN ERROR  ***\n\r");
+            return -1;
+            break;
+    }
+
+    return 1;
+}
+
+int con_perifpwr(ConsoleState* state)
+{
+    uint16_t fmodetype;
+
+    if( state->numparams < 2 )	{
+        state->conio->puts("perifpwr 0|1\n\r");
+        return 1;
+    }
+    fmodetype = atoi(con_getparam(state->command, 1));
+
+    switch(fmodetype)	{
+        case 0:
+            GPIO_ClearValue(2, (1 << 8));
+            break;
+        case 1:
+            GPIO_SetValue(2, (1 << 8));
+            break;
+        default:
+            state->conio->puts("*** PERIF PWR ERROR  ***\n\r");
             return -1;
             break;
     }

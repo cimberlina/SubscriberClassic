@@ -393,6 +393,7 @@ int con_closesoc(ConsoleState* state);
 
 int con_evowdog(ConsoleState* state);
 int con_DBGLAN_mode(ConsoleState* state);
+int con_perifpwr(ConsoleState* state);
 
 extern const ConsoleIO console_io[];
 
