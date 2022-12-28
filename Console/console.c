@@ -238,15 +238,15 @@ const ConsoleCommand console_commands[] =
     { "rffilter2",     con_rffilter2,			0,		MCMI_LEVEL},
     { "delaydual",     con_delaydual,			0,		MCMI_LEVEL},
     { "DeltaT",        con_DeltaT,		    0,		MCMI_LEVEL},
-    { "ActEvLic",      con_evsend_activation, 0,		MCMI_LEVEL},
-    { "DeactEvLic",    con_evsend_deactivation,0,		MCMI_LEVEL},
+//    { "ActEvLic",      con_evsend_activation, 0,		MCMI_LEVEL},
+//    { "DeactEvLic",    con_evsend_deactivation,0,		MCMI_LEVEL},
     { "set NETRSTHAB",	con_netrsthab,		    0,		MCMI_LEVEL},
     { "set HIGRSTHAB",	con_higrsthab,		    0,		MCMI_LEVEL},
     { "gencid",	con_gencid,		    0,		MCMI_LEVEL},
     { "closerst",	con_closerst,		    0,		MCMI_LEVEL},
     { "closesoc",	con_closesoc,		    0,		MCMI_LEVEL},
     { "w",             con_evowdog,               0,		MONI_LEVEL},
-    { "perifpwr",    con_perifpwr,               0,		MONI_LEVEL},
+//    { "perifpwr",    con_perifpwr,               0,		MONI_LEVEL},
 	{ "P",             con_poll,               0,		MONI_LEVEL}
 };
 
@@ -1580,31 +1580,31 @@ int con_DBGLAN_mode(ConsoleState* state)
     return 1;
 }
 
-int con_perifpwr(ConsoleState* state)
-{
-    uint16_t fmodetype;
-
-    if( state->numparams < 2 )	{
-        state->conio->puts("perifpwr 0|1\n\r");
-        return 1;
-    }
-    fmodetype = atoi(con_getparam(state->command, 1));
-
-    switch(fmodetype)	{
-        case 0:
-            GPIO_ClearValue(2, (1 << 8));
-            break;
-        case 1:
-            GPIO_SetValue(2, (1 << 8));
-            break;
-        default:
-            state->conio->puts("*** PERIF PWR ERROR  ***\n\r");
-            return -1;
-            break;
-    }
-
-    return 1;
-}
+//int con_perifpwr(ConsoleState* state)
+//{
+//    uint16_t fmodetype;
+//
+//    if( state->numparams < 2 )	{
+//        state->conio->puts("perifpwr 0|1\n\r");
+//        return 1;
+//    }
+//    fmodetype = atoi(con_getparam(state->command, 1));
+//
+//    switch(fmodetype)	{
+//        case 0:
+//            GPIO_ClearValue(2, (1 << 8));
+//            break;
+//        case 1:
+//            GPIO_SetValue(2, (1 << 8));
+//            break;
+//        default:
+//            state->conio->puts("*** PERIF PWR ERROR  ***\n\r");
+//            return -1;
+//            break;
+//    }
+//
+//    return 1;
+//}
 
 int con_DBGABORF_mode(ConsoleState* state)
 {
@@ -7484,37 +7484,37 @@ int con_rhb_deactivation(ConsoleState* state)
 }
 
 //
-int con_evsend_activation(ConsoleState* state)
-{
-    uint8_t buffer[4];
-    int error;
-
-
-    buffer[0] = 0x5A;
-    buffer[1] = 0xA5;
-    error = flash0_write(1, buffer, DF_EVSEND_OFFSET, 2);
-    WDT_Feed();
-    SystemFlag10 |= UDPLICOK_FLAG;
-    SystemFlag10 |= UDPUSELIC_FLAG;
-
-    return 1;
-}
-
-int con_evsend_deactivation(ConsoleState* state)
-{
-    uint8_t buffer[4];
-    int error;
-
-
-    buffer[0] = 0xAA;
-    buffer[1] = 0xBB;
-    error = flash0_write(1, buffer, DF_EVSEND_OFFSET, 2);
-    WDT_Feed();
-    SystemFlag10 |= UDPLICOK_FLAG;
-    SystemFlag10 &= ~UDPUSELIC_FLAG;
-
-    return 1;
-}
+//int con_evsend_activation(ConsoleState* state)
+//{
+//    uint8_t buffer[4];
+//    int error;
+//
+//
+//    buffer[0] = 0x5A;
+//    buffer[1] = 0xA5;
+//    error = flash0_write(1, buffer, DF_EVSEND_OFFSET, 2);
+//    WDT_Feed();
+//    SystemFlag10 |= UDPLICOK_FLAG;
+//    SystemFlag10 |= UDPUSELIC_FLAG;
+//
+//    return 1;
+//}
+//
+//int con_evsend_deactivation(ConsoleState* state)
+//{
+//    uint8_t buffer[4];
+//    int error;
+//
+//
+//    buffer[0] = 0xAA;
+//    buffer[1] = 0xBB;
+//    error = flash0_write(1, buffer, DF_EVSEND_OFFSET, 2);
+//    WDT_Feed();
+//    SystemFlag10 |= UDPLICOK_FLAG;
+//    SystemFlag10 &= ~UDPUSELIC_FLAG;
+//
+//    return 1;
+//}
 //
 
 int con_IP150_activation(ConsoleState* state)

@@ -310,15 +310,15 @@ void  LAN485_Task(void  *p_arg)
 
 
 			if(SystemFlag3 & WDOG_EVO_ENABLE)	{
-				switch(ptm_dcb[eveindex].rtuaddr)	{
+				switch(ptm_dcb[ptm_index].rtuaddr)	{       //eveindex
                     case 240:
-                        fsm_wdog_evo( 0, ptm_dcb[eveindex].particion );
+                        fsm_wdog_evo( 0, ptm_dcb[ptm_index].particion );
                         break;
                     case 241:
-                        fsm_wdog_evo( 1, ptm_dcb[eveindex].particion );
+                        fsm_wdog_evo( 1, ptm_dcb[ptm_index].particion );
                         break;
                     case 242:
-                        fsm_wdog_evo( 2, ptm_dcb[eveindex].particion );
+                        fsm_wdog_evo( 2, ptm_dcb[ptm_index].particion );
                         break;
                     default:
                         break;
@@ -374,7 +374,9 @@ void  LAN485_Task(void  *p_arg)
 				habi485[7] |= (1 << (temp_partition));
 			}
 
-
+            if(ptm_dcb[ptm_index].rtuaddr == 240 )  {
+                cid_ptm_index = ptm_index;
+            }
 
 			switch(ptm_dcb[ptm_index].state485)		{
 			case P485_IDLE :

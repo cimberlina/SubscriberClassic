@@ -2395,7 +2395,8 @@ void fsm_rotura485( void )
     case FSM_ROT485_PWAIT1:
         if(SEC_TIMER > rot485timer + 2) {
             PERIFPWR_ON();
-            GenerateCIDEventPTm(cid_ptm_index, 'E', 900,0);
+            //GenerateCIDEventPTm(cid_ptm_index, 'E', 900,0);
+            logCidEvent(account, 1, 900, 0, 0);
             rot485timer = SEC_TIMER;
             fsm_rot485_state = FSM_ROT485_PWAIT2;
             Rot485_flag |= CIDRESET_FLAG;
@@ -2473,10 +2474,28 @@ void fsm_roturaEVO( void )
 	switch(fsm_rotEVO_state)	{
 	case FSM_ROT485_IDLE:
 		if( Rot485_flag & ROTEVO_FLAG )	{
-			fsm_rotEVO_state = FSM_ROT485_WAIT;
+			fsm_rotEVO_state = FSM_ROT485_PWAIT1;
 			rotEVOtimer = SEC_TIMER;
+            Rot485_flag |= NOZSCAN_FLAG;
+            PERIFPWR_OFF();
 		}
 		break;
+    case FSM_ROT485_PWAIT1:
+        if(SEC_TIMER > rotEVOtimer + 2) {
+            PERIFPWR_ON();
+            GenerateCIDEventPTm(cid_ptm_index, 'E', 900,0);
+            rotEVOtimer = SEC_TIMER;
+            fsm_rotEVO_state = FSM_ROT485_PWAIT2;
+        }
+        break;
+    case FSM_ROT485_PWAIT2:
+        if(SEC_TIMER > rotEVOtimer + 7) {
+            Rot485_flag &= ~NOZSCAN_FLAG;
+            rotEVOtimer = SEC_TIMER;
+            fsm_rotEVO_state = FSM_ROT485_WAIT;
+
+        }
+        break;
 	case FSM_ROT485_WAIT:
 		if( !(Rot485_flag & ROTEVO_FLAG) )	{
 			fsm_rotEVO_state = FSM_ROT485_IDLE;
