@@ -825,68 +825,68 @@ void  RabbitTask(void  *p_arg)
 	}
 }
 
-void ack_syncronization( char * ascii_tstamp)
-{
-	struct tm currtime;
-	int tempint, i;
-	time_t sectimer;
-	char temp[12];
-
-	//convierto a formato timestamp de eventos
-	for( i = 0; i < 4; i++)
-		temp[i] = ascii_tstamp[i+10];
-	temp[i] = '\0';
-	tempint = atoi(temp);
-	currtime.tm_year = tempint - YEAR0;
-
-	for( i = 0; i < 2; i++)
-		temp[i] = ascii_tstamp[i+6];
-	temp[i] = '\0';
-	tempint = atoi(temp);
-	currtime.tm_mon = tempint;
-
-	for( i = 0; i < 2; i++)
-		temp[i] = ascii_tstamp[i+8];
-	temp[i] = '\0';
-	tempint = atoi(temp);
-	currtime.tm_mday = tempint;
-
-	for( i = 0; i < 2; i++)
-		temp[i] = ascii_tstamp[i];
-	temp[i] = '\0';
-	tempint = atoi(temp);
-	currtime.tm_hour = tempint;
-
-	for( i = 0; i < 2; i++)
-		temp[i] = ascii_tstamp[i+2];
-	temp[i] = '\0';
-	tempint = atoi(temp);
-	currtime.tm_min = tempint;
-
-	for( i = 0; i < 2; i++)
-		temp[i] = ascii_tstamp[i+4];
-	temp[i] = '\0';
-	tempint = atoi(temp);
-	currtime.tm_sec = tempint;
-
-
-	currtime.tm_mon -= 1;
-	sectimer = mktime(&currtime);
-	fsm_wdog_evo( 99, 0 );
-
-	if( (sectimer < (SEC_TIMER - 10)) || (sectimer > (SEC_TIMER + 10)) )	{
-
-		RTC_SetTime (LPC_RTC, RTC_TIMETYPE_SECOND, currtime.tm_sec);
-		RTC_SetTime (LPC_RTC, RTC_TIMETYPE_MINUTE, currtime.tm_min);
-		RTC_SetTime (LPC_RTC, RTC_TIMETYPE_HOUR, currtime.tm_hour);
-		RTC_SetTime (LPC_RTC, RTC_TIMETYPE_MONTH, currtime.tm_mon + 1);
-		RTC_SetTime (LPC_RTC, RTC_TIMETYPE_YEAR, currtime.tm_year);
-		RTC_SetTime (LPC_RTC, RTC_TIMETYPE_DAYOFMONTH, currtime.tm_mday);
-		RTC_SetTime (LPC_RTC, RTC_TIMETYPE_DAYOFWEEK, currtime.tm_wday);
-
-		SEC_TIMER = sectimer;
-	}
-}
+//void ack_syncronization( char * ascii_tstamp)
+//{
+//	struct tm currtime;
+//	int tempint, i;
+//	time_t sectimer;
+//	char temp[12];
+//
+//	//convierto a formato timestamp de eventos
+//	for( i = 0; i < 4; i++)
+//		temp[i] = ascii_tstamp[i+10];
+//	temp[i] = '\0';
+//	tempint = atoi(temp);
+//	currtime.tm_year = tempint - YEAR0;
+//
+//	for( i = 0; i < 2; i++)
+//		temp[i] = ascii_tstamp[i+6];
+//	temp[i] = '\0';
+//	tempint = atoi(temp);
+//	currtime.tm_mon = tempint;
+//
+//	for( i = 0; i < 2; i++)
+//		temp[i] = ascii_tstamp[i+8];
+//	temp[i] = '\0';
+//	tempint = atoi(temp);
+//	currtime.tm_mday = tempint;
+//
+//	for( i = 0; i < 2; i++)
+//		temp[i] = ascii_tstamp[i];
+//	temp[i] = '\0';
+//	tempint = atoi(temp);
+//	currtime.tm_hour = tempint;
+//
+//	for( i = 0; i < 2; i++)
+//		temp[i] = ascii_tstamp[i+2];
+//	temp[i] = '\0';
+//	tempint = atoi(temp);
+//	currtime.tm_min = tempint;
+//
+//	for( i = 0; i < 2; i++)
+//		temp[i] = ascii_tstamp[i+4];
+//	temp[i] = '\0';
+//	tempint = atoi(temp);
+//	currtime.tm_sec = tempint;
+//
+//
+//	currtime.tm_mon -= 1;
+//	sectimer = mktime(&currtime);
+//	fsm_wdog_evo( 99, 0 );
+//
+//	if( (sectimer < (SEC_TIMER - 10)) || (sectimer > (SEC_TIMER + 10)) )	{
+//
+//		RTC_SetTime (LPC_RTC, RTC_TIMETYPE_SECOND, currtime.tm_sec);
+//		RTC_SetTime (LPC_RTC, RTC_TIMETYPE_MINUTE, currtime.tm_min);
+//		RTC_SetTime (LPC_RTC, RTC_TIMETYPE_HOUR, currtime.tm_hour);
+//		RTC_SetTime (LPC_RTC, RTC_TIMETYPE_MONTH, currtime.tm_mon + 1);
+//		RTC_SetTime (LPC_RTC, RTC_TIMETYPE_YEAR, currtime.tm_year);
+//		RTC_SetTime (LPC_RTC, RTC_TIMETYPE_DAYOFMONTH, currtime.tm_mday);
+//		RTC_SetTime (LPC_RTC, RTC_TIMETYPE_DAYOFWEEK, currtime.tm_wday);
+//
+//		SEC_TIMER = sectimer;
+//	}
+//}
 
 int heartbeat( int coid, uint8_t *buffer)
 {
@@ -896,15 +896,17 @@ int heartbeat( int coid, uint8_t *buffer)
     retval = 0;
     if( retval == 0) {
         switch (Monitoreo[coid].protocol) {
-            case AP_EYSE1:
-                retval = heartbeat_EYSE1(buffer);
-                break;
+//            case AP_EYSE1:
+//                retval = heartbeat_EYSE1(buffer);
+//                break;
+//            case AP_NTSEC4:
+//                retval = heartbeat_NTSEC4(Monitoreo[coid].HBaccount, buffer);
+//                break;
+//            case AP_NTSEC5:
+//                retval = heartbeat_NTSEC5(Monitoreo[coid].HBaccount, buffer, Monitoreo[coid].sec);
+//                break;
             case AP_NTSEC4:
-                retval = heartbeat_NTSEC4(Monitoreo[coid].HBaccount, buffer);
-                break;
             case AP_NTSEC5:
-                retval = heartbeat_NTSEC5(Monitoreo[coid].HBaccount, buffer, Monitoreo[coid].sec);
-                break;
             case AP_NTSEC6:
                 retval = heartbeat_NTSEC6(Monitoreo[coid].HBaccount, buffer, Monitoreo[coid].sec);
                 break;

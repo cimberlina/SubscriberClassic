@@ -169,7 +169,7 @@ const ConsoleCommand console_commands[] =
     { "RELESTATE",		con_state_rele,			0,		MONI_LEVEL},
     { "vars",			dump_vars,				0,		OPER_LEVEL},
     //{ "manual_event",	send_manual_event,		0,		MCMI_LEVEL},
-    { "LIC",			set_license,			0,		FREE_LEVEL},
+    //{ "LIC",			set_license,			0,		FREE_LEVEL},
     { "set NPEVENT",	con_set_npmed,			0,		MONI_LEVEL},
     { "medir NP",		measure_np, 			0,		MONI_LEVEL},
     { "medir BAT",		measure_bat, 			0,		MONI_LEVEL},
@@ -190,7 +190,7 @@ const ConsoleCommand console_commands[] =
 	{ "dflash",			con_dflash_dump,		0,		OPER_LEVEL},
 	{ "toria1735",		con_audit_dump,			0,		MCMI_LEVEL},
 	{ "set OPENPTM",	con_set_OPENPTM,		0,		OPER_LEVEL},
-	{ "ECM",			CypherCommands,			0,		OPER_LEVEL},
+	//{ "ECM",			CypherCommands,			0,		OPER_LEVEL},
 	{ "volumetricas",	con_volumetrica,		0,		OPER_LEVEL},
 	{ "redpar",			con_volredu,			0,		OPER_LEVEL},
 	{ "evo_armar",		con_armar,				0,		OPER_LEVEL},
@@ -1102,20 +1102,20 @@ int con_echo(ConsoleState* state)
 	}
 }
 
-int con_hello(ConsoleState* state)
-{
-	auto int retval;
-	uint8_t buffer[8];
-        int len;
-
-	buffer[0] = 0x00;
-	len = flash0_write(1, buffer, DF_FIDUDT_OFFSET, 1);
-
-	if( (retval = state->conio->puts("Hello, Claudio. I'm fine.\n\rHow can I help you?\n\r")) > 0)
-		return 1;
-	else return -2;
-
-}
+//int con_hello(ConsoleState* state)
+//{
+//	auto int retval;
+//	uint8_t buffer[8];
+//        int len;
+//
+//	buffer[0] = 0x00;
+//	len = flash0_write(1, buffer, DF_FIDUDT_OFFSET, 1);
+//
+//	if( (retval = state->conio->puts("Hello, Claudio. I'm fine.\n\rHow can I help you?\n\r")) > 0)
+//		return 1;
+//	else return -2;
+//
+//}
 
 int con_version(ConsoleState* state)
 {
@@ -5637,129 +5637,129 @@ uint8_t hex2nibble(char c)
 		return 0;
 }
 
-int set_license(ConsoleState* state)
-{
-	char *input_code;
-	int len, i, j, lic_account;
-	uint8_t lic_code[16], buffer[12];
-	OS_ERR os_err;
-
-	struct tm time;
-	time_t timestamp;
-
-	uint32_t m_timestamp, old_timestamp, error, licvenc_ts;
-	uint8_t m_tecnico, m_interval, m_rndnumber, m_chksum, old_rndnumber;
-	uint16_t chksum;
-
-
-
-
-	len = strlen( con_getparam(state->command, 1) );
-	input_code = con_getparam(state->command, 1);
-
-	if(len != 32)	{
-		//state->conio->puts("*ERROR : Clave de longitud incorrecta\n\r");
-		return -1;
-	}
-
-	for( i = 0; i < 32; i++ )	{
-		if(!ASCII_IsDigHex(input_code[i]))	{
-			//state->conio->puts("*ERROR : Clave con caracteres invalidos\n\r");
-			return -1;
-		}
-	}
-
-	for( i = 0, j = 0; i < 32; i+=2, j++)	{
-		lic_code[j] = (hex2nibble(input_code[i]) << 4) + hex2nibble(input_code[i+1]);
-	}
-
-	aes_decrypt( lic_code, (unsigned char *)AES_key );
-
-	m_timestamp  = lic_code[3];
-	m_timestamp += ((lic_code[2] << 8)  & 0x0000FF00);
-	m_timestamp += ((lic_code[1] << 16) & 0x00FF0000);
-	m_timestamp += ((lic_code[0] << 24) & 0xFF000000);
-	
-
-	m_tecnico = lic_code[4];
-	m_interval = lic_code[5];
-	m_rndnumber = lic_code[6];
-	m_chksum = lic_code[15];
-
-	chksum = 0;
-	for(i = 0; i < 15; i++)	{
-		chksum += lic_code[i];
-	}
-	chksum &= 0x00FF;
-	if(m_chksum != (uint8_t)chksum)	{
-		//state->conio->puts("*ERROR : Checksum de clave, erroneo\n\r");
-		return -1;
-	}
-
-	error = flash0_read(buffer, LIC_TIMESTAMP, 4);
-	old_timestamp  = buffer[3];
-	old_timestamp += ((buffer[2] << 8)  & 0x0000FF00);
-	old_timestamp += ((buffer[1] << 16) & 0x00FF0000);
-	old_timestamp += ((buffer[0] << 24) & 0xFF000000);
-	error = flash0_read(buffer, LIC_RNDNUM, 4);
-	old_rndnumber = buffer[0];
-
-	if((m_timestamp == old_timestamp) && (m_rndnumber == old_rndnumber))	{
-		//state->conio->puts("*ERROR : Clave rechazada por re-utilizacion\n\r");
-		return -1;
-	}
-
-	//chequeo si corresponde a esta placa por numero de serie
-	if((lic_code[7] != 0) || (lic_code[8] != 0) || (lic_code[9] != 0) || (lic_code[10] != 0))	{
-	    lic_account = lic_code[10] - '0';
-	    lic_account += (lic_code[9] - '0')*10;
-	    lic_account += (lic_code[8] - '0')*100;
-	    lic_account += (lic_code[7] - '0')*1000;
-		if(account != lic_account)	{
-			//state->conio->puts("*ERROR : Clave no corresponde a esta placa por numero de cuenta\n\r");
-			return -1;
-		}
-	}
-
-	//chequeo si corresponde a esta placa por numero de abonado
-//	if(BaseAlarmPkt_numabo != m_numabo)	{
-//		state->conio->puts("ERROR : Clave no corresponde a esta placa por numero de abonado\n\r");
-//		return 1;
+//int set_license(ConsoleState* state)
+//{
+//	char *input_code;
+//	int len, i, j, lic_account;
+//	uint8_t lic_code[16], buffer[12];
+//	OS_ERR os_err;
+//
+//	struct tm time;
+//	time_t timestamp;
+//
+//	uint32_t m_timestamp, old_timestamp, error, licvenc_ts;
+//	uint8_t m_tecnico, m_interval, m_rndnumber, m_chksum, old_rndnumber;
+//	uint16_t chksum;
+//
+//
+//
+//
+//	len = strlen( con_getparam(state->command, 1) );
+//	input_code = con_getparam(state->command, 1);
+//
+//	if(len != 32)	{
+//		//state->conio->puts("*ERROR : Clave de longitud incorrecta\n\r");
+//		return -1;
 //	}
-
-
-	//aca se analiza la fecha de vencimiento de la licensia
-	//m_timestamp -= 31*24*60*60;
-        m_timestamp -= 3*60*60;
-	licvenc_ts = m_timestamp + (m_interval * 60*60);
-	buffer[0] = (licvenc_ts >> 24) & 0x000000FF;
-	buffer[1] = (licvenc_ts >> 16) & 0x000000FF;
-	buffer[2] = (licvenc_ts >> 8) & 0x000000FF;
-	buffer[3] = (licvenc_ts) & 0x000000FF;
-	error = flash0_write(1, buffer, DF_LICTSVENC_OFFSET, 4);		//guarde vencimiento de licensia
-
-	
-
-
-	if(!valid_license())	{
-		//state->conio->puts("*ERROR : Licencia vencida\n\r");
-		return -1;
-	}
-
-
-	//**************************************************************************
-	//* aca la clave fue aceptada
-	state->conio->puts("OK :Clave aceptada !!!\n\r");
-	RADAR_flags |= LIC_ENTER;
-	RADAR_flags &= ~CONSOLE_CMDIN;
-	buffer[0] = m_interval;
-	error = flash0_write(1, buffer, LIC_INTERVAL, 1);
-	error = flash0_write(1, lic_code, LIC_TIMESTAMP, 4);
-	buffer[0] = m_rndnumber;
-	error = flash0_write(1, buffer, LIC_RNDNUM, 1);
-
-	return 1;
-}
+//
+//	for( i = 0; i < 32; i++ )	{
+//		if(!ASCII_IsDigHex(input_code[i]))	{
+//			//state->conio->puts("*ERROR : Clave con caracteres invalidos\n\r");
+//			return -1;
+//		}
+//	}
+//
+//	for( i = 0, j = 0; i < 32; i+=2, j++)	{
+//		lic_code[j] = (hex2nibble(input_code[i]) << 4) + hex2nibble(input_code[i+1]);
+//	}
+//
+//	aes_decrypt( lic_code, (unsigned char *)AES_key );
+//
+//	m_timestamp  = lic_code[3];
+//	m_timestamp += ((lic_code[2] << 8)  & 0x0000FF00);
+//	m_timestamp += ((lic_code[1] << 16) & 0x00FF0000);
+//	m_timestamp += ((lic_code[0] << 24) & 0xFF000000);
+//
+//
+//	m_tecnico = lic_code[4];
+//	m_interval = lic_code[5];
+//	m_rndnumber = lic_code[6];
+//	m_chksum = lic_code[15];
+//
+//	chksum = 0;
+//	for(i = 0; i < 15; i++)	{
+//		chksum += lic_code[i];
+//	}
+//	chksum &= 0x00FF;
+//	if(m_chksum != (uint8_t)chksum)	{
+//		//state->conio->puts("*ERROR : Checksum de clave, erroneo\n\r");
+//		return -1;
+//	}
+//
+//	error = flash0_read(buffer, LIC_TIMESTAMP, 4);
+//	old_timestamp  = buffer[3];
+//	old_timestamp += ((buffer[2] << 8)  & 0x0000FF00);
+//	old_timestamp += ((buffer[1] << 16) & 0x00FF0000);
+//	old_timestamp += ((buffer[0] << 24) & 0xFF000000);
+//	error = flash0_read(buffer, LIC_RNDNUM, 4);
+//	old_rndnumber = buffer[0];
+//
+//	if((m_timestamp == old_timestamp) && (m_rndnumber == old_rndnumber))	{
+//		//state->conio->puts("*ERROR : Clave rechazada por re-utilizacion\n\r");
+//		return -1;
+//	}
+//
+//	//chequeo si corresponde a esta placa por numero de serie
+//	if((lic_code[7] != 0) || (lic_code[8] != 0) || (lic_code[9] != 0) || (lic_code[10] != 0))	{
+//	    lic_account = lic_code[10] - '0';
+//	    lic_account += (lic_code[9] - '0')*10;
+//	    lic_account += (lic_code[8] - '0')*100;
+//	    lic_account += (lic_code[7] - '0')*1000;
+//		if(account != lic_account)	{
+//			//state->conio->puts("*ERROR : Clave no corresponde a esta placa por numero de cuenta\n\r");
+//			return -1;
+//		}
+//	}
+//
+//	//chequeo si corresponde a esta placa por numero de abonado
+////	if(BaseAlarmPkt_numabo != m_numabo)	{
+////		state->conio->puts("ERROR : Clave no corresponde a esta placa por numero de abonado\n\r");
+////		return 1;
+////	}
+//
+//
+//	//aca se analiza la fecha de vencimiento de la licensia
+//	//m_timestamp -= 31*24*60*60;
+//        m_timestamp -= 3*60*60;
+//	licvenc_ts = m_timestamp + (m_interval * 60*60);
+//	buffer[0] = (licvenc_ts >> 24) & 0x000000FF;
+//	buffer[1] = (licvenc_ts >> 16) & 0x000000FF;
+//	buffer[2] = (licvenc_ts >> 8) & 0x000000FF;
+//	buffer[3] = (licvenc_ts) & 0x000000FF;
+//	error = flash0_write(1, buffer, DF_LICTSVENC_OFFSET, 4);		//guarde vencimiento de licensia
+//
+//
+//
+//
+//	if(!valid_license())	{
+//		//state->conio->puts("*ERROR : Licencia vencida\n\r");
+//		return -1;
+//	}
+//
+//
+//	//**************************************************************************
+//	//* aca la clave fue aceptada
+//	state->conio->puts("OK :Clave aceptada !!!\n\r");
+//	RADAR_flags |= LIC_ENTER;
+//	RADAR_flags &= ~CONSOLE_CMDIN;
+//	buffer[0] = m_interval;
+//	error = flash0_write(1, buffer, LIC_INTERVAL, 1);
+//	error = flash0_write(1, lic_code, LIC_TIMESTAMP, 4);
+//	buffer[0] = m_rndnumber;
+//	error = flash0_write(1, buffer, LIC_RNDNUM, 1);
+//
+//	return 1;
+//}
 
 
 int valid_license(void)
@@ -6718,105 +6718,105 @@ int con_dhcpjumper(ConsoleState* state)
 	return 1;
 }
 
-int CypherCommands(ConsoleState* state)
-{
-	char *input_code;
-	int len, i, j;
-	uint8_t lic_code[16], buffer[12];
-	OS_ERR os_err;
-	uint16_t cuenta;
-
-	uint32_t m_timestamp, old_timestamp, error;
-	uint8_t m_numabo, m_interval, m_rndnumber, m_chksum, old_rndnumber;
-	uint16_t chksum;
-
-
-
-
-	len = strlen( con_getparam(state->command, 1) );
-	input_code = con_getparam(state->command, 1);
-
-	if(len != 32)	{
-		state->conio->puts("*ERROR : Clave de longitud incorrecta\n\r");
-		return 1;
-	}
-
-	for( i = 0; i < 32; i++ )	{
-		if(!ASCII_IsDigHex(input_code[i]))	{
-			state->conio->puts("*ERROR : Clave con caracteres invalidos\n\r");
-			return 1;
-		}
-	}
-
-	for( i = 0, j = 0; i < 32; i+=2, j++)	{
-		lic_code[j] = (hex2nibble(input_code[i]) << 4) + hex2nibble(input_code[i+1]);
-	}
-
-	aes_decrypt( lic_code, (unsigned char *)AES_key );
-
-	m_chksum = lic_code[15];
-	chksum = 0;
-	for(i = 0; i < 15; i++)	{
-		chksum += lic_code[i];
-	}
-	chksum &= 0x00FF;
-	if(m_chksum != (uint8_t)chksum)	{
-		state->conio->puts("*ERROR : Checksum de comando, erroneo\n\r");
-		return 1;
-	}
-
-	error = flash0_read(buffer, LIC_INTERVAL, 1);
-	if((buffer[0] > 0) && (buffer[0] <= 48))	{
-		//el checksum dio bien, procesamos los comandos.
-		switch( lic_code[4])	{
-			case 0x31:				//dar de alta un PTM
-			case 0x32:
-				for( i = 5; i < 15; i++)	{
-					if( lic_code[i] != 0)	{
-						error = add_ptm(lic_code[i]);
-						OSTimeDlyHMSM(0, 0, 0, 200, OS_OPT_TIME_HMSM_STRICT, &os_err);
-						if(error == -1)	{
-							state->conio->puts("*ERROR : Comando NO ejecutado, la tabla esta llena\n\r");
-							return 1;
-						}
-					}
-				}
-				break;
-			case 0x51:				//dar de baja un PTM
-			case 0x52:
-				for( i = 5; i < 15; i++)	{
-					if( lic_code[i] != 0)	{
-						error = del_ptm(lic_code[i]);
-						OSTimeDlyHMSM(0, 0, 0, 200, OS_OPT_TIME_HMSM_STRICT, &os_err);
-						if(error == -1)	{
-							state->conio->puts("*ERROR : Comando NO ejecutado, PTM inexistente\n\r");
-							return 1;
-						}
-					}
-				}
-				break;
-			case 0x53:			//programar numero de cuanta bykom
-				lic_code[9] = 0;
-				cuenta = atoi( &(lic_code[5]));
-				if((cuenta > 0) && (cuenta < 10000))	{
-					EepromWriteWord(CIDACCOUNT1_E2P_ADDR, cuenta, &error);
-					OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);
-					EepromWriteWord(CIDACCOUNT2_E2P_ADDR, cuenta, &error);
-					OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);
-					EepromWriteWord(R3KACCOUNT_E2P_ADDR, cuenta, &error);
-					OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);
-				}
-				break;
-			default:
-				break;
-		}
-		state->conio->puts("*OK : Comando ejecutado\n\r");
-	} else {
-		state->conio->puts("*ERROR : Primero debe ingresar Licencia con LIC\n\r");
-	}
-
-	return 1;
-}
+//int CypherCommands(ConsoleState* state)
+//{
+//	char *input_code;
+//	int len, i, j;
+//	uint8_t lic_code[16], buffer[12];
+//	OS_ERR os_err;
+//	uint16_t cuenta;
+//
+//	uint32_t m_timestamp, old_timestamp, error;
+//	uint8_t m_numabo, m_interval, m_rndnumber, m_chksum, old_rndnumber;
+//	uint16_t chksum;
+//
+//
+//
+//
+//	len = strlen( con_getparam(state->command, 1) );
+//	input_code = con_getparam(state->command, 1);
+//
+//	if(len != 32)	{
+//		state->conio->puts("*ERROR : Clave de longitud incorrecta\n\r");
+//		return 1;
+//	}
+//
+//	for( i = 0; i < 32; i++ )	{
+//		if(!ASCII_IsDigHex(input_code[i]))	{
+//			state->conio->puts("*ERROR : Clave con caracteres invalidos\n\r");
+//			return 1;
+//		}
+//	}
+//
+//	for( i = 0, j = 0; i < 32; i+=2, j++)	{
+//		lic_code[j] = (hex2nibble(input_code[i]) << 4) + hex2nibble(input_code[i+1]);
+//	}
+//
+//	aes_decrypt( lic_code, (unsigned char *)AES_key );
+//
+//	m_chksum = lic_code[15];
+//	chksum = 0;
+//	for(i = 0; i < 15; i++)	{
+//		chksum += lic_code[i];
+//	}
+//	chksum &= 0x00FF;
+//	if(m_chksum != (uint8_t)chksum)	{
+//		state->conio->puts("*ERROR : Checksum de comando, erroneo\n\r");
+//		return 1;
+//	}
+//
+//	error = flash0_read(buffer, LIC_INTERVAL, 1);
+//	if((buffer[0] > 0) && (buffer[0] <= 48))	{
+//		//el checksum dio bien, procesamos los comandos.
+//		switch( lic_code[4])	{
+//			case 0x31:				//dar de alta un PTM
+//			case 0x32:
+//				for( i = 5; i < 15; i++)	{
+//					if( lic_code[i] != 0)	{
+//						error = add_ptm(lic_code[i]);
+//						OSTimeDlyHMSM(0, 0, 0, 200, OS_OPT_TIME_HMSM_STRICT, &os_err);
+//						if(error == -1)	{
+//							state->conio->puts("*ERROR : Comando NO ejecutado, la tabla esta llena\n\r");
+//							return 1;
+//						}
+//					}
+//				}
+//				break;
+//			case 0x51:				//dar de baja un PTM
+//			case 0x52:
+//				for( i = 5; i < 15; i++)	{
+//					if( lic_code[i] != 0)	{
+//						error = del_ptm(lic_code[i]);
+//						OSTimeDlyHMSM(0, 0, 0, 200, OS_OPT_TIME_HMSM_STRICT, &os_err);
+//						if(error == -1)	{
+//							state->conio->puts("*ERROR : Comando NO ejecutado, PTM inexistente\n\r");
+//							return 1;
+//						}
+//					}
+//				}
+//				break;
+//			case 0x53:			//programar numero de cuanta bykom
+//				lic_code[9] = 0;
+//				cuenta = atoi( &(lic_code[5]));
+//				if((cuenta > 0) && (cuenta < 10000))	{
+//					EepromWriteWord(CIDACCOUNT1_E2P_ADDR, cuenta, &error);
+//					OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);
+//					EepromWriteWord(CIDACCOUNT2_E2P_ADDR, cuenta, &error);
+//					OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);
+//					EepromWriteWord(R3KACCOUNT_E2P_ADDR, cuenta, &error);
+//					OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);
+//				}
+//				break;
+//			default:
+//				break;
+//		}
+//		state->conio->puts("*OK : Comando ejecutado\n\r");
+//	} else {
+//		state->conio->puts("*ERROR : Primero debe ingresar Licencia con LIC\n\r");
+//	}
+//
+//	return 1;
+//}
 
 int add_ptm( uint8_t ptm_partition)
 {

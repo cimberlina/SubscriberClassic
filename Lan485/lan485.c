@@ -173,14 +173,14 @@ void  LAN485_Task(void  *p_arg)
 
 	if( howmuchdev <= 4)	{
 		tslotsec = 0;
-		tslotms = 250; 
+		tslotms = 250;      //250
 	} else
 	if ( howmuchdev <= 12)	{
 		tslotsec = 0;
-		tslotms = 175;
+		tslotms = 250;      //175
 	} else	{
 		tslotsec = 0;
-		tslotms = 135;
+		tslotms = 250;      //135
 	}
 
 	currtime.tm_sec = RTC_GetTime (LPC_RTC, RTC_TIMETYPE_SECOND);
@@ -986,9 +986,9 @@ void GenerateCIDEventPTm( unsigned char index, unsigned char eventtype, unsigned
     if((ptm_dcb[index].rtuaddr == SKIMMING3_RTUADDR) && (eventtype != 145) && (eventtype != 627) && (eventtype != 628))
         return;
 
-	currentEvent.index = eventIndex++;
-	if(eventIndex == 0xFFFF)
-		eventIndex = 0x0000;
+//	currentEvent.index = eventIndex++;
+//	if(eventIndex == 0xFFFF)
+//		eventIndex = 0x0000;
 
 	currentEvent.timestamp = SEC_TIMER;
 	currentEvent.account = IntToBCD(ptm_dcb[index].cuenta);
@@ -1123,9 +1123,9 @@ void ParsePtmCID_Event( unsigned char event_buffer[] )
 	int pbtzone, retval;
 
 
-	currentEvent.index = eventIndex++;
-	if(eventIndex == 0xFFFF)
-		eventIndex = 0x0000;
+//	currentEvent.index = eventIndex++;
+//	if(eventIndex == 0xFFFF)
+//		eventIndex = 0x0000;
 
 	currentEvent.timestamp = SEC_TIMER;
 

@@ -143,6 +143,14 @@ int R3KeventRec_readptr;
 int R3KeventRec_count;
 //**************************************************************************
 
+//**************************************************************************
+//* Estas variables son para la transmision seria CID a rabbit
+EventRecord LogT_eventRecord[LogT_BUFFLEN];
+int LogT_eventRec_writeptr;
+int LogT_eventRec_readptr;
+int LogT_eventRec_count;
+//**************************************************************************
+
 /***************************************************************************
  **
  **  NVIC Interrupt channels
@@ -328,6 +336,7 @@ int  main (void)
     SystemFlag11 |= DONTSENDEVENTS;
 #endif
 
+    FSM_FLAG_1 = 0x00;
     EVOWD_Flag = 0x00;
     SIRENA_Flag = 0x00;
     STRIKE_Flag = 0x00;
@@ -657,6 +666,19 @@ static  void  App_TaskCreate (void)
 				 (OS_OPT      )(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
 				 (OS_ERR     *)&err);
 #endif
+    OSTaskCreate((OS_TCB     *)&LogT_Task_TCB,                /* Create the start task                                */
+                 (CPU_CHAR   *)"LogT_Task",
+                 (OS_TASK_PTR )LogT_Task,
+                 (void       *)0,
+                 (OS_PRIO     )LogT_Task_PRIO,
+                 (CPU_STK    *)&LogT_Task_Stk[0],
+                 (CPU_STK_SIZE)LogT_Task_STK_SIZE / 10,
+                 (CPU_STK_SIZE)LogT_Task_STK_SIZE,
+                 (OS_MSG_QTY  )0,
+                 (OS_TICK     )0,
+                 (void       *)0,
+                 (OS_OPT      )(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
+                 (OS_ERR     *)&err);
 
 }
 
@@ -3919,14 +3941,64 @@ void fsm_wdog_evo( uint8_t this, uint8_t partition )
 		return;
 	switch(fsmwdogevo_state[this])	{
         case FSMWDEVO_ENTRY :
-            fsmwdogevo_state[this] = FSMWDEVO_IDLE;
-            e602mon_timer = SEC_TIMER;
-            EVOWD_Flag &= ~0x80;
-            if(BaseAlarmPkt_alarm & bitpat[APER_bit])	{
-                wdogevotimer[this] = SEC_TIMER + 15*60;
-            } else	{
-                wdogevotimer[this] = SEC_TIMER + wdtimer*60;
+            FSM_ReadHistory();
+            switch(this)    {
+                case 0:
+                    if(FSM_FLAG_1 & WDEVO0_ALRM_FLAG)    {
+                        fsmwdogevo_state[this] = FSMWDEVO_ALARM;
+                        Rot485_flag |= ROTEVO_FLAG;
+                        diag485[6] |= (1 << (5 + this));
+                        FSM_FLAG_1 |= WDEVO0_ALRM_FLAG;
+                    } else {
+                        FSM_FLAG_1 &= ~WDEVO0_ALRM_FLAG;
+                        fsmwdogevo_state[this] = FSMWDEVO_IDLE;
+                        e602mon_timer = SEC_TIMER;
+                        EVOWD_Flag &= ~0x80;
+                        if (BaseAlarmPkt_alarm & bitpat[APER_bit]) {
+                            wdogevotimer[this] = SEC_TIMER + 15 * 60;
+                        } else {
+                            wdogevotimer[this] = SEC_TIMER + wdtimer * 60;
+                        }
+                    }
+                    break;
+                case 1:
+                    if(FSM_FLAG_1 & WDEVO1_ALRM_FLAG)    {
+                        fsmwdogevo_state[this] = FSMWDEVO_ALARM;
+                        Rot485_flag |= ROTEVO_FLAG;
+                        diag485[6] |= (1 << (5 + this));
+                        FSM_FLAG_1 |= WDEVO1_ALRM_FLAG;
+                    } else {
+                        FSM_FLAG_1 &= ~WDEVO1_ALRM_FLAG;
+                        fsmwdogevo_state[this] = FSMWDEVO_IDLE;
+                        e602mon_timer = SEC_TIMER;
+                        EVOWD_Flag &= ~0x80;
+                        if (BaseAlarmPkt_alarm & bitpat[APER_bit]) {
+                            wdogevotimer[this] = SEC_TIMER + 15 * 60;
+                        } else {
+                            wdogevotimer[this] = SEC_TIMER + wdtimer * 60;
+                        }
+                    }
+                    break;
+                case 2:
+                    if(FSM_FLAG_1 & WDEVO2_ALRM_FLAG)    {
+                        fsmwdogevo_state[this] = FSMWDEVO_ALARM;
+                        Rot485_flag |= ROTEVO_FLAG;
+                        diag485[6] |= (1 << (5 + this));
+                        FSM_FLAG_1 |= WDEVO2_ALRM_FLAG;
+                    } else {
+                        FSM_FLAG_1 &= ~WDEVO2_ALRM_FLAG;
+                        fsmwdogevo_state[this] = FSMWDEVO_IDLE;
+                        e602mon_timer = SEC_TIMER;
+                        EVOWD_Flag &= ~0x80;
+                        if (BaseAlarmPkt_alarm & bitpat[APER_bit]) {
+                            wdogevotimer[this] = SEC_TIMER + 15 * 60;
+                        } else {
+                            wdogevotimer[this] = SEC_TIMER + wdtimer * 60;
+                        }
+                    }
+                    break;
             }
+
             break;
         case FSMWDEVO_IDLE :
             if(SEC_TIMER > wdogevotimer[this])	{
@@ -3934,6 +4006,19 @@ void fsm_wdog_evo( uint8_t this, uint8_t partition )
                 logCidEvent(account, 1, 943, partition, 0);
                 Rot485_flag |= ROTEVO_FLAG;
                 diag485[6] |= (1 << (5 + this));
+                switch(this)    {
+                    case 0:
+                        FSM_FLAG_1 |= WDEVO0_ALRM_FLAG;
+                        break;
+                    case 1:
+                        FSM_FLAG_1 |= WDEVO1_ALRM_FLAG;
+                        break;
+                    case 2:
+                        FSM_FLAG_1 |= WDEVO2_ALRM_FLAG;
+                        break;
+                }
+
+                FSM_WriteHistory();
             } else
             if( EVOWD_Flag & (1 << this))	{
                 EVOWD_Flag &= ~(1 << this);
@@ -3969,11 +4054,32 @@ void fsm_wdog_evo( uint8_t this, uint8_t partition )
                 logCidEvent(account, 3, 943, partition, 0);
                 Rot485_flag &= ~ROTEVO_FLAG;
                 diag485[6] &= ~(1 << (5 + this));
+
+                switch(this)    {
+                    case 0:
+                        FSM_FLAG_1 &= ~WDEVO0_ALRM_FLAG;
+                        break;
+                    case 1:
+                        FSM_FLAG_1 &= ~WDEVO1_ALRM_FLAG;
+                        break;
+                    case 2:
+                        FSM_FLAG_1 &= ~WDEVO2_ALRM_FLAG;
+                        break;
+                }
+                FSM_WriteHistory();
             } else
-            if((currtime.tm_hour == 1) && (currtime.tm_min == 30) && (currtime.tm_sec == 0))	{
-                logCidEvent(account, 1, 943, partition, 0);
+            if((currtime.tm_hour == 1) && (currtime.tm_min == 30) && ((currtime.tm_sec >= 0) && (currtime.tm_sec <= 7)))	{
+                //logCidEvent(account, 1, 943, partition, 0);
                 Rot485_flag |= ROTEVO_FLAG;
                 diag485[6] |= (1 << (5 + this));
+                if(!(SystemFlag4 & E943F220_DONE)) {
+                    SystemFlag4 |= E943F220_DONE;
+                    SystemFlag3 |= NAPER_flag;
+                    SystemFlag3 |= NAPER_F220V;
+                }
+            }
+            if ((SystemFlag4 & E943F220_DONE) && (currtime.tm_hour == 1) && (currtime.tm_min == 30) && ((currtime.tm_sec >= 10) && (currtime.tm_sec <= 15))) {
+                SystemFlag4 &= ~E943F220_DONE;
             }
             break;
         default :

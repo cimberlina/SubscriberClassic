@@ -151,7 +151,7 @@ extern unsigned char SystemFlag3;
 
 extern unsigned char SystemFlag4;
 #define	LOWBATT_flag	0x01
-#define NPMEAS_DONE		0x02
+#define E943F220_DONE	0x02
 #define	RS485F220_DONE	0x04
 #define	NPMED_FLAG		0x08
 #define	LICACT_DONE		0x10
@@ -215,6 +215,14 @@ extern uint32_t SystemFlag11;
 #define APERASAL_FLAG   (1 << 1)
 #define FIRSTCMD_FLAG   (1 << 2)
 #define CONSOLASAL_FLAG (1 << 3)
+
+extern uint8_t FSM_FLAG_1;
+#define WDEVO0_ALRM_FLAG    (1 << 0)
+#define WDEVO1_ALRM_FLAG    (1 << 1)
+#define WDEVO2_ALRM_FLAG    (1 << 2)
+#define APER2_ALRM_FLAG     (1 << 3)
+#define APER13_ALRM_FLAG    (1 << 4)
+#define ROT943_FLAG         (1 << 5)
 
 #define PART5_REDU_FLAGS		0
 #define PART6_REDU_FLAGS		4
@@ -404,11 +412,17 @@ extern uint8_t epreve_state;
 #define	PRV_PREVE		0x30
 
 #define	R3KSERIALBUFFLEN	25
+#define LogT_BUFFLEN        50
 
 extern EventRecord R3KeventRecord[R3KSERIALBUFFLEN];
 extern int R3KeventRec_writeptr;
 extern int R3KeventRec_readptr;
 extern int R3KeventRec_count;
+
+extern EventRecord LogT_eventRecord[LogT_BUFFLEN];
+extern int LogT_eventRec_writeptr;
+extern int LogT_eventRec_readptr;
+extern int LogT_eventRec_count;
 
 extern uint16_t r3kaccount;
 

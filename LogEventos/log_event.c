@@ -34,7 +34,8 @@
 //}  MonitorConnectionStruct;
 //
 
-
+OS_TCB		LogT_Task_TCB;
+CPU_STK		LogT_Task_Stk[LogT_Task_STK_SIZE];
 
 EventRecord currentEvent, LcurrentEvent;
 uint16_t eventIndex;
@@ -48,43 +49,159 @@ uint16_t audit_evflash_rdptr;
 
 const uint8_t hexachar[16] = {'0', '1', '2', '3', '4','5','6','7','8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
-void RawCID_LogEvent( uint8_t *cidbuff)
+//void RawCID_LogEvent( uint8_t *cidbuff)
+//{
+//	uint16_t checksum;
+//	int i, len;
+//	uint8_t *currentEventPtr;
+//	char strbuffer[256];
+//
+//	currentEvent.index = eventIndex++;
+//	if(eventIndex == 0xFFFF)
+//		eventIndex = 0x0000;
+//	currentEvent.timestamp = SEC_TIMER;
+//
+//	currentEvent.account = (cidbuff[0] * 0x1000) + (cidbuff[1] * 0x0100) + (cidbuff[2] * 0x0010) + cidbuff[3];
+//	currentEvent.cid_qualifier = cidbuff[6];
+//	currentEvent.cid_eventcode =  (cidbuff[7] * 0x0100) + (cidbuff[8] * 0x0010) + cidbuff[9];
+//	currentEvent.cid_partition = (cidbuff[10] * 0x0010) + cidbuff[11];
+//	currentEvent.cid_zoneuser = (cidbuff[12] * 0x0100) + (cidbuff[13] * 0x0010) + cidbuff[14];
+//
+//	currentEventPtr = (uint8_t *)(&currentEvent);
+//	for(i = 0, checksum = 0; i < 14; i++)	{
+//		checksum += *(currentEventPtr + i);
+//	}
+//	checksum &= 0x00FF;
+//
+//	currentEvent.checksum = (uint8_t)checksum;
+//	currentEvent.ack_tag = 0;
+//
+//	len = BufPrintCidEvent( strbuffer, &currentEvent, 256 );
+//
+//	CommSendString(COMM0, strbuffer);
+//	WriteEventToFlash(&currentEvent);
+//
+//
+//	for( i = 0; i < CENTRALOFFICEMAX; i++ )	{
+//		if((Monitoreo[i].inuse == TRUE) && (!(SystemFlag11 & DONTSENDEVENTS)) )
+//			WriteEventToTxBuffer(i, &currentEvent);
+//	}
+//}
+
+void  LogT_Task(void  *p_arg)
 {
-	uint16_t checksum;
-	int i, len;
-	uint8_t *currentEventPtr;
-	char strbuffer[256];
+    OS_ERR	os_err;
+    int rdptr, error, i, chksum;
+    EventRecord event;
+    uint32_t dfindex;
+    uint8_t buffer[DF_EVELEN];
+    CPU_SIZE_T len;
 
-	currentEvent.index = eventIndex++;
-	if(eventIndex == 0xFFFF)
-		eventIndex = 0x0000;
-	currentEvent.timestamp = SEC_TIMER;
+    uint8_t *ptr_dest, *ptr_src;
 
-	currentEvent.account = (cidbuff[0] * 0x1000) + (cidbuff[1] * 0x0100) + (cidbuff[2] * 0x0010) + cidbuff[3];
-	currentEvent.cid_qualifier = cidbuff[6];
-	currentEvent.cid_eventcode =  (cidbuff[7] * 0x0100) + (cidbuff[8] * 0x0010) + cidbuff[9];
-	currentEvent.cid_partition = (cidbuff[10] * 0x0010) + cidbuff[11];
-	currentEvent.cid_zoneuser = (cidbuff[12] * 0x0100) + (cidbuff[13] * 0x0010) + cidbuff[14];
+    (void)p_arg;
 
-	currentEventPtr = (uint8_t *)(&currentEvent);
-	for(i = 0, checksum = 0; i < 14; i++)	{
-		checksum += *(currentEventPtr + i);
-	}
-	checksum &= 0x00FF;
+    LogT_eventRec_writeptr = 0;
+    LogT_eventRec_readptr = 0;
+    LogT_eventRec_count = 0;
+    len = DF_EVELEN;
 
-	currentEvent.checksum = (uint8_t)checksum;
-	currentEvent.ack_tag = 0;
+    while(DEF_ON) {
+        WDT_Feed();
+        OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &os_err);
 
-	len = BufPrintCidEvent( strbuffer, &currentEvent, 256 );
+        if(LogT_eventRec_count)   {
+            rdptr = LogT_eventRec_readptr;
 
-	CommSendString(COMM0, strbuffer);
-	WriteEventToFlash(&currentEvent);
+            event.ack_tag = LogT_eventRecord[rdptr].ack_tag;
+            event.index = LogT_eventRecord[rdptr].index;
+            event.timestamp = LogT_eventRecord[rdptr].timestamp;
+            event.account = LogT_eventRecord[rdptr].account;
+            event.cid_qualifier = LogT_eventRecord[rdptr].cid_qualifier;
+            event.cid_eventcode = LogT_eventRecord[rdptr].cid_eventcode;
+            event.cid_partition = LogT_eventRecord[rdptr].cid_partition;
+            event.cid_zoneuser = LogT_eventRecord[rdptr].cid_zoneuser;
+            event.checksum =  LogT_eventRecord[rdptr].checksum;
 
+            //-----------------------------------------------------------------------
+            buffer[0] = event.ack_tag;
+            //buffer[1] = (uint8_t)((event.index >> 8) & 0x00FF);
+            //buffer[2] = (uint8_t)((event.index) & 0x00FF);
 
-	for( i = 0; i < CENTRALOFFICEMAX; i++ )	{
-		if((Monitoreo[i].inuse == TRUE) && (!(SystemFlag11 & DONTSENDEVENTS)) )
-			WriteEventToTxBuffer(i, &currentEvent);
-	}
+            buffer[1] = (uint8_t)((eventIndex >> 8) & 0x00FF);
+            buffer[2] = (uint8_t)((eventIndex) & 0x00FF);
+
+            buffer[3] = (uint8_t)((event.timestamp >> 24) & 0x000000FF);
+            buffer[4] = (uint8_t)((event.timestamp >> 16) & 0x000000FF);
+            buffer[5] = (uint8_t)((event.timestamp >> 8) & 0x000000FF);
+            buffer[6] = (uint8_t)((event.timestamp ) & 0x000000FF);
+            buffer[7] = (uint8_t)((event.account >> 8) & 0x00FF);
+            buffer[8] = (uint8_t)((event.account ) & 0x00FF);
+            buffer[9] = event.cid_qualifier;
+            buffer[10] = (uint8_t)((event.cid_eventcode >> 8) & 0x00FF);
+            buffer[11] = (uint8_t)((event.cid_eventcode) & 0x00FF);
+            buffer[12] = event.cid_partition;
+            buffer[13] = (uint8_t)((event.cid_zoneuser >> 8) & 0x00FF);
+            buffer[14] = (uint8_t)((event.cid_zoneuser) & 0x00FF);
+
+            chksum = 0;
+            for(i = 1; i < 15; i++)	{
+                chksum += buffer[i];
+            }
+            chksum &= 0x00FF;
+
+            buffer[15] = (uint8_t)(chksum & 0x00FF);
+
+            //-----------------------------------------------------------------------
+            dfindex = DF_EVENT0 + (evflash_wrptr * DF_EVELEN);
+            error = flash0_write(2, buffer, dfindex, DF_EVELEN);
+            if( (error = verify_event_wr( buffer, dfindex)) == FALSE )
+                error = flash0_write(2, buffer, dfindex, DF_EVELEN);
+
+            if( (error = verify_event_wr( buffer, dfindex)) == TRUE )	{
+                currentEvent.index = eventIndex++;
+                if(eventIndex == 0xFFFF)
+                    eventIndex = 0x0000;
+
+                evflash_wrptr++;
+                if( evflash_wrptr == DF_MAXEVENTS)
+                    evflash_wrptr = 0;
+                Set_evwrptr(evflash_wrptr);
+
+                LogT_eventRec_readptr++;
+                LogT_eventRec_count--;
+                if(LogT_eventRec_readptr == LogT_BUFFLEN)	{
+                    LogT_eventRec_readptr = 0;
+                }
+            }
+
+            //----------------------------------------------------------------------
+            event.index = eventIndex-1;
+            event.checksum = buffer[15];
+            if(event.cid_eventcode < 0x999)	{
+                for( i = 0; i < CENTRALOFFICEMAX; i++ )	{
+                    if((Monitoreo[i].inuse == TRUE) && (!(SystemFlag11 & DONTSENDEVENTS)) )	{
+                        switch(Monitoreo[i].protocol)	{
+                            case AP_NTSEC4:
+                            case AP_NTSEC5:
+                            case AP_NTSEC6:
+                            case AP_NTSEC7:
+                                WriteEventToTxBuffer(i, &event);
+                                break;
+                            case AP_EYSE1:
+                                //heartbeat_EYSE1((uint8_t *)(&currentEvent) );
+                                WriteEventToTxBuffer(i, &event);
+                                break;
+                        }
+                    }
+                }
+            }
+            //----------------------------------------------------------------------
+
+            OSTimeDlyHMSM(0, 0, 0, 200, OS_OPT_TIME_HMSM_STRICT, &os_err);
+            //----------------------------------------------------------------------
+        }
+    }
 }
 
 uint16_t AccountToDigits( uint16_t data)
@@ -168,9 +285,9 @@ void logCidEvent(uint16_t account, uint8_t qualifier, uint16_t eventcode, uint8_
 
 	OSSemPend(&LogEventRdyPtr, 0, OS_OPT_PEND_BLOCKING, 0, &err);
 
-	LcurrentEvent.index = eventIndex++;
-	if(eventIndex == 0xFFFF)
-		eventIndex = 0x0000;
+//	LcurrentEvent.index = eventIndex++;
+//	if(eventIndex == 0xFFFF)
+//		eventIndex = 0x0000;
 
 	LcurrentEvent.timestamp = SEC_TIMER;
 	if(eventcode == REMOTEASALT_TRIGGER)	
@@ -196,24 +313,24 @@ void logCidEvent(uint16_t account, uint8_t qualifier, uint16_t eventcode, uint8_
 	LcurrentEvent.checksum = (uint8_t)checksum;
 	LcurrentEvent.ack_tag = 0;
 
-	if(eventcode < 999)	{
-		for( i = 0; i < CENTRALOFFICEMAX; i++ )	{
-			if((Monitoreo[i].inuse == TRUE) && (!(SystemFlag11 & DONTSENDEVENTS)) )	{
-				switch(Monitoreo[i].protocol)	{
-				case AP_NTSEC4:
-				case AP_NTSEC5:
-				case AP_NTSEC6:
-				case AP_NTSEC7:
-					WriteEventToTxBuffer(i, &LcurrentEvent);
-					break;
-				case AP_EYSE1:
-					//heartbeat_EYSE1((uint8_t *)(&currentEvent) );
-					WriteEventToTxBuffer(i, &LcurrentEvent);
-					break;
-				}
-			}
-		}
-	}
+//	if(eventcode < 999)	{
+//		for( i = 0; i < CENTRALOFFICEMAX; i++ )	{
+//			if((Monitoreo[i].inuse == TRUE) && (!(SystemFlag11 & DONTSENDEVENTS)) )	{
+//				switch(Monitoreo[i].protocol)	{
+//				case AP_NTSEC4:
+//				case AP_NTSEC5:
+//				case AP_NTSEC6:
+//				case AP_NTSEC7:
+//					WriteEventToTxBuffer(i, &LcurrentEvent);
+//					break;
+//				case AP_EYSE1:
+//					//heartbeat_EYSE1((uint8_t *)(&currentEvent) );
+//					WriteEventToTxBuffer(i, &LcurrentEvent);
+//					break;
+//				}
+//			}
+//		}
+//	}
 
 	switch(eventcode)	{
 		case 137:
@@ -406,8 +523,9 @@ int HowManyEvents( void )
 	for( event = 0; event < DF_MAXEVENTS; event++)	{
 		dfindex = DF_EVENT0 + (event * DF_EVELEN);
 		flash0_read(buffer, dfindex, DF_EVELEN);
-		if( buffer[0] != 0xFF)
+		if( (buffer[0] >= 0x00) && (buffer[0] <= 0x03))
 			count++;
+        else return count;
 	}
 
 	return count;
@@ -486,12 +604,11 @@ void Get_evwrptr(void)
 
 int WriteEventToFlash(EventRecord *event)
 {
-	int error, i, chksum;
-	uint8_t buffer[16];
-	uint32_t dfindex;
-	OS_ERR os_err;
+    int wrptr;
+    uint8_t buffer[16];
+    int error, i, chksum;
 
-	buffer[0] = event->ack_tag;
+    buffer[0] = event->ack_tag;
 	buffer[1] = (uint8_t)((event->index >> 8) & 0x00FF);
 	buffer[2] = (uint8_t)((event->index) & 0x00FF);
 	buffer[3] = (uint8_t)((event->timestamp >> 24) & 0x000000FF);
@@ -513,27 +630,73 @@ int WriteEventToFlash(EventRecord *event)
 	}
 	buffer[15] = (uint8_t)(chksum & 0x00FF);
 
+    wrptr = LogT_eventRec_writeptr++;
+    LogT_eventRec_count++;
 
-	dfindex = DF_EVENT0 + (evflash_wrptr * DF_EVELEN);
-	error = flash0_write(2, buffer, dfindex, DF_EVELEN);
-	//OSTimeDlyHMSM(0, 0, 0, 10, OS_OPT_TIME_HMSM_STRICT, &os_err);
+    LogT_eventRecord[wrptr].ack_tag = event->ack_tag;
+    LogT_eventRecord[wrptr].index = event->index;
+    LogT_eventRecord[wrptr].timestamp = event->timestamp;
+    LogT_eventRecord[wrptr].account = event->account;
+    LogT_eventRecord[wrptr].cid_qualifier = event->cid_qualifier;
+    LogT_eventRecord[wrptr].cid_eventcode = event->cid_eventcode;
+    LogT_eventRecord[wrptr].cid_partition = event->cid_partition;
+    LogT_eventRecord[wrptr].cid_zoneuser = event->cid_zoneuser;
+    LogT_eventRecord[wrptr].checksum = (uint8_t)(chksum & 0x00FF);
 
-	if( (error=verify_event_wr( buffer, dfindex)) == FALSE )	{
-		error = flash0_write(2, buffer, dfindex, DF_EVELEN);
-		//OSTimeDlyHMSM(0, 0, 0, 10, OS_OPT_TIME_HMSM_STRICT, &os_err);
-	} else
-	if( (error=verify_event_wr( buffer, dfindex)) == FALSE )	{
-		error = flash0_write(2, buffer, dfindex, DF_EVELEN);
-		//OSTimeDlyHMSM(0, 0, 0, 10, OS_OPT_TIME_HMSM_STRICT, &os_err);
-	}
 
-	if( (error=verify_event_wr( buffer, dfindex)) == TRUE )	{
-		evflash_wrptr++;
-		if( evflash_wrptr == DF_MAXEVENTS)
-			evflash_wrptr = 0;
-		Set_evwrptr(evflash_wrptr);
-		return TRUE;
-	} else return FALSE;
+    //Mem_Copy( &(LogT_eventRecord[wrptr]), buffer, sizeof(EventRecord));
+    if(LogT_eventRec_writeptr == LogT_BUFFLEN)	{
+        LogT_eventRec_writeptr = 0;
+    }
+
+//	int error, i, chksum;
+//	uint8_t buffer[16];
+//	uint32_t dfindex;
+//	OS_ERR os_err;
+//
+//	buffer[0] = event->ack_tag;
+//	buffer[1] = (uint8_t)((event->index >> 8) & 0x00FF);
+//	buffer[2] = (uint8_t)((event->index) & 0x00FF);
+//	buffer[3] = (uint8_t)((event->timestamp >> 24) & 0x000000FF);
+//	buffer[4] = (uint8_t)((event->timestamp >> 16) & 0x000000FF);
+//	buffer[5] = (uint8_t)((event->timestamp >> 8) & 0x000000FF);
+//	buffer[6] = (uint8_t)((event->timestamp ) & 0x000000FF);
+//	buffer[7] = (uint8_t)((event->account >> 8) & 0x00FF);
+//	buffer[8] = (uint8_t)((event->account ) & 0x00FF);
+//	buffer[9] = event->cid_qualifier;
+//	buffer[10] = (uint8_t)((event->cid_eventcode >> 8) & 0x00FF);
+//	buffer[11] = (uint8_t)((event->cid_eventcode) & 0x00FF);
+//	buffer[12] = event->cid_partition;
+//	buffer[13] = (uint8_t)((event->cid_zoneuser >> 8) & 0x00FF);
+//	buffer[14] = (uint8_t)((event->cid_zoneuser) & 0x00FF);
+//
+//	chksum = 0;
+//	for(i = 0; i < 15; i++)	{
+//		chksum += buffer[i];
+//	}
+//	buffer[15] = (uint8_t)(chksum & 0x00FF);
+//
+//
+//	dfindex = DF_EVENT0 + (evflash_wrptr * DF_EVELEN);
+//	error = flash0_write(2, buffer, dfindex, DF_EVELEN);
+//	//OSTimeDlyHMSM(0, 0, 0, 10, OS_OPT_TIME_HMSM_STRICT, &os_err);
+//
+//	if( (error=verify_event_wr( buffer, dfindex)) == FALSE )	{
+//		error = flash0_write(2, buffer, dfindex, DF_EVELEN);
+//		//OSTimeDlyHMSM(0, 0, 0, 10, OS_OPT_TIME_HMSM_STRICT, &os_err);
+//	} else
+//	if( (error=verify_event_wr( buffer, dfindex)) == FALSE )	{
+//		error = flash0_write(2, buffer, dfindex, DF_EVELEN);
+//		//OSTimeDlyHMSM(0, 0, 0, 10, OS_OPT_TIME_HMSM_STRICT, &os_err);
+//	}
+//
+//	if( (error=verify_event_wr( buffer, dfindex)) == TRUE )	{
+//		evflash_wrptr++;
+//		if( evflash_wrptr == DF_MAXEVENTS)
+//			evflash_wrptr = 0;
+//		Set_evwrptr(evflash_wrptr);
+//		return TRUE;
+//	} else return FALSE;
 
 }
 
@@ -574,6 +737,8 @@ int WriteEventToAuditFlash(EventRecord *event)
 	uint8_t buffer[16];
 	uint32_t dfindex;
 	OS_ERR os_err;
+
+    return FALSE;
 
 	buffer[0] = event->ack_tag;
 	buffer[1] = (uint8_t)((event->index >> 8) & 0x00FF);
@@ -660,6 +825,8 @@ int verify_event_wr(uint8_t buffer[DF_EVELEN], uint32_t dfindex)
 	uint8_t buffer_read[DF_EVELEN], i;
 	OS_ERR os_err;
 
+    flash0_read(buffer_read, 0, DF_EVELEN);
+    OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);
 	flash0_read(buffer_read, dfindex, DF_EVELEN);
 	OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);
 
@@ -916,10 +1083,11 @@ int ReadEventFromFlash( uint16_t evindex, EventRecord *event )
 		return FALSE;
 
 	chksum = 0;
-	for(i = 0; i < 15; i++)	{
+	for(i = 1; i < 15; i++)	{
 		chksum += buffer[i];
 	}
 	chksum &= 0x00FF;
+    buffer[15] -= buffer[0];
 	if( buffer[15] != chksum )
 		return FALSE;
 
@@ -1049,13 +1217,13 @@ int BufPrintCidEvent( char *strbuffer, EventRecord *event, int lenbuff )
 }
 
 
-int EventCodeToInt(uint16_t eventcode)
-{
-	int retval;
-
-	retval = (((eventcode >> 12) & 0x0F)*1000) + (((eventcode >> 8) & 0x0F)*100) + (((eventcode >> 4) & 0x0F)*10) + (eventcode & 0x0F);
-	return retval;
-}
+//int EventCodeToInt(uint16_t eventcode)
+//{
+//	int retval;
+//
+//	retval = (((eventcode >> 12) & 0x0F)*1000) + (((eventcode >> 8) & 0x0F)*100) + (((eventcode >> 4) & 0x0F)*10) + (eventcode & 0x0F);
+//	return retval;
+//}
 
 time_t ConvTimestamp(char *contimestamp)
 {
@@ -1113,6 +1281,7 @@ int GetTimestampIndexEv_GE( char *contimestamp)
 	char temp[12];
 	time_t time1, currmax;
 	EventRecord event;
+    uint16_t ceroindex;
 
 	//convierto a formato timestamp de eventos
 	for( i = 0; i < 4; i++)
@@ -1155,9 +1324,19 @@ int GetTimestampIndexEv_GE( char *contimestamp)
 
 	currmax = 0xFFFFFFFF;
 	retval = -1;
+    ReadEventFromFlash( 0, &event );
+    ceroindex = event.index;
 	for( i = 0; i < DF_MAXEVENTS; i++)	{
-		if(ReadEventFromFlash( i, &event ))	{
-			if((event.timestamp >= time1) && (event.timestamp <= currmax))	{
+		if((tempint = ReadEventFromFlash( i, &event )) == TRUE)	{
+            if((event.ack_tag < 0x00) || (event.ack_tag > 0x03))
+                return retval;
+            if(i == 0)  {
+                if((event.timestamp >= time1) && (event.timestamp <= currmax) )	{
+                    currmax = event.timestamp;
+                    retval = i;
+                }
+            } else
+			if((event.timestamp >= time1) && (event.timestamp <= currmax) && (event.index != ceroindex))	{
 				currmax = event.timestamp;
 				retval = i;
 			}
@@ -1361,6 +1540,7 @@ int con_DumpEventByTime(ConsoleState* state)
 	char buffer[128];
 	EventRecord thisevent;
 	time_t t1, t2;
+    int retval;
 
 	switch(state->numparams)	{
 	case 1:
@@ -1374,7 +1554,12 @@ int con_DumpEventByTime(ConsoleState* state)
 		}
 		break;
 	case 2:
-		indexT1 = GetTimestampIndexEv_GE(con_getparam(state->command, 1));
+		retval = GetTimestampIndexEv_GE(con_getparam(state->command, 1));
+        if(retval == -1)   {
+            state->conio->puts("\n\r");
+            return 1;
+        }
+        indexT1 = retval;
 		indexT2 = evflash_wrptr - 1;
 		break;
 	case 3:
@@ -1432,81 +1617,81 @@ int con_DumpEventByTime(ConsoleState* state)
 }
 
 
-int con_DumpEventTypeByTime(ConsoleState* state)
-{
-    uint16_t indexT1, indexT2, i;
-    char buffer[128];
-    EventRecord thisevent;
-    time_t t1, t2;
-
-    switch(state->numparams)	{
-        case 1:
-            i = HowManyEvents();
-            if(i > evflash_wrptr)	{
-                indexT1 = evflash_wrptr;
-                indexT2 = evflash_wrptr -1;
-            } else	{
-                indexT1 = 0;
-                indexT2 = evflash_wrptr -1;
-            }
-            break;
-        case 2:
-            indexT1 = GetTimestampIndexEv_GE(con_getparam(state->command, 1));
-            indexT2 = evflash_wrptr - 1;
-            break;
-        case 3:
-            t1 = ConvTimestamp(con_getparam(state->command, 1));
-            t2 = ConvTimestamp(con_getparam(state->command, 2));
-            if( t1 > t2)	{
-                state->conio->puts("Invalid parameters\n\r");
-                return -1;
-
-            } else if( t2 > t1)	{
-                indexT1 = GetTimestampIndexEv_GE(con_getparam(state->command, 1));
-                indexT2 = GetTimestampIndexEv_LE(con_getparam(state->command, 2));
-            } else	{
-                indexT1 = GetTimestampIndexEv_GE(con_getparam(state->command, 1));
-                indexT2 = evflash_wrptr - 1;
-            }
-            break;
-        default:
-            state->conio->puts("Error en cantidad de parametros\n\r");
-            return -1;
-    }
-
-    if(indexT2 >= indexT1)	{
-        for( i = indexT1; i <= indexT2; i++)	{
-            if(ReadEventFromFlash( i, &thisevent ))	{
-                BufPrintCidEvent( buffer, &thisevent, 128 );
-                state->conio->puts(buffer);
-            } else	{
-                state->conio->puts("\n\r");
-                return 1;
-            }
-        }
-    } else	{
-        for( i = indexT1; i < DF_MAXEVENTS; i++)	{
-            if(ReadEventFromFlash( i, &thisevent ))	{
-                BufPrintCidEvent( buffer, &thisevent, 128 );
-                state->conio->puts(buffer);
-            } else	{
-                state->conio->puts("\n\r");
-                return 1;
-            }
-        }
-        for( i = 0; i <= indexT2; i++)	{
-            if(ReadEventFromFlash( i, &thisevent ))	{
-                BufPrintCidEvent( buffer, &thisevent, 128 );
-                state->conio->puts(buffer);
-            } else	{
-                state->conio->puts("\n\r");
-                return 1;
-            }
-        }
-    }
-    state->conio->puts("\n\r");
-    return 1;
-}
+//int con_DumpEventTypeByTime(ConsoleState* state)
+//{
+//    uint16_t indexT1, indexT2, i;
+//    char buffer[128];
+//    EventRecord thisevent;
+//    time_t t1, t2;
+//
+//    switch(state->numparams)	{
+//        case 1:
+//            i = HowManyEvents();
+//            if(i > evflash_wrptr)	{
+//                indexT1 = evflash_wrptr;
+//                indexT2 = evflash_wrptr -1;
+//            } else	{
+//                indexT1 = 0;
+//                indexT2 = evflash_wrptr -1;
+//            }
+//            break;
+//        case 2:
+//            indexT1 = GetTimestampIndexEv_GE(con_getparam(state->command, 1));
+//            indexT2 = evflash_wrptr - 1;
+//            break;
+//        case 3:
+//            t1 = ConvTimestamp(con_getparam(state->command, 1));
+//            t2 = ConvTimestamp(con_getparam(state->command, 2));
+//            if( t1 > t2)	{
+//                state->conio->puts("Invalid parameters\n\r");
+//                return -1;
+//
+//            } else if( t2 > t1)	{
+//                indexT1 = GetTimestampIndexEv_GE(con_getparam(state->command, 1));
+//                indexT2 = GetTimestampIndexEv_LE(con_getparam(state->command, 2));
+//            } else	{
+//                indexT1 = GetTimestampIndexEv_GE(con_getparam(state->command, 1));
+//                indexT2 = evflash_wrptr - 1;
+//            }
+//            break;
+//        default:
+//            state->conio->puts("Error en cantidad de parametros\n\r");
+//            return -1;
+//    }
+//
+//    if(indexT2 >= indexT1)	{
+//        for( i = indexT1; i <= indexT2; i++)	{
+//            if(ReadEventFromFlash( i, &thisevent ))	{
+//                BufPrintCidEvent( buffer, &thisevent, 128 );
+//                state->conio->puts(buffer);
+//            } else	{
+//                state->conio->puts("\n\r");
+//                return 1;
+//            }
+//        }
+//    } else	{
+//        for( i = indexT1; i < DF_MAXEVENTS; i++)	{
+//            if(ReadEventFromFlash( i, &thisevent ))	{
+//                BufPrintCidEvent( buffer, &thisevent, 128 );
+//                state->conio->puts(buffer);
+//            } else	{
+//                state->conio->puts("\n\r");
+//                return 1;
+//            }
+//        }
+//        for( i = 0; i <= indexT2; i++)	{
+//            if(ReadEventFromFlash( i, &thisevent ))	{
+//                BufPrintCidEvent( buffer, &thisevent, 128 );
+//                state->conio->puts(buffer);
+//            } else	{
+//                state->conio->puts("\n\r");
+//                return 1;
+//            }
+//        }
+//    }
+//    state->conio->puts("\n\r");
+//    return 1;
+//}
 
 
 int con_setrtc(ConsoleState* state)
@@ -1844,6 +2029,10 @@ int ReloadUnAckEvents25( int monid)
     uint8_t mask;
     EventRecord event;
     OS_ERR os_err;
+
+    if(LogT_eventRec_count) {
+        return 0;
+    }
 
     mask = (1 << monid);
 

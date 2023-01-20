@@ -130,12 +130,18 @@ typedef struct	{
 #define DF_EVSEND_OFFSET        328     //2
 #define DF_NRSTHAB_OFFSET       330     //2
 #define DF_HRSTHAB_OFFSET       332     //2
+#define DF_HISTORY2_OFFSET      334     //8
 
 #define	ACKRCVDMON0				0x01
 #define	ACKRCVDMON1				0x02
 
+extern OS_TCB		LogT_Task_TCB;
+extern CPU_STK		LogT_Task_Stk[LogT_Task_STK_SIZE];
+
 extern EventRecord currentEvent, LcurrentEvent;
 extern uint16_t eventIndex;
+
+void  LogT_Task(void  *p_arg);
 
 void logCidEvent(uint16_t account, uint8_t qualifier, uint16_t eventcode, uint8_t partition, uint16_t zoneuser);
 

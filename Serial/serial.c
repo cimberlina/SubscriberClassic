@@ -413,39 +413,39 @@ CPU_BOOLEAN  CommIsEmpty (CPU_INT08U ch)
 *********************************************************************************************************
 */
 
-CPU_BOOLEAN  CommIsFull (CPU_INT08U ch)
-{
-	CPU_BOOLEAN		full;
-    COMM_RING_BUF	*pbuf;
-
-    CPU_SR_ALLOC();
-
-    switch (ch) {                                          /* Obtain pointer to communications channel */
-	case COMM0:
-		 pbuf = &UART0_Buf;
-		 break;
-	case COMM1:
-		 pbuf = &UART1_Buf;
-		 break;
-	case COMM2:
-		 pbuf = &UART2_Buf;
-		 break;
-	case COMM3:
-		 pbuf = (COMM_RING_BUF *)&UART3_Buf;
-		 break;
-
-        default:
-             return (TRUE);
-    }
-    CPU_CRITICAL_ENTER();
-    if (pbuf->RingBufTxCtr < COMM_TX_BUF_SIZE) {           /* See if buffer is full                    */
-        full = FALSE;                                      /* Buffer is NOT full                       */
-    } else {
-        full = TRUE;                                       /* Buffer is full                           */
-    }
-    CPU_CRITICAL_EXIT();
-    return (full);
-}
+//CPU_BOOLEAN  CommIsFull (CPU_INT08U ch)
+//{
+//	CPU_BOOLEAN		full;
+//    COMM_RING_BUF	*pbuf;
+//
+//    CPU_SR_ALLOC();
+//
+//    switch (ch) {                                          /* Obtain pointer to communications channel */
+//	case COMM0:
+//		 pbuf = &UART0_Buf;
+//		 break;
+//	case COMM1:
+//		 pbuf = &UART1_Buf;
+//		 break;
+//	case COMM2:
+//		 pbuf = &UART2_Buf;
+//		 break;
+//	case COMM3:
+//		 pbuf = (COMM_RING_BUF *)&UART3_Buf;
+//		 break;
+//
+//        default:
+//             return (TRUE);
+//    }
+//    CPU_CRITICAL_ENTER();
+//    if (pbuf->RingBufTxCtr < COMM_TX_BUF_SIZE) {           /* See if buffer is full                    */
+//        full = FALSE;                                      /* Buffer is NOT full                       */
+//    } else {
+//        full = TRUE;                                       /* Buffer is full                           */
+//    }
+//    CPU_CRITICAL_EXIT();
+//    return (full);
+//}
 
 /*
 *********************************************************************************************************

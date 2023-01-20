@@ -140,17 +140,17 @@ uint16_t Read869Status(void)
 	return rvalue;
 }
 
-void mdm_powerup(void)
-{
-	OS_ERR os_err;
-
-	wr16_cbus( CMXGENCTRL_ADDR, 0x11, 0x80);
-	OSTimeDlyHMSM(0, 0, 0, 20,
-	              OS_OPT_TIME_HMSM_STRICT,
-	              &os_err);
-	wr16_cbus( CMXGENCTRL_ADDR, 0x11, 0x0D);
-	Read869Status();
-}
+//void mdm_powerup(void)
+//{
+//	OS_ERR os_err;
+//
+//	wr16_cbus( CMXGENCTRL_ADDR, 0x11, 0x80);
+//	OSTimeDlyHMSM(0, 0, 0, 20,
+//	              OS_OPT_TIME_HMSM_STRICT,
+//	              &os_err);
+//	wr16_cbus( CMXGENCTRL_ADDR, 0x11, 0x0D);
+//	Read869Status();
+//}
 
 
 uint16_t InitCMX869(void)

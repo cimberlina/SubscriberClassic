@@ -91,24 +91,24 @@ void iButton_w_bit( int16_t bit )
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // iButton_cmd ---	Envia un comando tipo ROM al iButton
 //
-uint8_t iButton_cmd( uint8_t cmd )
-{
-	uint8_t tempch1;
-	int16_t i;
-
-	tempch1 = cmd;
-	if( iButton_reset() )	{
-		for(i=0; i<8; i++)	{
-			if(tempch1 & 0x01)
-				iButton_w_bit(1);
-			else
-				iButton_w_bit(0);
-			tempch1 >>= 1;
-		}
-		delay_us(500);
-		return 1;
-	} return 0;
-}
+//uint8_t iButton_cmd( uint8_t cmd )
+//{
+//	uint8_t tempch1;
+//	int16_t i;
+//
+//	tempch1 = cmd;
+//	if( iButton_reset() )	{
+//		for(i=0; i<8; i++)	{
+//			if(tempch1 & 0x01)
+//				iButton_w_bit(1);
+//			else
+//				iButton_w_bit(0);
+//			tempch1 >>= 1;
+//		}
+//		delay_us(500);
+//		return 1;
+//	} return 0;
+//}
 
 void iButton_tx_byte ( uint8_t data )
 {

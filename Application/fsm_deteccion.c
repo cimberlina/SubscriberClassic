@@ -9,6 +9,7 @@
 
 #include "includes.h"
 
+uint8_t FSM_FLAG_1;
 
 uint8_t fsm_rot485_state, fsm_rotrele485_state, fsm_rotEVO_state;
 uint16_t	Rot485_flag;
@@ -332,11 +333,11 @@ void DeteccionEventos(void)
 	}
 	if( SystemFlag2 & LOGAP2E_FLAG )	{
 		SystemFlag2 &= ~LOGAP2E_FLAG;
-		logCidEvent(account, 1, 137, 0, 2);
+		logCidEvent(account, 1, 147, 0, 2);
 	}
 	if( SystemFlag2 & LOGAP2R_FLAG )	{
 		SystemFlag2 &= ~LOGAP2R_FLAG;
-		logCidEvent(account, 3, 137, 0, 2);
+		logCidEvent(account, 3, 147, 0, 2);
 	}
 	if( SystemFlag5 & LOGAP3E_FLAG )	{
 		SystemFlag5 &= ~LOGAP3E_FLAG;
@@ -1151,33 +1152,40 @@ void fsm_deteccion_aperturaAP( void )
 {
 	switch( daper_stateAP )	{
 			case APER_IDLE :
-				if( (SysInputs & APER_sbit) || (RADAR_flags & AP_RADAR_FLAG) )	{
+                if( FSM_FLAG_1 & APER13_ALRM_FLAG)  {
+                    daper_stateAP = APER_ALRM;
+                } else
+				if( (SysInputs & APER_sbit) || (RADAR_flags & AP_RADAR_FLAG) || (SystemFlag2 & APE2_sbit))	{
 					daper_stateAP = APER_WAIT;
 					timerdbncaperAP = 500;
 				}
 				break;
 			case APER_WAIT:
-				if( (!(SysInputs & APER_sbit)) && (!(RADAR_flags & AP_RADAR_FLAG)) )	{
+				if( (!(SysInputs & APER_sbit)) && (!(RADAR_flags & AP_RADAR_FLAG)) && (!(SystemFlag2 & APE2_sbit)) )	{
 					daper_stateAP = APER_IDLE;
 				} else
 				if( !timerdbncaperAP)	{
 					daper_stateAP = APER_ALRM;
 					SysFlag_AP_Apertura |= AP_APR_APRLINE;		//notifico a la maquina de autoprotect
+                    FSM_FLAG_1 |= APER13_ALRM_FLAG;
+                    FSM_WriteHistory();
 				}
 				break;
 			case APER_ALRM :
-				if( (!(SysInputs & APER_sbit)) && (!(RADAR_flags & AP_RADAR_FLAG)) )	{
+				if( (!(SysInputs & APER_sbit)) && (!(RADAR_flags & AP_RADAR_FLAG)) && (!(SystemFlag2 & APE2_sbit)))	{
 					daper_stateAP = APER_WAIT2;
 					timerdbncaperAP = 500;
 				}
 				break;
 			case APER_WAIT2:
-				if( (SysInputs & APER_sbit) || (RADAR_flags & AP_RADAR_FLAG) )	{
+				if( (SysInputs & APER_sbit) || (RADAR_flags & AP_RADAR_FLAG) || (SystemFlag2 & APE2_sbit))	{
 					daper_stateAP = APER_ALRM;
 				} else
 				if(!timerdbncaperAP)	{
 					SysFlag_AP_Apertura &= ~AP_APR_APRLINE;		//notifico a la maquina de autoprotect
 					daper_stateAP = APER_IDLE;
+                    FSM_FLAG_1 &= ~APER13_ALRM_FLAG;
+                    FSM_WriteHistory();
 				}
 				break;
 			default :
@@ -1193,7 +1201,7 @@ void fsm_deteccion_apertura( void )
 		case APER_IDLE :
 			if( (SysInputs & APER_sbit) || (RADAR_flags & AP_RADAR_FLAG)  )	{
 				daper_state = APER_WAIT;
-				timerdbncaper = 500;
+				timerdbncaper = 750;
 			}
 			else
 			if(SystemFlag2 & APE1WDOG_FLAG)	{
@@ -1208,6 +1216,7 @@ void fsm_deteccion_apertura( void )
 				//SystemFlag3 |= NAPER_flag;
 				daper_state = APER_ALRM;
 				BaseAlarmPkt_alarm |= bitpat[APER_bit];
+                SysFlag1 |= APER13_FLAG;
 				if(SystemFlag2 & APE1WDOG_FLAG)	{
 					SystemFlag2 &= ~APE1WDOG_FLAG;
 					Aper_Poll_counter = 0;
@@ -1256,6 +1265,7 @@ void fsm_deteccion_apertura( void )
 					//SystemFlag5 |= LOGAP3R_FLAG;
 					SystemFlag6 |= LOGAP0R_FLAG;
 					daper_state = APER_IDLE;
+                    SysFlag1 &= ~APER13_FLAG;
 					if(!(((SysInputs & APER_sbit) || (RADAR_flags & AP_RADAR_FLAG)) || (SystemFlag2 & APE2_sbit)))	{
 						BaseAlarmPkt_alarm &= ~bitpat[APER_bit];
 						AlarmWriteHistory();
@@ -1325,7 +1335,7 @@ void fsm_AperMagRadar( void )
 			} else
 			if(!amr_timer)	{
 				AperMagRad_state = AMR_APERNG;
-				logCidEvent(account, 1, 913, 0, 2);
+				logCidEvent(account, 1, 913, 0, 3);
 			}
 			break;
 		case AMR_APERNG:
@@ -1349,7 +1359,7 @@ void fsm_AperMagRadar( void )
 			} else
 			if(!amr_timer)	{
 				AperMagRad_state = AMR_CLOSENG;
-				logCidEvent(account, 1, 914, 0, 2);
+				logCidEvent(account, 1, 914, 0, 3);
 			}
 			break;
 		case AMR_MAGWAIC:
@@ -1375,16 +1385,24 @@ void fsm_AperMagRadar( void )
 void fsm_deteccion_apertura2( void )
 {
 
-	switch( daper2_state )	{
-		case APER_IDLE :
-			if( SystemFlag2 & APE2_sbit  )	{
-				daper2_state = APER_WAIT;
-				timerdbncaper = 500;
-			}
-			else
-			if(SystemFlag2 & APE2WDOG_FLAG)	{
-				SystemFlag2 &= ~APE2WDOG_FLAG;
-			}
+	switch( daper2_state ) {
+        case APER_IDLE :
+            if (FSM_FLAG_1 & APER2_ALRM_FLAG) {
+                daper2_state = APER_ALRM;
+                Aper_Poll_counter = APER_POLL_COUNT;
+            } else {
+                if (SysFlag1 & APER2_FLAG) {
+                    // aca ya venia con apertura 2 activada
+                    daper2_state = APER_ALRM;
+                    Aper_Poll_counter = APER_POLL_COUNT;
+                }
+                if (SystemFlag2 & APE2_sbit) {
+                    daper2_state = APER_WAIT;
+                    timerdbncaper = 500;
+                } else if (SystemFlag2 & APE2WDOG_FLAG) {
+                    SystemFlag2 &= ~APE2WDOG_FLAG;
+                }
+            }
 			break;
 		case APER_WAIT:
 			if( !(SystemFlag2 & APE2_sbit) )	{
@@ -1392,6 +1410,8 @@ void fsm_deteccion_apertura2( void )
 			} else
 			if( !timerdbncaper)	{
 				daper2_state = APER_ALRM;
+                FSM_FLAG_1 |= APER2_ALRM_FLAG;
+                FSM_WriteHistory();
 				BaseAlarmPkt_alarm |= bitpat[APER_bit];
 				if(SystemFlag2 & APE2WDOG_FLAG)	{
 					SystemFlag2 &= ~APE2WDOG_FLAG;
@@ -1400,6 +1420,7 @@ void fsm_deteccion_apertura2( void )
 					SystemFlag2 |= LOGAP2E_FLAG;
 					Aper_Poll_counter = APER_POLL_COUNT;
 				}
+                SysFlag1 |= APER2_FLAG;
 				AlarmWriteHistory();
 				//Aper_Poll_counter = APER_POLL_COUNT;
 				led_dcb[APER_led].led_cad = 255*0x100 + 0;
@@ -1434,10 +1455,15 @@ void fsm_deteccion_apertura2( void )
 			} else
 			if(!timerdbncaper)	{
 				if( !(SystemFlag2 & APE2_sbit) && (Aper_Poll_counter == 0) )	{
+                    SysFlag1 &= ~APER2_FLAG;
+                    AlarmWriteHistory();
 					SystemFlag2 |= LOGAP2R_FLAG;
 					daper2_state = APER_IDLE;
+                    FSM_FLAG_1 &= ~APER2_ALRM_FLAG;
+                    FSM_WriteHistory();
 					if(!(((SysInputs & APER_sbit) || (RADAR_flags & AP_RADAR_FLAG)) || (SystemFlag2 & APE2_sbit)))	{
 						BaseAlarmPkt_alarm &= ~bitpat[APER_bit];
+                        SysFlag1 &= ~APER2_FLAG;
 						AlarmWriteHistory();
 						led_dcb[APER_led].led_state = LED_IDLE;
 						led_dcb[APER_led].led_cad = 0;
@@ -2212,6 +2238,8 @@ void  AlarmDetectTask(void  *p_arg)
         dualA_delay = 5;
     }
 
+    FSM_ReadHistory();
+
 	while(DEF_ON)	{
 		WDT_Feed();
 		OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);		//previo timeinterval = 5
@@ -2403,7 +2431,7 @@ void fsm_rotura485( void )
         }
         break;
     case FSM_ROT485_PWAIT2:
-        if(SEC_TIMER > rot485timer + 7) {
+        if(SEC_TIMER > rot485timer + 10) {
             Rot485_flag &= ~NOZSCAN_FLAG;
             rot485timer = SEC_TIMER;
             fsm_rot485_state = FSM_ROT485_WAIT;
@@ -2436,22 +2464,22 @@ void fsm_rotura485( void )
 			currtime.tm_min = RTC_GetTime (LPC_RTC, RTC_TIMETYPE_MINUTE);
 			currtime.tm_hour = RTC_GetTime (LPC_RTC, RTC_TIMETYPE_HOUR);
             if(Rot485_flag & ROT485PTM_FLAG) {
-                if ((currtime.tm_hour == 22) && (currtime.tm_min == 15) && (currtime.tm_sec == 0) &&
+                if ((currtime.tm_hour == 22) && (currtime.tm_min == 10) && (currtime.tm_sec == 0) &&
                     (!(SystemFlag4 & RS485F220_DONE))) {
                     SystemFlag4 |= RS485F220_DONE;
                     SystemFlag3 |= NAPER_flag;
                 }
-                if ((currtime.tm_hour == 22) && (currtime.tm_min == 15) && (currtime.tm_sec == 10)) {
+                if ((currtime.tm_hour == 22) && (currtime.tm_min == 10) && (currtime.tm_sec == 10)) {
                     SystemFlag4 &= ~RS485F220_DONE;
                 }
             }
             if(Rot485_flag & ROT485CID_FLAG) {
-                if ((currtime.tm_hour == 23) && (currtime.tm_min == 30) && (currtime.tm_sec == 0) &&
+                if ((currtime.tm_hour == 23) && (currtime.tm_min == 25) && (currtime.tm_sec == 0) &&
                     (!(SystemFlag4 & RS485F220_DONE))) {
                     SystemFlag4 |= RS485F220_DONE;
                     SystemFlag3 |= NAPER_flag;
                 }
-                if ((currtime.tm_hour == 23) && (currtime.tm_min == 30) && (currtime.tm_sec == 10)) {
+                if ((currtime.tm_hour == 23) && (currtime.tm_min == 25) && (currtime.tm_sec == 10)) {
                     SystemFlag4 &= ~RS485F220_DONE;
                 }
             }
@@ -2473,6 +2501,10 @@ void fsm_roturaEVO( void )
 
 	switch(fsm_rotEVO_state)	{
 	case FSM_ROT485_IDLE:
+        if(FSM_FLAG_1 & ROT943_FLAG)    {
+            fsm_rotEVO_state = FSM_ROT485_ROT;
+            SysFlag_AP_GenAlarm |= bitpat[ROTU_bit];
+        } else
 		if( Rot485_flag & ROTEVO_FLAG )	{
 			fsm_rotEVO_state = FSM_ROT485_PWAIT1;
 			rotEVOtimer = SEC_TIMER;
@@ -2489,7 +2521,7 @@ void fsm_roturaEVO( void )
         }
         break;
     case FSM_ROT485_PWAIT2:
-        if(SEC_TIMER > rotEVOtimer + 7) {
+        if(SEC_TIMER > rotEVOtimer + 10) {
             Rot485_flag &= ~NOZSCAN_FLAG;
             rotEVOtimer = SEC_TIMER;
             fsm_rotEVO_state = FSM_ROT485_WAIT;
@@ -2503,6 +2535,8 @@ void fsm_roturaEVO( void )
 		if(SEC_TIMER > rotEVOtimer + 180)	{
 			fsm_rotEVO_state = FSM_ROT485_ROT;
 			SysFlag_AP_GenAlarm |= bitpat[ROTU_bit];
+            FSM_FLAG_1 |= ROT943_FLAG;
+            FSM_WriteHistory();
 			//SystemFlag3 |= NAPER_flag;
 			//SystemFlag3 |= NAPER_F220V;
 		}
@@ -2510,14 +2544,16 @@ void fsm_roturaEVO( void )
 	case FSM_ROT485_ROT:
 		if( !(Rot485_flag & ROTEVO_FLAG) )	{
 			fsm_rotEVO_state = FSM_ROT485_IDLE;
+            FSM_FLAG_1 &= ~ROT943_FLAG;
+            FSM_WriteHistory();
 		} else	{
 			SysFlag_AP_GenAlarm |= bitpat[ROTU_bit];
 			BaseAlarmPkt_alarm |= bitpat[ROTU_bit];
-			if((currtime.tm_hour == 1) && (currtime.tm_min == 30) && (currtime.tm_sec == 0) && (!(SystemFlag4 & RS485F220_DONE)))	{
+			if((currtime.tm_hour == 1) && (currtime.tm_min == 25) && (currtime.tm_sec == 0) && (!(SystemFlag4 & RS485F220_DONE)))	{
 				SystemFlag4 |= RS485F220_DONE;
 				SystemFlag3 |= NAPER_flag;
 			}
-			if((currtime.tm_hour == 1) && (currtime.tm_min == 30) && (currtime.tm_sec == 10) )	{
+			if((currtime.tm_hour == 1) && (currtime.tm_min == 25) && (currtime.tm_sec == 10) )	{
 				SystemFlag4 &= ~RS485F220_DONE;
 			}
 		}
@@ -3156,6 +3192,56 @@ void AlarmWriteHistory(void)
 	}
 }
 
+void FSM_ReadHistory(void)
+{
+    uint32_t len, error;
+    uint8_t mybuffer[10], temp[8], i;
+
+
+    len = flash0_read(mybuffer, DF_HISTORY2_OFFSET, 8);
+
+    len = flash0_read(temp, DF_HISTORY2_OFFSET, 8);
+
+    for( i = 0; i < 8; i++ )	{
+        if( mybuffer[i] != temp[i] )	{
+            len = flash0_read(mybuffer, DF_HISTORY2_OFFSET, 8);
+            break;
+        }
+    }
+
+    if((mybuffer[6] == 0xAA) && (mybuffer[7] == 0x55))  {
+        FSM_FLAG_1 = mybuffer[0];
+        if(FSM_FLAG_1 & ROT943_FLAG)    {
+            BaseAlarmPkt_alarm |= bitpat[ROTU_bit];
+        }
+    }
+}
+
+void FSM_WriteHistory(void)
+{
+    uint32_t len;
+    uint8_t mybuffer[8], temp[8], i;
+
+    mybuffer[0] = FSM_FLAG_1;
+    mybuffer[1] = 0x00;
+    mybuffer[2] = 0x00;
+    mybuffer[3] = 0x00;
+    mybuffer[4] = 0x00;
+    mybuffer[5] = 0x00;
+    mybuffer[6] = 0xAA;
+    mybuffer[7] = 0x55;
+
+    len = flash0_write(1, mybuffer, DF_HISTORY2_OFFSET, 8);
+
+    len = flash0_read(temp, DF_HISTORY2_OFFSET, 8);
+    for( i = 0; i < 8; i++ )	{
+        if( mybuffer[i] != temp[i] )	{
+            len = flash0_write(1, mybuffer, DF_HISTORY2_OFFSET, 8);
+            break;
+        }
+    }
+}
+
 void PTM485NG_HistoryWrite(void)
 {
 	uint8_t mybuffer[MAXQTYPTM + 3], temp[MAXQTYPTM + 3], i;
@@ -3273,9 +3359,16 @@ void AlarmReadHistory(void)
             led_dcb[F220_led].led_cad = 255*0x100 + 0;
             led_dcb[F220_led].led_state = LED_IDLE;
 		}
-		if(BaseAlarmPkt_alarm & bitpat[APER_bit]){
+		if((BaseAlarmPkt_alarm & bitpat[APER_bit]) && (SysFlag1 & APER13_FLAG)){
 			daper_state = APER_ALRM;
 		}
+        //Agrego la recuperacion de apertura 2
+        if(mybuffer[5] & APER2_FLAG)   {
+            // aca ya venia con apertura 2 activada
+            SysFlag1 |= APER2_FLAG;
+            daper2_state = APER_ALRM;
+            Aper_Poll_counter = APER_POLL_COUNT;
+        }
 	} else {
 		BaseAlarmPkt_alarm = 0x80;
 		BaseAlarmPkt_estado_dispositivos = 0x00;
@@ -3962,172 +4055,172 @@ uint8_t PruebasFlags;
 uint32_t timer_prueba, timpr_llaveon, timpr_llaveoff, timpr_gap, prretries;
 uint32_t Timer_prueba, Timpr_llaveon, Timpr_llaveoff, Timpr_gap, Prretries;
 
-void PruebaLlaveWdog( void )
-{
-	switch(prLlaveState)	{
-		case PRLLST_IDLE:
-			if( PruebasFlags & StartCPOLL_flag)	{
-				timer_prueba = 0;
-				timpr_llaveon = 0;
-				prretries = 0;
-				PruebasFlags &= ~StartCPOLL_flag;
-				LlaveOnEvent();
-				prLlaveState = PRLLST_ON;
-			}
-			break;
-		case PRLLST_ON:
-			if( timpr_llaveon > Timpr_llaveon)	{
-				LLAVE_TX_OFF();
-				timpr_llaveoff = 0;
-				prLlaveState = PRLLST_OFF;
-			} else
-			if(timer_prueba > Timer_prueba)	{
-				timpr_gap = 0;
-				prLlaveState = PRLLST_WGAP;
-				LLAVE_TX_OFF();
+//void PruebaLlaveWdog( void )
+//{
+//	switch(prLlaveState)	{
+//		case PRLLST_IDLE:
+//			if( PruebasFlags & StartCPOLL_flag)	{
+//				timer_prueba = 0;
+//				timpr_llaveon = 0;
+//				prretries = 0;
+//				PruebasFlags &= ~StartCPOLL_flag;
+//				LlaveOnEvent();
+//				prLlaveState = PRLLST_ON;
+//			}
+//			break;
+//		case PRLLST_ON:
+//			if( timpr_llaveon > Timpr_llaveon)	{
+//				LLAVE_TX_OFF();
+//				timpr_llaveoff = 0;
+//				prLlaveState = PRLLST_OFF;
+//			} else
+//			if(timer_prueba > Timer_prueba)	{
+//				timpr_gap = 0;
+//				prLlaveState = PRLLST_WGAP;
+//				LLAVE_TX_OFF();
+//
+//			}
+//			break;
+//		case PRLLST_OFF:
+//			if( timpr_llaveoff > Timpr_llaveoff)	{
+//				LlaveOnEvent();
+//				prLlaveState = PRLLST_ON;
+//				timpr_llaveon = 0;
+//			} else
+//			if(timer_prueba > Timer_prueba)	{
+//				timpr_gap = 0;
+//				prLlaveState = PRLLST_WGAP;
+//				LLAVE_TX_OFF();
+//
+//			}
+//			break;
+//		case PRLLST_WGAP:
+//			if(timpr_gap > Timpr_gap)	{
+//				if(prretries == Prretries - 1)	{
+//					LLAVE_TX_OFF();
+//					prLlaveState = PRLLST_IDLE;
+//				} else	{
+//					timpr_llaveon = 0;
+//					timer_prueba = 0;
+//					LlaveOnEvent();
+//					prLlaveState = PRLLST_ON;
+//					prretries++;
+//				}
+//			}
+//			break;
+//		default:
+//			prLlaveState = PRLLST_IDLE;
+//			break;
+//	}
+//}
 
-			}
-			break;
-		case PRLLST_OFF:
-			if( timpr_llaveoff > Timpr_llaveoff)	{
-				LlaveOnEvent();
-				prLlaveState = PRLLST_ON;
-				timpr_llaveon = 0;
-			} else
-			if(timer_prueba > Timer_prueba)	{
-				timpr_gap = 0;
-				prLlaveState = PRLLST_WGAP;
-				LLAVE_TX_OFF();
-
-			}
-			break;
-		case PRLLST_WGAP:
-			if(timpr_gap > Timpr_gap)	{
-				if(prretries == Prretries - 1)	{
-					LLAVE_TX_OFF();
-					prLlaveState = PRLLST_IDLE;
-				} else	{
-					timpr_llaveon = 0;
-					timer_prueba = 0;
-					LlaveOnEvent();
-					prLlaveState = PRLLST_ON;
-					prretries++;
-				}
-			}
-			break;
-		default:
-			prLlaveState = PRLLST_IDLE;
-			break;
-	}
-}
-
-void LlaveOnEvent( void )
-{
-
-
-		led_dcb[APER_led].led_blink = 1;
-		led_dcb[APER_led].led_cad = 2*0x100+2;
-		led_dcb[APER_led].led_state = LED_IDLE;
-
-	if(!(SystemFlag5 & INHIBIT_LLAVE))	{
-		Buzzer_dcb.led_cad = 2*0x100 + 5;
-		Buzzer_dcb.led_state = LED_IDLE;
-		Buzzer_dcb.led_blink = 1;
-	}
-    POWER_TX_ON();
-		LLAVE_TX_ON();
-    SysFlag1 &= ~PREVE_CENTRAL_RX;
-    preve_timer = TIEMPO_PREVE;
-
-
-
-}
+//void LlaveOnEvent( void )
+//{
+//
+//
+//		led_dcb[APER_led].led_blink = 1;
+//		led_dcb[APER_led].led_cad = 2*0x100+2;
+//		led_dcb[APER_led].led_state = LED_IDLE;
+//
+//	if(!(SystemFlag5 & INHIBIT_LLAVE))	{
+//		Buzzer_dcb.led_cad = 2*0x100 + 5;
+//		Buzzer_dcb.led_state = LED_IDLE;
+//		Buzzer_dcb.led_blink = 1;
+//	}
+//    POWER_TX_ON();
+//		LLAVE_TX_ON();
+//    SysFlag1 &= ~PREVE_CENTRAL_RX;
+//    preve_timer = TIEMPO_PREVE;
+//
+//
+//
+//}
 
 uint8_t FTXOFF_state;
 int ftxoff_timer;
-
-void fsm_txoff(void)
-{
-	switch(FTXOFF_state)	{
-		case FTXOFF_IDLE:
-			if(PruebasFlags & TXOFFCMD_flag)	{
-				PruebasFlags &= ~TXOFFCMD_flag;
-				POWER_TX_OFF();
-				LLAVE_TX_OFF();
-				FTXOFF_state = FTXOFF_OFF;
-				ftxoff_timer = 0;
-			}
-			break;
-		case FTXOFF_OFF:
-			if( ftxoff_timer > 15*60)	{
-				POWER_TX_ON();
-				FTXOFF_state = FTXOFF_WAIT;
-				ftxoff_timer = 0;
-			}
-			break;
-		case FTXOFF_WAIT:
-			if( ftxoff_timer > 24*60*60)	{
-				FTXOFF_state = FTXOFF_IDLE;
-				ftxoff_timer = 0;
-			}
-			break;
-		default:
-			FTXOFF_state = FTXOFF_IDLE;
-			ftxoff_timer = 0;
-			break;
-	}
-}
-
+//
+//void fsm_txoff(void)
+//{
+//	switch(FTXOFF_state)	{
+//		case FTXOFF_IDLE:
+//			if(PruebasFlags & TXOFFCMD_flag)	{
+//				PruebasFlags &= ~TXOFFCMD_flag;
+//				POWER_TX_OFF();
+//				LLAVE_TX_OFF();
+//				FTXOFF_state = FTXOFF_OFF;
+//				ftxoff_timer = 0;
+//			}
+//			break;
+//		case FTXOFF_OFF:
+//			if( ftxoff_timer > 15*60)	{
+//				POWER_TX_ON();
+//				FTXOFF_state = FTXOFF_WAIT;
+//				ftxoff_timer = 0;
+//			}
+//			break;
+//		case FTXOFF_WAIT:
+//			if( ftxoff_timer > 24*60*60)	{
+//				FTXOFF_state = FTXOFF_IDLE;
+//				ftxoff_timer = 0;
+//			}
+//			break;
+//		default:
+//			FTXOFF_state = FTXOFF_IDLE;
+//			ftxoff_timer = 0;
+//			break;
+//	}
+//}
+//
 uint8_t FTXOFF2_state;
 int ftxoff2_timer;
 int ftxoff2_retries;
-
-void fsm_txoff2(void)
-{
-	switch(FTXOFF2_state)	{
-		case FTXOFF2_IDLE:
-			if(PruebasFlags & TXOFF2CMD_flag)	{
-				PruebasFlags &= ~TXOFF2CMD_flag;
-				POWER_TX_OFF();
-				LLAVE_TX_OFF();
-				FTXOFF2_state = FTXOFF2_OFF;
-				ftxoff2_timer = 0;
-				ftxoff2_retries = 0;
-			}
-			break;
-		case FTXOFF2_OFF:
-			if( ftxoff2_timer > 6*60)	{
-				POWER_TX_ON();
-				FTXOFF2_state = FTXOFF2_ON;
-				ftxoff2_timer = 0;
-			}
-			break;
-		case FTXOFF2_ON:
-			if( ftxoff2_timer > 10*60)	{
-				POWER_TX_OFF();
-				LLAVE_TX_OFF();
-				FTXOFF2_state = FTXOFF2_OFF;
-				ftxoff2_timer = 0;
-				ftxoff2_retries++;
-			}
-			if(ftxoff2_retries >= 3)	{
-				FTXOFF2_state = FTXOFF2_WAIT;
-				POWER_TX_ON();
-				ftxoff_timer = 0;
-			}
-			break;
-		case FTXOFF2_WAIT:
-			if( ftxoff2_timer > 24*60*60)	{
-				FTXOFF2_state = FTXOFF2_IDLE;
-				ftxoff2_timer = 0;
-			}
-			break;
-		default:
-			FTXOFF2_state = FTXOFF2_IDLE;
-			ftxoff2_timer = 0;
-			break;
-	}
-}
+//
+//void fsm_txoff2(void)
+//{
+//	switch(FTXOFF2_state)	{
+//		case FTXOFF2_IDLE:
+//			if(PruebasFlags & TXOFF2CMD_flag)	{
+//				PruebasFlags &= ~TXOFF2CMD_flag;
+//				POWER_TX_OFF();
+//				LLAVE_TX_OFF();
+//				FTXOFF2_state = FTXOFF2_OFF;
+//				ftxoff2_timer = 0;
+//				ftxoff2_retries = 0;
+//			}
+//			break;
+//		case FTXOFF2_OFF:
+//			if( ftxoff2_timer > 6*60)	{
+//				POWER_TX_ON();
+//				FTXOFF2_state = FTXOFF2_ON;
+//				ftxoff2_timer = 0;
+//			}
+//			break;
+//		case FTXOFF2_ON:
+//			if( ftxoff2_timer > 10*60)	{
+//				POWER_TX_OFF();
+//				LLAVE_TX_OFF();
+//				FTXOFF2_state = FTXOFF2_OFF;
+//				ftxoff2_timer = 0;
+//				ftxoff2_retries++;
+//			}
+//			if(ftxoff2_retries >= 3)	{
+//				FTXOFF2_state = FTXOFF2_WAIT;
+//				POWER_TX_ON();
+//				ftxoff_timer = 0;
+//			}
+//			break;
+//		case FTXOFF2_WAIT:
+//			if( ftxoff2_timer > 24*60*60)	{
+//				FTXOFF2_state = FTXOFF2_IDLE;
+//				ftxoff2_timer = 0;
+//			}
+//			break;
+//		default:
+//			FTXOFF2_state = FTXOFF2_IDLE;
+//			ftxoff2_timer = 0;
+//			break;
+//	}
+//}
 
 int	n_asal, n_teso, n_ince, nmax;
 int nmax_asal, nmax_teso, nmax_ince;

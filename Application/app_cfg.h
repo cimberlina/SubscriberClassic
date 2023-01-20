@@ -60,14 +60,15 @@
 #define  NET_OS_CFG_TMR_TASK_PRIO                       2u		//2
 #define  NET_OS_CFG_IF_RX_TASK_PRIO						2u		//2
 
-#define  APP_OS_CFG_TASK_1_PRIO                         4u
+#define  APP_OS_CFG_TASK_1_PRIO                         4u      //4
 #define	TelnetServerTask_PRIO							15u
-#define	ZoneScanTask_PRIO								10u
-#define	FsmLedsTask_PRIO								11u
-#define	AlarmDetectTask_PRIO							12u
-#define	AutoprotectTask_PRIO							13u
-#define	RabbitTask_PRIO									14u		//14
-#define	LAN485_Task_PRIO								5u
+#define	ZoneScanTask_PRIO								6u     //10
+#define	FsmLedsTask_PRIO								11u     //11
+#define	AlarmDetectTask_PRIO							7u     //12
+#define	AutoprotectTask_PRIO							8u     //13
+#define	RabbitTask_PRIO									9u		//14
+#define	LAN485_Task_PRIO								10u      //5
+#define	LogT_Task_PRIO								    5u      //6
 
 
 #define  OS_TASK_TMR_PRIO                (OS_LOWEST_PRIO - 2)
@@ -87,7 +88,7 @@
 #define	AutoprotectTask_STK_SIZE						104		//*
 #define	RabbitTask_STK_SIZE								2000	//*2000
 #define	LAN485_Task_STK_SIZE							700	//* 700
-
+#define	LogT_Task_STK_SIZE							    128
 
 #define  NET_OS_CFG_TMR_TASK_STK_SIZE                   200u	//*
 #define  NET_OS_CFG_IF_TX_DEALLOC_TASK_STK_SIZE         128u	//*

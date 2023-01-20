@@ -303,13 +303,13 @@ extern uint32_t Timer_prueba, Timpr_llaveon, Timpr_llaveoff, Timpr_gap, Prretrie
 #define	INPATTERN_flag		0x80		//indica que se esta dentro de un patron de encuesta valido
 
 //uint8_t SysFlag1;			//flags para el modulo de ADC
-#define	OUTFLG				0x01
+#define	APER2_FLAG			0x01
 #define	ABOMASUNO_flag		0x02
 #define	INPPON_flag			0x04
 #define SF220_flag          0x08
 #define	PREVE_CENTRAL_TX	0x10
 #define	PREVE_CENTRAL_RX	0x20
-#define	INPPON2_flag		0x40
+#define	APER13_FLAG 		0x40
 #define	AP_APERLED_CTRL		0x80
 
 //uint8_t	SysFlag3;			//flag para el modulo de aviso inmediato
@@ -433,5 +433,8 @@ void fsm_roturaRele485( void );
 
 int rxabonum_prev(uint8_t rxchar, int delta);
 int IsWrightTimePoll( void );
+
+void FSM_WriteHistory(void);
+void FSM_ReadHistory(void);
 
 #endif /* FSM_DETECCION_H_ */

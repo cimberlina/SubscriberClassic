@@ -2860,9 +2860,6 @@
             <name>$PROJ_DIR$\Application\radar.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\Application\TI_aes.c</name>
-        </file>
-        <file>
             <name>$PROJ_DIR$\Application\udpserver.c</name>
         </file>
         <file>

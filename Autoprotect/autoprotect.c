@@ -585,64 +585,64 @@ void fsm_AP_reset(void)
 }
 */
 
-void fsm_AP_zvolt(void)
-{
-	static time_t timer;
-	static uint8_t zcount;
-	//static uint32_t zvoltmed0[16], zvoltmed1[16], promedio[16];
-	static uint32_t zvoltmed0;
-	
-
-	switch(AP_zvolt_state)	{
-	case AP_ZVOLT_ENTRY:
-		timer = MSEC_TIMER + 50000;
-		AP_zvolt_state = AP_ZVOLT_IDLE;
-		zcount = 0;
-		break;
-	case AP_ZVOLT_IDLE:
-		if(timer < MSEC_TIMER)	{
-			timer = MSEC_TIMER + 25;
-			PERPWR_OFF();
-			if( zcount > 2 )
-				zcount = 0;
-                SysFlag_AP_zvolt |= AP_ZVOLT_MEAS_flag;
-			AP_zvolt_state = AP_ZVOLT_MEAS1;
-		}
-		break;
-	case AP_ZVOLT_MEAS1:
-		if(timer < MSEC_TIMER)	{
-			SysFlag_AP_zvolt |= AP_ZVOLT_MEAS_flag;
-            MUX4051_Address(zcount);
-            AP_zvolt_state = AP_ZVOLT_MEAS2;
-            timer = MSEC_TIMER + 10;
-		}
-		break;
-	case AP_ZVOLT_MEAS2:
-		if(timer < MSEC_TIMER)	{
- 			zvoltmed0 = (ADC_ChannelGetData(LPC_ADC,ADC_CHANNEL_0)) & 0x00000FFF;
-
-			if((zvoltmed0 >= V_NORMAL_LOW) && (zvoltmed0 <= V_NORMAL_HIGH))	{
-				SysFlag_AP_GenAlarm |= bitpat[TESO_bit];
-				SysFlag_AP_GenAlarm |= bitpat[ROTU_bit];
-			}
-			PERPWR_ON();
-			timer = MSEC_TIMER + 50;
-			AP_zvolt_state = AP_ZVOLT_MEAS3;
-		}
-		break;
-	case AP_ZVOLT_MEAS3:
-		if(timer < MSEC_TIMER)	{
-			timer = MSEC_TIMER + 30000;
-			SysFlag_AP_zvolt &= ~AP_ZVOLT_MEAS_flag;
-			AP_zvolt_state = AP_ZVOLT_IDLE;
-			zcount++;
-		}
-		break;
-	default:
-		AP_zvolt_state = AP_ZVOLT_ENTRY;
-		break;
-	}
-}
+//void fsm_AP_zvolt(void)
+//{
+//	static time_t timer;
+//	static uint8_t zcount;
+//	//static uint32_t zvoltmed0[16], zvoltmed1[16], promedio[16];
+//	static uint32_t zvoltmed0;
+//
+//
+//	switch(AP_zvolt_state)	{
+//	case AP_ZVOLT_ENTRY:
+//		timer = MSEC_TIMER + 50000;
+//		AP_zvolt_state = AP_ZVOLT_IDLE;
+//		zcount = 0;
+//		break;
+//	case AP_ZVOLT_IDLE:
+//		if(timer < MSEC_TIMER)	{
+//			timer = MSEC_TIMER + 25;
+//			PERPWR_OFF();
+//			if( zcount > 2 )
+//				zcount = 0;
+//                SysFlag_AP_zvolt |= AP_ZVOLT_MEAS_flag;
+//			AP_zvolt_state = AP_ZVOLT_MEAS1;
+//		}
+//		break;
+//	case AP_ZVOLT_MEAS1:
+//		if(timer < MSEC_TIMER)	{
+//			SysFlag_AP_zvolt |= AP_ZVOLT_MEAS_flag;
+//            MUX4051_Address(zcount);
+//            AP_zvolt_state = AP_ZVOLT_MEAS2;
+//            timer = MSEC_TIMER + 10;
+//		}
+//		break;
+//	case AP_ZVOLT_MEAS2:
+//		if(timer < MSEC_TIMER)	{
+// 			zvoltmed0 = (ADC_ChannelGetData(LPC_ADC,ADC_CHANNEL_0)) & 0x00000FFF;
+//
+//			if((zvoltmed0 >= V_NORMAL_LOW) && (zvoltmed0 <= V_NORMAL_HIGH))	{
+//				SysFlag_AP_GenAlarm |= bitpat[TESO_bit];
+//				SysFlag_AP_GenAlarm |= bitpat[ROTU_bit];
+//			}
+//			PERPWR_ON();
+//			timer = MSEC_TIMER + 50;
+//			AP_zvolt_state = AP_ZVOLT_MEAS3;
+//		}
+//		break;
+//	case AP_ZVOLT_MEAS3:
+//		if(timer < MSEC_TIMER)	{
+//			timer = MSEC_TIMER + 30000;
+//			SysFlag_AP_zvolt &= ~AP_ZVOLT_MEAS_flag;
+//			AP_zvolt_state = AP_ZVOLT_IDLE;
+//			zcount++;
+//		}
+//		break;
+//	default:
+//		AP_zvolt_state = AP_ZVOLT_ENTRY;
+//		break;
+//	}
+//}
 
 void fsmAperWriteHistory(void)
 {

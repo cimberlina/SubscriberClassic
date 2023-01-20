@@ -896,21 +896,21 @@ void conio_printHexWord(ConsoleState* state, unsigned int mydata)
     state->conio->puts(data);
 }
 
-void conio_printByte(ConsoleState* state, unsigned char mydata)
-{
-	unsigned char data[3], i;
-
-	data[0] = ((mydata >> 4) & 0x0F);
-	data[1] = (mydata & 0x0F);
-
-	for( i = 0; i < 2; i++ )	{
-		if(data[i] > 9)
-            data[i] += 'A' - 10;
-		else
-            data[i] += '0';
-	}
-    data[2] = 0;
-}
+//void conio_printByte(ConsoleState* state, unsigned char mydata)
+//{
+//	unsigned char data[3], i;
+//
+//	data[0] = ((mydata >> 4) & 0x0F);
+//	data[1] = (mydata & 0x0F);
+//
+//	for( i = 0; i < 2; i++ )	{
+//		if(data[i] > 9)
+//            data[i] += 'A' - 10;
+//		else
+//            data[i] += '0';
+//	}
+//    data[2] = 0;
+//}
 
 void sprintHexWord(char buffer[], unsigned int mydata)
 {
@@ -983,40 +983,40 @@ void printByte(unsigned char mydata)
 	}
 }
 
-void printByte2(unsigned char mydata)
-{
-	unsigned char data[2], i;
+//void printByte2(unsigned char mydata)
+//{
+//	unsigned char data[2], i;
+//
+//	data[0] = ((mydata >> 4) & 0x0F);
+//	data[1] = (mydata & 0x0F);
+//
+//	CommPutChar(DEBUG_COMM,'[',0);
+//	for( i = 0; i < 2; i++ )	{
+//		if(data[i] > 9)
+//			CommPutChar(DEBUG_COMM,('A' + data[i]- 10),0);
+//		else
+//			CommPutChar(DEBUG_COMM,('0' + data[i]),0);
+//	}
+//	CommPutChar(DEBUG_COMM,']',0);
+//	if(mydata == 0x0D)	{
+//		CommPutChar(DEBUG_COMM,'\n',0);
+//		CommPutChar(DEBUG_COMM,'\r',0);
+//	}
+//}
 
-	data[0] = ((mydata >> 4) & 0x0F);
-	data[1] = (mydata & 0x0F);
-
-	CommPutChar(DEBUG_COMM,'[',0);
-	for( i = 0; i < 2; i++ )	{
-		if(data[i] > 9)
-			CommPutChar(DEBUG_COMM,('A' + data[i]- 10),0);
-		else
-			CommPutChar(DEBUG_COMM,('0' + data[i]),0);
-	}
-	CommPutChar(DEBUG_COMM,']',0);
-	if(mydata == 0x0D)	{
-		CommPutChar(DEBUG_COMM,'\n',0);
-		CommPutChar(DEBUG_COMM,'\r',0);
-	}
-}
-
-void printBuffByte( uint8_t *data, uint8_t len)
-{
-	int i;
-
-	for( i = 0; i < len; i++)	{
-		//CommPutChar(DEBUG_COMM,'[',0);
-		//printByte(data[i]);
-		CommPutChar(DEBUG_COMM,data[i],0);
-		//CommPutChar(DEBUG_COMM,']',0);
-	}
-	CommPutChar(DEBUG_COMM,'\n',0);
-	CommPutChar(DEBUG_COMM,'\r',0);
-}
+//void printBuffByte( uint8_t *data, uint8_t len)
+//{
+//	int i;
+//
+//	for( i = 0; i < len; i++)	{
+//		//CommPutChar(DEBUG_COMM,'[',0);
+//		//printByte(data[i]);
+//		CommPutChar(DEBUG_COMM,data[i],0);
+//		//CommPutChar(DEBUG_COMM,']',0);
+//	}
+//	CommPutChar(DEBUG_COMM,'\n',0);
+//	CommPutChar(DEBUG_COMM,'\r',0);
+//}
 
 void printBuffByteRow( uint8_t *data, uint8_t len)
 {
@@ -1058,54 +1058,54 @@ void dumpMemory( uint8_t *address, uint16_t len )
 	}
 }
 
-int i2ctest_wr (void)
-{
-  uint32_t i;
+//int i2ctest_wr (void)
+//{
+//  uint32_t i;
+//
+//  for (i = 3; i  < Master_Buffer_BUFSIZE; i++) I2CMasterBuffer[i] = 'a'+i-3;
+//
+//  I2CWriteLength = Master_Buffer_BUFSIZE;
+//  I2CReadLength = 0;
+//  I2CMasterBuffer[0] = MC24LC64_ADDR;
+//  I2CMasterBuffer[1] = 0x00;		/* address MSB */
+//  I2CMasterBuffer[2] = 0x00;		/* address LSB */
+////  I2CMasterBuffer[3] = 0x55;		/* Data0 */
+////  I2CMasterBuffer[4] = 0xAA;		/* Data1 */
+////  I2CMasterBuffer[5] = 0x12;		/* Data2 */
+////  I2CMasterBuffer[6] = 0x34;		/* Data3 */
+//  uint32_t fin_state = I2CEngine();
+//
+//  return 0;
+//}
 
-  for (i = 3; i  < Master_Buffer_BUFSIZE; i++) I2CMasterBuffer[i] = 'a'+i-3;
-
-  I2CWriteLength = Master_Buffer_BUFSIZE;
-  I2CReadLength = 0;
-  I2CMasterBuffer[0] = MC24LC64_ADDR;
-  I2CMasterBuffer[1] = 0x00;		/* address MSB */
-  I2CMasterBuffer[2] = 0x00;		/* address LSB */
-//  I2CMasterBuffer[3] = 0x55;		/* Data0 */
-//  I2CMasterBuffer[4] = 0xAA;		/* Data1 */
-//  I2CMasterBuffer[5] = 0x12;		/* Data2 */
-//  I2CMasterBuffer[6] = 0x34;		/* Data3 */
-  uint32_t fin_state = I2CEngine();
-
-  return 0;
-}
-
-int i2ctest_rd (void)
-{
-	  uint32_t i;
-
-	  if ( I2CInit( (uint32_t)I2CMASTER ) == 0 )	/* initialize I2c */
-	  {
-		return 1;				/* Fatal error */
-	  }
-
-	  for ( i = 0; i < Slave_Buffer_BUFSIZE; i++ )
-	  {
-		I2CSlaveBuffer[i] = 0x00;
-	  }
-	  /* Write SLA(W), address, SLA(R), and read 4 bytes back. */
-
-	  I2CWriteLength = 3;
-	  I2CReadLength = Slave_Buffer_BUFSIZE;
-	  I2CMasterBuffer[0] = MC24LC64_ADDR;
-	  I2CMasterBuffer[1] = 0x00;		/* address MSB */
-	  I2CMasterBuffer[2] = 0x00;		/* address LSB */
-	  I2CMasterBuffer[3] = MC24LC64_ADDR | RD_BIT;
-
-	  i=0;
-	  while (I2CEngine() == I2CSTATE_SLA_NACK)
-		  i++;
-
-	  return 0;
-}
+//int i2ctest_rd (void)
+//{
+//	  uint32_t i;
+//
+//	  if ( I2CInit( (uint32_t)I2CMASTER ) == 0 )	/* initialize I2c */
+//	  {
+//		return 1;				/* Fatal error */
+//	  }
+//
+//	  for ( i = 0; i < Slave_Buffer_BUFSIZE; i++ )
+//	  {
+//		I2CSlaveBuffer[i] = 0x00;
+//	  }
+//	  /* Write SLA(W), address, SLA(R), and read 4 bytes back. */
+//
+//	  I2CWriteLength = 3;
+//	  I2CReadLength = Slave_Buffer_BUFSIZE;
+//	  I2CMasterBuffer[0] = MC24LC64_ADDR;
+//	  I2CMasterBuffer[1] = 0x00;		/* address MSB */
+//	  I2CMasterBuffer[2] = 0x00;		/* address LSB */
+//	  I2CMasterBuffer[3] = MC24LC64_ADDR | RD_BIT;
+//
+//	  i=0;
+//	  while (I2CEngine() == I2CSTATE_SLA_NACK)
+//		  i++;
+//
+//	  return 0;
+//}
 
 void delay_us( uint32_t microseconds)
 {
@@ -1174,124 +1174,124 @@ uint16_t BCD_Word_to_int( uint16_t data)
 
 }
 
-int ChrIndexOf( uint8_t *string, uint8_t key,  int start)
-{
-	int i, len;
-
-	len = sizeof(string);
-
-	for( i = 0; i < len; i++ )	{
-		if(string[start + i] == key)
-			return i;
-	}
-	return -1;
-}
-
-uint8_t *SubString(uint8_t *string1, uint8_t *string2, int start, int end)
-{
-	int i, j;
-
-	if((end - start) > sizeof(string2))	{
-		string2[0] = '\0';
-		return string2;
-	}
-
-	string2[0] = '\0';
-	for( i = start, j = 0; i < end; i++, j++)	{
-		string2[j] = string1[i];
-	}
-	string2[j] = '\0';
-
-	return string2;
-}
-
-uint8_t *SubStringEnd(uint8_t *string1, uint8_t *string2, int start)
-{
-	int i, j, end;
-
-	end = sizeof(string1);
-
-	if((end - start) > sizeof(string2))	{
-		string2[0] = '\0';
-		return string2;
-	}
-
-
-	for( i = start, j = 0; i < end; i++, j++)	{
-		string2[j] = string1[i];
-	}
-	string2[j] = '\0';
-
-	return string2;
-}
-
-
-int str_starts_with(const char *str, const char *start)
-{
-	return !Str_Cmp_N (str, start, strlen(start));
-}
-
-char *strnext(char **sp, const char *delim)
-{
-	char *tk = *sp;
-	char *p;
-
-	if(*sp) {
-		p = Str_Char((const  CPU_CHAR *)tk, *delim);
-		if(p) {
-			/* found delimiter */
-			if(*p) {
-				*sp = p+1;
-			} else {
-				*sp = 0; /* nothing ahead, so terminate */
-			}
-			*p = '\0';	/* terminate on the delimiter */
-		} else {
-			tk = 0;		/* not found */
-		}
-	}
-	return tk;
-}
-
-
-int StrIndexOf(uint8_t s1[], uint8_t s2[])
-{
-
-	uint8_t *inptr;
-
-	inptr = Str_Str( (const  CPU_CHAR *)s1, (const  CPU_CHAR *)s2);
-	if(inptr)	{
-		return (s1-inptr);
-	} else
-		return -1;
-
-}
-
-int StrLastIndexOf(uint8_t s1[], uint8_t s2[])
-{
-	uint8_t *inptr, *lastptr;
-	int s2len, s1len;
-
-	s2len = strlen(s2);
-	s1len = strlen(s1);
-	if(s2len > s1len)
-		return -1;
-
-	inptr = Str_Str( (const  CPU_CHAR *)s1, (const  CPU_CHAR *)s2);
-	while(inptr)	{
-		lastptr = Str_Str( (const  CPU_CHAR *)(inptr + s2len), (const  CPU_CHAR *)s2);
-		if(lastptr)	{
-			inptr = lastptr;
-		}
-		else
-			break;
-	}
-	if(inptr)	{
-		return (inptr - s1);
-	} else
-		return -1;
-
-}
+//int ChrIndexOf( uint8_t *string, uint8_t key,  int start)
+//{
+//	int i, len;
+//
+//	len = sizeof(string);
+//
+//	for( i = 0; i < len; i++ )	{
+//		if(string[start + i] == key)
+//			return i;
+//	}
+//	return -1;
+//}
+//
+//uint8_t *SubString(uint8_t *string1, uint8_t *string2, int start, int end)
+//{
+//	int i, j;
+//
+//	if((end - start) > sizeof(string2))	{
+//		string2[0] = '\0';
+//		return string2;
+//	}
+//
+//	string2[0] = '\0';
+//	for( i = start, j = 0; i < end; i++, j++)	{
+//		string2[j] = string1[i];
+//	}
+//	string2[j] = '\0';
+//
+//	return string2;
+//}
+//
+//uint8_t *SubStringEnd(uint8_t *string1, uint8_t *string2, int start)
+//{
+//	int i, j, end;
+//
+//	end = sizeof(string1);
+//
+//	if((end - start) > sizeof(string2))	{
+//		string2[0] = '\0';
+//		return string2;
+//	}
+//
+//
+//	for( i = start, j = 0; i < end; i++, j++)	{
+//		string2[j] = string1[i];
+//	}
+//	string2[j] = '\0';
+//
+//	return string2;
+//}
+//
+//
+//int str_starts_with(const char *str, const char *start)
+//{
+//	return !Str_Cmp_N (str, start, strlen(start));
+//}
+//
+//char *strnext(char **sp, const char *delim)
+//{
+//	char *tk = *sp;
+//	char *p;
+//
+//	if(*sp) {
+//		p = Str_Char((const  CPU_CHAR *)tk, *delim);
+//		if(p) {
+//			/* found delimiter */
+//			if(*p) {
+//				*sp = p+1;
+//			} else {
+//				*sp = 0; /* nothing ahead, so terminate */
+//			}
+//			*p = '\0';	/* terminate on the delimiter */
+//		} else {
+//			tk = 0;		/* not found */
+//		}
+//	}
+//	return tk;
+//}
+//
+//
+//int StrIndexOf(uint8_t s1[], uint8_t s2[])
+//{
+//
+//	uint8_t *inptr;
+//
+//	inptr = Str_Str( (const  CPU_CHAR *)s1, (const  CPU_CHAR *)s2);
+//	if(inptr)	{
+//		return (s1-inptr);
+//	} else
+//		return -1;
+//
+//}
+//
+//int StrLastIndexOf(uint8_t s1[], uint8_t s2[])
+//{
+//	uint8_t *inptr, *lastptr;
+//	int s2len, s1len;
+//
+//	s2len = strlen(s2);
+//	s1len = strlen(s1);
+//	if(s2len > s1len)
+//		return -1;
+//
+//	inptr = Str_Str( (const  CPU_CHAR *)s1, (const  CPU_CHAR *)s2);
+//	while(inptr)	{
+//		lastptr = Str_Str( (const  CPU_CHAR *)(inptr + s2len), (const  CPU_CHAR *)s2);
+//		if(lastptr)	{
+//			inptr = lastptr;
+//		}
+//		else
+//			break;
+//	}
+//	if(inptr)	{
+//		return (inptr - s1);
+//	} else
+//		return -1;
+//
+//}
 
 
 
