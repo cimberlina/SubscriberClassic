@@ -286,6 +286,7 @@ extern uint32_t Timer_prueba, Timpr_llaveon, Timpr_llaveoff, Timpr_gap, Prretrie
 #define	F220_sbit	0x02
 #define	RSTA_sbit	0x01
 #define DHCPM_sbit	0x10
+#define APER2_sbit  0x20
 
 
 

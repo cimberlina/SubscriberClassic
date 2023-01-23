@@ -209,12 +209,14 @@ extern uint8_t SystemFlag10;
 #define IBUTTONREAD         0x08
 #define UDPLICOK_FLAG       0x10
 #define UDPUSELIC_FLAG      0x20
+#define VALIDSCAN_FLAG      0x40
 
 extern uint32_t SystemFlag11;
 #define DONTSENDEVENTS  (1 << 0)
 #define APERASAL_FLAG   (1 << 1)
 #define FIRSTCMD_FLAG   (1 << 2)
 #define CONSOLASAL_FLAG (1 << 3)
+#define OPTOAPER2_FLAG  (1 << 4)
 
 extern uint8_t FSM_FLAG_1;
 #define WDEVO0_ALRM_FLAG    (1 << 0)
@@ -223,6 +225,7 @@ extern uint8_t FSM_FLAG_1;
 #define APER2_ALRM_FLAG     (1 << 3)
 #define APER13_ALRM_FLAG    (1 << 4)
 #define ROT943_FLAG         (1 << 5)
+#define APERNG_ALRM_FLAG    (1 << 6)
 
 #define PART5_REDU_FLAGS		0
 #define PART6_REDU_FLAGS		4

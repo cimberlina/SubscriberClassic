@@ -169,8 +169,12 @@ void  AutoprotectTask(void  *p_arg)
 			break;
 		}
 	}
-
-
+    while(SysFlag0 & STARTUP_flag)  {
+        WDT_Feed();
+    }
+    OSTimeDlyHMSM(0, 0, 15, 0,
+                  OS_OPT_TIME_HMSM_STRICT,
+                  &os_err);
 	while(DEF_ON)	{
 		WDT_Feed();
 		OSTimeDlyHMSM(0, 0, 0, 50,
@@ -193,41 +197,49 @@ void  AutoprotectTask(void  *p_arg)
 			case TAPST_IDLE :
 				SystemFlag2 &= ~APE2_sbit;
 				TasFlags |= TAS220ON_FLAG;
-				if (!(GPIO_ReadValue(0) & (1<<29)))	{
+				//if (!(GPIO_ReadValue(0) & (1<<29)))	{
+                if(SysInputs & APER2_sbit)  {
 					TasAperState = TAPST_DBNC;
 					tapsttimer = 1000;
 				}
 				break;
 			case TAPST_DBNC	:
-				if((GPIO_ReadValue(0) & (1<<29)))	{
+				//if((GPIO_ReadValue(0) & (1<<29)))	{
+                if(!(SysInputs & APER2_sbit))   {
 					TasAperState = TAPST_IDLE;
 					SystemFlag2 &= ~APE2_sbit;
 					TasFlags |= TAS220ON_FLAG;
+                    SystemFlag11 &= ~OPTOAPER2_FLAG;
 				} else
 				if(!tapsttimer)	{
 					TasAperState = TAPST_ON;
 					SystemFlag2 |= APE2_sbit;
 					TasFlags &= ~TAS220ON_FLAG;
+                    SystemFlag11 |= OPTOAPER2_FLAG;
 				}
 				break;
 			case TAPST_ON :
 				SystemFlag2 |= APE2_sbit;
 				TasFlags &= ~TAS220ON_FLAG;
-				if((GPIO_ReadValue(0) & (1<<29)))	{
+				//if((GPIO_ReadValue(0) & (1<<29)))	{
+                if(!(SysInputs & APER2_sbit))   {
 					TasAperState = TAPST_DBNC2;
 					tapsttimer = 1000;
 				}
 				break;
 			case TAPST_DBNC2	:
-				if (!(GPIO_ReadValue(0) & (1<<29)))	{
+				//if (!(GPIO_ReadValue(0) & (1<<29)))	{
+                if(SysInputs & APER2_sbit)   {
 					TasAperState = TAPST_ON;
 					SystemFlag2 |= APE2_sbit;
 					TasFlags &= ~TAS220ON_FLAG;
+                    SystemFlag11 |= OPTOAPER2_FLAG;
 				} else
 				if(!tapsttimer)	{
 					SystemFlag2 &= ~APE2_sbit;
 					TasFlags |= TAS220ON_FLAG;
 					TasAperState = TAPST_IDLE;
+                    SystemFlag11 &= ~OPTOAPER2_FLAG;
 				}
 				break;
 			default :
@@ -270,23 +282,34 @@ void fsm_AP_apertura(void)
 
 	switch(AP_apertura_state)	{
 		case AP_APER_IDLE :
-			SysFlag4 &= ~LOGICALPWRTXOFF;
-			SystemFlag4 |= ARSTOK_FLAG;
-			SysFlag_AP_Apertura &= ~AP_APR_IBUTTON_OK;
-			lic_ibuttonid = 0;
-            SystemFlag11 &= ~APERASAL_FLAG;
-            SystemFlag11 &= ~FIRSTCMD_FLAG;
-            //SystemFlag11 &= ~CONSOLASAL_FLAG;
-			if(SysFlag_AP_Apertura & AP_APR_APRLINE)	{
-				tout_AP_apertura = 60;
-				AP_apertura_state = AP_APER_WAIT_IBUTT;
-				fsmAperWriteHistory();
-				SysFlag_AP_Apertura &= ~AP_APR_IBUTTON_OK;
-				AP_Aper_led_dcb.led_cad = WAIT_IBUTTON_LED_CADENCE;
-				AP_Aper_led_dcb.led_state = LED_IDLE;
-				AP_Aper_led_dcb.led_blink = BLINK_FOREVER;
+            if(FSM_FLAG_1 & APERNG_ALRM_FLAG)   {
+                tout_AP_apertura = 60*6;
+                SystemFlag11 |= APERASAL_FLAG;
+                //SysFlag_AP_GenAlarm |= bitpat[ROTU_bit];
+                AP_apertura_state = AP_APER_OP_PREVE;
+                fsmAperWriteHistory();
+                AP_Aper_led_dcb.led_cad = WAIT_PREVE_LED_CADENCE;
+                AP_Aper_led_dcb.led_state = LED_IDLE;
+                AP_Aper_led_dcb.led_blink = BLINK_FOREVER;
+            } else {
+                SysFlag4 &= ~LOGICALPWRTXOFF;
+                SystemFlag4 |= ARSTOK_FLAG;
+                SysFlag_AP_Apertura &= ~AP_APR_IBUTTON_OK;
+                lic_ibuttonid = 0;
+                SystemFlag11 &= ~APERASAL_FLAG;
+                SystemFlag11 &= ~FIRSTCMD_FLAG;
+                //SystemFlag11 &= ~CONSOLASAL_FLAG;
+                if (SysFlag_AP_Apertura & AP_APR_APRLINE) {
+                    tout_AP_apertura = 60;
+                    AP_apertura_state = AP_APER_WAIT_IBUTT;
+                    fsmAperWriteHistory();
+                    SysFlag_AP_Apertura &= ~AP_APR_IBUTTON_OK;
+                    AP_Aper_led_dcb.led_cad = WAIT_IBUTTON_LED_CADENCE;
+                    AP_Aper_led_dcb.led_state = LED_IDLE;
+                    AP_Aper_led_dcb.led_blink = BLINK_FOREVER;
 
-			}
+                }
+            }
 			break;
 		case AP_APER_WAIT_IBUTT :
 			SysFlag4 &= ~LOGICALPWRTXOFF;
@@ -317,7 +340,8 @@ void fsm_AP_apertura(void)
 				AP_Aper_led_dcb.led_cad = WAIT_PREVE_LED_CADENCE;
 				AP_Aper_led_dcb.led_state = LED_IDLE;
 				AP_Aper_led_dcb.led_blink = BLINK_FOREVER;
-
+                FSM_FLAG_1 |= APERNG_ALRM_FLAG;
+                FSM_WriteHistory();
 			}
 			break;
 		case AP_APER_OP_NORMAL :
@@ -405,6 +429,8 @@ void fsm_AP_apertura(void)
 				POWER_TX_ON();
 				SysFlag4 &= ~LOGICALPWRTXOFF;
 				SysFlag_AP_Apertura &= ~AP_APR_INPREVE;
+                FSM_FLAG_1 &= ~APERNG_ALRM_FLAG;
+                FSM_WriteHistory();
 			} else
 			if(!tout_AP_apertura)	{
 				POWER_TX_ON();
@@ -416,6 +442,8 @@ void fsm_AP_apertura(void)
                     SystemFlag11 &= ~APERASAL_FLAG;
                     SysFlag_AP_Apertura &= ~AP_APR_INPREVE;
                     fsmAperWriteHistory();
+                    FSM_FLAG_1 &= ~APERNG_ALRM_FLAG;
+                    FSM_WriteHistory();
                 }
 
 			} else
@@ -425,6 +453,8 @@ void fsm_AP_apertura(void)
                 SystemFlag11 &= ~APERASAL_FLAG;
                 SysFlag_AP_Apertura &= ~AP_APR_INPREVE;
                 fsmAperWriteHistory();
+                FSM_FLAG_1 &= ~APERNG_ALRM_FLAG;
+                FSM_WriteHistory();
             }
 			break;
 		case AP_APER_WAIT_15MIN:

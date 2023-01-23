@@ -1150,42 +1150,56 @@ void fsm_deteccion_rotura( void )
 
 void fsm_deteccion_aperturaAP( void )
 {
+
 	switch( daper_stateAP )	{
 			case APER_IDLE :
-                if( FSM_FLAG_1 & APER13_ALRM_FLAG)  {
+                if( (FSM_FLAG_1 & APER13_ALRM_FLAG) || (FSM_FLAG_1 & APER2_ALRM_FLAG))  {
                     daper_stateAP = APER_ALRM;
+                    SysFlag_AP_Apertura |= AP_APR_APRLINE;
                 } else
-				if( (SysInputs & APER_sbit) || (RADAR_flags & AP_RADAR_FLAG) || (SystemFlag2 & APE2_sbit))	{
+				if( ((SysInputs & APER_sbit) || (RADAR_flags & AP_RADAR_FLAG) || (SysInputs & APER2_sbit)) && (SystemFlag10 & VALIDSCAN_FLAG))	{
 					daper_stateAP = APER_WAIT;
 					timerdbncaperAP = 500;
 				}
 				break;
 			case APER_WAIT:
-				if( (!(SysInputs & APER_sbit)) && (!(RADAR_flags & AP_RADAR_FLAG)) && (!(SystemFlag2 & APE2_sbit)) )	{
+				if( ((!(SysInputs & APER_sbit)) && (!(RADAR_flags & AP_RADAR_FLAG)) && (!(SysInputs & APER2_sbit))) && (SystemFlag10 & VALIDSCAN_FLAG) )	{
 					daper_stateAP = APER_IDLE;
 				} else
 				if( !timerdbncaperAP)	{
 					daper_stateAP = APER_ALRM;
 					SysFlag_AP_Apertura |= AP_APR_APRLINE;		//notifico a la maquina de autoprotect
-                    FSM_FLAG_1 |= APER13_ALRM_FLAG;
-                    FSM_WriteHistory();
+                    if( (SysInputs & APER_sbit) || (RADAR_flags & AP_RADAR_FLAG)) {
+                        FSM_FLAG_1 |= APER13_ALRM_FLAG;
+                        FSM_WriteHistory();
+                    }
+                    if(SystemFlag2 & APE2_sbit) {
+                        FSM_FLAG_1 |= APER2_ALRM_FLAG;
+                        FSM_WriteHistory();
+                    }
 				}
 				break;
 			case APER_ALRM :
-				if( (!(SysInputs & APER_sbit)) && (!(RADAR_flags & AP_RADAR_FLAG)) && (!(SystemFlag2 & APE2_sbit)))	{
+				if( ((!(SysInputs & APER_sbit)) && (!(RADAR_flags & AP_RADAR_FLAG)) && (!(SysInputs & APER2_sbit))) && (SystemFlag10 & VALIDSCAN_FLAG))	{
 					daper_stateAP = APER_WAIT2;
-					timerdbncaperAP = 500;
+					timerdbncaperAP = 2000;
 				}
 				break;
 			case APER_WAIT2:
-				if( (SysInputs & APER_sbit) || (RADAR_flags & AP_RADAR_FLAG) || (SystemFlag2 & APE2_sbit))	{
+				if( ((SysInputs & APER_sbit) || (RADAR_flags & AP_RADAR_FLAG) || (SysInputs & APER2_sbit)) && (SystemFlag10 & VALIDSCAN_FLAG))	{
 					daper_stateAP = APER_ALRM;
 				} else
 				if(!timerdbncaperAP)	{
 					SysFlag_AP_Apertura &= ~AP_APR_APRLINE;		//notifico a la maquina de autoprotect
 					daper_stateAP = APER_IDLE;
-                    FSM_FLAG_1 &= ~APER13_ALRM_FLAG;
-                    FSM_WriteHistory();
+                    if( (!(SysInputs & APER_sbit)) && (!(RADAR_flags & AP_RADAR_FLAG))) {
+                        FSM_FLAG_1 &= ~APER13_ALRM_FLAG;
+                        FSM_WriteHistory();
+                    }
+                    if(!(SystemFlag2 & APE2_sbit)) {
+                        FSM_FLAG_1 &= ~APER2_ALRM_FLAG;
+                        FSM_WriteHistory();
+                    }
 				}
 				break;
 			default :

@@ -330,6 +330,7 @@ int  main (void)
     SystemFlag6 = 0x00;
     SystemFlag7 |= IP150_ALIVE;
     SystemFlag8 = 0x00;
+    SystemFlag10 = 0x00;
     SystemFlag11 = 0x00;
 
 #ifdef NOEVENTS

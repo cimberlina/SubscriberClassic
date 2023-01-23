@@ -65,7 +65,7 @@ void MUX4051_Address(uint8_t zonenumber)
 
 void  ZoneScanTask  (void  *p_arg)
 {
-	uint8_t	i;
+	uint8_t	i, scan_count;
 	OS_ERR	os_err;
 	uint32_t adc_value_mux0, adc_value_mux1, adc_value_mux2;
 	uint8_t sysinput0, sysinput1, sysinput2;
@@ -73,6 +73,7 @@ void  ZoneScanTask  (void  *p_arg)
 	(void)p_arg;
 	np_med0 = 0;
 	np_med1 = 0;
+    scan_count = 0;
 
 		OSTimeDlyHMSM(0, 0, TIME_STARTUP_SCAN, 0,
 					  OS_OPT_TIME_HMSM_STRICT,
@@ -80,6 +81,7 @@ void  ZoneScanTask  (void  *p_arg)
 	while(DEF_ON)	{
 		if((!(SysFlag0 & STARTUP_flag)) && (!(Rot485_flag & NOZSCAN_FLAG)))	{
 		if(!(SysFlag_AP_zvolt & AP_ZVOLT_MEAS_flag))	{
+
 			//aca exploro las lineas de F220 y Apertura
 			sysinput0 = sysinput1;
 			sysinput1 = sysinput2;
@@ -98,7 +100,22 @@ void  ZoneScanTask  (void  *p_arg)
 			else
 				sysinput2 &= ~DHCPM_sbit;
 
+            GPIO_SetDir(0, (1 << 29), 0);
+            if (!(GPIO_ReadValue(0) & (1<<29))) {
+            //if(SystemFlag11 & OPTOAPER2_FLAG) {
+                sysinput2 |= APER2_sbit;
+            } else  {
+                sysinput2 &= ~APER2_sbit;
+            }
+            GPIO_SetDir(0, (1 << 29), 1);
+
 			SysInputs = sysinput0 & sysinput1 & sysinput2;
+            if(scan_count <= 10) {
+                scan_count++;
+                if(scan_count == 9) {
+                    SystemFlag10 |= VALIDSCAN_FLAG;
+                }
+            }
 
 			//-----------------------------------------
 			for( i = 0; i < 8; i++ )	{
