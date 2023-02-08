@@ -217,6 +217,7 @@ extern uint32_t SystemFlag11;
 #define FIRSTCMD_FLAG   (1 << 2)
 #define CONSOLASAL_FLAG (1 << 3)
 #define OPTOAPER2_FLAG  (1 << 4)
+#define INCE2MODE_FLAG  (1 << 5)
 
 extern uint8_t FSM_FLAG_1;
 #define WDEVO0_ALRM_FLAG    (1 << 0)

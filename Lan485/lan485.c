@@ -1450,12 +1450,14 @@ void ParsePtmCID_Event( unsigned char event_buffer[] )
         }
     }
 
+    //filtro las señalizacion de uso interno en zonas 189 a 192
+    if((currentEvent.cid_zoneuser >= 0x189) && (currentEvent.cid_zoneuser <= 0x192))	{
+        return;
+    }
+
 	WriteEventToFlash(&currentEvent);
 
-	//filtro las señalizacion de uso interno en zonas 189 a 192
-	if((currentEvent.cid_zoneuser >= 0x189) && (currentEvent.cid_zoneuser <= 0x192))	{
-		return;
-	}
+
 
 	//filtro los eventos de zonas 5 a 8, de las evo, para los eventos entre 100 y 199
 	if((currentEvent.cid_zoneuser >= ASALPBT_FIRSTZONE) && (currentEvent.cid_zoneuser <= ASALPBT_LASTZONE))	{

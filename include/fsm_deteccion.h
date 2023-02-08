@@ -56,7 +56,7 @@ extern uint8_t ince_state;
 extern uint8_t rotu_state;
 extern uint8_t apdisp_state[5];
 
-extern uint16_t dbnc_ince_timer;
+extern uint16_t dbnc_ince_timer, dbnc_ince2_timer, dbnc_fince2_timer;
 extern uint16_t dbnc_asal_timer;
 extern uint16_t dbnc_teso_timer;
 extern uint16_t dbnc_rotu_timer;
@@ -231,7 +231,7 @@ extern uint8_t daper2_state;
 extern uint8_t daper_stateAP;
 extern uint8_t dasa_state;
 extern uint8_t df220_state;
-extern uint8_t dinc_state;
+extern uint8_t dinc_state, dinc2_state, dfinc2_state;
 extern uint8_t drst_state;
 extern uint8_t dteso_state;
 extern uint8_t drotu_state[16];
@@ -279,6 +279,8 @@ extern uint32_t Timer_prueba, Timpr_llaveon, Timpr_llaveoff, Timpr_gap, Prretrie
 #define	ZONA_ASALTO		0
 #define	ZONA_INCENDIO	1
 #define	ZONA_TESORO		2
+#define ZONA_INCE2      6
+#define ZONA_FALLAINCE2 7
 
 //definiciones de los bits en SysInputs
 #define	APER_sbit	0x08
@@ -389,6 +391,7 @@ void fsm_deteccion_rotura( void );
 void fsm_deteccion_tesoro( void );
 void fsm_deteccion_asalto( void );
 void fsm_deteccion_incendio( void );
+void fsm_deteccion_incendio2( void );
 void fsm_rfwatchdog( void );
 void fsm_ppon_wdog( void );
 

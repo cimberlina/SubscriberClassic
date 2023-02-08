@@ -131,6 +131,7 @@ typedef struct	{
 #define DF_NRSTHAB_OFFSET       330     //2
 #define DF_HRSTHAB_OFFSET       332     //2
 #define DF_HISTORY2_OFFSET      334     //8
+#define DF_ACTINCE2_OFFSET      342     //2
 
 #define	ACKRCVDMON0				0x01
 #define	ACKRCVDMON1				0x02

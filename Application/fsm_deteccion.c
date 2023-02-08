@@ -114,6 +114,8 @@ uint8_t daper_stateAP;
 uint8_t dasa_state;
 uint8_t df220_state;
 uint8_t dinc_state;
+uint8_t dinc2_state;
+uint8_t dfinc2_state;
 uint8_t drst_state;
 uint8_t dteso_state;
 uint8_t drotu_state[16];
@@ -157,7 +159,7 @@ uint8_t fsm_icmx_state;
 #define FSM_ICMX_INIT		0x20
 #define	FSM_ICMX_NOIRQ		0x40
 
-uint16_t dbnc_ince_timer;
+uint16_t dbnc_ince_timer, dbnc_ince2_timer, dbnc_fince2_timer;
 uint16_t dbnc_asal_timer;
 uint16_t dbnc_teso_timer;
 uint16_t dbnc_rotu_timer;
@@ -743,9 +745,9 @@ void fsm_deteccion_incendio( void )
 				dinc_state = INCENDIO_IDLE;
 			}
 			break;
-		case ASALTO_INDEF1:
+		case INCENDIO_INDEF1:
 			if( Status_Zonas[ZONA_INCENDIO] != ALRM_INDEF )	{
-				dasa_state = INCENDIO_IDLE;
+				dinc_state = INCENDIO_IDLE;
 			}
 			break;
 		default :
@@ -753,6 +755,123 @@ void fsm_deteccion_incendio( void )
 			break;
 	}
 }
+
+void fsm_deteccion_incendio2( void )
+{
+
+    int16_t vreal;
+
+    if(Rot485_flag & NOZSCAN_FLAG)  {
+        return;
+    }
+
+
+    switch( dinc2_state )	{
+        case INCENDIO_IDLE :
+            if( Status_Zonas[ZONA_INCE2] == ALRM_EVENTO )	{
+                dinc2_state = INCENDIO_WAIT;
+                dbnc_ince2_timer = 500;
+            } else
+            if( Status_Zonas[ZONA_INCE2] == ALRM_INDEF )	{
+                dinc2_state = INCENDIO_INDEF;
+                dbnc_ince2_timer = 500;
+            }
+            break;
+        case INCENDIO_WAIT:
+            if(!dbnc_ince2_timer)	{
+                dinc2_state = INCENDIO_ALRM;
+
+                logCidEvent(account, 1, 111, 8, 195);
+
+            } else if(Status_Zonas[ZONA_INCE2] != ALRM_EVENTO)	{
+                dinc2_state = INCENDIO_IDLE;
+            }
+            break;
+        case INCENDIO_ALRM :
+            if( Status_Zonas[ZONA_INCE2] != ALRM_EVENTO )	{
+                logCidEvent(account, 3, 111, 8, 195);
+                dinc2_state = INCENDIO_IDLE;
+            }
+            break;
+        case INCENDIO_INDEF:
+            if(!dbnc_ince2_timer)	{
+                dinc2_state = INCENDIO_INDEF1;
+                vreal = get_vreal(6);
+                logCidEvent(account, 1, 381, 8, vreal);
+            } else
+            if( Status_Zonas[ZONA_INCE2] != ALRM_INDEF )	{
+                dinc2_state = INCENDIO_IDLE;
+            }
+            break;
+        case INCENDIO_INDEF1:
+            if( Status_Zonas[ZONA_INCE2] != ALRM_INDEF )	{
+                dinc2_state = INCENDIO_IDLE;
+            }
+            break;
+        default :
+            dinc2_state = INCENDIO_IDLE;
+            break;
+    }
+}
+
+void fsm_deteccion_fallainc2( void )
+{
+
+    int16_t vreal;
+
+    if(Rot485_flag & NOZSCAN_FLAG)  {
+        return;
+    }
+
+
+    switch( dfinc2_state )	{
+        case INCENDIO_IDLE :
+            if( Status_Zonas[ZONA_FALLAINCE2] == ALRM_EVENTO )	{
+                dfinc2_state = INCENDIO_WAIT;
+                dbnc_fince2_timer = 500;
+            } else
+            if( Status_Zonas[ZONA_FALLAINCE2] == ALRM_INDEF )	{
+                dfinc2_state = INCENDIO_INDEF;
+                dbnc_fince2_timer = 500;
+            }
+            break;
+        case INCENDIO_WAIT:
+            if(!dbnc_fince2_timer)	{
+                dfinc2_state = INCENDIO_ALRM;
+
+                logCidEvent(account, 1, 387, 9, 196);
+
+            } else if(Status_Zonas[ZONA_FALLAINCE2] != ALRM_EVENTO)	{
+                dfinc2_state = INCENDIO_IDLE;
+            }
+            break;
+        case INCENDIO_ALRM :
+            if( Status_Zonas[ZONA_FALLAINCE2] != ALRM_EVENTO )	{
+                logCidEvent(account, 3, 387, 9, 196);
+                dfinc2_state = INCENDIO_IDLE;
+            }
+            break;
+        case INCENDIO_INDEF:
+            if(!dbnc_fince2_timer)	{
+                dfinc2_state = INCENDIO_INDEF1;
+                vreal = get_vreal(7);
+                logCidEvent(account, 1, 381, 9, vreal);
+            } else
+            if( Status_Zonas[ZONA_FALLAINCE2] != ALRM_INDEF )	{
+                dfinc2_state = INCENDIO_IDLE;
+            }
+            break;
+        case INCENDIO_INDEF1:
+            if( Status_Zonas[ZONA_FALLAINCE2] != ALRM_INDEF )	{
+                dfinc2_state = INCENDIO_IDLE;
+            }
+            break;
+        default :
+            dfinc2_state = INCENDIO_IDLE;
+            break;
+    }
+}
+
 
 void fsm_deteccion_asalto( void )
 {
@@ -955,8 +1074,15 @@ uint16_t apdisp_timer[5];
 void fsm_deteccion_dispositivos( void )
 {
 	int i;
+    int ndev;
 
-	for( i = 3; i < 8; i++ )	{
+    if(SystemFlag11 & INCE2MODE_FLAG)   {
+        ndev = 6;
+    } else  {
+        ndev = 8;
+    }
+
+	for( i = 3; i < ndev; i++ )	{
 		if(PT_estado_particion[i-3] != 0x00)
 			continue;
 		switch(apdisp_state[i - 3])	{
@@ -2030,6 +2156,8 @@ void  AlarmDetectTask(void  *p_arg)
 		dasa_state = ASALTO_IDLE;
 		df220_state = F220_IDLE;
 		dinc_state = INCENDIO_IDLE;
+        dinc2_state = INCENDIO_IDLE;
+        dfinc2_state = INCENDIO_IDLE;
 		drst_state = RSTALM_IDLE;
 		dteso_state = TESORO_IDLE;
 
@@ -2322,6 +2450,10 @@ void  AlarmDetectTask(void  *p_arg)
 			fsm_deteccion_asalto();
 			fsm_deteccion_tesoro();
 			fsm_deteccion_rotura();
+            if(SystemFlag11 & INCE2MODE_FLAG) {
+                fsm_deteccion_incendio2();
+                fsm_deteccion_fallainc2();
+            }
 			
 			if( SysFlag0 & TIMROT_flag )	{
 				SysFlag0 &= ~TIMROT_flag;

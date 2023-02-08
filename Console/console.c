@@ -246,7 +246,8 @@ const ConsoleCommand console_commands[] =
     { "closerst",	con_closerst,		    0,		MCMI_LEVEL},
     { "closesoc",	con_closesoc,		    0,		MCMI_LEVEL},
     { "w",             con_evowdog,               0,		MONI_LEVEL},
-//    { "perifpwr",    con_perifpwr,               0,		MONI_LEVEL},
+    { "actince2",             con_ince2activation,               0,		MONI_LEVEL},
+    { "deactince2",             con_ince2deactivation,               0,		MONI_LEVEL},
 	{ "P",             con_poll,               0,		MONI_LEVEL}
 };
 
@@ -7421,15 +7422,45 @@ int con_radarctivation(ConsoleState* state)
 
 int con_radardeactivation(ConsoleState* state)
 {
+    uint8_t buffer[4];
+    int error;
+
+
+    buffer[0] = 0xAA;
+    buffer[1] = 0xBB;
+    error = flash0_write(1, buffer, DF_ARADAR_OFFSET, 2);
+    WDT_Feed();
+    SystemFlag6 &= ~USE_ARADAR;
+
+    return 1;
+}
+
+int con_ince2activation(ConsoleState* state)
+{
+    uint8_t buffer[4];
+    int error;
+
+
+    buffer[0] = 0x5A;
+    buffer[1] = 0xA5;
+    error = flash0_write(1, buffer, DF_ACTINCE2_OFFSET, 2);
+    WDT_Feed();
+    SystemFlag11 |= INCE2MODE_FLAG;
+
+    return 1;
+}
+
+int con_ince2deactivation(ConsoleState* state)
+{
 	uint8_t buffer[4];
 	int error;
 
 
 	buffer[0] = 0xAA;
 	buffer[1] = 0xBB;
-	error = flash0_write(1, buffer, DF_ARADAR_OFFSET, 2);
+	error = flash0_write(1, buffer, DF_ACTINCE2_OFFSET, 2);
     WDT_Feed();
-    SystemFlag6 &= ~USE_ARADAR;
+    SystemFlag11 &= ~INCE2MODE_FLAG;
 
 	return 1;
 }

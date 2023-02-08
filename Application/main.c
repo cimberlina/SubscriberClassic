@@ -1005,6 +1005,14 @@ static  void  App_Task_1 (void  *p_arg)
     }
     WDT_Feed();
 
+    flash0_read(temp, DF_ACTINCE2_OFFSET, 2);
+    if((temp[0] == 0x5A) && (temp[1] == 0xA5)) {
+        SystemFlag11 |= INCE2MODE_FLAG;
+    } else  {
+        SystemFlag11 &= ~INCE2MODE_FLAG;
+    }
+    WDT_Feed();
+
     flash0_read(temp, DF_ENARHB_OFFSET, 2);
     if((temp[0] == 0x5A) && (temp[1] == 0xA5)) {
         SystemFlag6 |= ENARHB_FLAG;
@@ -2466,6 +2474,10 @@ void SoftwareTimersHandler(void)
 
 		if(dbnc_ince_timer)
 			dbnc_ince_timer--;
+        if(dbnc_ince2_timer)
+            dbnc_ince2_timer--;
+        if(dbnc_fince2_timer)
+            dbnc_fince2_timer--;
 		if(dbnc_asal_timer)
 			dbnc_asal_timer--;
 		if(dbnc_teso_timer)
