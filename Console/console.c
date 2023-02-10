@@ -248,6 +248,7 @@ const ConsoleCommand console_commands[] =
     { "w",             con_evowdog,               0,		MONI_LEVEL},
     { "actince2",             con_ince2activation,               0,		MONI_LEVEL},
     { "deactince2",             con_ince2deactivation,               0,		MONI_LEVEL},
+    { "ince2?",             con_ince2_status,               0,		MONI_LEVEL},
 	{ "P",             con_poll,               0,		MONI_LEVEL}
 };
 
@@ -5043,6 +5044,12 @@ int con_conf_ticket(ConsoleState* state)
     }
     WDT_Feed();
 
+    if(SystemFlag11 & INCE2MODE_FLAG)   {
+        state->conio->puts("Incendio 2 Activado\n\r");
+    } else  {
+        state->conio->puts("Incendio 2 Desactivado\n\r");
+    }
+
 	return 1;
 }
 
@@ -5327,6 +5334,16 @@ int con_st_llavemecanica(ConsoleState* state)
 		}
 	}
 	return 1;
+}
+
+int con_ince2_status(ConsoleState* state)
+{
+    if(SystemFlag11 & INCE2MODE_FLAG)   {
+        state->conio->puts("1\n\r");
+    } else  {
+        state->conio->puts("0\n\r");
+    }
+    return 1;
 }
 
 int con_st_puerta(ConsoleState* state)

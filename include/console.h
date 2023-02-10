@@ -34,12 +34,12 @@ extern uint8_t	r3kmode;
 -----------------------------------------\r\n\
 NXP LPC1769 Cortex-M3 System-UP by C.M.I.\r\n\
 EYSE (C) 2023 Abonado - EYSE Ingenieria\r\n\
-Version: 6.29CB                  20230208\r\n\
+Version: 6.30CB                  20230210\r\n\
 -----------------------------------------\r\n"
 
-#define	VERSION_ABO		"Version: 6.29CB            20230208\r\n"
+#define	VERSION_ABO		"Version: 6.30CB            20230210\r\n"
 
-#define VERSION_NUMBER  629
+#define VERSION_NUMBER  630
 
 #define VERSION_YEAR	2021
 
@@ -397,6 +397,7 @@ int con_perifpwr(ConsoleState* state);
 
 int con_ince2activation(ConsoleState* state);
 int con_ince2deactivation(ConsoleState* state);
+int con_ince2_status(ConsoleState* state);
 
 extern const ConsoleIO console_io[];
 
