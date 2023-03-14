@@ -59,6 +59,11 @@
 #define PERIFPWR_OFF()  GPIO_ClearValue(2, (1 << 8));
 #define PERIFPWR_ON()  GPIO_SetValue(2, (1 << 8));
 
+#define BELL1_ON()  GPIO_ClearValue(1, (1 << 25));
+#define BELL1_OFF()  GPIO_SetValue(1, (1 << 25));
+#define BELL2_ON()  GPIO_ClearValue(1, (1 << 31));
+#define BELL2_OFF()  GPIO_SetValue(1, (1 << 31));
+
 #define	LAN485_PTM			1
 #define	R3K_SERIAL			1
 //#define AUTORST_PRUEBA		1
@@ -218,6 +223,8 @@ extern uint32_t SystemFlag11;
 #define CONSOLASAL_FLAG (1 << 3)
 #define OPTOAPER2_FLAG  (1 << 4)
 #define INCE2MODE_FLAG  (1 << 5)
+#define PWR1PULSE_FLAG  (1 << 6)
+#define PWR2PULSE_FLAG  (1 << 7)
 
 extern uint8_t FSM_FLAG_1;
 #define WDEVO0_ALRM_FLAG    (1 << 0)

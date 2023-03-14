@@ -192,5 +192,24 @@ int con_set1rtc(ConsoleState* state);
 
 time_t ConvTimestamp(char *contimestamp);
 
+#define EVSET_APERTURA      0
+#define EVSET_ALARMAS       1
+#define EVSET_F220          2
+#define EVSET_SUPERVISION   3
+#define EVSET_ROTURA        4
+#define EVSET_PREVE         5
+#define EVSET_RESET         6
+#define EVSET_DESPROTECCION 7
+#define EVSET_TECNICO       8
+#define EVSET_ALL           99
+
+#define EVSET_LEN           105
+#define EVSET_TYPE_LEN      9
+
+extern const uint16_t EveSet_TBL[EVSET_TYPE_LEN][EVSET_LEN];
+
+int eveset_number( char *evestr);
+int IsInEveTBL( int evset, uint16_t event);
+
 
 #endif /* LOG_EVENT_H_ */

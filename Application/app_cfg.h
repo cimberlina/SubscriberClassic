@@ -62,13 +62,13 @@
 
 #define  APP_OS_CFG_TASK_1_PRIO                         4u      //4
 #define	TelnetServerTask_PRIO							15u
-#define	ZoneScanTask_PRIO								6u     //10
-#define	FsmLedsTask_PRIO								11u     //11
-#define	AlarmDetectTask_PRIO							7u     //12
-#define	AutoprotectTask_PRIO							8u     //13
-#define	RabbitTask_PRIO									9u		//14
-#define	LAN485_Task_PRIO								10u      //5
-#define	LogT_Task_PRIO								    5u      //6
+#define	ZoneScanTask_PRIO								6u     //10      _6
+#define	FsmLedsTask_PRIO								11u     //11    _11
+#define	AlarmDetectTask_PRIO							7u     //12     _7
+#define	AutoprotectTask_PRIO							8u     //13     _8
+#define	RabbitTask_PRIO									14u		//14    _9
+#define	LAN485_Task_PRIO								10u      //5    _10
+#define	LogT_Task_PRIO								    5u      //6     _5
 
 
 #define  OS_TASK_TMR_PRIO                (OS_LOWEST_PRIO - 2)

@@ -1512,6 +1512,11 @@ static  void  App_Task_1 (void  *p_arg)
 		        logCidEvent(account, 1, 785, 0, (uint16_t)170);
 		    else
 		        logCidEvent(account, 1, 785, 0, (uint16_t)BaseAlarmPkt_alarm);
+
+            if(SystemFlag11 & INCE2MODE_FLAG)
+                logCidEvent(account, 1, 927, 0, (uint16_t)1);
+            else
+                logCidEvent(account, 1, 927, 0, (uint16_t)0);
 		}
 
 		//transmision de eventos del grupo 1, dia domingo
@@ -2442,6 +2447,8 @@ void AboBoardInit(void)
 	LPC_I2C1->I2CONCLR = I2CONCLR_AAC;
 	LPC_I2C1->I2CONCLR = I2CONCLR_SIC;
 
+    BELL1_ON();
+    BELL2_ON();
 	//************************************************************************************************************************************
 	// Inicializacion del watchdog
 	// Initialize WDT, IRC OSC, interrupt mode, timeout = 5000000us = 5s

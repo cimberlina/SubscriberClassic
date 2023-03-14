@@ -2382,12 +2382,18 @@ void  AlarmDetectTask(void  *p_arg)
 
     FSM_ReadHistory();
 
+    fsmpwr1state = FSMPWR_IDLE;
+    fsmpwr2state = FSMPWR_IDLE;
+
 	while(DEF_ON)	{
 		WDT_Feed();
 		OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);		//previo timeinterval = 5
 		UDP_cmd_server();
 		fsm_init_cmx_preve();
         refresh_alrm_led();
+
+        fsm_pwr1_pulse();
+        fsm_pwr2_pulse();
 
 		//fsm_txoff();
 		//fsm_txoff2();

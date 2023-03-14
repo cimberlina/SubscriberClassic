@@ -108,7 +108,7 @@ const ConsoleCommand console_commands[] =
 	{ "eyse_df_format",	con_EvDF_format,	0,		MCMI_LEVEL},
 	{ "ev_hex_dump",	con_DumpEvMemory,		0,		MCMI_LEVEL},
 	{ "ev_inx_dump",	con_DumpEvIndex,		0,		MCMI_LEVEL},
-	{ "ev_time_dump",	con_DumpEventByTime,	0,		OPER_LEVEL},
+	{ "history",	con_DumpEventByTime,	0,		OPER_LEVEL},
 	{ "set rtc",		con_setrtc,				0,		MONI_LEVEL},
 	{ "...@#set rtc",	con_set1rtc,			0,		FREE_LEVEL},
 	{ "...@#RHB",		con_rhb,				0,		FREE_LEVEL},
@@ -249,6 +249,12 @@ const ConsoleCommand console_commands[] =
     { "actince2",             con_ince2activation,               0,		MONI_LEVEL},
     { "deactince2",             con_ince2deactivation,               0,		MONI_LEVEL},
     { "ince2?",             con_ince2_status,               0,		MONI_LEVEL},
+    { "PWR1_ON",             con_bell1on,               0,		MONI_LEVEL},
+    { "PWR1_OFF",             con_bell1off,               0,		MONI_LEVEL},
+    { "PWR2_ON",             con_bell2on,               0,		MONI_LEVEL},
+    { "PWR2_OFF",             con_bell2off,               0,		MONI_LEVEL},
+    { "PWR1_PULSE",             con_bell1pulse,               0,		MONI_LEVEL},
+    { "PWR2_PULSE",             con_bell2pulse,               0,		MONI_LEVEL},
 	{ "P",             con_poll,               0,		MONI_LEVEL}
 };
 
@@ -7467,6 +7473,63 @@ int con_ince2activation(ConsoleState* state)
     return 1;
 }
 
+int con_bell1on(ConsoleState* state)
+{
+    BELL1_ON();
+    return 1;
+}
+int con_bell1off(ConsoleState* state)
+{
+    BELL1_OFF();
+    return 1;
+}
+int con_bell2on(ConsoleState* state)
+{
+    BELL2_ON();
+    return 1;
+}
+int con_bell2off(ConsoleState* state)
+{
+    BELL2_OFF();
+    return 1;
+}
+
+int con_bell1pulse(ConsoleState* state)
+{
+    uint16_t duration;
+
+    if( state->numparams < 2 )  {
+        duration = 20;
+    } else {
+        duration = atoi(con_getparam(state->command, 1));
+        if (duration > 600) {
+            state->conio->puts("PWR1_PULSE [0 a 600]\n\r");
+            return 1;
+        }
+    }
+    PWR1PULSE_TIME = duration;
+    SystemFlag11 |= PWR1PULSE_FLAG;
+    return 1;
+}
+
+int con_bell2pulse(ConsoleState* state)
+{
+    uint16_t duration;
+
+    if( state->numparams < 2 )  {
+        duration = 20;
+    } else {
+        duration = atoi(con_getparam(state->command, 1));
+        if (duration > 600) {
+            state->conio->puts("PWR2_PULSE [0 a 600]\n\r");
+            return 1;
+        }
+    }
+    PWR2PULSE_TIME = duration;
+    SystemFlag11 |= PWR2PULSE_FLAG;
+    return 1;
+}
+
 int con_ince2deactivation(ConsoleState* state)
 {
 	uint8_t buffer[4];
@@ -8617,4 +8680,72 @@ int con_closesoc(ConsoleState* state)
 //    Monitoreo[1].flags &= ~ACKWDG_FLAG;
     return 1;
 
+}
+
+uint8_t fsmpwr1state;
+uint8_t fsmpwr2state;
+
+
+uint16_t PWR1PULSE_TIME;
+uint16_t PWR2PULSE_TIME;
+
+void fsm_pwr1_pulse( void )
+{
+    static uint32_t timer;
+
+    switch(fsmpwr1state) {
+        case FSMPWR_IDLE:
+            BELL1_ON();
+            SystemFlag11 &= ~PWR1PULSE_FLAG;
+            fsmpwr1state = FSMPWR_ON;
+            PWR1PULSE_TIME = 20;
+            break;
+        case FSMPWR_ON:
+            if(SystemFlag11 & PWR1PULSE_FLAG)   {
+                SystemFlag11 &= ~PWR1PULSE_FLAG;
+                timer = SEC_TIMER;
+                fsmpwr1state = FSMPWR_OFF;
+                BELL1_OFF();
+            }
+            break;
+        case FSMPWR_OFF:
+            if(SEC_TIMER > timer + PWR1PULSE_TIME)  {
+                SystemFlag11 &= ~PWR1PULSE_FLAG;
+                fsmpwr1state = FSMPWR_ON;
+                BELL1_ON();
+            }
+            break;
+    }
+}
+
+void fsm_pwr2_pulse( void )
+{
+    static uint32_t timer;
+
+    switch(fsmpwr2state) {
+        case FSMPWR_IDLE:
+            BELL2_ON();
+            SystemFlag11 &= ~PWR1PULSE_FLAG;
+            fsmpwr2state = FSMPWR_ON;
+            PWR2PULSE_TIME = 20;
+            break;
+        case FSMPWR_ON:
+            if(SystemFlag11 & PWR2PULSE_FLAG)   {
+                SystemFlag11 &= ~PWR2PULSE_FLAG;
+                timer = SEC_TIMER;
+                fsmpwr2state = FSMPWR_OFF;
+                BELL2_OFF();
+            }
+            break;
+        case FSMPWR_OFF:
+            if(SEC_TIMER > timer + PWR2PULSE_TIME)  {
+                SystemFlag11 &= ~PWR2PULSE_FLAG;
+                fsmpwr2state = FSMPWR_ON;
+                BELL2_ON();
+            }
+            break;
+        default:
+            fsmpwr2state = FSMPWR_IDLE;
+            break;
+    }
 }

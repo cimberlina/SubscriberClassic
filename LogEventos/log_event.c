@@ -1534,16 +1534,96 @@ int con_audit_dump(ConsoleState* state)
 	return 1;	
 }
 
+
+int eveset_number( char *evestr)
+{
+    int evesetnum;
+
+    //Str_Cmp(con_getparam(state->command, temp), "yes") == 0)
+    if(Str_Cmp(evestr, "APERTURA") == 0)
+        evesetnum = EVSET_APERTURA;
+    else if(Str_Cmp(evestr, "ALARMAS") == 0)
+        evesetnum = EVSET_ALARMAS;
+    else if(Str_Cmp(evestr, "F220") == 0)
+        evesetnum = EVSET_F220;
+    else if(Str_Cmp(evestr, "SUPERVISION") == 0)
+        evesetnum = EVSET_SUPERVISION;
+    else if(Str_Cmp(evestr, "ROTURA") == 0)
+        evesetnum = EVSET_ROTURA;
+    else if(Str_Cmp(evestr, "PREVE") == 0)
+        evesetnum = EVSET_PREVE;
+    else if(Str_Cmp(evestr, "RESET") == 0)
+        evesetnum = EVSET_RESET;
+    else if(Str_Cmp(evestr, "DESPROTECCION") == 0)
+        evesetnum = EVSET_DESPROTECCION;
+    else if(Str_Cmp(evestr, "TECNICO") == 0)
+        evesetnum = EVSET_TECNICO;
+    else if(Str_Cmp(evestr, "ALL") == 0)
+        evesetnum = EVSET_ALL;
+    else
+        evesetnum = -1;
+
+    return evesetnum;
+}
+
+const uint16_t EveSet_TBL[EVSET_TYPE_LEN][EVSET_LEN] = {
+        {0x137, 0x147, 0x674, 0x675, 0x913, 0x914, 0},
+        {0x120, 0x121, 0x122, 0x123, 0x127, 0x128, 0x165, 0x166, 0x167, 0x168, 0x169, 0x888, 0x889, 0x130, 0x131, 0x132,
+         0x133, 0x134, 0x135, 0x138, 0x180, 0x181, 0x182, 0x183, 0x184, 0x185, 0x186, 0x187, 0x188, 0x189, 0x190, 0x191, 0x192,
+         0x110, 0x111, 0x112, 0x113, 0x114, 0x115, 0x116, 0x117, 0x118, 0x175, 0x176, 0x139, 0x136, 0x145, 0x393, 0},
+        {0x301, 0x302, 0x333, 0x337, 0x342, 0},
+        { 0x699, 0x700, 0x602, 0},
+        {0x143, 0x144, 0x300, 0x303, 0x304, 0x305, 0x308, 0x309, 0x310, 0x311, 0x312, 0x314, 0x315, 0x321, 0x322, 0x323, 0x324,
+         0x325, 0x333, 0x341, 0x350, 0x354, 0x380, 0x381, 0x382, 0x383, 0x384, 0x385, 0x386, 0x387, 0x388, 0x735, 0x943, 0},
+        { 0x356,0 },
+        { 0x900, 0x901, 0x902, 0x903, 0x904, 0},
+        {0x400, 0x401, 0x402, 0x403, 0x404, 0x405, 0x407, 0x408, 0x409, 0x441, 0x442, 0x451, 0x452, 0x456, 0x470, 0x801, 0},
+        {0x306, 0x353, 0x406, 0x412, 0x421, 0x422, 0x423, 0x429, 0x430, 0x460, 0x528, 0x529, 0x530, 0x552, 0x570, 0x571, 0x572,
+         0x572, 0x573, 0x574,  0x621, 0x622, 0x623, 0x624, 0x625, 0x626, 0x627, 0x628, 0x670, 0x671, 0x672, 0x673,
+         0x676, 0x677, 0x678, 0x679, 0x680, 0x681, 0x682, 0x777, 0x778, 0x779, 0x780, 0x781, 0x785, 0x812, 0x813, 0x814, 0x815,
+         0x879, 0x880, 0x881, 0x882, 0x883, 0x884, 0x885, 0x886, 0x887, 0x891, 0x892, 0x895, 0x905, 0x906, 0x909, 0x910, 0x911,
+         0x912, 0x915, 0x916, 0x917, 920, 0x921, 0x922, 0x923, 0x927,0x931, 0x933, 0x934, 0x941, 0x942, 0x944, 0x945, 0x946, 0x961,
+         0x962, 0x972, 0x973, 0x974, 0x975, 0x978, 0x979, 0x980, 0x981, 0x982, 0x983, 0x984, 0x985, 0x986, 0x987, 0x988, 0x989,
+         0x990, 0x991, 0x995, 0x996 }
+};
+
+int IsInEveTBL( int evset, uint16_t event)
+{
+    int i;
+
+    if(evset == EVSET_ALL)
+        return 1;
+
+    for(i = 0; i < EVSET_LEN; i++) {
+        if( EveSet_TBL[evset][i] == event)
+            return 1;
+        else if(EveSet_TBL[evset][i] == 0)
+            return 0;
+    }
+    return 0;
+}
+
 int con_DumpEventByTime(ConsoleState* state)
 {
 	uint16_t indexT1, indexT2, i;
 	char buffer[128];
 	EventRecord thisevent;
 	time_t t1, t2;
-    int retval;
+    int retval, eventset;
+
+    if(state->commandparams >= 1 ) {
+        eventset = eveset_number(con_getparam(state->command, 1));
+        if(eventset == -1)  {
+            state->conio->puts("Error de parametros\n\r");
+            return -1;
+        }
+    } else  {
+        state->conio->puts("Error de parametros\n\r");
+        return -1;
+    }
 
 	switch(state->numparams)	{
-	case 1:
+	case 2:
 		i = HowManyEvents();
 		if(i > evflash_wrptr)	{
 			indexT1 = evflash_wrptr;
@@ -1553,8 +1633,8 @@ int con_DumpEventByTime(ConsoleState* state)
 			indexT2 = evflash_wrptr -1;
 		}
 		break;
-	case 2:
-		retval = GetTimestampIndexEv_GE(con_getparam(state->command, 1));
+	case 3:
+		retval = GetTimestampIndexEv_GE(con_getparam(state->command, 2));
         if(retval == -1)   {
             state->conio->puts("\n\r");
             return 1;
@@ -1562,18 +1642,18 @@ int con_DumpEventByTime(ConsoleState* state)
         indexT1 = retval;
 		indexT2 = evflash_wrptr - 1;
 		break;
-	case 3:
-		t1 = ConvTimestamp(con_getparam(state->command, 1));
-		t2 = ConvTimestamp(con_getparam(state->command, 2));
+	case 4:
+		t1 = ConvTimestamp(con_getparam(state->command, 2));
+		t2 = ConvTimestamp(con_getparam(state->command, 3));
 		if( t1 > t2)	{
 			state->conio->puts("Invalid parameters\n\r");
 			return -1;
 
 		} else if( t2 > t1)	{
-			indexT1 = GetTimestampIndexEv_GE(con_getparam(state->command, 1));
-			indexT2 = GetTimestampIndexEv_LE(con_getparam(state->command, 2));
+			indexT1 = GetTimestampIndexEv_GE(con_getparam(state->command, 2));
+			indexT2 = GetTimestampIndexEv_LE(con_getparam(state->command, 3));
 		} else	{
-			indexT1 = GetTimestampIndexEv_GE(con_getparam(state->command, 1));
+			indexT1 = GetTimestampIndexEv_GE(con_getparam(state->command, 2));
 			indexT2 = evflash_wrptr - 1;
 		}
 		break;
@@ -1585,8 +1665,10 @@ int con_DumpEventByTime(ConsoleState* state)
 	if(indexT2 >= indexT1)	{
 		for( i = indexT1; i <= indexT2; i++)	{
 			if(ReadEventFromFlash( i, &thisevent ))	{
-				BufPrintCidEvent( buffer, &thisevent, 128 );
-				state->conio->puts(buffer);
+                if(IsInEveTBL(eventset, thisevent.cid_eventcode)) {
+                    BufPrintCidEvent(buffer, &thisevent, 128);
+                    state->conio->puts(buffer);
+                }
 			} else	{
 				state->conio->puts("\n\r");
 				return 1;
@@ -1595,8 +1677,10 @@ int con_DumpEventByTime(ConsoleState* state)
 	} else	{
 		for( i = indexT1; i < DF_MAXEVENTS; i++)	{
 			if(ReadEventFromFlash( i, &thisevent ))	{
-				BufPrintCidEvent( buffer, &thisevent, 128 );
-				state->conio->puts(buffer);
+                if(IsInEveTBL(eventset, thisevent.cid_eventcode)) {
+                    BufPrintCidEvent(buffer, &thisevent, 128);
+                    state->conio->puts(buffer);
+                }
 			} else	{
 				state->conio->puts("\n\r");
 				return 1;
@@ -1604,8 +1688,10 @@ int con_DumpEventByTime(ConsoleState* state)
 		}
 		for( i = 0; i <= indexT2; i++)	{
 			if(ReadEventFromFlash( i, &thisevent ))	{
-				BufPrintCidEvent( buffer, &thisevent, 128 );
-				state->conio->puts(buffer);
+                if(IsInEveTBL(eventset, thisevent.cid_eventcode)) {
+                    BufPrintCidEvent(buffer, &thisevent, 128);
+                    state->conio->puts(buffer);
+                }
 			} else	{
 				state->conio->puts("\n\r");
 				return 1;

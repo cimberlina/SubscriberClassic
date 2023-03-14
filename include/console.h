@@ -34,12 +34,12 @@ extern uint8_t	r3kmode;
 -----------------------------------------\r\n\
 NXP LPC1769 Cortex-M3 System-UP by C.M.I.\r\n\
 EYSE (C) 2023 Abonado - EYSE Ingenieria\r\n\
-Version: 6.30CB                  20230210\r\n\
+Version: 6.32SB                  20230306\r\n\
 -----------------------------------------\r\n"
 
-#define	VERSION_ABO		"Version: 6.30CB            20230210\r\n"
+#define	VERSION_ABO		"Version: 6.32SB            20230206\r\n"
 
-#define VERSION_NUMBER  630
+#define VERSION_NUMBER  632
 
 #define VERSION_YEAR	2021
 
@@ -399,7 +399,25 @@ int con_ince2activation(ConsoleState* state);
 int con_ince2deactivation(ConsoleState* state);
 int con_ince2_status(ConsoleState* state);
 
+int con_bell1on(ConsoleState* state);
+int con_bell1off(ConsoleState* state);
+int con_bell2on(ConsoleState* state);
+int con_bell2off(ConsoleState* state);
+int con_bell1pulse(ConsoleState* state);
+int con_bell2pulse(ConsoleState* state);
+
+void fsm_pwr1_pulse( void );
+void fsm_pwr2_pulse( void );
+
 extern const ConsoleIO console_io[];
+
+extern uint16_t PWR1PULSE_TIME;
+extern uint16_t PWR2PULSE_TIME;
+extern uint8_t fsmpwr1state;
+extern uint8_t fsmpwr2state;
+#define FSMPWR_IDLE         0x10
+#define FSMPWR_ON           0x20
+#define FSMPWR_OFF          0x30
 
 extern unsigned char fsmrhbstate;
 #define FSMRHB_IDLE		0x10
