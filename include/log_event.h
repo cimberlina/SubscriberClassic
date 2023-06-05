@@ -132,6 +132,8 @@ typedef struct	{
 #define DF_HRSTHAB_OFFSET       332     //2
 #define DF_HISTORY2_OFFSET      334     //8
 #define DF_ACTINCE2_OFFSET      342     //2
+#define DF_MACROMODE_OFFSET     346     //2
+#define DF_NETRECOV_OFFSET      348     //2
 
 #define	ACKRCVDMON0				0x01
 #define	ACKRCVDMON1				0x02
@@ -203,13 +205,74 @@ time_t ConvTimestamp(char *contimestamp);
 #define EVSET_TECNICO       8
 #define EVSET_ALL           99
 
-#define EVSET_LEN           105
+#define EVSET_LEN           106
 #define EVSET_TYPE_LEN      9
 
+#define MACROEVENTS_LEN     30
+
 extern const uint16_t EveSet_TBL[EVSET_TYPE_LEN][EVSET_LEN];
+extern const uint16_t Eve400_TBL[10];
 
 int eveset_number( char *evestr);
 int IsInEveTBL( int evset, uint16_t event);
+
+int IsInEve400TBL(uint16_t event);
+
+int IsInEveMACROTBL(uint16_t event);
+void fsm_MEV110(void);
+void fsm_MEV120(void);
+void fsm_MEV130(void);
+
+void fsm_MEV400P5(void);
+void fsm_MEV400P6(void);
+void fsm_MEV400P7(void);
+void fsm_MEV400P8(void);
+void fsm_MEV400P9(void);
+
+void ReadOutEventMacro( int co_id, EventRecord *event);
+
+extern unsigned char fsm_MEV130_state;
+#define FMEV130_IDLE    0x10
+#define FMEV130P0       0x20
+#define FMEV130P04      0x30
+#define FMEV130_GUARD   0x40
+
+extern unsigned char fsm_MEV120_state;
+#define FMEV120_IDLE    0x10
+#define FMEV120P0       0x20
+#define FMEV120P02      0x30
+#define FMEV120_GUARD   0x40
+
+extern unsigned char fsm_MEV110_state;
+#define FMEV110_IDLE    0x10
+#define FMEV110P0       0x20
+#define FMEV110P03      0x30
+#define FMEV110_GUARD   0x40
+
+extern uint8_t fsm_MEV400P5_state;
+#define FMEV400P5_IDLE  0x10
+#define FMEV400P5_RXD   0x20
+#define FMEV400P5_GUARD 0x30
+
+extern uint8_t fsm_MEV400P6_state;
+#define FMEV400P6_IDLE  0x10
+#define FMEV400P6_RXD   0x20
+#define FMEV400P6_GUARD 0x30
+
+extern uint8_t fsm_MEV400P7_state;
+#define FMEV400P7_IDLE  0x10
+#define FMEV400P7_RXD   0x20
+#define FMEV400P7_GUARD 0x30
+
+extern uint8_t fsm_MEV400P8_state;
+#define FMEV400P8_IDLE  0x10
+#define FMEV400P8_RXD   0x20
+#define FMEV400P8_GUARD 0x30
+
+extern uint8_t fsm_MEV400P9_state;
+#define FMEV400P9_IDLE  0x10
+#define FMEV400P9_RXD   0x20
+#define FMEV400P9_GUARD 0x30
 
 
 #endif /* LOG_EVENT_H_ */

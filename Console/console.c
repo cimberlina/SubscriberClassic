@@ -6,8 +6,8 @@
  */
 #include "includes.h"
 
-int conio_telnet_port;
-int __code_bytes_needed;
+//int conio_telnet_port;
+//int __code_bytes_needed;
 
 uint8_t	r3kmode;
 
@@ -90,8 +90,8 @@ const int batscale[21][2] =	{
 };
 const ConsoleCommand console_commands[] =
 {
-	{ "dflash", 		con_dflash_dump, 		0,		OPER_LEVEL},
-	{ "ucflash", 		con_ucflash_dump, 		0,		OPER_LEVEL},
+//	{ "dflash", 		con_dflash_dump, 		0,		OPER_LEVEL},
+//	{ "ucflash", 		con_ucflash_dump, 		0,		OPER_LEVEL},
 	{ "version", 		con_version, 			0,		OPER_LEVEL},
 	{ "we2prom numabo", con_E2PROM_Write_numabo, 0,		MONI_LEVEL},
 	{ "we2prom rfansw", con_E2PROM_Write_rfansw, 0,		MONI_LEVEL},
@@ -101,13 +101,13 @@ const ConsoleCommand console_commands[] =
 	{ "debug rf", 		con_DBGRF_mode, 		0,		OPER_LEVEL},
 	{ "debug aborf", 	con_DBGABORF_mode,		0,		OPER_LEVEL},
     { "debug lan", 	con_DBGLAN_mode,		0,		OPER_LEVEL},
-	{ "RDCONFMEM", 		con_E2PROM_read1,		0,		OPER_LEVEL},
+//	{ "RDCONFMEM", 		con_E2PROM_read1,		0,		OPER_LEVEL},    //-
 	{ "set prevetimer", con_set_prevetimer, 	0,		MONI_LEVEL},
 
 	//visualizacion de eventos
 	{ "eyse_df_format",	con_EvDF_format,	0,		MCMI_LEVEL},
-	{ "ev_hex_dump",	con_DumpEvMemory,		0,		MCMI_LEVEL},
-	{ "ev_inx_dump",	con_DumpEvIndex,		0,		MCMI_LEVEL},
+	{ "ev_hex_dump",	con_DumpEvMemory,		0,		MCMI_LEVEL},        //-
+	{ "ev_inx_dump",	con_DumpEvIndex,		0,		MCMI_LEVEL},        //-
 	{ "history",	con_DumpEventByTime,	0,		OPER_LEVEL},
 	{ "set rtc",		con_setrtc,				0,		MONI_LEVEL},
 	{ "...@#set rtc",	con_set1rtc,			0,		FREE_LEVEL},
@@ -150,12 +150,12 @@ const ConsoleCommand console_commands[] =
     { "help",           helpcmd,                0,		OPER_LEVEL},
     { "factory",        factorycmd,             0,		MCMI_LEVEL},
     { "set r3kmode",   	con_rs232,   	        0,		OPER_LEVEL},
-    { "redbox",   		con_redbox,   	        0,		MONI_LEVEL},
+//    { "redbox",   		con_redbox,   	        0,		MONI_LEVEL},    //-
     { "set serialnum",	con_serialnum, 	        0,		PROD_LEVEL},
     { "set paptslot",	con_paptslot,			0,		MCMI_LEVEL},
     { "set pap_timer",	con_paparst_timer,		0,		MCMI_LEVEL},
 //    { "set ptxormask",	con_set_ptxormask,		0,		MONI_LEVEL},
-    { "ptxorstate",		ptxorstate,				0,		MONI_LEVEL},
+//    { "ptxorstate",		ptxorstate,				0,		MONI_LEVEL},    //-
     { "conf_ticket",	con_conf_ticket,		0,		OPER_LEVEL},
     { "set TAS",		con_set_TAS,			0,		OPER_LEVEL},
     { "set WDEVO",		con_set_wdogevo,		0,		MCMI_LEVEL},
@@ -172,7 +172,7 @@ const ConsoleCommand console_commands[] =
     //{ "LIC",			set_license,			0,		FREE_LEVEL},
     { "set NPEVENT",	con_set_npmed,			0,		MONI_LEVEL},
     { "medir NP",		measure_np, 			0,		MONI_LEVEL},
-    { "medir BAT",		measure_bat, 			0,		MONI_LEVEL},
+    { "medir BAT",		measure_bat, 			0,		MONI_LEVEL},    //-
     { "set BOOT",		con_set_bootmode, 		0,		MONI_LEVEL},
     { "calib",			con_calib,		 		0,		MONI_LEVEL},
     { "replicar",		con_replicar,	 		0,		OPER_LEVEL},
@@ -187,21 +187,21 @@ const ConsoleCommand console_commands[] =
 	{ "DHCP?",			show_dhcp_info,		 	0,		MONI_LEVEL},
 	{ "set DHCP",		con_SetDHCP,		 	0,		MONI_LEVEL},
 	{ "dhcpjumper",		con_dhcpjumper,		 	0,		MONI_LEVEL},
-	{ "dflash",			con_dflash_dump,		0,		OPER_LEVEL},
-	{ "toria1735",		con_audit_dump,			0,		MCMI_LEVEL},
+//	{ "dflash",			con_dflash_dump,		0,		OPER_LEVEL},
+	{ "toria1735",		con_audit_dump,			0,		MCMI_LEVEL},    //-
 	{ "set OPENPTM",	con_set_OPENPTM,		0,		OPER_LEVEL},
 	//{ "ECM",			CypherCommands,			0,		OPER_LEVEL},
 	{ "volumetricas",	con_volumetrica,		0,		OPER_LEVEL},
 	{ "redpar",			con_volredu,			0,		OPER_LEVEL},
-	{ "evo_armar",		con_armar,				0,		OPER_LEVEL},
-	{ "prueba_llave",	con_prueballave,		0,		OPER_LEVEL},
-	{ "TXOFF_largo",	con_txoff_largo,		0,		MONI_LEVEL},
-	{ "TXOFF_corto",	con_txoff_corto,		0,		MONI_LEVEL},
+//	{ "evo_armar",		con_armar,				0,		OPER_LEVEL},    //-
+//	{ "prueba_llave",	con_prueballave,		0,		OPER_LEVEL},        //-
+//	{ "TXOFF_largo",	con_txoff_largo,		0,		MONI_LEVEL},        //-
+//	{ "TXOFF_corto",	con_txoff_corto,		0,		MONI_LEVEL},        //-
 	{ "show ptmpwd",	con_showptmpwd,			0,		FREE_LEVEL},
 	{ "...@#dumpdev",	con_rvb_dump_dev,		0,		FREE_LEVEL},
-	{ "monistruct",		con_dump_monstruct,		0,		FREE_LEVEL},
-	{ "ActLicence",		con_licactivation,		0,		FREE_LEVEL},
-	{ "PindongAL",		con_licdeactivation,	0,		FREE_LEVEL},
+//	{ "monistruct",		con_dump_monstruct,		0,		FREE_LEVEL},    //-
+//	{ "ActLicence",		con_licactivation,		0,		FREE_LEVEL},
+//	{ "PindongAL",		con_licdeactivation,	0,		FREE_LEVEL},
 	{ "ActRadar",		con_radarctivation,		0,		FREE_LEVEL},
 	{ "PindongAR",		con_radardeactivation,	0,		FREE_LEVEL},
 	{ "...@#ActAsalto",	con_ASALTOactivation,	0,		FREE_LEVEL},
@@ -218,8 +218,8 @@ const ConsoleCommand console_commands[] =
 	{ "INPATT_CHECK",	con_INPATTERN_activation,	0,	MCMI_LEVEL},
 	{ "INPATT_UNCHECK",	con_INPATTERN_deactivation,	0,	MCMI_LEVEL},
     { "INPATT?",	    con_INPATTERNASK,	    0,	    MCMI_LEVEL},
-	{ "set IRIDIUM",	con_IRI_activation,		0,		MCMI_LEVEL},
-	{ "set IRIMODE",	con_IRI_mode,			0,		MCMI_LEVEL},
+//	{ "set IRIDIUM",	con_IRI_activation,		0,		MCMI_LEVEL},    //-
+//	{ "set IRIMODE",	con_IRI_mode,			0,		MCMI_LEVEL},        //-
     { "set PPONWDOG",	con_PPONWDOG,			0,		MCMI_LEVEL},
 	{ "castrotu",		con_castrotu,			0,		MCMI_LEVEL},
 	{ "set NMAX",		con_setNmax,			0,		MCMI_LEVEL},
@@ -233,7 +233,7 @@ const ConsoleCommand console_commands[] =
     { "...@#SNDVDLY",	con_sendvarsdly,        0,		MCMI_LEVEL},
 	{ "!@#NORM",		con_normalrm,			0,		MCMI_LEVEL},
     { "REMPTMARM",		con_remptmarm,			0,		MCMI_LEVEL},
-    { "r485stat",      con_pakterrors,			0,		MCMI_LEVEL},
+//    { "r485stat",      con_pakterrors,			0,		MCMI_LEVEL},
     { "rffilter1",     con_rffilter1,			0,		MCMI_LEVEL},
     { "rffilter2",     con_rffilter2,			0,		MCMI_LEVEL},
     { "delaydual",     con_delaydual,			0,		MCMI_LEVEL},
@@ -242,9 +242,9 @@ const ConsoleCommand console_commands[] =
 //    { "DeactEvLic",    con_evsend_deactivation,0,		MCMI_LEVEL},
     { "set NETRSTHAB",	con_netrsthab,		    0,		MCMI_LEVEL},
     { "set HIGRSTHAB",	con_higrsthab,		    0,		MCMI_LEVEL},
-    { "gencid",	con_gencid,		    0,		MCMI_LEVEL},
-    { "closerst",	con_closerst,		    0,		MCMI_LEVEL},
-    { "closesoc",	con_closesoc,		    0,		MCMI_LEVEL},
+    { "gencid",	con_gencid,		    0,		MCMI_LEVEL},        //-
+//    { "closerst",	con_closerst,		    0,		MCMI_LEVEL},    //-
+//    { "closesoc",	con_closesoc,		    0,		MCMI_LEVEL},    //-
     { "w",             con_evowdog,               0,		MONI_LEVEL},
     { "actince2",             con_ince2activation,               0,		MONI_LEVEL},
     { "deactince2",             con_ince2deactivation,               0,		MONI_LEVEL},
@@ -255,6 +255,8 @@ const ConsoleCommand console_commands[] =
     { "PWR2_OFF",             con_bell2off,               0,		MONI_LEVEL},
     { "PWR1_PULSE",             con_bell1pulse,               0,		MONI_LEVEL},
     { "PWR2_PULSE",             con_bell2pulse,               0,		MONI_LEVEL},
+    { "MACRO_MODE",             con_macromode,               0,		MONI_LEVEL},
+    { "NETRECOV",             con_netrecov,               0,		MONI_LEVEL},
 	{ "P",             con_poll,               0,		MONI_LEVEL}
 };
 
@@ -1109,7 +1111,7 @@ int con_set_prevetimer(ConsoleState* state)
 		return 1;
 	}
 	numabo = atoi(con_getparam(state->command, 2));
-	if((numabo >= 0) && (numabo <= 17))
+	if((numabo >= 0) && (numabo <= 45))
 		EepromWriteByte(PREVETIMER_E2P_ADDR, (uint8_t)numabo, &error);
 	else	{
 		state->conio->puts("*** PREVETIMER debe estar entre 0 y 17 minutos ***\n\r");
@@ -1298,40 +1300,40 @@ int con_E2PROM_Write_rfansw(ConsoleState* state)
 	return 1;
 }
 
-int con_E2PROM_read1(ConsoleState* state)
-{
-	uint8_t tempbuffer[32];
-	int error;
-
-	//EepromReadBuffer(RF_NUMABO_E2P_ADDR, tempbuffer, 32, &error );
-	EepromReadBuffer(LOCAL_IP_E2P_ADDR, tempbuffer, 16, &error );
-	dumpMemory(tempbuffer, 16);
-	CommSendString(DEBUG_COMM, "\n\r");
-	EepromReadBuffer(NETMASK_E2P_ADDR, tempbuffer, 16, &error );
-	dumpMemory(tempbuffer, 16);
-	CommSendString(DEBUG_COMM, "\n\r");
-	EepromReadBuffer(GATEWAY_E2P_ADDR, tempbuffer, 16, &error );
-	dumpMemory(tempbuffer, 16);
-	CommSendString(DEBUG_COMM, "\n\r"); CommSendString(DEBUG_COMM, "\n\r");
-
-	EepromReadBuffer(IPADDCHK_E2P_ADDR, tempbuffer, 6, &error );
-
-	printByte(tempbuffer[0]);
-	CommPutChar(DEBUG_COMM,' ',0);
-	printByte(tempbuffer[1]);
-	CommPutChar(DEBUG_COMM,' ',0);
-	printByte(tempbuffer[2]);
-	CommPutChar(DEBUG_COMM,' ',0);
-	printByte(tempbuffer[3]);
-	CommPutChar(DEBUG_COMM,' ',0);
-	printByte(tempbuffer[4]);
-	CommPutChar(DEBUG_COMM,' ',0);
-	printByte(tempbuffer[5]);
-	CommPutChar(DEBUG_COMM,' ',0);
-	CommSendString(DEBUG_COMM, "\n\r");
-
-	return 1;
-}
+//int con_E2PROM_read1(ConsoleState* state)
+//{
+//	uint8_t tempbuffer[32];
+//	int error;
+//
+//	//EepromReadBuffer(RF_NUMABO_E2P_ADDR, tempbuffer, 32, &error );
+//	EepromReadBuffer(LOCAL_IP_E2P_ADDR, tempbuffer, 16, &error );
+//	dumpMemory(tempbuffer, 16);
+//	CommSendString(DEBUG_COMM, "\n\r");
+//	EepromReadBuffer(NETMASK_E2P_ADDR, tempbuffer, 16, &error );
+//	dumpMemory(tempbuffer, 16);
+//	CommSendString(DEBUG_COMM, "\n\r");
+//	EepromReadBuffer(GATEWAY_E2P_ADDR, tempbuffer, 16, &error );
+//	dumpMemory(tempbuffer, 16);
+//	CommSendString(DEBUG_COMM, "\n\r"); CommSendString(DEBUG_COMM, "\n\r");
+//
+//	EepromReadBuffer(IPADDCHK_E2P_ADDR, tempbuffer, 6, &error );
+//
+//	printByte(tempbuffer[0]);
+//	CommPutChar(DEBUG_COMM,' ',0);
+//	printByte(tempbuffer[1]);
+//	CommPutChar(DEBUG_COMM,' ',0);
+//	printByte(tempbuffer[2]);
+//	CommPutChar(DEBUG_COMM,' ',0);
+//	printByte(tempbuffer[3]);
+//	CommPutChar(DEBUG_COMM,' ',0);
+//	printByte(tempbuffer[4]);
+//	CommPutChar(DEBUG_COMM,' ',0);
+//	printByte(tempbuffer[5]);
+//	CommPutChar(DEBUG_COMM,' ',0);
+//	CommSendString(DEBUG_COMM, "\n\r");
+//
+//	return 1;
+//}
 
 
 
@@ -3499,7 +3501,7 @@ void FactoryPgm(void)
     OSTimeDlyHMSM(0, 0, 0, 300, OS_OPT_TIME_HMSM_STRICT, &os_err);
     WDT_Feed();
 
-    EepromWriteByte(PREVETIMER_E2P_ADDR, (uint8_t)12, &error);
+    EepromWriteByte(PREVETIMER_E2P_ADDR, (uint8_t)17, &error);
     OSTimeDlyHMSM(0, 0, 0, 300, OS_OPT_TIME_HMSM_STRICT, &os_err);
     WDT_Feed();
 
@@ -3824,57 +3826,57 @@ int con_rs232(ConsoleState* state)
 }
 
 
-int con_redbox(ConsoleState* state)
-{
-	uint16_t cnumabo;
-	uint8_t retval;
-	int error;
-	
-	char buffer[32];
-
-	buffer[0] = 0;
-
-	if( state->numparams < 2 )	{
-		state->conio->puts("redbox 0|1 (0: Inhabilitar, 1: Habilitar)\n\r");
-		retval = EepromReadByte(REDBOXHAB_E2P_ADDR, &error);
-		Str_Cat(buffer, "RED BOX = ");
-		switch(retval)	{
-		case 0:
-			Str_Cat(buffer, "Inhabilitada\n\r");
-			break;
-		case 1:
-			Str_Cat(buffer, "Habilitada\n\r");
-			break;
-		default:
-			Str_Cat(buffer, "Habilitada\n\r");
-			break;
-		}
-		state->conio->puts(buffer);
-		return 1;
-	}
-	cnumabo = atoi(con_getparam(state->command, 1));
-	if((cnumabo >= 0) && (cnumabo < 2))
-		EepromWriteByte(REDBOXHAB_E2P_ADDR, (uint8_t)cnumabo, &error);
-	else	{
-		state->conio->puts("*** REDBOX MODE TYPE ERROR  ***\n\r");
-		return -1;
-	}
-	retval = EepromReadByte(REDBOXHAB_E2P_ADDR, &error);
-	Str_Cat(buffer, "RED BOX = ");
-	switch(retval)	{
-	case 0:
-		Str_Cat(buffer, "Inhabilitada\n\r");
-		break;
-	case 1:
-		Str_Cat(buffer, "Habilitada\n\r");
-		break;
-	default:
-		Str_Cat(buffer, "Habilitada\n\r");
-		break;
-	}
-	state->conio->puts(buffer);
-	return 1;
-}
+//int con_redbox(ConsoleState* state)
+//{
+//	uint16_t cnumabo;
+//	uint8_t retval;
+//	int error;
+//
+//	char buffer[32];
+//
+//	buffer[0] = 0;
+//
+//	if( state->numparams < 2 )	{
+//		state->conio->puts("redbox 0|1 (0: Inhabilitar, 1: Habilitar)\n\r");
+//		retval = EepromReadByte(REDBOXHAB_E2P_ADDR, &error);
+//		Str_Cat(buffer, "RED BOX = ");
+//		switch(retval)	{
+//		case 0:
+//			Str_Cat(buffer, "Inhabilitada\n\r");
+//			break;
+//		case 1:
+//			Str_Cat(buffer, "Habilitada\n\r");
+//			break;
+//		default:
+//			Str_Cat(buffer, "Habilitada\n\r");
+//			break;
+//		}
+//		state->conio->puts(buffer);
+//		return 1;
+//	}
+//	cnumabo = atoi(con_getparam(state->command, 1));
+//	if((cnumabo >= 0) && (cnumabo < 2))
+//		EepromWriteByte(REDBOXHAB_E2P_ADDR, (uint8_t)cnumabo, &error);
+//	else	{
+//		state->conio->puts("*** REDBOX MODE TYPE ERROR  ***\n\r");
+//		return -1;
+//	}
+//	retval = EepromReadByte(REDBOXHAB_E2P_ADDR, &error);
+//	Str_Cat(buffer, "RED BOX = ");
+//	switch(retval)	{
+//	case 0:
+//		Str_Cat(buffer, "Inhabilitada\n\r");
+//		break;
+//	case 1:
+//		Str_Cat(buffer, "Habilitada\n\r");
+//		break;
+//	default:
+//		Str_Cat(buffer, "Habilitada\n\r");
+//		break;
+//	}
+//	state->conio->puts(buffer);
+//	return 1;
+//}
 
 
 int con_serialnum(ConsoleState* state)
@@ -4070,56 +4072,56 @@ int con_paparst_timer(ConsoleState* state)
 //	return 1;
 //}
 
-int ptxorstate(ConsoleState* state)
-{
-	unsigned char particion;
-	char *mychar;
-	uint8_t xormask, mask;
-	OS_ERR os_err;
-	int error;
-
-
-	mask = 0x00;
-	if( state->numparams != 3 )	{
-		state->conio->puts("\tERROR de sintaxis del comando\n\r");
-		return 1;
-	}
-
-	particion = atoi( con_getparam(state->command, 1) );
-	if( (particion > 9) || (particion < 5) )	{
-		state->conio->puts("*** Error en el numero de particion\n\r");
-		return 1;
-	}
-	mask = (1 << (particion - 2));
-	xormask = (uint8_t)EepromReadByte(PTXORMASK_E2P_ADDR, &error);
-
-	mychar = con_getparam(state->command, 2);
-	switch(*mychar)	{
-	case 'N':
-	case 'n':
-		xormask &= ~mask;
-		break;
-	case 'I':
-	case 'i':
-		xormask |= mask;
-		break;
-	default:
-		state->conio->puts("*** Error en el estado\n\r");
-		return 1;
-		break;
-	}
-
-	EepromWriteByte(PTXORMASK_E2P_ADDR, xormask, &error);
-	OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);
-
-	state->conio->puts("PTXORMASK = ");
-	conio_printHexWord(state, xormask);
-	state->conio->puts("\n\r");
-
-	ptxormask = xormask;
-
-	return 1;
-}
+//int ptxorstate(ConsoleState* state)
+//{
+//	unsigned char particion;
+//	char *mychar;
+//	uint8_t xormask, mask;
+//	OS_ERR os_err;
+//	int error;
+//
+//
+//	mask = 0x00;
+//	if( state->numparams != 3 )	{
+//		state->conio->puts("\tERROR de sintaxis del comando\n\r");
+//		return 1;
+//	}
+//
+//	particion = atoi( con_getparam(state->command, 1) );
+//	if( (particion > 9) || (particion < 5) )	{
+//		state->conio->puts("*** Error en el numero de particion\n\r");
+//		return 1;
+//	}
+//	mask = (1 << (particion - 2));
+//	xormask = (uint8_t)EepromReadByte(PTXORMASK_E2P_ADDR, &error);
+//
+//	mychar = con_getparam(state->command, 2);
+//	switch(*mychar)	{
+//	case 'N':
+//	case 'n':
+//		xormask &= ~mask;
+//		break;
+//	case 'I':
+//	case 'i':
+//		xormask |= mask;
+//		break;
+//	default:
+//		state->conio->puts("*** Error en el estado\n\r");
+//		return 1;
+//		break;
+//	}
+//
+//	EepromWriteByte(PTXORMASK_E2P_ADDR, xormask, &error);
+//	OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);
+//
+//	state->conio->puts("PTXORMASK = ");
+//	conio_printHexWord(state, xormask);
+//	state->conio->puts("\n\r");
+//
+//	ptxormask = xormask;
+//
+//	return 1;
+//}
 
 
 int con_conf_ticket(ConsoleState* state)
@@ -4969,6 +4971,7 @@ int con_conf_ticket(ConsoleState* state)
         state->conio->puts("Reset Interrupcion de Red NO CONFIGURADO\n\r");
     }
     WDT_Feed();
+
     //--------------------------------------------------------------------------
     flash0_read(buffer, DF_HRSTHAB_OFFSET, 2);
     if((buffer[0] == 0xA5) && (buffer[1] == 0x5A))  {
@@ -4984,6 +4987,12 @@ int con_conf_ticket(ConsoleState* state)
         state->conio->puts("Incendio 2 Activado\n\r");
     } else  {
         state->conio->puts("Incendio 2 Desactivado\n\r");
+    }
+
+    if(SystemFlag11 & MACROMODE_FLAG)   {
+        state->conio->puts("MACROMODE Activado\n\r");
+    } else  {
+        state->conio->puts("MACROMODE Desactivado\n\r");
     }
 
 	return 1;
@@ -5579,17 +5588,17 @@ int con_wdevo_event(ConsoleState* state)
 //	return 1;
 //}
 
-uint8_t hex2nibble(char c)
-{
-	if (c >= '0' && c <= '9')
-		return (c - '0');
-	else if (c >= 'a' && c <= 'f')
-		return (c - 'a') + 10;
-	else if (c >= 'A' && c <= 'F')
-		return (c - 'A') + 10;
-	else
-		return 0;
-}
+//uint8_t hex2nibble(char c)
+//{
+//	if (c >= '0' && c <= '9')
+//		return (c - '0');
+//	else if (c >= 'a' && c <= 'f')
+//		return (c - 'a') + 10;
+//	else if (c >= 'A' && c <= 'F')
+//		return (c - 'A') + 10;
+//	else
+//		return 0;
+//}
 
 //int set_license(ConsoleState* state)
 //{
@@ -6143,62 +6152,62 @@ int con_volredu(ConsoleState* state)
 }
 
 
-int con_armar(ConsoleState* state)
-{
-	int accion, partition2, pgroup, puni;
-	uint32_t error;
-	uint8_t temp[10], i;
-
-	if( state->numparams < 3 )	{
-		state->conio->puts( "Error en la cantidad de parametros\n\r");
-		return -1;
-	}
-
-	accion = atoi(con_getparam(state->command, 1));
-	partition2 = atoi(con_getparam(state->command, 2));
-
-
-//	if((partition2 >= 99) || (partition2 < 71) )	{
-//		state->conio->puts( "La particion origen debe ser entre 71 y 98\n\r");
+//int con_armar(ConsoleState* state)
+//{
+//	int accion, partition2, pgroup, puni;
+//	uint32_t error;
+//	uint8_t temp[10], i;
+//
+//	if( state->numparams < 3 )	{
+//		state->conio->puts( "Error en la cantidad de parametros\n\r");
 //		return -1;
 //	}
-
-	pgroup = partition2 / 10;
-	puni = partition2 % 10;
-
-	if((puni >= 9) || (puni < 1) )	{
-		state->conio->puts( "La subparticion origen debe ser entre 1 y 8\n\r");
-		return -1;
-	}
-
-	if( (pgroup >= 1) && (pgroup <= 6))	{
-		for( i = 0; i < MAXQTYPTM; i++ )	{
-			if( ptm_dcb[i].rtuaddr == 0x00)
-				continue;
-
-			if(ptm_dcb[i].particion == partition2)	{
-				if( accion == 1)
-					PTM_dev_status[i] |= 0x81;
-				else
-				if( accion == 3)
-					PTM_dev_status[i] &= ~0x81;
-			}
-
-		}
-	}
-
-	if( (pgroup >= 7) && (pgroup <= 9))	{
-		if( accion == 1)	{
-			PDX_dev_status[pgroup - 7] |= (1 << (puni - 1));
-		} else
-		if( accion == 3)	{
-			PDX_dev_status[pgroup - 7] &= ~(1 << (puni - 1));
-		}
-		guardar_PDX_status();
-	}
-
-	return 1;
-}
+//
+//	accion = atoi(con_getparam(state->command, 1));
+//	partition2 = atoi(con_getparam(state->command, 2));
+//
+//
+////	if((partition2 >= 99) || (partition2 < 71) )	{
+////		state->conio->puts( "La particion origen debe ser entre 71 y 98\n\r");
+////		return -1;
+////	}
+//
+//	pgroup = partition2 / 10;
+//	puni = partition2 % 10;
+//
+//	if((puni >= 9) || (puni < 1) )	{
+//		state->conio->puts( "La subparticion origen debe ser entre 1 y 8\n\r");
+//		return -1;
+//	}
+//
+//	if( (pgroup >= 1) && (pgroup <= 6))	{
+//		for( i = 0; i < MAXQTYPTM; i++ )	{
+//			if( ptm_dcb[i].rtuaddr == 0x00)
+//				continue;
+//
+//			if(ptm_dcb[i].particion == partition2)	{
+//				if( accion == 1)
+//					PTM_dev_status[i] |= 0x81;
+//				else
+//				if( accion == 3)
+//					PTM_dev_status[i] &= ~0x81;
+//			}
+//
+//		}
+//	}
+//
+//	if( (pgroup >= 7) && (pgroup <= 9))	{
+//		if( accion == 1)	{
+//			PDX_dev_status[pgroup - 7] |= (1 << (puni - 1));
+//		} else
+//		if( accion == 3)	{
+//			PDX_dev_status[pgroup - 7] &= ~(1 << (puni - 1));
+//		}
+//		guardar_PDX_status();
+//	}
+//
+//	return 1;
+//}
 
 
 int con_volumetrica(ConsoleState* state)
@@ -6772,294 +6781,294 @@ int con_dhcpjumper(ConsoleState* state)
 //	return 1;
 //}
 
-int add_ptm( uint8_t ptm_partition)
-{
-	int i, error;
-	uint8_t buffer[5];
-	uint16_t address;
+//int add_ptm( uint8_t ptm_partition)
+//{
+//	int i, error;
+//	uint8_t buffer[5];
+//	uint16_t address;
+//
+//	//chequeo si el ptm ya existe
+//	for( i = 0; i < MAXQTYPTM; i++ )	{
+//		if( ptm_dcb[i].particion ==  ptm_partition )	{	//existe, la sobre-escribo con la normalizada
+//			if(ptm_partition == 58)	{
+//				ptm_dcb[i].rtuaddr = 230;
+//			} else
+//			if(ptm_partition == 70)	{
+//				ptm_dcb[i].rtuaddr = 240;
+//			} else
+//			if(ptm_partition == 80)	{
+//				ptm_dcb[i].rtuaddr = 241;
+//			} else
+//			if(ptm_partition == 90)	{
+//				ptm_dcb[i].rtuaddr = 242;
+//			} else	{
+//				ptm_dcb[i].rtuaddr = ptm_partition;
+//			}
+//
+//			ptm_dcb[i].cuenta = 0x0000;
+//			ptm_dcb[i].particion = ptm_partition;
+//			ptm_dcb[i].disparo = '-';
+//
+//			buffer[0] = ptm_dcb[i].rtuaddr;
+//			buffer[1] = ptm_dcb[i].particion;
+//			buffer[2] = (ptm_dcb[i].cuenta >> 8) & 0x00FF;
+//			buffer[3] = ptm_dcb[i].cuenta & 0x00FF;
+//			buffer[4] = ptm_dcb[i].disparo;
+//
+//			address = PTM00DCB_E2P_ADDR + i*5;
+//			EepromWriteBuffer(address, buffer, 5, &error);
+//			logCidEvent(account, 1, 918, ptm_partition, 0);
+//			return 1;
+//		}
+//	}
+//
+//	//no existia, entonces busco un lugar libre en la tabla
+//	for( i = 0; i < MAXQTYPTM; i++ )	{
+//		if( ptm_dcb[i].rtuaddr ==  0x00 )	{	//encontre el primer lugar libre
+//			if(ptm_partition == 58)	{
+//				ptm_dcb[i].rtuaddr = 230;
+//			} else
+//			if(ptm_partition == 70)	{
+//				ptm_dcb[i].rtuaddr = 240;
+//			} else
+//			if(ptm_partition == 80)	{
+//				ptm_dcb[i].rtuaddr = 241;
+//			} else
+//			if(ptm_partition == 90)	{
+//				ptm_dcb[i].rtuaddr = 242;
+//			} else	{
+//				ptm_dcb[i].rtuaddr = ptm_partition;
+//			}
+//
+//			ptm_dcb[i].cuenta = 0x0000;
+//			ptm_dcb[i].particion = ptm_partition;
+//			ptm_dcb[i].disparo = '-';
+//
+//			buffer[0] = ptm_dcb[i].rtuaddr;
+//			buffer[1] = ptm_dcb[i].particion;
+//			buffer[2] = (ptm_dcb[i].cuenta >> 8) & 0x00FF;
+//			buffer[3] = ptm_dcb[i].cuenta & 0x00FF;
+//			buffer[4] = ptm_dcb[i].disparo;
+//
+//			address = PTM00DCB_E2P_ADDR + i*5;
+//			EepromWriteBuffer(address, buffer, 5, &error);
+//			logCidEvent(account, 1, 918, ptm_partition, 0);
+//			return 1;
+//		}
+//	}
+//
+//	//Error, no hay lugar en la tabla para un nuevo PTM
+//	//state->conio->puts("ERROR : La tabla de PTM esta llena\n\r");
+//	return -1;
+//}
+//
+//int del_ptm( uint8_t ptm_partition)
+//{
+//	int i, error;
+//	uint8_t buffer[5];
+//	uint16_t address;
+//
+//	//chequeo si el ptm ya existe
+//	for( i = 0; i < MAXQTYPTM; i++ )	{
+//		if( ptm_dcb[i].particion ==  ptm_partition )	{	//existe, lo borro poniendolo a cero.
+//
+//			ptm_dcb[i].rtuaddr = 0x00;
+//			ptm_dcb[i].cuenta = 0x0000;
+//			ptm_dcb[i].particion = 0x00;
+//			ptm_dcb[i].disparo = '-';
+//
+//			buffer[0] = ptm_dcb[i].rtuaddr;
+//			buffer[1] = ptm_dcb[i].particion;
+//			buffer[2] = (ptm_dcb[i].cuenta >> 8) & 0x00FF;
+//			buffer[3] = ptm_dcb[i].cuenta & 0x00FF;
+//			buffer[4] = ptm_dcb[i].disparo;
+//
+//			address = PTM00DCB_E2P_ADDR + i*5;
+//			EepromWriteBuffer(address, buffer, 5, &error);
+//			logCidEvent(account, 1, 919, ptm_partition, 0);
+//			return 1;
+//		}
+//	}
+//
+//	return -1;
+//}
 
-	//chequeo si el ptm ya existe
-	for( i = 0; i < MAXQTYPTM; i++ )	{
-		if( ptm_dcb[i].particion ==  ptm_partition )	{	//existe, la sobre-escribo con la normalizada
-			if(ptm_partition == 58)	{
-				ptm_dcb[i].rtuaddr = 230;
-			} else
-			if(ptm_partition == 70)	{
-				ptm_dcb[i].rtuaddr = 240;
-			} else
-			if(ptm_partition == 80)	{
-				ptm_dcb[i].rtuaddr = 241;
-			} else
-			if(ptm_partition == 90)	{
-				ptm_dcb[i].rtuaddr = 242;
-			} else	{
-				ptm_dcb[i].rtuaddr = ptm_partition;
-			}
+//
+//int con_prueballave(ConsoleState* state)
+//{
+//
+//	uint32_t TMprueba, TMllaveon, TMllaveoff, TMgap, retries;
+//
+//	if( state->numparams < 6 )	{
+//		return -1;
+//	}
+//
+//
+//
+//
+//	TMprueba = atoi(con_getparam(state->command, 1));
+//	TMllaveon = atoi(con_getparam(state->command, 2));
+//	TMllaveoff = atoi(con_getparam(state->command, 3));
+//	TMgap = atoi(con_getparam(state->command, 4));
+//	retries = atoi(con_getparam(state->command, 5));
+//
+//	Timer_prueba = TMprueba;
+//	Timpr_llaveon = TMllaveon;
+//	Timpr_llaveoff =TMllaveoff;
+//	Timpr_gap = TMgap;
+//
+//	if(retries == 0)
+//		retries = 1;
+//	Prretries = retries;
+//
+//	PruebasFlags |= StartCPOLL_flag;
+//
+//	return 1;
+//}
+//
+//int con_txoff_largo(ConsoleState* state)
+//{
+//	int factivacion;
+//
+//	if( state->numparams < 2 )	{
+//		state->conio->puts("*ERROR : Indicar activacion con 0 o 1\n\r");
+//		return -1;
+//	}
+//
+//	factivacion = atoi(con_getparam(state->command, 1));
+//	if(factivacion == 1)	{
+//		PruebasFlags |= TXOFFCMD_flag;
+//	}
+//	else	{
+//		PruebasFlags &= ~TXOFFCMD_flag;
+//		POWER_TX_ON();
+//		FTXOFF_state = FTXOFF_WAIT;
+//		ftxoff_timer = 0;
+//	}
+//
+//	return 1;
+//}
+//
+//int con_txoff_corto(ConsoleState* state)
+//{
+//	int factivacion;
+//
+//	if( state->numparams < 2 )	{
+//		state->conio->puts("*ERROR : Indicar activacion con 0 o 1\n\r");
+//		return -1;
+//	}
+//
+//	factivacion = atoi(con_getparam(state->command, 1));
+//	if(factivacion == 1)	{
+//		PruebasFlags |= TXOFF2CMD_flag;
+//	}
+//	else	{
+//		PruebasFlags &= ~TXOFF2CMD_flag;
+//		POWER_TX_ON();
+//		FTXOFF2_state = FTXOFF2_WAIT;
+//		ftxoff2_timer = 0;
+//	}
+//
+//	return 1;
+//}
 
-			ptm_dcb[i].cuenta = 0x0000;
-			ptm_dcb[i].particion = ptm_partition;
-			ptm_dcb[i].disparo = '-';
+//uint8_t gralbuffer[528];
 
-			buffer[0] = ptm_dcb[i].rtuaddr;
-			buffer[1] = ptm_dcb[i].particion;
-			buffer[2] = (ptm_dcb[i].cuenta >> 8) & 0x00FF;
-			buffer[3] = ptm_dcb[i].cuenta & 0x00FF;
-			buffer[4] = ptm_dcb[i].disparo;
+//int con_dflash_dump(ConsoleState* state)
+//{
+//    uint8_t j;
+//    uint32_t i, len, offset;
+//    char buffer[128], temp[8];
+//    int page;
+//    OS_ERR os_err;
+//
+//    for(i = 0; i < 528; i++)	{
+//    	gralbuffer[i] ='U';
+//    }
+//
+//    page = atoi( con_getparam(state->command, 1));
+//
+//    state->conio->puts("\n\r");
+//
+//    len = 528;
+//    offset = page*528;
+//
+//    flash0_read(gralbuffer, offset, len);
+//
+//    for( i = 0; i < len; i += 16 )	{
+//        sprintHexDWord(buffer, offset + i);Str_Cat(buffer,"\t");
+//        for( j = 0; j < 16; j++ )	{
+//            sprintByte(temp, gralbuffer[i+j]); Str_Cat(buffer, temp);
+//            Str_Cat(buffer," ");
+//            if( j == 7 )
+//                Str_Cat(buffer,"- ");
+//        }
+//        Str_Cat(buffer,"\t");
+//        for( j = 0; j < 16; j++ )	{
+//            if((gralbuffer[i+j] >= 0x20) && (gralbuffer[i+j] <= 0x7F)) {
+//            	temp[0] = gralbuffer[i + j]; temp[1] = 0;
+//                //sprintByte(temp, gralbuffer[i + j]);
+//                Str_Cat(buffer, temp);
+//            }
+//            else Str_Cat(buffer,".");
+//        }
+//        Str_Cat(buffer,"\n\r");
+//        state->conio->puts(buffer);
+//        OSTimeDlyHMSM(0, 0, 0, 50, OS_OPT_TIME_HMSM_STRICT, &os_err);
+//    }
+//
+//    return 1;
+//}
 
-			address = PTM00DCB_E2P_ADDR + i*5;
-			EepromWriteBuffer(address, buffer, 5, &error);
-			logCidEvent(account, 1, 918, ptm_partition, 0);
-			return 1;
-		}
-	}
-
-	//no existia, entonces busco un lugar libre en la tabla
-	for( i = 0; i < MAXQTYPTM; i++ )	{
-		if( ptm_dcb[i].rtuaddr ==  0x00 )	{	//encontre el primer lugar libre
-			if(ptm_partition == 58)	{
-				ptm_dcb[i].rtuaddr = 230;
-			} else
-			if(ptm_partition == 70)	{
-				ptm_dcb[i].rtuaddr = 240;
-			} else
-			if(ptm_partition == 80)	{
-				ptm_dcb[i].rtuaddr = 241;
-			} else
-			if(ptm_partition == 90)	{
-				ptm_dcb[i].rtuaddr = 242;
-			} else	{
-				ptm_dcb[i].rtuaddr = ptm_partition;
-			}
-
-			ptm_dcb[i].cuenta = 0x0000;
-			ptm_dcb[i].particion = ptm_partition;
-			ptm_dcb[i].disparo = '-';
-
-			buffer[0] = ptm_dcb[i].rtuaddr;
-			buffer[1] = ptm_dcb[i].particion;
-			buffer[2] = (ptm_dcb[i].cuenta >> 8) & 0x00FF;
-			buffer[3] = ptm_dcb[i].cuenta & 0x00FF;
-			buffer[4] = ptm_dcb[i].disparo;
-
-			address = PTM00DCB_E2P_ADDR + i*5;
-			EepromWriteBuffer(address, buffer, 5, &error);
-			logCidEvent(account, 1, 918, ptm_partition, 0);
-			return 1;
-		}
-	}
-
-	//Error, no hay lugar en la tabla para un nuevo PTM
-	//state->conio->puts("ERROR : La tabla de PTM esta llena\n\r");
-	return -1;
-}
-
-int del_ptm( uint8_t ptm_partition)
-{
-	int i, error;
-	uint8_t buffer[5];
-	uint16_t address;
-
-	//chequeo si el ptm ya existe
-	for( i = 0; i < MAXQTYPTM; i++ )	{
-		if( ptm_dcb[i].particion ==  ptm_partition )	{	//existe, lo borro poniendolo a cero.
-			
-			ptm_dcb[i].rtuaddr = 0x00;
-			ptm_dcb[i].cuenta = 0x0000;
-			ptm_dcb[i].particion = 0x00;
-			ptm_dcb[i].disparo = '-';
-
-			buffer[0] = ptm_dcb[i].rtuaddr;
-			buffer[1] = ptm_dcb[i].particion;
-			buffer[2] = (ptm_dcb[i].cuenta >> 8) & 0x00FF;
-			buffer[3] = ptm_dcb[i].cuenta & 0x00FF;
-			buffer[4] = ptm_dcb[i].disparo;
-
-			address = PTM00DCB_E2P_ADDR + i*5;
-			EepromWriteBuffer(address, buffer, 5, &error);
-			logCidEvent(account, 1, 919, ptm_partition, 0);
-			return 1;
-		}
-	}
-
-	return -1;
-}
-
-
-int con_prueballave(ConsoleState* state)
-{
-
-	uint32_t TMprueba, TMllaveon, TMllaveoff, TMgap, retries;
-
-	if( state->numparams < 6 )	{
-		return -1;
-	}
-
-
-
-
-	TMprueba = atoi(con_getparam(state->command, 1));
-	TMllaveon = atoi(con_getparam(state->command, 2));
-	TMllaveoff = atoi(con_getparam(state->command, 3));
-	TMgap = atoi(con_getparam(state->command, 4));
-	retries = atoi(con_getparam(state->command, 5));
-
-	Timer_prueba = TMprueba;
-	Timpr_llaveon = TMllaveon;
-	Timpr_llaveoff =TMllaveoff;
-	Timpr_gap = TMgap;
-
-	if(retries == 0)
-		retries = 1;
-	Prretries = retries;
-
-	PruebasFlags |= StartCPOLL_flag;
-
-	return 1;
-}
-
-int con_txoff_largo(ConsoleState* state)
-{
-	int factivacion;
-
-	if( state->numparams < 2 )	{
-		state->conio->puts("*ERROR : Indicar activacion con 0 o 1\n\r");
-		return -1;
-	}
-
-	factivacion = atoi(con_getparam(state->command, 1));
-	if(factivacion == 1)	{
-		PruebasFlags |= TXOFFCMD_flag;
-	}
-	else	{
-		PruebasFlags &= ~TXOFFCMD_flag;
-		POWER_TX_ON();
-		FTXOFF_state = FTXOFF_WAIT;
-		ftxoff_timer = 0;
-	}
-
-	return 1;
-}
-
-int con_txoff_corto(ConsoleState* state)
-{
-	int factivacion;
-
-	if( state->numparams < 2 )	{
-		state->conio->puts("*ERROR : Indicar activacion con 0 o 1\n\r");
-		return -1;
-	}
-
-	factivacion = atoi(con_getparam(state->command, 1));
-	if(factivacion == 1)	{
-		PruebasFlags |= TXOFF2CMD_flag;
-	}
-	else	{
-		PruebasFlags &= ~TXOFF2CMD_flag;
-		POWER_TX_ON();
-		FTXOFF2_state = FTXOFF2_WAIT;
-		ftxoff2_timer = 0;
-	}
-
-	return 1;
-}
-
-uint8_t gralbuffer[528];
-
-int con_dflash_dump(ConsoleState* state)
-{
-    uint8_t j;
-    uint32_t i, len, offset;
-    char buffer[128], temp[8];
-    int page;
-    OS_ERR os_err;
-
-    for(i = 0; i < 528; i++)	{
-    	gralbuffer[i] ='U';
-    }
-
-    page = atoi( con_getparam(state->command, 1));
-
-    state->conio->puts("\n\r");
-
-    len = 528;
-    offset = page*528;
-
-    flash0_read(gralbuffer, offset, len);
-
-    for( i = 0; i < len; i += 16 )	{
-        sprintHexDWord(buffer, offset + i);Str_Cat(buffer,"\t");
-        for( j = 0; j < 16; j++ )	{
-            sprintByte(temp, gralbuffer[i+j]); Str_Cat(buffer, temp);
-            Str_Cat(buffer," ");
-            if( j == 7 )
-                Str_Cat(buffer,"- ");
-        }
-        Str_Cat(buffer,"\t");
-        for( j = 0; j < 16; j++ )	{
-            if((gralbuffer[i+j] >= 0x20) && (gralbuffer[i+j] <= 0x7F)) {
-            	temp[0] = gralbuffer[i + j]; temp[1] = 0;
-                //sprintByte(temp, gralbuffer[i + j]);
-                Str_Cat(buffer, temp);
-            }
-            else Str_Cat(buffer,".");
-        }
-        Str_Cat(buffer,"\n\r");
-        state->conio->puts(buffer);
-        OSTimeDlyHMSM(0, 0, 0, 50, OS_OPT_TIME_HMSM_STRICT, &os_err);
-    }
-
-    return 1;
-}
-
-int con_ucflash_dump(ConsoleState* state)
-{
-    uint8_t j;
-    uint32_t i, len, offset;
-    char buffer[128], temp[16];
-    int page;
-    uint8_t  *memptr;
-    uint32_t uC_flash_start, uC_flash_end;
-    OS_ERR os_err;
-
-
-    page = atoi( con_getparam(state->command, 1));
-
-    state->conio->puts("\n\r");
-
-    len = 528;
-
-    uC_flash_start = 0x00008000 + page*len;
-    uC_flash_end = uC_flash_start + len;
-
-    for(i = 0; i < 528; i++)	{
-        memptr = (uint8_t *)(uC_flash_start + i);
-        gralbuffer[i] = *memptr;
-    }
-
-    for( i = 0; i < len; i += 16 )	{
-        sprintHexDWord(buffer, uC_flash_start + i); Str_Cat(buffer,"\t");
-        for( j = 0; j < 16; j++ )	{
-            sprintByte(temp, gralbuffer[i+j]); Str_Cat(buffer, temp);
-            Str_Cat(buffer," ");
-            if( j == 7 )
-                Str_Cat(buffer,"- ");
-        }
-        Str_Cat(buffer,"\t");
-        for( j = 0; j < 16; j++ )	{
-            if((gralbuffer[i+j] >= 0x20) && (gralbuffer[i+j] <= 0x7F)) {
-                temp[0] = gralbuffer[i + j]; temp[1] = 0;
-                //sprintByte(temp, gralbuffer[i + j]);
-                Str_Cat(buffer, temp);
-            }
-            else Str_Cat(buffer,".");
-        }
-        Str_Cat(buffer,"\n\r");
-        state->conio->puts(buffer);
-        OSTimeDlyHMSM(0, 0, 0, 50, OS_OPT_TIME_HMSM_STRICT, &os_err);
-    }
-
-    return 1;
-}
+//int con_ucflash_dump(ConsoleState* state)
+//{
+//    uint8_t j;
+//    uint32_t i, len, offset;
+//    char buffer[128], temp[16];
+//    int page;
+//    uint8_t  *memptr;
+//    uint32_t uC_flash_start, uC_flash_end;
+//    OS_ERR os_err;
+//
+//
+//    page = atoi( con_getparam(state->command, 1));
+//
+//    state->conio->puts("\n\r");
+//
+//    len = 528;
+//
+//    uC_flash_start = 0x00008000 + page*len;
+//    uC_flash_end = uC_flash_start + len;
+//
+//    for(i = 0; i < 528; i++)	{
+//        memptr = (uint8_t *)(uC_flash_start + i);
+//        gralbuffer[i] = *memptr;
+//    }
+//
+//    for( i = 0; i < len; i += 16 )	{
+//        sprintHexDWord(buffer, uC_flash_start + i); Str_Cat(buffer,"\t");
+//        for( j = 0; j < 16; j++ )	{
+//            sprintByte(temp, gralbuffer[i+j]); Str_Cat(buffer, temp);
+//            Str_Cat(buffer," ");
+//            if( j == 7 )
+//                Str_Cat(buffer,"- ");
+//        }
+//        Str_Cat(buffer,"\t");
+//        for( j = 0; j < 16; j++ )	{
+//            if((gralbuffer[i+j] >= 0x20) && (gralbuffer[i+j] <= 0x7F)) {
+//                temp[0] = gralbuffer[i + j]; temp[1] = 0;
+//                //sprintByte(temp, gralbuffer[i + j]);
+//                Str_Cat(buffer, temp);
+//            }
+//            else Str_Cat(buffer,".");
+//        }
+//        Str_Cat(buffer,"\n\r");
+//        state->conio->puts(buffer);
+//        OSTimeDlyHMSM(0, 0, 0, 50, OS_OPT_TIME_HMSM_STRICT, &os_err);
+//    }
+//
+//    return 1;
+//}
 
 
 int con_rvb_dump_dev(ConsoleState* state)
@@ -7081,94 +7090,94 @@ int con_rvb_dump_dev(ConsoleState* state)
 	return 1;
 }
 
-int con_pakterrors(ConsoleState* state) {
-    int i, qtydeclared;
-    char buffer[8], tmpbuffer[10];
-
-    qtydeclared = 0;
-    for( i = 0; i <= MAXQTYPTM; i++ ) {
-        if( ptm_dcb[i].rtuaddr != 0x00 )    {
-            qtydeclared++;
-        }
-    }
-
-    state->conio->puts("\n");
-    Mem_Clr(buffer, sizeof(buffer));
-
-    state->conio->puts("Dispositivos declarados :\t");
-    state->conio->puts( itoa(qtydeclared));
-    state->conio->puts( "\n\r");
-
-    state->conio->puts("Errores por vuelta :\t\t");
-    state->conio->puts( itoa(lan485errorpkt));
-    state->conio->puts( "\n\r");
-
-    if(qtydeclared != 0) {
-        state->conio->puts("Eficacia :\t\t\t");
-        state->conio->puts(itoa((100 - (lan485errorpkt * 100) / qtydeclared)));
-        state->conio->puts(" %\n\r\n\r");
-    }
-
-    state->conio->puts("Errores acumulados :\t\t");
-    state->conio->puts( itoa(accumulated_errors));
-    state->conio->puts( "\n\r");
-
-    if( totalpakets != 0) {
-        state->conio->puts("Eficacia acumulada :\t\t");
-        state->conio->puts(itoa((100 - (accumulated_errors*100) / totalpakets)));
-        state->conio->puts("\n\r");
-    }
-
-    return 1;
-}
-
-
-int con_dump_monstruct(ConsoleState* state)
-{
-	int i;
-	char buffer[128], tmpbuffer[10];
-	
-
-	state->conio->puts( "\n");
+//int con_pakterrors(ConsoleState* state) {
+//    int i, qtydeclared;
+//    char buffer[8], tmpbuffer[10];
+//
+//    qtydeclared = 0;
+//    for( i = 0; i <= MAXQTYPTM; i++ ) {
+//        if( ptm_dcb[i].rtuaddr != 0x00 )    {
+//            qtydeclared++;
+//        }
+//    }
+//
+//    state->conio->puts("\n");
+//    Mem_Clr(buffer, sizeof(buffer));
+//
+//    state->conio->puts("Dispositivos declarados :\t");
+//    state->conio->puts( itoa(qtydeclared));
+//    state->conio->puts( "\n\r");
+//
+//    state->conio->puts("Errores por vuelta :\t\t");
+//    state->conio->puts( itoa(lan485errorpkt));
+//    state->conio->puts( "\n\r");
+//
+//    if(qtydeclared != 0) {
+//        state->conio->puts("Eficacia :\t\t\t");
+//        state->conio->puts(itoa((100 - (lan485errorpkt * 100) / qtydeclared)));
+//        state->conio->puts(" %\n\r\n\r");
+//    }
+//
+//    state->conio->puts("Errores acumulados :\t\t");
+//    state->conio->puts( itoa(accumulated_errors));
+//    state->conio->puts( "\n\r");
+//
+//    if( totalpakets != 0) {
+//        state->conio->puts("Eficacia acumulada :\t\t");
+//        state->conio->puts(itoa((100 - (accumulated_errors*100) / totalpakets)));
+//        state->conio->puts("\n\r");
+//    }
+//
+//    return 1;
+//}
 
 
-	Str_Copy(buffer,"inuse:\t"); state->conio->puts(buffer);
-	conio_printHexWord(state, Monitoreo[0].inuse);
-	state->conio->puts( "\n");
-
-	Str_Copy(buffer,"wdogstate:\t");
-	switch(Monitoreo[0].wdogstate)	{
-		case WR3K_IDLE:
-			Str_Cat(buffer,"WR3K_IDLE\n");
-			break;
-		case WR3K_WDOG:
-			Str_Cat(buffer,"WR3K_WDOG\n");
-			break;
-		case WR3K_WRST:
-			Str_Cat(buffer,"WR3K_WRST\n");
-			break;
-		default:
-			Str_Cat(buffer,"WRONG STATE\n");
-			break;
-	}
-	state->conio->puts(buffer);
-
-	Str_Copy(buffer,"flags:\t"); state->conio->puts(buffer);
-	conio_printHexWord(state, Monitoreo[0].flags);
-	state->conio->puts( "\n");
-
-	Str_Copy(buffer,"SEC_TIMER:\t"); Str_Cat(buffer,itoa(SEC_TIMER)); state->conio->puts(buffer);
-	state->conio->puts( "\n");
-
-	Str_Copy(buffer,"wdogr3kTimer:\t"); Str_Cat(buffer,itoa(Monitoreo[0].wdogr3kTimer)); state->conio->puts(buffer);
-	state->conio->puts( "\n");
-	Str_Copy(buffer,"SystemFlag4:\t"); sprintByte(tmpbuffer, SystemFlag4); Str_Cat(buffer, tmpbuffer); Str_Cat(buffer,"\n");state->conio->puts(buffer);
-	
-	state->conio->puts( "\n");
-
-
-	return 1;
-}
+//int con_dump_monstruct(ConsoleState* state)
+//{
+//	int i;
+//	char buffer[128], tmpbuffer[10];
+//
+//
+//	state->conio->puts( "\n");
+//
+//
+//	Str_Copy(buffer,"inuse:\t"); state->conio->puts(buffer);
+//	conio_printHexWord(state, Monitoreo[0].inuse);
+//	state->conio->puts( "\n");
+//
+//	Str_Copy(buffer,"wdogstate:\t");
+//	switch(Monitoreo[0].wdogstate)	{
+//		case WR3K_IDLE:
+//			Str_Cat(buffer,"WR3K_IDLE\n");
+//			break;
+//		case WR3K_WDOG:
+//			Str_Cat(buffer,"WR3K_WDOG\n");
+//			break;
+//		case WR3K_WRST:
+//			Str_Cat(buffer,"WR3K_WRST\n");
+//			break;
+//		default:
+//			Str_Cat(buffer,"WRONG STATE\n");
+//			break;
+//	}
+//	state->conio->puts(buffer);
+//
+//	Str_Copy(buffer,"flags:\t"); state->conio->puts(buffer);
+//	conio_printHexWord(state, Monitoreo[0].flags);
+//	state->conio->puts( "\n");
+//
+//	Str_Copy(buffer,"SEC_TIMER:\t"); Str_Cat(buffer,itoa(SEC_TIMER)); state->conio->puts(buffer);
+//	state->conio->puts( "\n");
+//
+//	Str_Copy(buffer,"wdogr3kTimer:\t"); Str_Cat(buffer,itoa(Monitoreo[0].wdogr3kTimer)); state->conio->puts(buffer);
+//	state->conio->puts( "\n");
+//	Str_Copy(buffer,"SystemFlag4:\t"); sprintByte(tmpbuffer, SystemFlag4); Str_Cat(buffer, tmpbuffer); Str_Cat(buffer,"\n");state->conio->puts(buffer);
+//
+//	state->conio->puts( "\n");
+//
+//
+//	return 1;
+//}
 
 
 
@@ -7328,35 +7337,35 @@ int con_rffilter2(ConsoleState* state)
     return 1;
 }
 
-int con_licactivation(ConsoleState* state)
-{
-	uint8_t buffer[4];
-	int error;
-
-
-	buffer[0] = 0x5A;
-	buffer[1] = 0xA5;
-	error = flash0_write(1, buffer, DF_LICFLAG_OFFSET, 2);
-    WDT_Feed();
-    SystemFlag6 |= USE_LICENSE;
-
-	return 1;
-}
-
-int con_licdeactivation(ConsoleState* state)
-{
-	uint8_t buffer[4];
-	int error;
-
-
-	buffer[0] = 0xAA;
-	buffer[1] = 0xBB;
-	error = flash0_write(1, buffer, DF_LICFLAG_OFFSET, 2);
-    WDT_Feed();
-    SystemFlag6 &= ~USE_LICENSE;
-
-	return 1;
-}
+//int con_licactivation(ConsoleState* state)
+//{
+//	uint8_t buffer[4];
+//	int error;
+//
+//
+//	buffer[0] = 0x5A;
+//	buffer[1] = 0xA5;
+//	error = flash0_write(1, buffer, DF_LICFLAG_OFFSET, 2);
+//    WDT_Feed();
+//    SystemFlag6 |= USE_LICENSE;
+//
+//	return 1;
+//}
+//
+//int con_licdeactivation(ConsoleState* state)
+//{
+//	uint8_t buffer[4];
+//	int error;
+//
+//
+//	buffer[0] = 0xAA;
+//	buffer[1] = 0xBB;
+//	error = flash0_write(1, buffer, DF_LICFLAG_OFFSET, 2);
+//    WDT_Feed();
+//    SystemFlag6 &= ~USE_LICENSE;
+//
+//	return 1;
+//}
 
 int con_radarctivation(ConsoleState* state)
 {
@@ -7457,6 +7466,110 @@ int con_bell2pulse(ConsoleState* state)
     }
     PWR2PULSE_TIME = duration;
     SystemFlag11 |= PWR2PULSE_FLAG;
+    return 1;
+}
+
+int con_netrecov(ConsoleState* state)
+{
+    uint16_t cnumabo;
+    uint8_t retval, temp[8];
+    int error;
+
+    char buffer[32];
+
+    buffer[0] = 0;
+
+    if( state->numparams < 2 )	{
+        state->conio->puts("NETRECOV 0|1 (0:OFF, 1:ON)\n\r");
+        flash0_read(temp, DF_NETRECOV_OFFSET, 2);
+        if((temp[0] == 0x5A) && (temp[1] == 0xA5))
+            retval = 1;
+        else
+            retval = 0;
+
+        Str_Cat(buffer, "NETRECOV = ");
+        switch(retval)	{
+            case 0:
+                Str_Cat(buffer, "OFF\n\r");
+                break;
+            case 1:
+                Str_Cat(buffer, "ON\n\r");
+                break;
+            default:
+                Str_Cat(buffer, "ACTIVATION ERROR\n\r");
+                break;
+        }
+        state->conio->puts(buffer);
+        return 1;
+    }
+
+    cnumabo = atoi(con_getparam(state->command, 1));
+    if( cnumabo == 1) 	{
+        buffer[0] = 0x5A;
+        buffer[1] = 0xA5;
+        error = flash0_write(1, buffer, DF_NETRECOV_OFFSET, 2);
+        SystemFlag12 |= NETRECOVERY_FLAG;
+    }
+    else	{
+        buffer[0] = 0xA5;
+        buffer[1] = 0x5A;
+        error = flash0_write(1, buffer, DF_NETRECOV_OFFSET, 2);
+        SystemFlag12 &= ~NETRECOVERY_FLAG;
+    }
+
+
+    return 1;
+}
+
+int con_macromode(ConsoleState* state)
+{
+    uint16_t cnumabo;
+    uint8_t retval, temp[8];
+    int error;
+
+    char buffer[32];
+
+    buffer[0] = 0;
+
+    if( state->numparams < 2 )	{
+        state->conio->puts("MACRO_MODE 0|1 (0:OFF, 1:ON)\n\r");
+        flash0_read(temp, DF_MACROMODE_OFFSET, 2);
+        if((temp[0] == 0x5A) && (temp[1] == 0xA5))
+            retval = 1;
+        else
+            retval = 0;
+
+        Str_Cat(buffer, "MACROMODE = ");
+        switch(retval)	{
+            case 0:
+                Str_Cat(buffer, "OFF\n\r");
+                break;
+            case 1:
+                Str_Cat(buffer, "ON\n\r");
+                break;
+            default:
+                Str_Cat(buffer, "ACTIVATION ERROR\n\r");
+                break;
+        }
+        state->conio->puts(buffer);
+        return 1;
+    }
+
+    cnumabo = atoi(con_getparam(state->command, 1));
+    if( cnumabo == 1) 	{
+        buffer[0] = 0x5A;
+        buffer[1] = 0xA5;
+        error = flash0_write(1, buffer, DF_MACROMODE_OFFSET, 2);
+        SystemFlag11 |= MACROMODE_FLAG;
+    }
+    else	{
+        buffer[0] = 0xA5;
+        buffer[1] = 0x5A;
+        error = flash0_write(1, buffer, DF_MACROMODE_OFFSET, 2);
+        SystemFlag11 &= ~MACROMODE_FLAG;
+    }
+
+
     return 1;
 }
 
@@ -7852,62 +7965,62 @@ int con_timerhbcast(ConsoleState* state)
 	return 1;
 }
 
-int con_IRI_activation(ConsoleState* state)
-{
-	uint8_t buffer[4];
-	int error, value;
-
-#ifdef USAR_IRIDIUM
-	if( state->numparams < 3 )	{
-		state->conio->puts("set IRIDIUM 0|1 (0:OFF, 1:ON)\n\r");
-		//state->conio->puts(buffer);
-		return 1;
-	}
-
-	value = atoi(con_getparam(state->command, 2));
-
-	if( value == 1)	{
-		buffer[0] = 0x5A;
-		buffer[1] = 0xA5;
-		error = flash0_write(1, buffer, DF_ENAIRI_OFFSET, 2);
-		WDT_Feed();
-		IRIDIUM_flag |= IRI_USEIRIDIUM_FLAG;
-
-		//-------------------------------------
-		// Activando modem Iridium
-		state->conio->puts("Activando modem Iridium ...     Espere por favor\n\r");
-		//state->conio->puts(buffer);
-		IridiumSBD_begin();
-		FSMIRI_state = FSMIRI_IDLE;
-		hbiri_time = 47;
-		HBIRI_timer = SEC_TIMER + hbiri_time;
-		iphbiri_timer = SEC_TIMER + 15*60;
-
-		if(IRIDIUM_flag & IRI_IRIDIUMOK_FLAG)	{
-			state->conio->puts("Modem Iridium Detectado Correctamente\n\r");
-			//state->conio->puts(buffer);
-			logCidEvent(account, 1, 997, 0, 8);
-		} else	{
-			state->conio->puts("ERROR:  No se detecto modem Iridium conectado\n\r");
-			//state->conio->puts(buffer);
-			//Iridium activado pero no ok
-			if((IRIDIUM_flag & IRI_USEIRIDIUM_FLAG) && (!(IRIDIUM_flag & IRI_IRIDIUMOK_FLAG)))	{
-				logCidEvent(account, 1, 997, 0, 6); 
-			}
-		}
-		//-------------------------------------
-	} else {
-		buffer[0] = 0xAA;
-		buffer[1] = 0xBB;
-		error = flash0_write(1, buffer, DF_ENAIRI_OFFSET, 2);
-		WDT_Feed();
-		IRIDIUM_flag &= ~IRI_USEIRIDIUM_FLAG;
-		state->conio->puts("Modem Iridium desactivado\n\r");
-		//state->conio->puts(buffer);
-	}
-#endif
-	return 1;
-}
+//int con_IRI_activation(ConsoleState* state)
+//{
+//	uint8_t buffer[4];
+//	int error, value;
+//
+//#ifdef USAR_IRIDIUM
+//	if( state->numparams < 3 )	{
+//		state->conio->puts("set IRIDIUM 0|1 (0:OFF, 1:ON)\n\r");
+//		//state->conio->puts(buffer);
+//		return 1;
+//	}
+//
+//	value = atoi(con_getparam(state->command, 2));
+//
+//	if( value == 1)	{
+//		buffer[0] = 0x5A;
+//		buffer[1] = 0xA5;
+//		error = flash0_write(1, buffer, DF_ENAIRI_OFFSET, 2);
+//		WDT_Feed();
+//		IRIDIUM_flag |= IRI_USEIRIDIUM_FLAG;
+//
+//		//-------------------------------------
+//		// Activando modem Iridium
+//		state->conio->puts("Activando modem Iridium ...     Espere por favor\n\r");
+//		//state->conio->puts(buffer);
+//		IridiumSBD_begin();
+//		FSMIRI_state = FSMIRI_IDLE;
+//		hbiri_time = 47;
+//		HBIRI_timer = SEC_TIMER + hbiri_time;
+//		iphbiri_timer = SEC_TIMER + 15*60;
+//
+//		if(IRIDIUM_flag & IRI_IRIDIUMOK_FLAG)	{
+//			state->conio->puts("Modem Iridium Detectado Correctamente\n\r");
+//			//state->conio->puts(buffer);
+//			logCidEvent(account, 1, 997, 0, 8);
+//		} else	{
+//			state->conio->puts("ERROR:  No se detecto modem Iridium conectado\n\r");
+//			//state->conio->puts(buffer);
+//			//Iridium activado pero no ok
+//			if((IRIDIUM_flag & IRI_USEIRIDIUM_FLAG) && (!(IRIDIUM_flag & IRI_IRIDIUMOK_FLAG)))	{
+//				logCidEvent(account, 1, 997, 0, 6);
+//			}
+//		}
+//		//-------------------------------------
+//	} else {
+//		buffer[0] = 0xAA;
+//		buffer[1] = 0xBB;
+//		error = flash0_write(1, buffer, DF_ENAIRI_OFFSET, 2);
+//		WDT_Feed();
+//		IRIDIUM_flag &= ~IRI_USEIRIDIUM_FLAG;
+//		state->conio->puts("Modem Iridium desactivado\n\r");
+//		//state->conio->puts(buffer);
+//	}
+//#endif
+//	return 1;
+//}
 
 int con_E393HAB_activation(ConsoleState* state)
 {
@@ -8055,81 +8168,81 @@ int con_higrsthab(ConsoleState* state)
     return 1;
 }
 
-int con_IRI_mode(ConsoleState* state)
-{
-	uint8_t buffer[4];
-	int error, value;
-
-#ifdef USAR_IRIDIUM
-	if( state->numparams < 3 )	{
-		state->conio->puts("set IRIMODE 0|1|2|3|4 (0:OFF, 1:IP DOWN, 2:RF DOWN, 3:IP+RF DOWN, 4:ALWAYS, 5:IP+RF+GPRS DOWN)\n\r");
-		//state->conio->puts(buffer);
-		return 1;
-	}
-
-	value = atoi(con_getparam(state->command, 2));
-
-	switch(value)	{
-		case 0:
-			buffer[0] = 0x5A;
-			buffer[1] = 0x0;
-			error = flash0_write(1, buffer, DF_IRIMODE_OFFSET, 2);
-			WDT_Feed();
-			IRIDIUM_flag &= ~(IRI_IPDWNHAB_FLAG | IRI_RFDWNHAB_FLAG | IRI_ALWAYSHAB_FLAG | IRI_BOTHDWNHAB_FLAG | IRI_GPRSDWN_FLAG);
-			IRI_mode = 0;
-			break;
-		case 1:
-			buffer[0] = 0x5A;
-			buffer[1] = 0x1;
-			error = flash0_write(1, buffer, DF_IRIMODE_OFFSET, 2);
-			WDT_Feed();
-			IRIDIUM_flag &= ~(IRI_IPDWNHAB_FLAG | IRI_RFDWNHAB_FLAG | IRI_ALWAYSHAB_FLAG | IRI_BOTHDWNHAB_FLAG | IRI_GPRSDWN_FLAG);
-			IRIDIUM_flag |= IRI_IPDWNHAB_FLAG;
-			IRI_mode = 1;
-			break;
-		case 2:
-			buffer[0] = 0x5A;
-			buffer[1] = 0x2;
-			error = flash0_write(1, buffer, DF_IRIMODE_OFFSET, 2);
-			WDT_Feed();
-			IRIDIUM_flag &= ~(IRI_IPDWNHAB_FLAG | IRI_RFDWNHAB_FLAG | IRI_ALWAYSHAB_FLAG | IRI_BOTHDWNHAB_FLAG | IRI_GPRSDWN_FLAG);
-			IRIDIUM_flag |= IRI_RFDWNHAB_FLAG;
-			IRI_mode = 2;
-			break;
-		case 3:
-			buffer[0] = 0x5A;
-			buffer[1] = 0x3;
-			error = flash0_write(1, buffer, DF_IRIMODE_OFFSET, 2);
-			WDT_Feed();
-			IRIDIUM_flag &= ~(IRI_IPDWNHAB_FLAG | IRI_RFDWNHAB_FLAG | IRI_ALWAYSHAB_FLAG | IRI_BOTHDWNHAB_FLAG | IRI_GPRSDWN_FLAG);
-			IRIDIUM_flag |= IRI_BOTHDWNHAB_FLAG;
-			IRI_mode = 3;
-			break;
-		case 4:
-			buffer[0] = 0x5A;
-			buffer[1] = 0x04;
-			error = flash0_write(1, buffer, DF_IRIMODE_OFFSET, 2);
-			WDT_Feed();
-			IRIDIUM_flag &= ~(IRI_IPDWNHAB_FLAG | IRI_RFDWNHAB_FLAG | IRI_ALWAYSHAB_FLAG | IRI_BOTHDWNHAB_FLAG | IRI_GPRSDWN_FLAG);
-			IRIDIUM_flag |= IRI_ALWAYSHAB_FLAG;
-			IRI_mode = 4;
-			break;
-		case 5:
-			buffer[0] = 0x5A;
-			buffer[1] = 0x5;
-			error = flash0_write(1, buffer, DF_IRIMODE_OFFSET, 2);
-			WDT_Feed();
-			IRIDIUM_flag &= ~(IRI_IPDWNHAB_FLAG | IRI_RFDWNHAB_FLAG | IRI_ALWAYSHAB_FLAG | IRI_BOTHDWNHAB_FLAG | IRI_GPRSDWN_FLAG);
-			IRIDIUM_flag |= IRI_BOTHDWNHAB_FLAG;
-			IRIDIUM_flag |= IRI_GPRSDWN_FLAG;
-			IRI_mode = 5;
-			break;
-		default:
-			break;
-	}
-#endif
-	return 1;
-}
+//int con_IRI_mode(ConsoleState* state)
+//{
+//	uint8_t buffer[4];
+//	int error, value;
+//
+//#ifdef USAR_IRIDIUM
+//	if( state->numparams < 3 )	{
+//		state->conio->puts("set IRIMODE 0|1|2|3|4 (0:OFF, 1:IP DOWN, 2:RF DOWN, 3:IP+RF DOWN, 4:ALWAYS, 5:IP+RF+GPRS DOWN)\n\r");
+//		//state->conio->puts(buffer);
+//		return 1;
+//	}
+//
+//	value = atoi(con_getparam(state->command, 2));
+//
+//	switch(value)	{
+//		case 0:
+//			buffer[0] = 0x5A;
+//			buffer[1] = 0x0;
+//			error = flash0_write(1, buffer, DF_IRIMODE_OFFSET, 2);
+//			WDT_Feed();
+//			IRIDIUM_flag &= ~(IRI_IPDWNHAB_FLAG | IRI_RFDWNHAB_FLAG | IRI_ALWAYSHAB_FLAG | IRI_BOTHDWNHAB_FLAG | IRI_GPRSDWN_FLAG);
+//			IRI_mode = 0;
+//			break;
+//		case 1:
+//			buffer[0] = 0x5A;
+//			buffer[1] = 0x1;
+//			error = flash0_write(1, buffer, DF_IRIMODE_OFFSET, 2);
+//			WDT_Feed();
+//			IRIDIUM_flag &= ~(IRI_IPDWNHAB_FLAG | IRI_RFDWNHAB_FLAG | IRI_ALWAYSHAB_FLAG | IRI_BOTHDWNHAB_FLAG | IRI_GPRSDWN_FLAG);
+//			IRIDIUM_flag |= IRI_IPDWNHAB_FLAG;
+//			IRI_mode = 1;
+//			break;
+//		case 2:
+//			buffer[0] = 0x5A;
+//			buffer[1] = 0x2;
+//			error = flash0_write(1, buffer, DF_IRIMODE_OFFSET, 2);
+//			WDT_Feed();
+//			IRIDIUM_flag &= ~(IRI_IPDWNHAB_FLAG | IRI_RFDWNHAB_FLAG | IRI_ALWAYSHAB_FLAG | IRI_BOTHDWNHAB_FLAG | IRI_GPRSDWN_FLAG);
+//			IRIDIUM_flag |= IRI_RFDWNHAB_FLAG;
+//			IRI_mode = 2;
+//			break;
+//		case 3:
+//			buffer[0] = 0x5A;
+//			buffer[1] = 0x3;
+//			error = flash0_write(1, buffer, DF_IRIMODE_OFFSET, 2);
+//			WDT_Feed();
+//			IRIDIUM_flag &= ~(IRI_IPDWNHAB_FLAG | IRI_RFDWNHAB_FLAG | IRI_ALWAYSHAB_FLAG | IRI_BOTHDWNHAB_FLAG | IRI_GPRSDWN_FLAG);
+//			IRIDIUM_flag |= IRI_BOTHDWNHAB_FLAG;
+//			IRI_mode = 3;
+//			break;
+//		case 4:
+//			buffer[0] = 0x5A;
+//			buffer[1] = 0x04;
+//			error = flash0_write(1, buffer, DF_IRIMODE_OFFSET, 2);
+//			WDT_Feed();
+//			IRIDIUM_flag &= ~(IRI_IPDWNHAB_FLAG | IRI_RFDWNHAB_FLAG | IRI_ALWAYSHAB_FLAG | IRI_BOTHDWNHAB_FLAG | IRI_GPRSDWN_FLAG);
+//			IRIDIUM_flag |= IRI_ALWAYSHAB_FLAG;
+//			IRI_mode = 4;
+//			break;
+//		case 5:
+//			buffer[0] = 0x5A;
+//			buffer[1] = 0x5;
+//			error = flash0_write(1, buffer, DF_IRIMODE_OFFSET, 2);
+//			WDT_Feed();
+//			IRIDIUM_flag &= ~(IRI_IPDWNHAB_FLAG | IRI_RFDWNHAB_FLAG | IRI_ALWAYSHAB_FLAG | IRI_BOTHDWNHAB_FLAG | IRI_GPRSDWN_FLAG);
+//			IRIDIUM_flag |= IRI_BOTHDWNHAB_FLAG;
+//			IRIDIUM_flag |= IRI_GPRSDWN_FLAG;
+//			IRI_mode = 5;
+//			break;
+//		default:
+//			break;
+//	}
+//#endif
+//	return 1;
+//}
 
 int con_setPtmDly(ConsoleState* state)
 {
@@ -8571,46 +8684,46 @@ int con_gencid(ConsoleState* state)
     return 1;
 }
 
-int con_closerst(ConsoleState* state)
-{
-    NET_ERR err;
-    int error;
-    uint8_t buffer[8];
-
-    NetSock_Close(Monitoreo[0].monsock, &err);
-    NetSock_Close(Monitoreo[1].monsock, &err);
-    LLAVE_TX_OFF();
-    POWER_TX_OFF();
-    buffer[0] = 0;
-    error = flash0_write(1, buffer, DF_HBRSTRTRY_OFFSET, 1);
-    OSTimeDlyHMSM(0, 0, 5, 0, OS_OPT_TIME_HMSM_STRICT, &err);
-
-    OSTimeDlyHMSM(0, 0, 5, 0, OS_OPT_TIME_HMSM_STRICT, &err);
-    while(1);	//me reseteo por watchdog
-    return 1;
-}
-
-int con_closesoc(ConsoleState* state)
-{
-    NET_ERR err;
-
-    //NetSock_Close(Monitoreo[0].monsock, &err);
-    //NetSock_Close(Monitoreo[1].monsock, &err);
-//    state->conio->puts("Wait ... \n\r");
-//    OSTimeDlyHMSM(0, 0, 30, 0, OS_OPT_TIME_HMSM_STRICT, &err);
-
-    ethlink_state = ETHLNK_CONNECTED;
-    NetNIC_Init(&err);
-    OSTimeDlyHMSM(0, 0, 10, 0, OS_OPT_TIME_HMSM_STRICT, &err);
-
-//    InitMonitoreoStruct();
-//    Monitoreo[0].wdogr3kTimer = SEC_TIMER + (5*60);
-//    Monitoreo[0].flags &= ~ACKWDG_FLAG;
-//    Monitoreo[1].wdogr3kTimer = SEC_TIMER + (5*60);
-//    Monitoreo[1].flags &= ~ACKWDG_FLAG;
-    return 1;
-
-}
+//int con_closerst(ConsoleState* state)
+//{
+//    NET_ERR err;
+//    int error;
+//    uint8_t buffer[8];
+//
+//    NetSock_Close(Monitoreo[0].monsock, &err);
+//    NetSock_Close(Monitoreo[1].monsock, &err);
+//    LLAVE_TX_OFF();
+//    POWER_TX_OFF();
+//    buffer[0] = 0;
+//    error = flash0_write(1, buffer, DF_HBRSTRTRY_OFFSET, 1);
+//    OSTimeDlyHMSM(0, 0, 5, 0, OS_OPT_TIME_HMSM_STRICT, &err);
+//
+//    OSTimeDlyHMSM(0, 0, 5, 0, OS_OPT_TIME_HMSM_STRICT, &err);
+//    while(1);	//me reseteo por watchdog
+//    return 1;
+//}
+//
+//int con_closesoc(ConsoleState* state)
+//{
+//    NET_ERR err;
+//
+//    //NetSock_Close(Monitoreo[0].monsock, &err);
+//    //NetSock_Close(Monitoreo[1].monsock, &err);
+////    state->conio->puts("Wait ... \n\r");
+////    OSTimeDlyHMSM(0, 0, 30, 0, OS_OPT_TIME_HMSM_STRICT, &err);
+//
+//    ethlink_state = ETHLNK_CONNECTED;
+//    NetNIC_Init(&err);
+//    OSTimeDlyHMSM(0, 0, 10, 0, OS_OPT_TIME_HMSM_STRICT, &err);
+//
+////    InitMonitoreoStruct();
+////    Monitoreo[0].wdogr3kTimer = SEC_TIMER + (5*60);
+////    Monitoreo[0].flags &= ~ACKWDG_FLAG;
+////    Monitoreo[1].wdogr3kTimer = SEC_TIMER + (5*60);
+////    Monitoreo[1].flags &= ~ACKWDG_FLAG;
+//    return 1;
+//
+//}
 
 uint8_t fsmpwr1state;
 uint8_t fsmpwr2state;

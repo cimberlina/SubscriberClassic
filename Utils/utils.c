@@ -930,27 +930,27 @@ void sprintHexWord(char buffer[], unsigned int mydata)
 	buffer[4] = 0;
 }
 
-void sprintHexDWord(char buffer[], unsigned int mydata)
-{
-    unsigned char data[8], i;
-
-    data[0] = (unsigned char)((mydata >> 28) & 0x0F);
-    data[1] = (unsigned char)((mydata >> 24) & 0x0F);
-    data[2] = (unsigned char)((mydata >> 20) & 0x0F);
-    data[3] = (unsigned char)((mydata >> 16) & 0x0F);
-    data[4] = (unsigned char)((mydata >> 12) & 0x0F);
-    data[5] = (unsigned char)((mydata >> 8) & 0x0F);
-    data[6] = (unsigned char)((mydata >> 4) & 0x0F);
-    data[7] = (unsigned char)(mydata & 0x0F);
-
-    for( i = 0; i < 8; i++ )	{
-        if(data[i] > 9)
-            buffer[i] = ('A' + data[i]- 10);
-        else
-            buffer[i] = ('0' + data[i]);
-    }
-    buffer[8] = 0;
-}
+//void sprintHexDWord(char buffer[], unsigned int mydata)
+//{
+//    unsigned char data[8], i;
+//
+//    data[0] = (unsigned char)((mydata >> 28) & 0x0F);
+//    data[1] = (unsigned char)((mydata >> 24) & 0x0F);
+//    data[2] = (unsigned char)((mydata >> 20) & 0x0F);
+//    data[3] = (unsigned char)((mydata >> 16) & 0x0F);
+//    data[4] = (unsigned char)((mydata >> 12) & 0x0F);
+//    data[5] = (unsigned char)((mydata >> 8) & 0x0F);
+//    data[6] = (unsigned char)((mydata >> 4) & 0x0F);
+//    data[7] = (unsigned char)(mydata & 0x0F);
+//
+//    for( i = 0; i < 8; i++ )	{
+//        if(data[i] > 9)
+//            buffer[i] = ('A' + data[i]- 10);
+//        else
+//            buffer[i] = ('0' + data[i]);
+//    }
+//    buffer[8] = 0;
+//}
 
 void sprintByte(char buffer[], unsigned char mydata)
 {
@@ -1032,31 +1032,31 @@ void printBuffByteRow( uint8_t *data, uint8_t len)
 	CommPutChar(DEBUG_COMM,'\r',0);
 }
 
-void dumpMemory( uint8_t *address, uint16_t len )
-{
-	uint8_t j;
-	uint16_t i;
-
-	CommSendString(DEBUG_COMM, "---------------------------------------------------\n\r");
-	for( i = 0; i < len; i += 16 )	{
-
-		printHexWord(i);
-		CommPutChar(DEBUG_COMM,'\t',0);
-		for( j = 0; j < 16; j++ )	{
-			printByte(address[i+j]);
-			CommPutChar(DEBUG_COMM,' ',0);
-			if( j == 7 )
-				CommSendString(DEBUG_COMM, "- ");
-		}
-		CommPutChar(DEBUG_COMM,'\t',0);
-		for( j = 0; j < 16; j++ )	{
-			if(address[i+j] >= 0x20)
-				CommPutChar(DEBUG_COMM,address[i+j],0);
-			else CommPutChar(DEBUG_COMM,'.',0);
-		}
-		CommSendString(DEBUG_COMM, "\n\r");
-	}
-}
+//void dumpMemory( uint8_t *address, uint16_t len )
+//{
+//	uint8_t j;
+//	uint16_t i;
+//
+//	CommSendString(DEBUG_COMM, "---------------------------------------------------\n\r");
+//	for( i = 0; i < len; i += 16 )	{
+//
+//		printHexWord(i);
+//		CommPutChar(DEBUG_COMM,'\t',0);
+//		for( j = 0; j < 16; j++ )	{
+//			printByte(address[i+j]);
+//			CommPutChar(DEBUG_COMM,' ',0);
+//			if( j == 7 )
+//				CommSendString(DEBUG_COMM, "- ");
+//		}
+//		CommPutChar(DEBUG_COMM,'\t',0);
+//		for( j = 0; j < 16; j++ )	{
+//			if(address[i+j] >= 0x20)
+//				CommPutChar(DEBUG_COMM,address[i+j],0);
+//			else CommPutChar(DEBUG_COMM,'.',0);
+//		}
+//		CommSendString(DEBUG_COMM, "\n\r");
+//	}
+//}
 
 //int i2ctest_wr (void)
 //{
@@ -1160,19 +1160,19 @@ uint8_t htoi_nibble( char data)
 	else return 0;
 }
 
-uint16_t BCD_Word_to_int( uint16_t data)
-{
-	uint16_t temp, miles, centena, decena, unidad;
-
-	unidad = data & 0x000F;
-	decena = (data >> 4) & 0x000F;
-	centena = (data >> 8) & 0x000F;
-	miles = (data >> 12) & 0x000F;
-
-	temp = miles*1000 + centena*100 + decena*10 + unidad;
-	return temp;
-
-}
+//uint16_t BCD_Word_to_int( uint16_t data)
+//{
+//	uint16_t temp, miles, centena, decena, unidad;
+//
+//	unidad = data & 0x000F;
+//	decena = (data >> 4) & 0x000F;
+//	centena = (data >> 8) & 0x000F;
+//	miles = (data >> 12) & 0x000F;
+//
+//	temp = miles*1000 + centena*100 + decena*10 + unidad;
+//	return temp;
+//
+//}
 
 //int ChrIndexOf( uint8_t *string, uint8_t key,  int start)
 //{

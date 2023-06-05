@@ -543,39 +543,39 @@ uint16_t EepromReadWord(uint16_t address, int *error)
 }
 
 
-uint32_t EepromReadDoubleWord(uint16_t address, int *error)
-{
-	uint8_t addr_msb, addr_lsb;
-	uint16_t i;
-	uint32_t retval;
-
-	addr_lsb = (uint8_t)(address & 0x00FF);
-	addr_msb = (uint8_t)((address >> 8) & 0x00FF);
-
-	for ( i = 0; i < Slave_Buffer_BUFSIZE; i++ )	{
-		I2CSlaveBuffer[i] = 0x00;
-	}
-
-	I2CWriteLength = 3;
-	I2CReadLength = 4;
-	I2CMasterBuffer[0] = MC24LC512_ADDR;
-	I2CMasterBuffer[1] = addr_msb;		/* address MSB */
-	I2CMasterBuffer[2] = addr_lsb;		/* address LSB */
-	I2CMasterBuffer[3] = MC24LC512_ADDR | RD_BIT;
-
-	i=0;
-	while (I2CEngine() == I2CSTATE_SLA_NACK)
-		i++;
-
-	*error = 0;
-
-	retval =  ((I2CSlaveBuffer[0] << 24) & 0xFF000000);
-	retval += ((I2CSlaveBuffer[1] << 16) & 0x00FF0000);
-	retval += ((I2CSlaveBuffer[2] << 8)  & 0x0000FF00);
-	retval += ( I2CSlaveBuffer[0] 	     & 0x000000FF);
-
-	return retval;
-}
+//uint32_t EepromReadDoubleWord(uint16_t address, int *error)
+//{
+//	uint8_t addr_msb, addr_lsb;
+//	uint16_t i;
+//	uint32_t retval;
+//
+//	addr_lsb = (uint8_t)(address & 0x00FF);
+//	addr_msb = (uint8_t)((address >> 8) & 0x00FF);
+//
+//	for ( i = 0; i < Slave_Buffer_BUFSIZE; i++ )	{
+//		I2CSlaveBuffer[i] = 0x00;
+//	}
+//
+//	I2CWriteLength = 3;
+//	I2CReadLength = 4;
+//	I2CMasterBuffer[0] = MC24LC512_ADDR;
+//	I2CMasterBuffer[1] = addr_msb;		/* address MSB */
+//	I2CMasterBuffer[2] = addr_lsb;		/* address LSB */
+//	I2CMasterBuffer[3] = MC24LC512_ADDR | RD_BIT;
+//
+//	i=0;
+//	while (I2CEngine() == I2CSTATE_SLA_NACK)
+//		i++;
+//
+//	*error = 0;
+//
+//	retval =  ((I2CSlaveBuffer[0] << 24) & 0xFF000000);
+//	retval += ((I2CSlaveBuffer[1] << 16) & 0x00FF0000);
+//	retval += ((I2CSlaveBuffer[2] << 8)  & 0x0000FF00);
+//	retval += ( I2CSlaveBuffer[0] 	     & 0x000000FF);
+//
+//	return retval;
+//}
 
 void EepromReadBuffer(uint16_t address, uint8_t *buffer, int len, int *error)
 {

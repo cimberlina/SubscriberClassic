@@ -130,7 +130,7 @@ void fsm_pgm1( void );
 
 uint8_t SystemFlag, SystemFlag1, SystemFlag2, SystemFlag3, SystemFlag4, SystemFlag5, SystemFlag6;
 uint8_t SystemFlag7, SystemFlag8, SystemFlag10;
-uint32_t SystemFlag9, SystemFlag11;
+uint32_t SystemFlag9, SystemFlag11, SystemFlag12;
 uint8_t	EVOWD_Flag;
 uint8_t SIRENA_Flag, STRIKE_Flag;
 
@@ -144,11 +144,13 @@ int R3KeventRec_count;
 //**************************************************************************
 
 //**************************************************************************
-//* Estas variables son para la transmision seria CID a rabbit
 EventRecord LogT_eventRecord[LogT_BUFFLEN];
 int LogT_eventRec_writeptr;
 int LogT_eventRec_readptr;
 int LogT_eventRec_count;
+
+EventRecord EV110P0_temp, EV110P3_temp, EV120P0_temp,EV120P2_temp, EV130P0_temp, EV130P4_temp;
+EventRecord EV401P5_temp, EV401P6_temp, EV401P7_temp, EV401P8_temp, EV401P9_temp;
 //**************************************************************************
 
 /***************************************************************************
@@ -246,58 +248,58 @@ uint8_t sndptimer;
 
 
 
-void intToString(int value, uint8_t* pBuf, uint32_t len, uint32_t base)
-{
-    static const char* pAscii = "0123456789abcdefghijklmnopqrstuvwxyz";
-    int pos = 0;
-    int tmpValue = value;
-
-    // the buffer must not be null and at least have a length of 2 to handle one
-    // digit and null-terminator
-    if (pBuf == NULL || len < 2)
-    {
-        return;
-    }
-
-    // a valid base cannot be less than 2 or larger than 36
-    // a base value of 2 means binary representation. A value of 1 would mean only zeros
-    // a base larger than 36 can only be used if a larger alphabet were used.
-    if (base < 2 || base > 36)
-    {
-        return;
-    }
-
-    // negative value
-    if (value < 0)
-    {
-        tmpValue = -tmpValue;
-        value    = -value;
-        pBuf[pos++] = '-';
-    }
-
-    // calculate the required length of the buffer
-    do {
-        pos++;
-        tmpValue /= base;
-    } while(tmpValue > 0);
-
-
-    if (pos > len)
-    {
-        // the len parameter is invalid.
-        return;
-    }
-
-    pBuf[pos] = '\0';
-
-    do {
-        pBuf[--pos] = pAscii[value % base];
-        value /= base;
-    } while(value > 0);
-
-    return;
-
-}
+//void intToString(int value, uint8_t* pBuf, uint32_t len, uint32_t base)
+//{
+//    static const char* pAscii = "0123456789abcdefghijklmnopqrstuvwxyz";
+//    int pos = 0;
+//    int tmpValue = value;
+//
+//    // the buffer must not be null and at least have a length of 2 to handle one
+//    // digit and null-terminator
+//    if (pBuf == NULL || len < 2)
+//    {
+//        return;
+//    }
+//
+//    // a valid base cannot be less than 2 or larger than 36
+//    // a base value of 2 means binary representation. A value of 1 would mean only zeros
+//    // a base larger than 36 can only be used if a larger alphabet were used.
+//    if (base < 2 || base > 36)
+//    {
+//        return;
+//    }
+//
+//    // negative value
+//    if (value < 0)
+//    {
+//        tmpValue = -tmpValue;
+//        value    = -value;
+//        pBuf[pos++] = '-';
+//    }
+//
+//    // calculate the required length of the buffer
+//    do {
+//        pos++;
+//        tmpValue /= base;
+//    } while(tmpValue > 0);
+//
+//
+//    if (pos > len)
+//    {
+//        // the len parameter is invalid.
+//        return;
+//    }
+//
+//    pBuf[pos] = '\0';
+//
+//    do {
+//        pBuf[--pos] = pAscii[value % base];
+//        value /= base;
+//    } while(value > 0);
+//
+//    return;
+//
+//}
 /*
 *********************************************************************************************************
 *                                                main()
@@ -332,6 +334,7 @@ int  main (void)
     SystemFlag8 = 0x00;
     SystemFlag10 = 0x00;
     SystemFlag11 = 0x00;
+    SystemFlag12 = 0x00;
 
 #ifdef NOEVENTS
     SystemFlag11 |= DONTSENDEVENTS;
@@ -1013,6 +1016,22 @@ static  void  App_Task_1 (void  *p_arg)
     }
     WDT_Feed();
 
+    flash0_read(temp, DF_MACROMODE_OFFSET, 2);
+    if((temp[0] == 0x5A) && (temp[1] == 0xA5)) {
+        SystemFlag11 |= MACROMODE_FLAG;
+    } else  {
+        SystemFlag11 &= ~MACROMODE_FLAG;
+    }
+    WDT_Feed();
+
+    flash0_read(temp, DF_NETRECOV_OFFSET, 2);
+    if((temp[0] == 0x5A) && (temp[1] == 0xA5)) {
+        SystemFlag12 |= NETRECOVERY_FLAG;
+    } else  {
+        SystemFlag12 &= ~NETRECOVERY_FLAG;
+    }
+    WDT_Feed();
+
     flash0_read(temp, DF_ENARHB_OFFSET, 2);
     if((temp[0] == 0x5A) && (temp[1] == 0xA5)) {
         SystemFlag6 |= ENARHB_FLAG;
@@ -1513,10 +1532,10 @@ static  void  App_Task_1 (void  *p_arg)
 		    else
 		        logCidEvent(account, 1, 785, 0, (uint16_t)BaseAlarmPkt_alarm);
 
-            if(SystemFlag11 & INCE2MODE_FLAG)
-                logCidEvent(account, 1, 927, 0, (uint16_t)1);
-            else
-                logCidEvent(account, 1, 927, 0, (uint16_t)0);
+//            if(SystemFlag11 & INCE2MODE_FLAG)
+//                logCidEvent(account, 1, 927, 0, (uint16_t)1);
+//            else
+//                logCidEvent(account, 1, 927, 0, (uint16_t)0);
 		}
 
 		//transmision de eventos del grupo 1, dia domingo
@@ -1524,6 +1543,11 @@ static  void  App_Task_1 (void  *p_arg)
 		    OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &os_err);
 		    //-------------------------------------------------------------------------------------
 		    log_nivel_portadora();
+
+            if(SystemFlag11 & MACROMODE_FLAG)
+                logCidEvent(account, 1, 928, 0, (uint16_t)1);
+            if(SystemFlag11 & INCE2MODE_FLAG)
+                logCidEvent(account, 1, 927, 0, (uint16_t)1);
 		    //-------------------------------------------------------------------------------------
 		    for( i = 0; i < MAXQTYPTM; i++) {
 		        if(ptm_dcb[i].rtuaddr == 0x00)

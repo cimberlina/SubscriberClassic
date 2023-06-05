@@ -97,18 +97,18 @@ unsigned int BCDToInt( unsigned int value)
 	return temp;
 }
 
-unsigned int UCharToBCD( unsigned char value )
-{
-	unsigned int temp;
-	unsigned char digit3, digit4;
-
-
-	digit3 = value / 10;
-	temp = value - (digit3 * 10);
-	digit4 = temp;
-
-	return ( (digit3 * 0x10) + digit4 );
-}
+//unsigned int UCharToBCD( unsigned char value )
+//{
+//	unsigned int temp;
+//	unsigned char digit3, digit4;
+//
+//
+//	digit3 = value / 10;
+//	temp = value - (digit3 * 10);
+//	digit4 = temp;
+//
+//	return ( (digit3 * 0x10) + digit4 );
+//}
 
 void  LAN485_Task(void  *p_arg)
 {
@@ -247,9 +247,13 @@ void  LAN485_Task(void  *p_arg)
 		fsm_e401_volumetrica_p8();
 		fsm_e401_volumetrica_p9();
 
+        if(numerozona != 1) {
+            RFDLYBOR_flag &= ~RFDLYBOR_E393HAB_FLAG;
+        }
         fsm_rfdlyptm();
         fsm_rfdlybornera_teso();
-        fsm_ptmsignalling();
+        if(numerozona == 1)
+            fsm_ptmsignalling();
 
 		currtime.tm_sec = RTC_GetTime (LPC_RTC, RTC_TIMETYPE_SECOND);
 		currtime.tm_min = RTC_GetTime (LPC_RTC, RTC_TIMETYPE_MINUTE);
@@ -908,6 +912,8 @@ void PTm_process_answer( int nread, unsigned char * rxbuffer, unsigned char inde
                 if(ptm_dcb[index].flags & PTMCMD_ARM)   {
                     ptm_dcb[index].flags &= ~PTMCMD_ARM;
                 }
+
+
 				if( (rxbuffer[0] == 0x0A) && (rxbuffer[1] == 'A') && (rxbuffer[2] == ptm_dcb[index].rtuaddr) && (rxbuffer[25] == 0x0D) )	{
 					error = ANS_PKT_OK;
 					ptm_dcb[index].com_error_counter = 0;
@@ -1096,20 +1102,20 @@ void GenerateCIDEventPTm( unsigned char index, unsigned char eventtype, unsigned
 #endif
 
 
-	for( i = 0; i < CENTRALOFFICEMAX; i++ )	{
-		if((Monitoreo[i].inuse == TRUE) && (!(SystemFlag11 & DONTSENDEVENTS)) )	{
-			switch(Monitoreo[i].protocol)	{
-			case AP_NTSEC4:
-			case AP_NTSEC5:
-			case AP_NTSEC6:
-			case AP_NTSEC7:
-				WriteEventToTxBuffer(i, &currentEvent);
-				break;
-			default:
-				break;
-			}
-		}
-	}
+//	for( i = 0; i < CENTRALOFFICEMAX; i++ )	{
+//		if((Monitoreo[i].inuse == TRUE) && (!(SystemFlag11 & DONTSENDEVENTS)) )	{
+//			switch(Monitoreo[i].protocol)	{
+//			case AP_NTSEC4:
+//			case AP_NTSEC5:
+//			case AP_NTSEC6:
+//			case AP_NTSEC7:
+//				WriteEventToTxBuffer(i, &currentEvent);
+//				break;
+//			default:
+//				break;
+//			}
+//		}
+//	}
     OSTimeDlyHMSM(0, 0, 0, 500, OS_OPT_TIME_HMSM_STRICT, &err);
 }
 
@@ -1173,12 +1179,14 @@ void ParsePtmCID_Event( unsigned char event_buffer[] )
 				event_buffer[14] = event_buffer[0];
 			}
 		}
-        tempint = BCDToInt((unsigned int)((event_buffer[13] - '0')*10) + (event_buffer[14] - '0'));
+        tempint = BCDToInt((unsigned int)((event_buffer[13] - '0')*16) + (event_buffer[14] - '0'));
         temp = (ptm_dcb[eveindex].particion >> 4) * 16;
         temp += (ptm_dcb[eveindex].particion & 0x0F);
         temppart = tempint + temp;
         tempint = IntToBCD(temppart);
         currentEvent.cid_partition = tempint;
+
+
 //		tempint = BCDToInt((unsigned int)((event_buffer[13] - '0')*10) + (event_buffer[14] - '0'));
 //		temp = (ptm_dcb[eveindex].particion >> 4) * 16;
 //		temp += (ptm_dcb[eveindex].particion & 0x0F);
@@ -1566,22 +1574,23 @@ void ParsePtmCID_Event( unsigned char event_buffer[] )
 #endif
 
 
-
-	for( i = 0; i < CENTRALOFFICEMAX; i++ )	{
-		if((Monitoreo[i].inuse == TRUE) && (!(SystemFlag11 & DONTSENDEVENTS)) )	{
-			switch(Monitoreo[i].protocol)	{
-			case AP_NTSEC4:
-			case AP_NTSEC5:
-			case AP_NTSEC6:
-			case AP_NTSEC7:
-				//while( SystemFlag2 & MONBUFFER_BUSY);
-				WriteEventToTxBuffer(i, &currentEvent);
-				break;
-			default:
-				break;
-			}
-		}
-	}
+//
+//	for( i = 0; i < CENTRALOFFICEMAX; i++ )	{
+//		if((Monitoreo[i].inuse == TRUE) && (!(SystemFlag11 & DONTSENDEVENTS)) )	{
+//			switch(Monitoreo[i].protocol)	{
+//			case AP_NTSEC4:
+//			case AP_NTSEC5:
+//			case AP_NTSEC6:
+//			case AP_NTSEC7:
+//				//while( SystemFlag2 & MONBUFFER_BUSY);
+//                if(!((i == 0) && ( SystemFlag11 & MACROMODE_FLAG)))
+//				    WriteEventToTxBuffer(i, &currentEvent);
+//				break;
+//			default:
+//				break;
+//			}
+//		}
+//	}
 }
 
 int rfdly_time;
@@ -1982,7 +1991,7 @@ void ProcessEvents( unsigned char event_buffer[], unsigned char index )
 	            break;
 		    case 776:
                 OSTimeDlyHMSM(0, 0, 0, 500, OS_OPT_TIME_HMSM_STRICT, &os_err);
-                if((ptm_dcb[index].particion >= 10) && (ptm_dcb[index].particion < 55)) {
+                if((ptm_dcb[index].particion >= 10) && (ptm_dcb[index].particion < 55) && (numerozona == 1)) {
                     if(!(((currentEvent.cid_partition >= 0x21) && (currentEvent.cid_partition <= 0x25)) ||
                        ((currentEvent.cid_partition >= 0x31) && (currentEvent.cid_partition <= 0x39)) ||
                        ((currentEvent.cid_partition >= 0x50) && (currentEvent.cid_partition <= 0x54))))    {
@@ -3011,7 +3020,7 @@ void fsm_e401_volumetrica_p5(void)
 
 void fsm_e401_volumetrica_p6(void)
 {
-	if(VolumetricRedundance[0] == 0)
+	if(VolumetricRedundance[1] == 0)
 		return;
 
 	switch(fsme401volp6_state)    {

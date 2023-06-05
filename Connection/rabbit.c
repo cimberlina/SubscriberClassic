@@ -215,15 +215,7 @@ void InitMonitoreoStruct(void)
 		for( i = 0; i < 2; i++)	{
 			switch(retval[i])	{
 				case 1:
-					Monitoreo[i].protocol = AP_NTSEC4;
-//					sockProtocol[i] = IPPROTO_UDP;
-//					sockType[i] = SOCK_DGRAM;
-					break;
 				case 2:
-					Monitoreo[i].protocol = AP_NTSEC5;
-//					sockProtocol[i] = IPPROTO_UDP;
-//					sockType[i] = SOCK_DGRAM;
-					break;
 				case 3:
 					Monitoreo[i].protocol = AP_NTSEC6;
 //					sockProtocol[i] = IPPROTO_TCP;
@@ -235,7 +227,7 @@ void InitMonitoreoStruct(void)
 //					sockType[i] = SOCK_STREAM;
 					break;
 				default:
-					Monitoreo[i].protocol = AP_NTSEC4;
+					Monitoreo[i].protocol = AP_NTSEC6;
 					break;
 				}
 		}
@@ -582,7 +574,7 @@ void  RabbitTask(void  *p_arg)
 							Buzzer_dcb.led_blink = 1;
 						}
 
-						if((Monitoreo[monid].protocol == AP_NTSEC5) || (Monitoreo[monid].protocol == AP_NTSEC6))	{
+						if((Monitoreo[monid].protocol == AP_NTSEC4) || (Monitoreo[monid].protocol == AP_NTSEC5) || (Monitoreo[monid].protocol == AP_NTSEC6))	{
 							if(Monitoreo[monid].sec == 0xFF)	{
 								Monitoreo[monid].sec = 0x01;
 							} else	{
@@ -1066,6 +1058,7 @@ void fsm_wdog_r3k(int coid)
     time_t temp;
     int error;
     uint8_t buffer[8];
+    NET_SOCK_RTN_CODE retval;
 
     switch(Monitoreo[coid].wdogstate)	{
         case WR3K_IDLE:
@@ -1074,7 +1067,7 @@ void fsm_wdog_r3k(int coid)
                 Monitoreo[coid].wdogstate = WR3K_WDOG;
                 Monitoreo[coid].flags &= ~ACKWDG_FLAG;
             } else 	{
-                Monitoreo[coid].wdogr3kTimer = SEC_TIMER;
+                Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
                 Monitoreo[coid].wdogstate = WR3K_WDOG;
                 Monitoreo[coid].flags &= ~ACKWDG_FLAG;
             }
@@ -1090,7 +1083,12 @@ void fsm_wdog_r3k(int coid)
                 OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &err);
 
 //                InitMonitoreoStruct();
-                Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (NETRSTTIME*60);
+                if(SystemFlag12 & NETRECOVERY_FLAG) {
+                    Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (10*60);
+                } else  {
+                    Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (NETRSTTIME*60);
+                }
+
                 Monitoreo[coid].flags &= ~ACKWDG_FLAG;
 
                 Monitoreo[coid].wdogstate = WR3K_WRST;
@@ -1117,20 +1115,30 @@ void fsm_wdog_r3k(int coid)
                     Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (NETRSTTIME*60);
             }
             if( SEC_TIMER > Monitoreo[coid].wdogr3kTimer )	{
-                if((SystemFlag4 & ARSTOK_FLAG) && (hbreset_retries < HBRESET_RETRIES) )	{
+                retval = NetNIC_PhyLinkState();
+                if((SystemFlag12 & NETRECOVERY_FLAG) && (retval == DEF_YES)) {
                     NetSock_Close(Monitoreo[0].monsock, &err);
                     NetSock_Close(Monitoreo[1].monsock, &err);
                     LLAVE_TX_OFF();
                     POWER_TX_OFF();
-                    hbreset_retries++;
-                    buffer[0] = hbreset_retries;
-                    error = flash0_write(1, buffer, DF_HBRSTRTRY_OFFSET, 1);
                     OSTimeDlyHMSM(0, 0, 5, 0, OS_OPT_TIME_HMSM_STRICT, &err);
-                    while(1);	//me reseteo por watchdog
-                } else	if(hbreset_retries >= HBRESET_RETRIES)  {
-                    Monitoreo[coid].wdogr3kTimer = SEC_TIMER + SEC_TIMER + 2*NETRSTTIME*60;
-                    Monitoreo[coid].flags &= ~ACKWDG_FLAG;
-                    Monitoreo[coid].wdogstate = WR3K_WAITONEHOUR;
+                    while (1);    //me reseteo por watchdog
+                } else {
+                    if ((SystemFlag4 & ARSTOK_FLAG) && (hbreset_retries < HBRESET_RETRIES)) {
+                        NetSock_Close(Monitoreo[0].monsock, &err);
+                        NetSock_Close(Monitoreo[1].monsock, &err);
+                        LLAVE_TX_OFF();
+                        POWER_TX_OFF();
+                        hbreset_retries++;
+                        buffer[0] = hbreset_retries;
+                        error = flash0_write(1, buffer, DF_HBRSTRTRY_OFFSET, 1);
+                        OSTimeDlyHMSM(0, 0, 5, 0, OS_OPT_TIME_HMSM_STRICT, &err);
+                        while (1);    //me reseteo por watchdog
+                    } else if (hbreset_retries >= HBRESET_RETRIES) {
+                        Monitoreo[coid].wdogr3kTimer = SEC_TIMER + 2 * NETRSTTIME * 60;
+                        Monitoreo[coid].flags &= ~ACKWDG_FLAG;
+                        Monitoreo[coid].wdogstate = WR3K_WAITONEHOUR;
+                    }
                 }
 
             } else

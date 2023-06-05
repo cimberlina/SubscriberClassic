@@ -9,6 +9,7 @@
 
 #include "includes.h"
 
+uint8_t numerozona;
 uint8_t FSM_FLAG_1;
 
 uint8_t fsm_rot485_state, fsm_rotrele485_state, fsm_rotEVO_state;
@@ -327,31 +328,46 @@ void DeteccionEventos(void)
 	//manejamos la se�alizacion de las distintas aperturas
 	if( SystemFlag2 & LOGAP1E_FLAG )	{
 		SystemFlag2 &= ~LOGAP1E_FLAG;
-		logCidEvent(account, 1, 137, 0, 1);
+        if(SystemFlag11 & MACROMODE_FLAG)
+            logCidEvent(account, 1, 137, 1, 1);
+        else logCidEvent(account, 1, 137, 0, 1);
 	}
 	if( SystemFlag2 & LOGAP1R_FLAG )	{
 		SystemFlag2 &= ~LOGAP1R_FLAG;
-		logCidEvent(account, 3, 137, 0, 1);
+        if(SystemFlag11 & MACROMODE_FLAG)
+            logCidEvent(account, 3, 137, 1, 1);
+        else logCidEvent(account, 3, 137, 0, 1);
 	}
 	if( SystemFlag2 & LOGAP2E_FLAG )	{
 		SystemFlag2 &= ~LOGAP2E_FLAG;
-		logCidEvent(account, 1, 147, 0, 2);
+        if(SystemFlag11 & MACROMODE_FLAG)
+            logCidEvent(account, 1, 147, 1, 2);
+        else logCidEvent(account, 1, 147, 0, 2);
 	}
 	if( SystemFlag2 & LOGAP2R_FLAG )	{
 		SystemFlag2 &= ~LOGAP2R_FLAG;
-		logCidEvent(account, 3, 147, 0, 2);
+        if(SystemFlag11 & MACROMODE_FLAG)
+            logCidEvent(account, 3, 147, 1, 2);
+        else logCidEvent(account, 3, 147, 0, 2);
 	}
 	if( SystemFlag5 & LOGAP3E_FLAG )	{
 		SystemFlag5 &= ~LOGAP3E_FLAG;
-		logCidEvent(account, 1, 137, 0, 3);
+        if(SystemFlag11 & MACROMODE_FLAG)
+            logCidEvent(account, 1, 137, 1, 3);
+        else logCidEvent(account, 1, 137, 0, 3);
 	}
 	if( SystemFlag5 & LOGAP3R_FLAG )	{
 		SystemFlag5 &= ~LOGAP3R_FLAG;
-		logCidEvent(account, 3, 137, 0, 3);
+        if(SystemFlag11 & MACROMODE_FLAG)
+            logCidEvent(account, 3, 137, 1, 3);
+        else logCidEvent(account, 3, 137, 0, 3);
+
 	}
 	if( SystemFlag6 & LOGAP0R_FLAG )	{
 		SystemFlag6 &= ~LOGAP0R_FLAG;
-		logCidEvent(account, 3, 137, 0, 0);
+        if(SystemFlag11 & MACROMODE_FLAG)
+            logCidEvent(account, 3, 137, 1, 0);
+        else logCidEvent(account, 3, 137, 0, 0);
 	}
 
 	//----------------------------------------------------------------------------------
@@ -361,14 +377,18 @@ void DeteccionEventos(void)
 #ifdef USAR_IRIDIUM
 			IRIDIUM_flag |= IRI_SENDALRM_FLAG;
 #endif
-			logCidEvent(account, 3, 120, 0, 0);
+            if(SystemFlag11 & MACROMODE_FLAG)
+                logCidEvent(account, 3, 120, 1, 0);
+            else logCidEvent(account, 3, 120, 0, 0);
 			logCidEvent(account, 3, 120, 2, 0);
 		}
 		if(restore_alarm & bitpat[TESO_bit])	{
 #ifdef USAR_IRIDIUM
             IRIDIUM_flag |= IRI_SENDALRM_FLAG;
 #endif
-			logCidEvent(account, 3, 130, 0, 0);
+            if(SystemFlag11 & MACROMODE_FLAG)
+			    logCidEvent(account, 3, 130, 1, 0);
+            else logCidEvent(account, 3, 130, 0, 0);
 			logCidEvent(account, 3, 130, 4, 0);
 			if(oldptalarm & OPTZIPT6)	{
 				oldptalarm &= ~OPTZIPT6;
@@ -407,20 +427,26 @@ void DeteccionEventos(void)
 #ifdef USAR_IRIDIUM
             IRIDIUM_flag |= IRI_SENDALRM_FLAG;
 #endif
-			logCidEvent(account, 3, 110, 0, 0);
+            if(SystemFlag11 & MACROMODE_FLAG)
+                logCidEvent(account, 3, 110, 1, 0);
+            else logCidEvent(account, 3, 110, 0, 0);
 			logCidEvent(account, 3, 110, 3, 0);
 		}
 		if(restore_alarm & bitpat[ROTU_bit])	{
 #ifdef USAR_IRIDIUM
             IRIDIUM_flag |= IRI_SENDALRM_FLAG;
 #endif
-			logCidEvent(account, 3, 380, 0, 0);
+            if(SystemFlag11 & MACROMODE_FLAG)
+                logCidEvent(account, 3, 380, 1, 0);
+            else logCidEvent(account, 3, 380, 0, 0);
 		}
 		if(restore_alarm & bitpat[F220_bit])	{
 #ifdef USAR_IRIDIUM
             IRIDIUM_flag |= IRI_SENDALRM_FLAG;
 #endif
-			logCidEvent(account, 3, 301, 0, 0);
+            if(SystemFlag11 & MACROMODE_FLAG)
+                logCidEvent(account, 3, 301, 1, 0);
+            else logCidEvent(account, 3, 301, 0, 0);
 		}
 //		if(restore_alarm & bitpat[APER_bit])	{
 //			logCidEvent(account, 3, 137, 0, 1);
@@ -429,7 +455,9 @@ void DeteccionEventos(void)
 #ifdef USAR_IRIDIUM
             IRIDIUM_flag |= IRI_SENDALRM_FLAG;
 #endif
-			logCidEvent(account, 3, 393, 0, 0);
+            if(SystemFlag11 & MACROMODE_FLAG)
+                logCidEvent(account, 3, 393, 1, 0);
+            else logCidEvent(account, 3, 393, 0, 0);
 		}
 	}
 	if(restore_estados)	{
@@ -506,7 +534,9 @@ void DeteccionEventos(void)
             IRIDIUM_flag |= IRI_SENDALRM_FLAG;
 #endif
 			//logCidEvent(account, 1, 120, 2, 0);
-			logCidEvent(account, 1, 120, 0, 0);
+            if(SystemFlag11 & MACROMODE_FLAG)
+                logCidEvent(account, 1, 120, 1, 0);
+            else logCidEvent(account, 1, 120, 0, 0);
 			recharge_alarm(ASAL_bit);
 		}
 		if(event_alarm & bitpat[TESO_bit])	{
@@ -546,7 +576,9 @@ void DeteccionEventos(void)
 				oldptalarm |= OPTZTPT9;
 			}
 			//logCidEvent(account, 1, 130, 4, 0);
-			logCidEvent(account, 1, 130, 0, 0);
+            if(SystemFlag11 & MACROMODE_FLAG)
+			    logCidEvent(account, 1, 130, 1, 0);
+            else logCidEvent(account, 1, 130, 0, 0);
 			recharge_alarm(TESO_bit);
 		}
 		if(event_alarm & bitpat[INCE_bit])	{
@@ -554,20 +586,26 @@ void DeteccionEventos(void)
             IRIDIUM_flag |= IRI_SENDALRM_FLAG;
 #endif
 			//logCidEvent(account, 1, 110, 3, 0);
-			logCidEvent(account, 1, 110, 0, 0);
+            if(SystemFlag11 & MACROMODE_FLAG)
+                logCidEvent(account, 1, 110, 1, 0);
+            else logCidEvent(account, 1, 110, 0, 0);
 			recharge_alarm(INCE_bit);
 		}
 		if(event_alarm & bitpat[ROTU_bit])	{
 #ifdef USAR_IRIDIUM
             IRIDIUM_flag |= IRI_SENDALRM_FLAG;
 #endif
-			logCidEvent(account, 1, 380, 0, 0);
+            if(SystemFlag11 & MACROMODE_FLAG)
+                logCidEvent(account, 1, 380, 1, 0);
+            else logCidEvent(account, 1, 380, 0, 0);
 		}
 		if(event_alarm & bitpat[F220_bit])	{
 #ifdef USAR_IRIDIUM
             IRIDIUM_flag |= IRI_SENDALRM_FLAG;
 #endif
-			logCidEvent(account, 1, 301, 0, 0);
+            if(SystemFlag11 & MACROMODE_FLAG)
+                logCidEvent(account, 1, 301, 1, 0);
+            else logCidEvent(account, 1, 301, 0, 0);
 		}
 //		if(event_alarm & bitpat[APER_bit])	{
 //			logCidEvent(account, 1, 137, 0, 1);
@@ -576,7 +614,10 @@ void DeteccionEventos(void)
 #ifdef USAR_IRIDIUM
             IRIDIUM_flag |= IRI_SENDALRM_FLAG;
 #endif
-			logCidEvent(account, 1, 393, 0, 0);
+            if(SystemFlag11 & MACROMODE_FLAG)
+                logCidEvent(account, 1, 393, 1, 0);
+            else logCidEvent(account, 1, 393, 0, 0);
+
 		}
 	}
 	if(event_estados)	{
@@ -1285,7 +1326,7 @@ void fsm_deteccion_aperturaAP( void )
                 } else
 				if( ((SysInputs & APER_sbit) || (RADAR_flags & AP_RADAR_FLAG) || (SysInputs & APER2_sbit)) && (SystemFlag10 & VALIDSCAN_FLAG))	{
 					daper_stateAP = APER_WAIT;
-					timerdbncaperAP = 500;
+					timerdbncaperAP = 1000;
 				}
 				break;
 			case APER_WAIT:
@@ -1341,7 +1382,7 @@ void fsm_deteccion_apertura( void )
 		case APER_IDLE :
 			if( (SysInputs & APER_sbit) || (RADAR_flags & AP_RADAR_FLAG)  )	{
 				daper_state = APER_WAIT;
-				timerdbncaper = 750;
+				timerdbncaper = 1000;
 			}
 			else
 			if(SystemFlag2 & APE1WDOG_FLAG)	{
@@ -1387,7 +1428,7 @@ void fsm_deteccion_apertura( void )
 			}
 			if( (!(SysInputs & APER_sbit)) && (!(RADAR_flags & AP_RADAR_FLAG)) )	{
 				daper_state = APER_WAIT2;
-				timerdbncaper = 500;
+				timerdbncaper = 1000;
 			}
 			break;
 		case APER_WAIT2:
@@ -1538,7 +1579,7 @@ void fsm_deteccion_apertura2( void )
                 }
                 if (SystemFlag2 & APE2_sbit) {
                     daper2_state = APER_WAIT;
-                    timerdbncaper = 500;
+                    timerdbncaper = 1000;
                 } else if (SystemFlag2 & APE2WDOG_FLAG) {
                     SystemFlag2 &= ~APE2WDOG_FLAG;
                 }
@@ -1581,7 +1622,7 @@ void fsm_deteccion_apertura2( void )
 			}
 			if( !(SystemFlag2 & APE2_sbit) )	{
 				daper2_state = APER_WAIT2;
-				timerdbncaper = 500;
+				timerdbncaper = 1000;
 			}
 			break;
 		case APER_WAIT2:
@@ -2260,6 +2301,7 @@ void  AlarmDetectTask(void  *p_arg)
 	i = (uint8_t)EepromReadByte(RF_NUMABO_E2P_ADDR, &error);
 	tzone = (uint8_t)EepromReadByte(ZONE_E2P_ADDR, &error);
 	zonenumber = tzone;
+    numerozona = tzone;
 	if( (i >= 1) && (i <= 200) && (tzone >= 1) && (tzone <= 6) )	{
 		switch(tzone)	{
 		case 1:
@@ -2385,6 +2427,18 @@ void  AlarmDetectTask(void  *p_arg)
     fsmpwr1state = FSMPWR_IDLE;
     fsmpwr2state = FSMPWR_IDLE;
 
+    fsm_MEV110_state = FMEV110_IDLE;
+    SystemFlag11 &= ~EV110P0_FLAG;
+    SystemFlag11 &= ~EV110P3_FLAG;
+
+    fsm_MEV120_state = FMEV120_IDLE;
+    SystemFlag11 &= ~EV120P0_FLAG;
+    SystemFlag11 &= ~EV120P2_FLAG;
+
+    fsm_MEV130_state = FMEV130_IDLE;
+    SystemFlag11 &= ~EV130P0_FLAG;
+    SystemFlag11 &= ~EV130P4_FLAG;
+
 	while(DEF_ON)	{
 		WDT_Feed();
 		OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);		//previo timeinterval = 5
@@ -2394,6 +2448,16 @@ void  AlarmDetectTask(void  *p_arg)
 
         fsm_pwr1_pulse();
         fsm_pwr2_pulse();
+        if(SystemFlag11 & MACROMODE_FLAG) {
+            fsm_MEV110();
+            fsm_MEV120();
+            fsm_MEV130();
+            fsm_MEV400P5();
+            fsm_MEV400P6();
+            fsm_MEV400P7();
+            fsm_MEV400P8();
+            fsm_MEV400P9();
+        }
 
 		//fsm_txoff();
 		//fsm_txoff2();
@@ -2684,7 +2748,7 @@ void fsm_roturaEVO( void )
 		if( !(Rot485_flag & ROTEVO_FLAG) )	{
 			fsm_rotEVO_state = FSM_ROT485_IDLE;
 		} else
-		if(SEC_TIMER > rotEVOtimer + 180)	{
+		if(SEC_TIMER > rotEVOtimer + 20*60)	{
 			fsm_rotEVO_state = FSM_ROT485_ROT;
 			SysFlag_AP_GenAlarm |= bitpat[ROTU_bit];
             FSM_FLAG_1 |= ROT943_FLAG;

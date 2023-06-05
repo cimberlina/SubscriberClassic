@@ -122,23 +122,23 @@ void wr16_cbus( uint8_t address, uint8_t data1, uint8_t data2)
 	//CPU_CRITICAL_EXIT();
 }
 
-uint16_t Read869Status(void)
-{
-	uint16_t rvalue;
-	uint8_t tmpdata[2], address;
-
-	//CPU_SR_ALLOC();
-	address = CMXSTAT_ADDR;
-	//CPU_CRITICAL_ENTER();
-	MDM_CS_ON();
-	SSPSend( (uint8_t *)&address, 1 );
-	SSPReceive( tmpdata, 2 );
-	MDM_CS_OFF();
-	//CPU_CRITICAL_EXIT();
-
-	rvalue = tmpdata[0]*0x100 + tmpdata[1];
-	return rvalue;
-}
+//uint16_t Read869Status(void)
+//{
+//	uint16_t rvalue;
+//	uint8_t tmpdata[2], address;
+//
+//	//CPU_SR_ALLOC();
+//	address = CMXSTAT_ADDR;
+//	//CPU_CRITICAL_ENTER();
+//	MDM_CS_ON();
+//	SSPSend( (uint8_t *)&address, 1 );
+//	SSPReceive( tmpdata, 2 );
+//	MDM_CS_OFF();
+//	//CPU_CRITICAL_EXIT();
+//
+//	rvalue = tmpdata[0]*0x100 + tmpdata[1];
+//	return rvalue;
+//}
 
 //void mdm_powerup(void)
 //{

@@ -361,21 +361,21 @@ char *asctime(const struct tm *timeptr)
 //	}
 //}
 
-struct tm *GetTime(struct tm *tmbuff)
-{
-	tmbuff->tm_sec = (int)RTC_GetTime(LPC_RTC, RTC_TIMETYPE_SECOND);
-	tmbuff->tm_min = (int)RTC_GetTime(LPC_RTC, RTC_TIMETYPE_MINUTE);
-	tmbuff->tm_hour = (int)RTC_GetTime(LPC_RTC, RTC_TIMETYPE_HOUR);
-	tmbuff->tm_mon = (int)RTC_GetTime(LPC_RTC, RTC_TIMETYPE_MONTH) - 1;
-	tmbuff->tm_year = (int)RTC_GetTime(LPC_RTC, RTC_TIMETYPE_YEAR);
-	tmbuff->tm_mday = (int)RTC_GetTime(LPC_RTC, RTC_TIMETYPE_DAYOFMONTH);
-	tmbuff->tm_wday = (int)RTC_GetTime(LPC_RTC, RTC_TIMETYPE_DAYOFWEEK);
-	tmbuff->tm_yday = (int)RTC_GetTime(LPC_RTC, RTC_TIMETYPE_DAYOFYEAR) - 1;
-
-	SEC_TIMER = mktime(tmbuff);
-    fsm_wdog_evo( 99, 0 );
-
-	return tmbuff;
-}
+//struct tm *GetTime(struct tm *tmbuff)
+//{
+//	tmbuff->tm_sec = (int)RTC_GetTime(LPC_RTC, RTC_TIMETYPE_SECOND);
+//	tmbuff->tm_min = (int)RTC_GetTime(LPC_RTC, RTC_TIMETYPE_MINUTE);
+//	tmbuff->tm_hour = (int)RTC_GetTime(LPC_RTC, RTC_TIMETYPE_HOUR);
+//	tmbuff->tm_mon = (int)RTC_GetTime(LPC_RTC, RTC_TIMETYPE_MONTH) - 1;
+//	tmbuff->tm_year = (int)RTC_GetTime(LPC_RTC, RTC_TIMETYPE_YEAR);
+//	tmbuff->tm_mday = (int)RTC_GetTime(LPC_RTC, RTC_TIMETYPE_DAYOFMONTH);
+//	tmbuff->tm_wday = (int)RTC_GetTime(LPC_RTC, RTC_TIMETYPE_DAYOFWEEK);
+//	tmbuff->tm_yday = (int)RTC_GetTime(LPC_RTC, RTC_TIMETYPE_DAYOFYEAR) - 1;
+//
+//	SEC_TIMER = mktime(tmbuff);
+//    fsm_wdog_evo( 99, 0 );
+//
+//	return tmbuff;
+//}
 
 

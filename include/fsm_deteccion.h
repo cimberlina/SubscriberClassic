@@ -26,6 +26,7 @@ void LLAVE_TX_ON( void );
 #define POWER_TX_ON() 	GPIO_SetValue(3, 1<<25);
 #define POWER_TX_OFF() 	GPIO_ClearValue(3, 1<<25 );
 
+extern uint8_t numerozona;
 extern OS_TCB		AlarmDetectTask_TCB;
 extern CPU_STK		AlarmDetectTask_Stk[AlarmDetectTask_STK_SIZE];
 

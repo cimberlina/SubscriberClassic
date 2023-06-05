@@ -186,11 +186,13 @@ void  LogT_Task(void  *p_arg)
                             case AP_NTSEC5:
                             case AP_NTSEC6:
                             case AP_NTSEC7:
-                                WriteEventToTxBuffer(i, &event);
+                                //if(!((i == 0) && ( SystemFlag11 & MACROMODE_FLAG)))
+                                    WriteEventToTxBuffer(i, &event);
                                 break;
                             case AP_EYSE1:
                                 //heartbeat_EYSE1((uint8_t *)(&currentEvent) );
-                                WriteEventToTxBuffer(i, &event);
+                                //if(!((i == 0) && ( SystemFlag11 & MACROMODE_FLAG)))
+                                    WriteEventToTxBuffer(i, &event);
                                 break;
                         }
                     }
@@ -377,10 +379,42 @@ void logCidEvent(uint16_t account, uint8_t qualifier, uint16_t eventcode, uint8_
 
 }
 
+const uint16_t EveMACRO_TBL[MACROEVENTS_LEN] =  { \
+        0x110, 0x120, 0x130, 0x401, 0x407,0x602, 0x121, 0x131, 0x139, 0x382, 0x383, \
+        0x380, 0x301, 0x356, 0x137, 0x653, 0x111, 0x381,0x387, 0
+};
+const uint16_t Eve400_TBL[10] = { 0x401, 0x402, 0x403, 0x407, 0x408, 0x409, 0x410, 0};
+
+int IsInEveMACROTBL(uint16_t event)
+{
+    int i;
+
+    for(i = 0; i < MACROEVENTS_LEN; i++) {
+        if( EveMACRO_TBL[i] == event)
+            return 1;
+        else if(EveMACRO_TBL[i] == 0)
+            return 0;
+    }
+    return 0;
+}
+
+int IsInEve400TBL(uint16_t event)
+{
+    int i;
+
+    for(i = 0; i < 10; i++) {
+        if( Eve400_TBL[i] == event)
+            return 1;
+        else if(Eve400_TBL[i] == 0)
+            return 0;
+    }
+    return 0;
+}
 
 void WriteEventToTxBuffer(int co_id, EventRecord *event)
 {
 	int wrptr;
+    uint16_t eventcodeorig;
 
 	if(!((event->cid_qualifier ==  1) || (event->cid_qualifier ==  3) || (event->cid_qualifier ==  6)) )	{
 		return;
@@ -389,14 +423,673 @@ void WriteEventToTxBuffer(int co_id, EventRecord *event)
 //		return;
 //	}
 
-	wrptr = Monitoreo[co_id].eventRec_writeptr++;
-	Monitoreo[co_id].eventRec_count++;
-	Mem_Copy( &(Monitoreo[co_id].eventRecord[wrptr]), event, sizeof(EventRecord));
-	if(Monitoreo[co_id].eventRec_writeptr == TXEVENTBUFFERLEN)	{
-		Monitoreo[co_id].eventRec_writeptr = 0;
-	}
+    //-----------------------------------------------------------------------------------------------------------------
+    if((SystemFlag11 & MACROMODE_FLAG) && (co_id == 0))   {
 
+        //aca aplico conversion de codigo de eventos para el Macro
+        eventcodeorig = event->cid_eventcode;
+        if(event->cid_eventcode == 0x408 ) {
+            event->cid_eventcode = 0x401;
+            //eventcodeorig = 0x408;
+        }
+        if(event->cid_eventcode == 0x403 ) {
+            event->cid_eventcode = 0x401;
+            //eventcodeorig = 0x403;
+        }
+        if(event->cid_eventcode == 0x407 ) {
+            event->cid_eventcode = 0x401;
+            //eventcodeorig = 0x403;
+        }
+
+        if((event->cid_eventcode == 0x110) && ((event->cid_partition == 0) || (event->cid_partition == 1))) {
+            SystemFlag11 |= EV110P0_FLAG;
+            Mem_Copy(&EV110P0_temp, event, sizeof(EventRecord));
+            ReadOutEventMacro(0, event);
+            return;
+        } else
+        if((event->cid_eventcode == 0x120) && ((event->cid_partition == 0) || (event->cid_partition == 1))) {
+            SystemFlag11 |= EV120P0_FLAG;
+            Mem_Copy(&EV120P0_temp, event, sizeof(EventRecord));
+            ReadOutEventMacro(0, event);
+            return;
+        } else
+        if((event->cid_eventcode == 0x130) && ((event->cid_partition == 0) || (event->cid_partition == 1))) {
+            SystemFlag11 |= EV130P0_FLAG;
+            Mem_Copy(&EV130P0_temp, event, sizeof(EventRecord));
+            ReadOutEventMacro(0, event);
+            return;
+        } else
+        if((event->cid_eventcode == 0x110) && (event->cid_partition == 3)) {
+            SystemFlag11 |= EV110P3_FLAG;
+            Mem_Copy(&EV110P3_temp, event, sizeof(EventRecord));
+            ReadOutEventMacro(0, event);
+            return;
+        } else
+        if((event->cid_eventcode == 0x120) && (event->cid_partition == 2)) {
+            SystemFlag11 |= EV120P2_FLAG;
+            Mem_Copy(&EV120P2_temp, event, sizeof(EventRecord));
+            ReadOutEventMacro(0, event);
+            return;
+        } else
+        if((event->cid_eventcode == 0x130) && (event->cid_partition == 4)) {
+            SystemFlag11 |= EV130P4_FLAG;
+            Mem_Copy(&EV130P4_temp, event, sizeof(EventRecord));
+            ReadOutEventMacro(0, event);
+            return;
+        } else
+
+        if((IsInEve400TBL(event->cid_eventcode)) && (event->cid_partition == 5)) {
+            SystemFlag11 |= EV401P5_FLAG;
+            Mem_Copy(&EV401P5_temp, event, sizeof(EventRecord));
+            ReadOutEventMacro(0, event);
+            return;
+        } else
+        if((IsInEve400TBL(event->cid_eventcode)) && (event->cid_partition == 6)) {
+            SystemFlag11 |= EV401P6_FLAG;
+            Mem_Copy(&EV401P6_temp, event, sizeof(EventRecord));
+            ReadOutEventMacro(0, event);
+            return;
+        } else
+        if((IsInEve400TBL(event->cid_eventcode)) && (event->cid_partition == 7)) {
+            SystemFlag11 |= EV401P7_FLAG;
+            Mem_Copy(&EV401P7_temp, event, sizeof(EventRecord));
+            ReadOutEventMacro(0, event);
+            return;
+        } else
+        if((IsInEve400TBL(event->cid_eventcode)) && (event->cid_partition == 8)) {
+            SystemFlag11 |= EV401P8_FLAG;
+            Mem_Copy(&EV401P8_temp, event, sizeof(EventRecord));
+            ReadOutEventMacro(0, event);
+            return;
+        } else
+        if((IsInEve400TBL(event->cid_eventcode)) && (event->cid_partition == 9)) {
+            SystemFlag11 |= EV401P9_FLAG;
+            Mem_Copy(&EV401P9_temp, event, sizeof(EventRecord));
+            ReadOutEventMacro(0, event);
+            return;
+        }
+
+        if((event->cid_eventcode == 0x110) && (event->cid_partition >= 10) && (event->cid_partition < 70)) {
+            SystemFlag11 &= ~EV110P0_FLAG;
+            SystemFlag11 &= ~EV110P3_FLAG;
+            SystemFlag11 |= GEV110P0_FLAG;
+            SystemFlag11 |= GEV110P3_FLAG;
+        }
+        if((event->cid_eventcode == 0x120) && (event->cid_partition >= 10) && (event->cid_partition < 70)) {
+            SystemFlag11 &= ~EV120P0_FLAG;
+            SystemFlag11 &= ~EV120P2_FLAG;
+            SystemFlag11 |= GEV120P0_FLAG;
+            SystemFlag11 |= GEV120P2_FLAG;
+        }
+        if((event->cid_eventcode == 0x130) && (event->cid_partition >= 10) && (event->cid_partition < 70)) {   //today
+            SystemFlag11 &= ~EV130P0_FLAG;
+            SystemFlag11 &= ~EV130P4_FLAG;
+            SystemFlag11 |= GEV130P0_FLAG;
+            SystemFlag11 |= GEV130P4_FLAG;
+        }
+
+        //aca detecto la llegada por datos de los 400 que redundan en bornera delantera
+        if((IsInEve400TBL(event->cid_eventcode)) && (VolumetricRedundance[0] == event->cid_partition))    {
+            SystemFlag11 &= ~EV401P5_FLAG;
+            SystemFlag11 |= GEV401P5_FLAG;
+        }
+        if((IsInEve400TBL(event->cid_eventcode)) && (VolumetricRedundance[1] == event->cid_partition))    {
+            SystemFlag11 &= ~EV401P6_FLAG;
+            SystemFlag11 |= GEV401P6_FLAG;
+        }
+        if((IsInEve400TBL(event->cid_eventcode)) && (VolumetricRedundance[2] == event->cid_partition))    {
+            SystemFlag11 &= ~EV401P7_FLAG;
+            SystemFlag11 |= GEV401P7_FLAG;
+        }
+        if((IsInEve400TBL(event->cid_eventcode)) && (VolumetricRedundance[3] == event->cid_partition))    {
+            SystemFlag11 &= ~EV401P8_FLAG;
+            SystemFlag11 |= GEV401P8_FLAG;
+        }
+        if((IsInEve400TBL(event->cid_eventcode)) && (VolumetricRedundance[4] == event->cid_partition))    {
+            SystemFlag11 &= ~EV401P9_FLAG;
+            SystemFlag11 |= GEV401P9_FLAG;
+        }
+
+        if( IsInEveMACROTBL(event->cid_eventcode) ) {
+            wrptr = Monitoreo[0].eventRec_writeptr++;
+            Monitoreo[0].eventRec_count++;
+            Mem_Copy(&(Monitoreo[0].eventRecord[wrptr]), event, sizeof(EventRecord));
+            if (Monitoreo[0].eventRec_writeptr == TXEVENTBUFFERLEN) {
+                Monitoreo[0].eventRec_writeptr = 0;
+            }
+        }
+        event->cid_eventcode = eventcodeorig;
+    //-----------------------------------------------------------------------------------------------------------------
+    } else {
+        wrptr = Monitoreo[co_id].eventRec_writeptr++;
+        Monitoreo[co_id].eventRec_count++;
+        Mem_Copy(&(Monitoreo[co_id].eventRecord[wrptr]), event, sizeof(EventRecord));
+        if (Monitoreo[co_id].eventRec_writeptr == TXEVENTBUFFERLEN) {
+            Monitoreo[co_id].eventRec_writeptr = 0;
+        }
+    }
 }
+
+unsigned char fsm_MEV110_state;
+
+void fsm_MEV110(void)
+{
+    static uint32_t  timeout;
+    int wrptr;
+
+    switch(fsm_MEV110_state)    {
+        case FMEV110_IDLE:
+            if(SystemFlag11 & EV110P0_FLAG) {
+                timeout = SEC_TIMER + 30;
+                fsm_MEV110_state = FMEV110P0;
+            } else
+            if(SystemFlag11 & EV110P3_FLAG) {
+                timeout = SEC_TIMER + 30;
+                fsm_MEV110_state = FMEV110P03;
+            } else if((SystemFlag11 & GEV110P0_FLAG) || (SystemFlag11 & GEV110P3_FLAG))    {
+                fsm_MEV110_state = FMEV110_GUARD;
+                timeout = SEC_TIMER + 90;
+                SystemFlag11 &= ~GEV110P0_FLAG;
+                SystemFlag11 &= ~GEV110P3_FLAG;
+            }
+            break;
+        case FMEV110P0:
+            if((!(SystemFlag11 & EV110P0_FLAG)) && (!(SystemFlag11 & EV110P3_FLAG)))  {
+                fsm_MEV110_state = FMEV110_IDLE;
+                if((SystemFlag11 & GEV110P0_FLAG) || (SystemFlag11 & GEV110P3_FLAG))    {
+                    fsm_MEV110_state = FMEV110_GUARD;
+                    timeout = SEC_TIMER + 90;
+                    SystemFlag11 &= ~GEV110P0_FLAG;
+                    SystemFlag11 &= ~GEV110P3_FLAG;
+                }
+            } else
+            if(SystemFlag11 & EV110P3_FLAG) {
+                timeout = SEC_TIMER + 30;
+                fsm_MEV110_state = FMEV110P03;
+            } else
+            if(SEC_TIMER > timeout) {
+                //aca tirar evento de particion 0
+                wrptr = Monitoreo[0].eventRec_writeptr++;
+                Monitoreo[0].eventRec_count++;
+                Mem_Copy(&(Monitoreo[0].eventRecord[wrptr]), &EV110P0_temp, sizeof(EventRecord));
+                if (Monitoreo[0].eventRec_writeptr == TXEVENTBUFFERLEN) {
+                    Monitoreo[0].eventRec_writeptr = 0;
+                }
+                fsm_MEV110_state = FMEV110_IDLE;
+                SystemFlag11 &= ~EV110P0_FLAG;
+                SystemFlag11 &= ~EV110P3_FLAG;
+            }
+            break;
+        case FMEV110P03:
+            if((!(SystemFlag11 & EV110P0_FLAG)) && (!(SystemFlag11 & EV110P3_FLAG)))  {
+                fsm_MEV110_state = FMEV110_IDLE;
+                if((SystemFlag11 & GEV110P0_FLAG) || (SystemFlag11 & GEV110P3_FLAG))    {
+                    fsm_MEV110_state = FMEV110_GUARD;
+                    timeout = SEC_TIMER + 90;
+                    SystemFlag11 &= ~GEV110P0_FLAG;
+                    SystemFlag11 &= ~GEV110P3_FLAG;
+                }
+            } else
+            if(SEC_TIMER > timeout) {
+                //aca tirar evento de particion 3
+                wrptr = Monitoreo[0].eventRec_writeptr++;
+                Monitoreo[0].eventRec_count++;
+                Mem_Copy(&(Monitoreo[0].eventRecord[wrptr]), &EV110P3_temp, sizeof(EventRecord));
+                if (Monitoreo[0].eventRec_writeptr == TXEVENTBUFFERLEN) {
+                    Monitoreo[0].eventRec_writeptr = 0;
+                }
+                fsm_MEV110_state = FMEV110_IDLE;
+                SystemFlag11 &= ~EV110P0_FLAG;
+                SystemFlag11 &= ~EV110P3_FLAG;
+            }
+            break;
+        case FMEV110_GUARD:
+            if(SEC_TIMER > timeout) {
+                fsm_MEV110_state = FMEV110_IDLE;
+                SystemFlag11 &= ~EV110P0_FLAG;
+                SystemFlag11 &= ~EV110P3_FLAG;
+            }
+            break;
+        default:
+            fsm_MEV110_state = FMEV110_IDLE;
+            SystemFlag11 &= ~EV110P0_FLAG;
+            SystemFlag11 &= ~EV110P3_FLAG;
+            break;
+    }
+}
+
+
+unsigned char fsm_MEV120_state;
+
+void fsm_MEV120(void)
+{
+    static uint32_t  timeout;
+    int wrptr;
+
+    switch(fsm_MEV120_state)    {
+        case FMEV120_IDLE:
+            if(SystemFlag11 & EV120P0_FLAG) {
+                timeout = SEC_TIMER + 30;
+                fsm_MEV120_state = FMEV120P0;
+            } else
+            if(SystemFlag11 & EV120P2_FLAG) {
+                timeout = SEC_TIMER + 30;
+                fsm_MEV120_state = FMEV120P02;
+            } else if((SystemFlag11 & GEV120P0_FLAG) || (SystemFlag11 & GEV120P2_FLAG))    {
+                fsm_MEV120_state = FMEV120_GUARD;
+                timeout = SEC_TIMER + 90;
+                SystemFlag11 &= ~GEV120P0_FLAG;
+                SystemFlag11 &= ~GEV120P2_FLAG;
+            }
+            break;
+        case FMEV120P0:
+            if((!(SystemFlag11 & EV120P0_FLAG)) && (!(SystemFlag11 & EV120P2_FLAG)))  {
+                fsm_MEV120_state = FMEV120_IDLE;
+                if((SystemFlag11 & GEV120P0_FLAG) || (SystemFlag11 & GEV120P2_FLAG))    {
+                    fsm_MEV120_state = FMEV120_GUARD;
+                    timeout = SEC_TIMER + 90;
+                    SystemFlag11 &= ~GEV120P0_FLAG;
+                    SystemFlag11 &= ~GEV120P2_FLAG;
+                }
+            } else
+            if(SystemFlag11 & EV120P2_FLAG) {
+                timeout = SEC_TIMER + 30;
+                fsm_MEV120_state = FMEV120P02;
+            } else
+            if(SEC_TIMER > timeout) {
+                //aca tirar evento de particion 0
+                wrptr = Monitoreo[0].eventRec_writeptr++;
+                Monitoreo[0].eventRec_count++;
+                Mem_Copy(&(Monitoreo[0].eventRecord[wrptr]), &EV120P0_temp, sizeof(EventRecord));
+                if (Monitoreo[0].eventRec_writeptr == TXEVENTBUFFERLEN) {
+                    Monitoreo[0].eventRec_writeptr = 0;
+                }
+                fsm_MEV120_state = FMEV120_IDLE;
+                SystemFlag11 &= ~EV120P0_FLAG;
+                SystemFlag11 &= ~EV120P2_FLAG;
+            }
+            break;
+        case FMEV120P02:
+            if((!(SystemFlag11 & EV120P0_FLAG)) && (!(SystemFlag11 & EV120P2_FLAG)))  {
+                fsm_MEV120_state = FMEV120_IDLE;
+                if((SystemFlag11 & GEV120P0_FLAG) || (SystemFlag11 & GEV120P2_FLAG))    {
+                    fsm_MEV120_state = FMEV120_GUARD;
+                    timeout = SEC_TIMER + 90;
+                    SystemFlag11 &= ~GEV120P0_FLAG;
+                    SystemFlag11 &= ~GEV120P2_FLAG;
+                }
+            } else
+            if(SEC_TIMER > timeout) {
+                //aca tirar evento de particion 2
+                wrptr = Monitoreo[0].eventRec_writeptr++;
+                Monitoreo[0].eventRec_count++;
+                Mem_Copy(&(Monitoreo[0].eventRecord[wrptr]), &EV120P2_temp, sizeof(EventRecord));
+                if (Monitoreo[0].eventRec_writeptr == TXEVENTBUFFERLEN) {
+                    Monitoreo[0].eventRec_writeptr = 0;
+                }
+                fsm_MEV120_state = FMEV120_IDLE;
+                SystemFlag11 &= ~EV120P0_FLAG;
+                SystemFlag11 &= ~EV120P2_FLAG;
+            }
+            break;
+        case FMEV120_GUARD:
+            if(SEC_TIMER > timeout) {
+                fsm_MEV120_state = FMEV120_IDLE;
+                SystemFlag11 &= ~EV120P0_FLAG;
+                SystemFlag11 &= ~EV120P2_FLAG;
+            }
+            break;
+        default:
+            fsm_MEV120_state = FMEV120_IDLE;
+            SystemFlag11 &= ~EV120P0_FLAG;
+            SystemFlag11 &= ~EV120P2_FLAG;
+            break;
+    }
+}
+
+unsigned char fsm_MEV130_state;
+
+void fsm_MEV130(void)
+{
+    static uint32_t  timeout;
+    int wrptr;
+
+    switch(fsm_MEV130_state)    {
+        case FMEV130_IDLE:
+            if(SystemFlag11 & EV130P0_FLAG) {
+                timeout = SEC_TIMER + 30;
+                fsm_MEV130_state = FMEV130P0;
+            } else
+            if(SystemFlag11 & EV130P4_FLAG) {
+                timeout = SEC_TIMER + 30;
+                fsm_MEV130_state = FMEV130P04;
+            } else if((SystemFlag11 & GEV130P0_FLAG) || (SystemFlag11 & GEV130P4_FLAG))    {
+                fsm_MEV130_state = FMEV130_GUARD;
+                timeout = SEC_TIMER + 90;
+                SystemFlag11 &= ~GEV130P0_FLAG;
+                SystemFlag11 &= ~GEV130P4_FLAG;
+            }
+            break;
+        case FMEV130P0:
+            if((!(SystemFlag11 & EV130P0_FLAG)) && (!(SystemFlag11 & EV130P4_FLAG)))  {
+                fsm_MEV130_state = FMEV130_IDLE;
+                if((SystemFlag11 & GEV130P0_FLAG) || (SystemFlag11 & GEV130P4_FLAG))    {
+                    fsm_MEV130_state = FMEV130_GUARD;
+                    timeout = SEC_TIMER + 90;
+                    SystemFlag11 &= ~GEV130P0_FLAG;
+                    SystemFlag11 &= ~GEV130P4_FLAG;
+                }
+            } else
+            if(SystemFlag11 & EV130P4_FLAG) {
+                timeout = SEC_TIMER + 30;
+                fsm_MEV130_state = FMEV130P04;
+            } else
+            if(SEC_TIMER > timeout) {
+                //aca tirar evento de particion 0
+                wrptr = Monitoreo[0].eventRec_writeptr++;
+                Monitoreo[0].eventRec_count++;
+                Mem_Copy(&(Monitoreo[0].eventRecord[wrptr]), &EV130P0_temp, sizeof(EventRecord));
+                if (Monitoreo[0].eventRec_writeptr == TXEVENTBUFFERLEN) {
+                    Monitoreo[0].eventRec_writeptr = 0;
+                }
+                fsm_MEV130_state = FMEV130_IDLE;
+                SystemFlag11 &= ~EV130P0_FLAG;
+                SystemFlag11 &= ~EV130P4_FLAG;
+            }
+            break;
+        case FMEV130P04:
+            if((!(SystemFlag11 & EV130P0_FLAG)) && (!(SystemFlag11 & EV130P4_FLAG)))  {
+                fsm_MEV130_state = FMEV130_IDLE;
+                if((SystemFlag11 & GEV130P0_FLAG) || (SystemFlag11 & GEV130P4_FLAG))    {
+                    fsm_MEV130_state = FMEV130_GUARD;
+                    timeout = SEC_TIMER + 90;
+                    SystemFlag11 &= ~GEV130P0_FLAG;
+                    SystemFlag11 &= ~GEV130P4_FLAG;
+                }
+            } else
+            if(SEC_TIMER > timeout) {
+                //aca tirar evento de particion 4
+                wrptr = Monitoreo[0].eventRec_writeptr++;
+                Monitoreo[0].eventRec_count++;
+                Mem_Copy(&(Monitoreo[0].eventRecord[wrptr]), &EV130P4_temp, sizeof(EventRecord));
+                if (Monitoreo[0].eventRec_writeptr == TXEVENTBUFFERLEN) {
+                    Monitoreo[0].eventRec_writeptr = 0;
+                }
+                fsm_MEV130_state = FMEV130_IDLE;
+                SystemFlag11 &= ~EV130P0_FLAG;
+                SystemFlag11 &= ~EV130P4_FLAG;
+            }
+            break;
+        case FMEV130_GUARD:
+            if(SEC_TIMER > timeout) {
+                fsm_MEV130_state = FMEV130_IDLE;
+                SystemFlag11 &= ~EV130P0_FLAG;
+                SystemFlag11 &= ~EV130P4_FLAG;
+            }
+            break;
+        default:
+            fsm_MEV130_state = FMEV130_IDLE;
+            SystemFlag11 &= ~EV130P0_FLAG;
+            SystemFlag11 &= ~EV130P4_FLAG;
+            break;
+    }
+}
+
+uint8_t fsm_MEV400P5_state;
+
+void fsm_MEV400P5(void)
+{
+    static uint32_t  timeout;
+    int wrptr;
+
+    switch(fsm_MEV400P5_state)  {
+        case FMEV400P5_IDLE:
+            if(SystemFlag11 & EV401P5_FLAG) {
+                timeout = SEC_TIMER + 30;
+                fsm_MEV400P5_state = FMEV400P5_RXD;
+            } else if(SystemFlag11 & GEV401P5_FLAG)    {
+                fsm_MEV400P5_state = FMEV400P5_GUARD;
+                timeout = SEC_TIMER + 30;
+                SystemFlag11 &= ~GEV401P5_FLAG;
+            }
+            break;
+        case FMEV400P5_RXD:
+            if(!(SystemFlag11 & EV401P5_FLAG)) {
+                fsm_MEV400P5_state = FMEV400P5_IDLE;
+                if(SystemFlag11 & GEV401P5_FLAG)    {
+                    fsm_MEV400P5_state = FMEV400P5_GUARD;
+                    timeout = SEC_TIMER + 30;
+                    SystemFlag11 &= ~GEV401P5_FLAG;
+                }
+            } else
+            if(SEC_TIMER > timeout) {
+                wrptr = Monitoreo[0].eventRec_writeptr++;
+                Monitoreo[0].eventRec_count++;
+                Mem_Copy(&(Monitoreo[0].eventRecord[wrptr]), &EV401P5_temp, sizeof(EventRecord));
+                if (Monitoreo[0].eventRec_writeptr == TXEVENTBUFFERLEN) {
+                    Monitoreo[0].eventRec_writeptr = 0;
+                }
+                fsm_MEV400P5_state = FMEV400P5_IDLE;
+                SystemFlag11 &= ~EV401P5_FLAG;
+            }
+            break;
+        case FMEV400P5_GUARD:
+            if(SEC_TIMER > timeout) {
+                fsm_MEV400P5_state = FMEV400P5_IDLE;
+                SystemFlag11 &= ~EV401P5_FLAG;
+            }
+            break;
+        default:
+            fsm_MEV400P5_state = FMEV400P5_IDLE;
+            SystemFlag11 &= ~EV401P5_FLAG;
+            break;
+    }
+}
+
+uint8_t fsm_MEV400P6_state;
+
+void fsm_MEV400P6(void)
+{
+    static uint32_t  timeout;
+    int wrptr;
+
+    switch(fsm_MEV400P6_state)  {
+        case FMEV400P6_IDLE:
+            if(SystemFlag11 & EV401P6_FLAG) {
+                timeout = SEC_TIMER + 30;
+                fsm_MEV400P6_state = FMEV400P6_RXD;
+            } else if(SystemFlag11 & GEV401P6_FLAG)    {
+                fsm_MEV400P6_state = FMEV400P6_GUARD;
+                timeout = SEC_TIMER + 30;
+                SystemFlag11 &= ~GEV401P6_FLAG;
+            }
+            break;
+        case FMEV400P6_RXD:
+            if(!(SystemFlag11 & EV401P6_FLAG)) {
+                fsm_MEV400P6_state = FMEV400P6_IDLE;
+                if(SystemFlag11 & GEV401P6_FLAG)    {
+                    fsm_MEV400P6_state = FMEV400P6_GUARD;
+                    timeout = SEC_TIMER + 30;
+                    SystemFlag11 &= ~GEV401P6_FLAG;
+                }
+            } else
+            if(SEC_TIMER > timeout) {
+                wrptr = Monitoreo[0].eventRec_writeptr++;
+                Monitoreo[0].eventRec_count++;
+                Mem_Copy(&(Monitoreo[0].eventRecord[wrptr]), &EV401P6_temp, sizeof(EventRecord));
+                if (Monitoreo[0].eventRec_writeptr == TXEVENTBUFFERLEN) {
+                    Monitoreo[0].eventRec_writeptr = 0;
+                }
+                fsm_MEV400P6_state = FMEV400P6_IDLE;
+                SystemFlag11 &= ~EV401P6_FLAG;
+            }
+            break;
+        case FMEV400P6_GUARD:
+            if(SEC_TIMER > timeout) {
+                fsm_MEV400P6_state = FMEV400P6_IDLE;
+                SystemFlag11 &= ~EV401P6_FLAG;
+            }
+            break;
+        default:
+            fsm_MEV400P6_state = FMEV400P6_IDLE;
+            SystemFlag11 &= ~EV401P6_FLAG;
+            break;
+    }
+}
+
+uint8_t fsm_MEV400P7_state;
+
+void fsm_MEV400P7(void)
+{
+    static uint32_t  timeout;
+    int wrptr;
+
+    switch(fsm_MEV400P7_state)  {
+        case FMEV400P7_IDLE:
+            if(SystemFlag11 & EV401P7_FLAG) {
+                timeout = SEC_TIMER + 30;
+                fsm_MEV400P7_state = FMEV400P7_RXD;
+            } else if(SystemFlag11 & GEV401P7_FLAG)    {
+                fsm_MEV400P7_state = FMEV400P7_GUARD;
+                timeout = SEC_TIMER + 30;
+                SystemFlag11 &= ~GEV401P7_FLAG;
+            }
+            break;
+        case FMEV400P7_RXD:
+            if(!(SystemFlag11 & EV401P7_FLAG)) {
+                fsm_MEV400P7_state = FMEV400P7_IDLE;
+                if(SystemFlag11 & GEV401P7_FLAG)    {
+                    fsm_MEV400P7_state = FMEV400P7_GUARD;
+                    timeout = SEC_TIMER + 30;
+                    SystemFlag11 &= ~GEV401P7_FLAG;
+                }
+            } else
+            if(SEC_TIMER > timeout) {
+                wrptr = Monitoreo[0].eventRec_writeptr++;
+                Monitoreo[0].eventRec_count++;
+                Mem_Copy(&(Monitoreo[0].eventRecord[wrptr]), &EV401P7_temp, sizeof(EventRecord));
+                if (Monitoreo[0].eventRec_writeptr == TXEVENTBUFFERLEN) {
+                    Monitoreo[0].eventRec_writeptr = 0;
+                }
+                fsm_MEV400P7_state = FMEV400P7_IDLE;
+                SystemFlag11 &= ~EV401P7_FLAG;
+            }
+            break;
+        case FMEV400P7_GUARD:
+            if(SEC_TIMER > timeout) {
+                fsm_MEV400P7_state = FMEV400P7_IDLE;
+                SystemFlag11 &= ~EV401P7_FLAG;
+            }
+            break;
+        default:
+            fsm_MEV400P7_state = FMEV400P7_IDLE;
+            SystemFlag11 &= ~EV401P7_FLAG;
+            break;
+    }
+}
+
+uint8_t fsm_MEV400P8_state;
+
+void fsm_MEV400P8(void)
+{
+    static uint32_t  timeout;
+    int wrptr;
+
+    switch(fsm_MEV400P8_state)  {
+        case FMEV400P8_IDLE:
+            if(SystemFlag11 & EV401P8_FLAG) {
+                timeout = SEC_TIMER + 30;
+                fsm_MEV400P8_state = FMEV400P8_RXD;
+            } else if(SystemFlag11 & GEV401P8_FLAG)    {
+                fsm_MEV400P8_state = FMEV400P8_GUARD;
+                timeout = SEC_TIMER + 30;
+                SystemFlag11 &= ~GEV401P8_FLAG;
+            }
+            break;
+        case FMEV400P8_RXD:
+            if(!(SystemFlag11 & EV401P8_FLAG)) {
+                fsm_MEV400P8_state = FMEV400P8_IDLE;
+                if(SystemFlag11 & GEV401P8_FLAG)    {
+                    fsm_MEV400P8_state = FMEV400P8_GUARD;
+                    timeout = SEC_TIMER + 30;
+                    SystemFlag11 &= ~GEV401P8_FLAG;
+                }
+            } else
+            if(SEC_TIMER > timeout) {
+                wrptr = Monitoreo[0].eventRec_writeptr++;
+                Monitoreo[0].eventRec_count++;
+                Mem_Copy(&(Monitoreo[0].eventRecord[wrptr]), &EV401P8_temp, sizeof(EventRecord));
+                if (Monitoreo[0].eventRec_writeptr == TXEVENTBUFFERLEN) {
+                    Monitoreo[0].eventRec_writeptr = 0;
+                }
+                fsm_MEV400P8_state = FMEV400P8_IDLE;
+                SystemFlag11 &= ~EV401P8_FLAG;
+            }
+            break;
+        case FMEV400P8_GUARD:
+            if(SEC_TIMER > timeout) {
+                fsm_MEV400P8_state = FMEV400P8_IDLE;
+                SystemFlag11 &= ~EV401P8_FLAG;
+            }
+            break;
+        default:
+            fsm_MEV400P8_state = FMEV400P8_IDLE;
+            SystemFlag11 &= ~EV401P8_FLAG;
+            break;
+    }
+}
+
+uint8_t fsm_MEV400P9_state;
+
+void fsm_MEV400P9(void)
+{
+    static uint32_t  timeout;
+    int wrptr;
+
+    switch(fsm_MEV400P9_state)  {
+        case FMEV400P9_IDLE:
+            if(SystemFlag11 & EV401P9_FLAG) {
+                timeout = SEC_TIMER + 30;
+                fsm_MEV400P9_state = FMEV400P9_RXD;
+            } else if(SystemFlag11 & GEV401P9_FLAG)    {
+                fsm_MEV400P9_state = FMEV400P9_GUARD;
+                timeout = SEC_TIMER + 30;
+                SystemFlag11 &= ~GEV401P9_FLAG;
+            }
+            break;
+        case FMEV400P9_RXD:
+            if(!(SystemFlag11 & EV401P9_FLAG)) {
+                fsm_MEV400P9_state = FMEV400P9_IDLE;
+                if(SystemFlag11 & GEV401P9_FLAG)    {
+                    fsm_MEV400P9_state = FMEV400P9_GUARD;
+                    timeout = SEC_TIMER + 30;
+                    SystemFlag11 &= ~GEV401P9_FLAG;
+                }
+            } else
+            if(SEC_TIMER > timeout) {
+                wrptr = Monitoreo[0].eventRec_writeptr++;
+                Monitoreo[0].eventRec_count++;
+                Mem_Copy(&(Monitoreo[0].eventRecord[wrptr]), &EV401P9_temp, sizeof(EventRecord));
+                if (Monitoreo[0].eventRec_writeptr == TXEVENTBUFFERLEN) {
+                    Monitoreo[0].eventRec_writeptr = 0;
+                }
+                fsm_MEV400P9_state = FMEV400P9_IDLE;
+                SystemFlag11 &= ~EV401P9_FLAG;
+            }
+            break;
+        case FMEV400P9_GUARD:
+            if(SEC_TIMER > timeout) {
+                fsm_MEV400P9_state = FMEV400P9_IDLE;
+                SystemFlag11 &= ~EV401P9_FLAG;
+            }
+            break;
+        default:
+            fsm_MEV400P9_state = FMEV400P9_IDLE;
+            SystemFlag11 &= ~EV401P9_FLAG;
+            break;
+    }
+}
+
 
 void WriteEventToR3KBuffer(EventRecord *event)
 {
@@ -429,6 +1122,35 @@ void R3KpreReadEvent(EventRecord *event)
 	rdptr = R3KeventRec_readptr;
 
 	Mem_Copy( event, &(R3KeventRecord[rdptr]), sizeof(EventRecord));
+}
+
+void ReadOutEventMacro( int co_id, EventRecord *event)
+{
+    uint32_t df_eve_addr;
+    uint16_t fnd_index;
+    uint8_t buffer[DF_EVELEN];
+    OS_ERR os_err;
+    int result;
+
+    fnd_index =event->index;
+    result = find_event_by_index( fnd_index, &df_eve_addr);
+
+    if(result == TRUE)	{
+
+        flash0_read(buffer, df_eve_addr, DF_EVELEN);
+        OSTimeDlyHMSM(0, 0, 0, 10, OS_OPT_TIME_HMSM_STRICT, &os_err);
+        switch(co_id)	{
+            case 0:
+                buffer[0] |= ACKRCVDMON0;
+                break;
+            case 1:
+                buffer[0] |= ACKRCVDMON1;
+                break;
+        }
+
+        RawWriteEventToFlash(buffer, df_eve_addr);
+
+    }
 }
 
 void ReadOutEvent( int co_id, EventRecord *event)
@@ -1584,7 +2306,7 @@ const uint16_t EveSet_TBL[EVSET_TYPE_LEN][EVSET_LEN] = {
          0x879, 0x880, 0x881, 0x882, 0x883, 0x884, 0x885, 0x886, 0x887, 0x891, 0x892, 0x895, 0x905, 0x906, 0x909, 0x910, 0x911,
          0x912, 0x915, 0x916, 0x917, 920, 0x921, 0x922, 0x923, 0x927,0x931, 0x933, 0x934, 0x941, 0x942, 0x944, 0x945, 0x946, 0x961,
          0x962, 0x972, 0x973, 0x974, 0x975, 0x978, 0x979, 0x980, 0x981, 0x982, 0x983, 0x984, 0x985, 0x986, 0x987, 0x988, 0x989,
-         0x990, 0x991, 0x995, 0x996 }
+         0x990, 0x991, 0x995, 0x996, 0 }
 };
 
 int IsInEveTBL( int evset, uint16_t event)

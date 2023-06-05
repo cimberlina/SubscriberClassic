@@ -225,6 +225,33 @@ extern uint32_t SystemFlag11;
 #define INCE2MODE_FLAG  (1 << 5)
 #define PWR1PULSE_FLAG  (1 << 6)
 #define PWR2PULSE_FLAG  (1 << 7)
+#define MACROMODE_FLAG  (1 << 8)
+#define EV110P0_FLAG    (1 << 9)
+#define EV110P3_FLAG    (1 << 10)
+#define EV120P0_FLAG    (1 << 11)
+#define EV120P2_FLAG    (1 << 12)
+#define EV130P0_FLAG    (1 << 13)
+#define EV130P4_FLAG    (1 << 14)
+#define EV401P5_FLAG    (1 << 15)
+#define EV401P6_FLAG    (1 << 16)
+#define EV401P7_FLAG    (1 << 17)
+#define EV401P8_FLAG    (1 << 18)
+#define EV401P9_FLAG    (1 << 19)
+
+#define GEV110P0_FLAG    (1 << 20)
+#define GEV110P3_FLAG    (1 << 21)
+#define GEV120P0_FLAG    (1 << 22)
+#define GEV120P2_FLAG    (1 << 23)
+#define GEV130P0_FLAG    (1 << 24)
+#define GEV130P4_FLAG    (1 << 25)
+#define GEV401P5_FLAG    (1 << 26)
+#define GEV401P6_FLAG    (1 << 27)
+#define GEV401P7_FLAG    (1 << 28)
+#define GEV401P8_FLAG    (1 << 29)
+#define GEV401P9_FLAG    (1 << 30)
+
+extern uint32_t SystemFlag12;
+#define NETRECOVERY_FLAG    (1 << 0)
 
 extern uint8_t FSM_FLAG_1;
 #define WDEVO0_ALRM_FLAG    (1 << 0)
@@ -423,7 +450,7 @@ extern uint8_t epreve_state;
 #define	PRV_PREVE		0x30
 
 #define	R3KSERIALBUFFLEN	25
-#define LogT_BUFFLEN        50
+#define LogT_BUFFLEN        40
 
 extern EventRecord R3KeventRecord[R3KSERIALBUFFLEN];
 extern int R3KeventRec_writeptr;
@@ -434,6 +461,9 @@ extern EventRecord LogT_eventRecord[LogT_BUFFLEN];
 extern int LogT_eventRec_writeptr;
 extern int LogT_eventRec_readptr;
 extern int LogT_eventRec_count;
+
+extern EventRecord EV110P0_temp, EV110P3_temp, EV120P0_temp,EV120P2_temp, EV130P0_temp, EV130P4_temp;
+extern EventRecord EV401P5_temp, EV401P6_temp, EV401P7_temp, EV401P8_temp, EV401P9_temp;
 
 extern uint16_t r3kaccount;
 
