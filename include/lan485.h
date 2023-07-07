@@ -205,11 +205,14 @@ void SendProblem386(uint8_t ptm_index, uint8_t erevent);
 #define	EVEALRM_ENTRYEXIT	0x0040
 #define	EVEALRM_BURG_TERMIC	0x0080
 #define	EVEALRM_PANIC128	0x0100
+#define PDX_PANICNORMAL     0x0200
 
 
 extern uint16_t wdevo_event;
 
-extern uint8_t PDX_dev_alarm[3];
+extern uint16_t PDX_dev_alarm[18];
+extern time_t  PDX_dev_normtimer[18];
+extern uint8_t PDX_dev_normstate[18];
 
 extern uint8_t diag485[8];
 extern uint8_t habi485[8];

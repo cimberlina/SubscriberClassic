@@ -37,6 +37,13 @@ uint8_t	RADAR_count, RADAR_count1, RADAR_flags, RADAR2_flags;
 uint8_t CentralPollTimer, dhcpinuse;
 time_t startserialtimer;
 
+uint8_t fsmlog_state;
+#define FSMLOG_IDLE     0x10
+#define FSMLOG_PLUS     0x20
+#define FSMLOG_WAIT_A   0x30
+#define FSMLOG_WAIT_T   0x40
+#define FSMLOG_END      0x50
+
 uint8_t fsm_conent_state;
 #define FCS_IDLE    0x10
 #define FCS_CONIN   0x20
@@ -112,7 +119,7 @@ uint16_t r3kaccount;
 
 unsigned char sbtimeout;
 
-uint8_t ibuttonid, lic_ibuttonid;
+int ibuttonid, lic_ibuttonid;
 
 unsigned char sbfsm_state;
 #define SBFSM_IDLE			0x10
@@ -316,6 +323,7 @@ uint8_t sndptimer;
 int  main (void)
 {
     OS_ERR  err;
+    int i;
     
     
 
@@ -361,6 +369,8 @@ int  main (void)
 
     startserialtimer = 45;
 
+    fsmlog_state = FSMLOG_IDLE;
+
     GPIO_SetDir(1, (1 << 19), 1);
     GPIO_SetDir(0, (1 << 27), 1);
     PGM1_OFF();
@@ -374,9 +384,11 @@ int  main (void)
     RADAR_flags = 0x00;
 	RADAR2_flags = 0x00;
 
-    PDX_dev_alarm[0] = 0x00;
-    PDX_dev_alarm[1] = 0x00;
-    PDX_dev_alarm[2] = 0x00;
+    for(i = 0; i < 18; i++) {
+        PDX_dev_alarm[i] = 0x00;
+        PDX_dev_normstate[i] = PTNORM_IDLE;
+    }
+
 
     ppon_state = FSM_PPON_IDLE;
     ppon_wdog_timer = SEC_TIMER;
@@ -1032,6 +1044,14 @@ static  void  App_Task_1 (void  *p_arg)
     }
     WDT_Feed();
 
+    flash0_read(temp, DF_ACKNG_OFFSET, 2);
+    if((temp[0] == 0x5A) && (temp[1] == 0xA5)) {
+        SystemFlag12 |= ACKNG_FLAG;
+    } else  {
+        SystemFlag12 &= ~ACKNG_FLAG;
+    }
+    WDT_Feed();
+
     flash0_read(temp, DF_ENARHB_OFFSET, 2);
     if((temp[0] == 0x5A) && (temp[1] == 0xA5)) {
         SystemFlag6 |= ENARHB_FLAG;
@@ -1486,7 +1506,7 @@ static  void  App_Task_1 (void  *p_arg)
     account_time(21,0, &eveg1_hour, &eveg1_minutes);     //grupo a tirar el dia 1
     account_time(20,0, &eveg2_hour, &eveg2_minutes);    //grupo a tirar el dia 3
     account_time(22,0, &eveg3_hour, &eveg3_minutes);    //grupo a tirar el dia 5
-    account_time(19,0, &eveg4_hour, &eveg4_minutes);    //grupo a tirar el dia 7
+    account_time(17,0, &eveg4_hour, &eveg4_minutes);    //19 grupo a tirar el dia 7
 
 
 	while (DEF_ON) {                                          /* Task body, always written as an infinite loop.       */
@@ -1527,7 +1547,7 @@ static  void  App_Task_1 (void  *p_arg)
 		   ((currtime.tm_hour == E785_hour4) && (currtime.tm_min == E785_minutes4) && (currtime.tm_sec == 0))
 		)    {
 		    OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &os_err);
-		    if((SysFlag1 & PREVE_CENTRAL_TX) || (SysFlag1 & PREVE_CENTRAL_RX))
+		    if(((SysFlag1 & PREVE_CENTRAL_TX) || (SysFlag1 & PREVE_CENTRAL_RX)) && (TypeAboAns != 5) && (TypeAboAns != 6) && (TypeAboAns != 7))
 		        logCidEvent(account, 1, 785, 0, (uint16_t)170);
 		    else
 		        logCidEvent(account, 1, 785, 0, (uint16_t)BaseAlarmPkt_alarm);
@@ -1615,7 +1635,7 @@ static  void  App_Task_1 (void  *p_arg)
 		}
 
 		//transmision de eventos del grupo 4, dia sabado
-		if((currtime.tm_hour == eveg4_hour) && (currtime.tm_min == eveg4_minutes) && (currtime.tm_sec == 0) && (currtime.tm_wday == 7))    {
+		if((currtime.tm_hour == eveg4_hour) && (currtime.tm_min == eveg4_minutes) && (currtime.tm_sec == 0) && (currtime.tm_wday == 6))    {
 		    OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &os_err);
 		    //-------------------------------------------------------------------------------------
 		    if( dhcpinuse == 1) {
@@ -1855,8 +1875,10 @@ static  void  App_Task_1 (void  *p_arg)
 		}
 
 
-		if(Monitoreo[0].inuse == 1)
-			fsm_wdog_r3k(0);
+        if(Monitoreo[0].inuse == 1)
+            fsm_wdog_r3k(0);
+        else if(Monitoreo[1].inuse == 1)
+            fsm_wdog_r3k(1);
 
 //		if(Monitoreo[1].inuse == 1)
 //			fsm_wdog_r3k(1);
@@ -1946,6 +1968,7 @@ static  void  App_Task_1 (void  *p_arg)
         	//-------------------------------------------------
 
         	inchar = ComGetChar(DEBUG_COMM);
+            fsm_login(inchar);
         	if((inchar == ' ') && ((r3kmode == 1) || (r3kmode == 3)))	{		//esta es la enuesta de la R3K
 #ifdef USAR_IRIDIUM
 				IRIDIUM_flag |= IRI_GPRSKICK1_FLAG;
@@ -2065,30 +2088,32 @@ static  void  App_Task_1 (void  *p_arg)
 				ComPutChar(DEBUG_COMM, 0x0D);
 				SystemFlag |= R3KSERSPACE;
         		//----------------------------------------------------------------
-        	} else if((inchar == CONSOLEIN_CTRLCHAR) || (inchar == CONSOLEIN_CTRLCHAR1))	{		//Ctrl-B, entra en modo consola
-                if(SystemFlag6 & USE_LICENSE)   {
-                    if(valid_license()) 
-                        CommSendString(DEBUG_COMM, "LIC OK\n\r");
-                    else
-                        CommSendString(DEBUG_COMM, "LIC NG\n\r");
-                } else
-                    CommSendString(DEBUG_COMM, "LIC OK\n\r");
-                
-        		CommSendString(DEBUG_COMM, "\n\n\n***  START OF SERIAL CONSOLE MODE  ***\n\r");
-        		console_init();
-        		SerialConsoleFlag |= INSERCON_flag;
-                RADAR_flags |= CONSOLE_ENTER;
-                
-                //-----------------------------------------------------------------------------------------
-#ifndef  USAR_LICENSIA     
-                if(!(SystemFlag6 & USE_LICENSE))    {          
-                    RADAR_flags |= LIC_ENTER;       // !!!! OJO: para que no necesite licensia - Despues sacar.
-                }
-#endif                
-                //-----------------------------------------------------------------------------------------
-        		
-                inconsole_timer = 3*60;		//arranco dandole tres minutos de consola
-        	} else if((inchar == '.') && (SysFlag_AP_Apertura & AP_APR_VALID))	{
+        	} else
+//            if((inchar == CONSOLEIN_CTRLCHAR) || (inchar == CONSOLEIN_CTRLCHAR1))	{		//Ctrl-B, entra en modo consola
+//                if(SystemFlag6 & USE_LICENSE)   {
+//                    if(valid_license())
+//                        CommSendString(DEBUG_COMM, "LIC OK\n\r");
+//                    else
+//                        CommSendString(DEBUG_COMM, "LIC NG\n\r");
+//                } else
+//                    CommSendString(DEBUG_COMM, "LIC OK\n\r");
+//
+//        		CommSendString(DEBUG_COMM, "\n\n\n***  START OF SERIAL CONSOLE MODE  ***\n\r");
+//        		console_init();
+//        		SerialConsoleFlag |= INSERCON_flag;
+//                RADAR_flags |= CONSOLE_ENTER;
+//
+//                //-----------------------------------------------------------------------------------------
+//#ifndef  USAR_LICENSIA
+//                if(!(SystemFlag6 & USE_LICENSE))    {
+//                    RADAR_flags |= LIC_ENTER;       // !!!! OJO: para que no necesite licensia - Despues sacar.
+//                }
+//#endif
+//                //-----------------------------------------------------------------------------------------
+//
+//                inconsole_timer = 3*60;		//arranco dandole tres minutos de consola
+//        	} else
+            if((inchar == '.') && (SysFlag_AP_Apertura & AP_APR_VALID))	{
         		if(EepromReadByte(REDBOXHAB_E2P_ADDR, &error))	{
         			SerialConsoleFlag |= INCONFBOARD_flag;
         			ComPutChar(DEBUG_COMM, '{');
@@ -3959,7 +3984,7 @@ void fsm_wdog_ip150(void)
 }
 **/
 
-time_t wdogevotimer[3], e602mon_timer;
+time_t wdogevotimer[3], e602mon_timer[3];
 uint8_t fsmwdogevo_state[3];
 //#define	FSMWDEVO_ENTRY	0x05
 //#define	FSMWDEVO_IDLE	0x10
@@ -3996,7 +4021,7 @@ void fsm_wdog_evo( uint8_t this, uint8_t partition )
                     } else {
                         FSM_FLAG_1 &= ~WDEVO0_ALRM_FLAG;
                         fsmwdogevo_state[this] = FSMWDEVO_IDLE;
-                        e602mon_timer = SEC_TIMER;
+                        e602mon_timer[this] = SEC_TIMER;
                         EVOWD_Flag &= ~0x80;
                         if (BaseAlarmPkt_alarm & bitpat[APER_bit]) {
                             wdogevotimer[this] = SEC_TIMER + 15 * 60;
@@ -4014,7 +4039,7 @@ void fsm_wdog_evo( uint8_t this, uint8_t partition )
                     } else {
                         FSM_FLAG_1 &= ~WDEVO1_ALRM_FLAG;
                         fsmwdogevo_state[this] = FSMWDEVO_IDLE;
-                        e602mon_timer = SEC_TIMER;
+                        e602mon_timer[this] = SEC_TIMER;
                         EVOWD_Flag &= ~0x80;
                         if (BaseAlarmPkt_alarm & bitpat[APER_bit]) {
                             wdogevotimer[this] = SEC_TIMER + 15 * 60;
@@ -4032,7 +4057,7 @@ void fsm_wdog_evo( uint8_t this, uint8_t partition )
                     } else {
                         FSM_FLAG_1 &= ~WDEVO2_ALRM_FLAG;
                         fsmwdogevo_state[this] = FSMWDEVO_IDLE;
-                        e602mon_timer = SEC_TIMER;
+                        e602mon_timer[this] = SEC_TIMER;
                         EVOWD_Flag &= ~0x80;
                         if (BaseAlarmPkt_alarm & bitpat[APER_bit]) {
                             wdogevotimer[this] = SEC_TIMER + 15 * 60;
@@ -4073,12 +4098,12 @@ void fsm_wdog_evo( uint8_t this, uint8_t partition )
                 }
             }
             //le envio señal de watchdog de evo al monitoreo
-            if((SEC_TIMER > e602mon_timer + 60*60) && (!(EVOWD_Flag & 0x80)))   {
+            if((SEC_TIMER > e602mon_timer[this] + 60*60) && (!(EVOWD_Flag & 0x80)))   {
                 EVOWD_Flag |= 0x80;
-                e602mon_timer = SEC_TIMER;
+                e602mon_timer[this] = SEC_TIMER;
                 logCidEvent(account, 1, 602, partition, 0);
             } else
-            if(SEC_TIMER > e602mon_timer + 1)  {
+            if(SEC_TIMER > e602mon_timer[this] + 1)  {
                 EVOWD_Flag &= ~0x80;
             }
             break;
@@ -4609,6 +4634,88 @@ void fsm_console_enter(void)
             break;
     }
 }
+
+
+
+void fsm_login(uint8_t incharrx)
+{
+    static time_t timeout;
+    static int count;
+
+    switch(fsmlog_state)    {
+        case FSMLOG_IDLE:
+            if(incharrx == '+')   {
+                timeout = SEC_TIMER + 15;
+                count = 1;
+                fsmlog_state = FSMLOG_PLUS;
+            }
+            break;
+        case FSMLOG_PLUS:
+            if(SEC_TIMER > timeout) {
+                fsmlog_state = FSMLOG_IDLE;
+            } else
+            if(incharrx == '+')   {
+                count++;
+                if(count >= 3)  {
+                    fsmlog_state = FSMLOG_WAIT_A;
+                    timeout = SEC_TIMER + 15;
+                }
+            } else
+            if((incharrx != '+') && (incharrx != 0)) {
+                fsmlog_state = FSMLOG_IDLE;
+            }
+            break;
+        case FSMLOG_WAIT_A:
+            if(SEC_TIMER > timeout) {
+                fsmlog_state = FSMLOG_IDLE;
+            } else
+            if((incharrx == 'A') || (incharrx == 'a'))  {
+                fsmlog_state = FSMLOG_WAIT_T;
+                timeout = SEC_TIMER + 15;
+            } else
+            if(incharrx != 0)    {
+                fsmlog_state = FSMLOG_IDLE;
+            }
+            break;
+        case FSMLOG_WAIT_T:
+            if(SEC_TIMER > timeout) {
+                fsmlog_state = FSMLOG_IDLE;
+            } else
+            if((incharrx == 'T') || (incharrx == 't'))  {
+                fsmlog_state = FSMLOG_END;
+                //--------------------------
+                CommSendString(DEBUG_COMM, "\n\n\n***  START OF SERIAL CONSOLE MODE  ***\n\r");
+                console_init();
+                SerialConsoleFlag |= INSERCON_flag;
+                RADAR_flags |= CONSOLE_ENTER;
+
+                //-----------------------------------------------------------------------------------------
+#ifndef  USAR_LICENSIA
+                if(!(SystemFlag6 & USE_LICENSE))    {
+                    RADAR_flags |= LIC_ENTER;       // !!!! OJO: para que no necesite licensia - Despues sacar.
+                }
+#endif
+                //-----------------------------------------------------------------------------------------
+
+                inconsole_timer = 3*60;
+                //--------------------------
+            } else
+            if(incharrx != 0)    {
+                fsmlog_state = FSMLOG_IDLE;
+            }
+            break;
+        case FSMLOG_END:
+            if(!(SerialConsoleFlag & INSERCON_flag))    {
+                fsmlog_state = FSMLOG_IDLE;
+            }
+            break;
+        default:
+            fsmlog_state = FSMLOG_IDLE;
+            break;
+    }
+
+}
+
 
 void HardFault_Handler(void)
 {

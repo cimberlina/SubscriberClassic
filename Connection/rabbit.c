@@ -280,13 +280,14 @@ void  RabbitTask(void  *p_arg)
 	NET_SOCK_ADDR_LEN ipsize;
 	CPU_INT32U taskinterval;
 
-	time_t linktesttimer;
+	time_t linktesttimer, timeout;
 
 	int monid;
 	uint8_t aboactual[3];
 	int i;
 
-
+    uint16_t checksum;
+    uint8_t *currentEventPtr;
 
 
 	(void)p_arg;
@@ -418,8 +419,12 @@ void  RabbitTask(void  *p_arg)
 			//* Ya estamos conectados
 			case SM_SOCK_READY:
 				taskinterval = 250;     //2000
-				if((Monitoreo[monid].eventRec_count) && (!(Monitoreo[monid].flags & SNDHBT_FLAG)) && (SystemFlag10 & UDPLICOK_FLAG))	{
-					//-----------------------------------------------
+				if(((Monitoreo[monid].eventRec_count) && (!(Monitoreo[monid].flags & SNDHBT_FLAG)) && (SystemFlag10 & UDPLICOK_FLAG)) || \
+                (SystemFlag12 & FORCESND_FLAG))	{
+
+
+
+                //-----------------------------------------------
 					retval = 1;
 					while(retval)	{
 						retval = NetSock_RxDataFrom((NET_SOCK_ID)			Monitoreo[monid].monsock,
@@ -439,7 +444,35 @@ void  RabbitTask(void  *p_arg)
 					retval = 0;
 					OSTimeDlyHMSM(0, 0, 0, 10, OS_OPT_TIME_HMSM_STRICT, &os_err);
 					//-----------------------------------------------
-					preReadEvent(monid, &thisEvent);
+                    if((SystemFlag12 & E606SND_FLAG) || (SystemFlag12 & R606SND_FLAG))  {
+                        thisEvent.timestamp = SEC_TIMER;
+                        thisEvent.account = AccountToDigits(account);
+
+                        if(SystemFlag12 & E606SND_FLAG) {
+                            thisEvent.cid_qualifier = 1;
+                            SystemFlag12 &= ~E606SND_FLAG;
+                        } else
+                        if(SystemFlag12 & R606SND_FLAG) {
+                            thisEvent.cid_qualifier = 3;
+                            SystemFlag12 &= ~R606SND_FLAG;
+                        }
+                        thisEvent.cid_eventcode = EventCodeToDigits(606);
+                        thisEvent.cid_partition = PartitionToDigits(1);
+                        thisEvent.cid_zoneuser = ZoneCodeToDigits(0);
+
+                        currentEventPtr = (uint8_t *)(&thisEvent);
+                        for(i = 0, checksum = 0; i < 14; i++)	{
+                            checksum += *(currentEventPtr + i);
+                        }
+                        checksum &= 0x00FF;
+
+                        thisEvent.checksum = (uint8_t)checksum;
+                        thisEvent.ack_tag = 0;
+                        //WriteEventToR3KBuffer(&thisEvent);
+
+                    } else {
+                        preReadEvent(monid, &thisEvent);
+                    }
 
 					//--------------------------------------------------------------
 					// inserto el envio del paquete encriptado
@@ -471,6 +504,7 @@ void  RabbitTask(void  *p_arg)
 					}
 					Monitoreo[monid].retries = 1;
 					Monitoreo[monid].state = SM_SOCK_WAITACK;
+                    timeout = SEC_TIMER + (5 * Monitoreo[monid].HeartBeatTime);
 					Monitoreo[monid].flags |= EVESND_FLAG;
 					Monitoreo[monid].timer = SEC_TIMER;
 					aboactual[0] = sendbuffer[4];
@@ -484,7 +518,13 @@ void  RabbitTask(void  *p_arg)
 						Buzzer_dcb.led_state = LED_IDLE;
 						Buzzer_dcb.led_blink = 1;
 					}
-
+                    if(thisEvent.cid_eventcode == 0x606) {
+                        SystemFlag12 &= ~FORCESND_FLAG;
+                        //ReadOutEvent(monid, &thisEvent);
+                        Monitoreo[monid].flags &= ~EVESND_FLAG;
+                        Monitoreo[monid].state = SM_SOCK_READY;
+                        Monitoreo[monid].flags &= ~SNDHBT_FLAG;
+                    }
 				} else
 				    if(SEC_TIMER >= (Monitoreo[monid].timer + Monitoreo[monid].HeartBeatTime))	{
 					//-----------------------------------------------
@@ -524,6 +564,7 @@ void  RabbitTask(void  *p_arg)
 					}
 					Monitoreo[monid].retries = 1;
 					Monitoreo[monid].state = SM_SOCK_WAITACK;
+                    timeout = SEC_TIMER + (5 * Monitoreo[monid].HeartBeatTime);
 					Monitoreo[monid].flags |= HBTSND_FLAG;
 					Monitoreo[monid].timer = SEC_TIMER;
 
@@ -540,6 +581,9 @@ void  RabbitTask(void  *p_arg)
 			//* Ahora esperamos el ACK
 			case SM_SOCK_WAITACK:
 				taskinterval = 250;    //2000
+                if(SystemFlag12 & FORCESND_FLAG)    {
+                    Monitoreo[monid].state = SM_SOCK_READY;
+                }
 				// veo si recibi algo
 				ipsize = sizeof(Monitoreo[monid].server_sock_addr_ip);
 				retval = NetSock_RxDataFrom((NET_SOCK_ID)			Monitoreo[monid].monsock,
@@ -786,6 +830,11 @@ void  RabbitTask(void  *p_arg)
 						break;
 					}
 				}
+                if(SEC_TIMER > timeout) {
+                    Monitoreo[monid].state = SM_WAIT_CLOSE;
+                    Monitoreo[monid].timer = SEC_TIMER;
+                    err = NET_SOCK_ERR_NONE;
+                }
 				break;
 			case SM_WAIT_CLOSE:
 				NetSock_Close(Monitoreo[monid].monsock, &err);
@@ -1056,9 +1105,12 @@ void fsm_wdog_r3k(int coid)
     NET_ERR err;
     struct tm currtime;
     time_t temp;
-    int error;
+    int error, i;
     uint8_t buffer[8];
     NET_SOCK_RTN_CODE retval;
+    EventRecord thisEvent;
+    uint16_t checksum;
+    uint8_t *currentEventPtr;
 
     switch(Monitoreo[coid].wdogstate)	{
         case WR3K_IDLE:
@@ -1098,14 +1150,132 @@ void fsm_wdog_r3k(int coid)
 #endif
                 if(coid == 0)	{
                     Monitoreo[0].flags |= E700_1_FLAG;
+                    if(!(SystemFlag12 & ACKNG_FLAG))    {
+                        SystemFlag12 |= ACKNG_FLAG;
+                        //logCidEvent(account, 1, 606, 0, (uint16_t)1);
+                        if(SystemFlag11 & MACROMODE_FLAG) {
+                            SystemFlag12 |= FORCESND_FLAG;
+                            SystemFlag12 |= E606SND_FLAG;
+                        }
+                        buffer[0] = 0x5A;
+                        buffer[1] = 0xA5;
+                        error = flash0_write(1, buffer, DF_ACKNG_OFFSET, 2);
+                        Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
+                        Monitoreo[coid].flags &= ~ACKWDG_FLAG;
+                        Monitoreo[coid].wdogstate = WR3K_WDOG;
+                        //------------------------------------
+                        thisEvent.timestamp = SEC_TIMER;
+                        thisEvent.account = AccountToDigits(account);
+
+                        if(SystemFlag12 & E606SND_FLAG) {
+                            thisEvent.cid_qualifier = 1;
+                        } else
+                        if(SystemFlag12 & R606SND_FLAG) {
+                            thisEvent.cid_qualifier = 3;
+
+                        }
+                        thisEvent.cid_eventcode = EventCodeToDigits(606);
+                        thisEvent.cid_partition = PartitionToDigits(1);
+                        thisEvent.cid_zoneuser = ZoneCodeToDigits(0);
+
+                        currentEventPtr = (uint8_t *)(&thisEvent);
+                        for(i = 0, checksum = 0; i < 14; i++)	{
+                            checksum += *(currentEventPtr + i);
+                        }
+                        checksum &= 0x00FF;
+
+                        thisEvent.checksum = (uint8_t)checksum;
+                        thisEvent.ack_tag = 0;
+                        WriteEventToR3KBuffer(&thisEvent);
+                        //------------------------------------
+                    }
                 }
                 else if( coid == 1)	{
                     Monitoreo[1].flags |= E700_2_FLAG;
+                    if(!(SystemFlag12 & ACKNG_FLAG))    {
+                        SystemFlag12 |= ACKNG_FLAG;
+                        //logCidEvent(account, 1, 606, 0, (uint16_t)2);
+                        if(SystemFlag11 & MACROMODE_FLAG) {
+                            SystemFlag12 |= FORCESND_FLAG;
+                            SystemFlag12 |= E606SND_FLAG;
+                        }
+                        buffer[0] = 0x5A;
+                        buffer[1] = 0xA5;
+                        error = flash0_write(1, buffer, DF_ACKNG_OFFSET, 2);
+                        Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
+                        Monitoreo[coid].flags &= ~ACKWDG_FLAG;
+                        Monitoreo[coid].wdogstate = WR3K_WDOG;
+                        //------------------------------------
+                        thisEvent.timestamp = SEC_TIMER;
+                        thisEvent.account = AccountToDigits(account);
+
+                        if(SystemFlag12 & E606SND_FLAG) {
+                            thisEvent.cid_qualifier = 1;
+                        } else
+                        if(SystemFlag12 & R606SND_FLAG) {
+                            thisEvent.cid_qualifier = 3;
+
+                        }
+                        thisEvent.cid_eventcode = EventCodeToDigits(606);
+                        thisEvent.cid_partition = PartitionToDigits(1);
+                        thisEvent.cid_zoneuser = ZoneCodeToDigits(0);
+
+                        currentEventPtr = (uint8_t *)(&thisEvent);
+                        for(i = 0, checksum = 0; i < 14; i++)	{
+                            checksum += *(currentEventPtr + i);
+                        }
+                        checksum &= 0x00FF;
+
+                        thisEvent.checksum = (uint8_t)checksum;
+                        thisEvent.ack_tag = 0;
+                        WriteEventToR3KBuffer(&thisEvent);
+                        //------------------------------------
+                    }
                 }
             } else
             if( Monitoreo[coid].flags & ACKWDG_FLAG )	{
                 Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
                 Monitoreo[coid].flags &= ~ACKWDG_FLAG;
+                if(SystemFlag12 & ACKNG_FLAG) {
+                    SystemFlag12 &= ~ACKNG_FLAG;
+                    //logCidEvent(account, 3, 606, 0, (uint16_t) 0);
+                    if(SystemFlag12 & R606SND_FLAG) {
+                        SystemFlag12 |= R606SND_FLAG;
+                        SystemFlag12 |= FORCESND_FLAG;
+                    }
+                    buffer[0] = 0xA5;
+                    buffer[1] = 0x5A;
+                    error = flash0_write(1, buffer, DF_ACKNG_OFFSET, 2);
+                    //-----------
+                    Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
+                    Monitoreo[coid].flags &= ~ACKWDG_FLAG;
+                    Monitoreo[coid].wdogstate = WR3K_WDOG;
+                    //------------------------------------
+                    thisEvent.timestamp = SEC_TIMER;
+                    thisEvent.account = AccountToDigits(account);
+
+                    if(SystemFlag12 & E606SND_FLAG) {
+                        thisEvent.cid_qualifier = 1;
+                    } else
+                    if(SystemFlag12 & R606SND_FLAG) {
+                        thisEvent.cid_qualifier = 3;
+
+                    }
+                    thisEvent.cid_eventcode = EventCodeToDigits(606);
+                    thisEvent.cid_partition = PartitionToDigits(1);
+                    thisEvent.cid_zoneuser = ZoneCodeToDigits(0);
+
+                    currentEventPtr = (uint8_t *)(&thisEvent);
+                    for(i = 0, checksum = 0; i < 14; i++)	{
+                        checksum += *(currentEventPtr + i);
+                    }
+                    checksum &= 0x00FF;
+
+                    thisEvent.checksum = (uint8_t)checksum;
+                    thisEvent.ack_tag = 0;
+                    WriteEventToR3KBuffer(&thisEvent);
+                    //------------------------------------
+                }
             }
             break;
         case WR3K_WRST:
@@ -1151,9 +1321,87 @@ void fsm_wdog_r3k(int coid)
 #endif
                 if(coid == 0)	{
                     Monitoreo[0].flags &= ~E700_1_FLAG;
+                    if(SystemFlag12 & ACKNG_FLAG)    {
+                        SystemFlag12 &= ~ACKNG_FLAG;
+                        //logCidEvent(account, 3, 606, 0, (uint16_t)1);
+                        if(SystemFlag12 & R606SND_FLAG) {
+                            SystemFlag12 |= FORCESND_FLAG;
+                            SystemFlag12 |= R606SND_FLAG;
+                        }
+                        buffer[0] = 0xA5;
+                        buffer[1] = 0x5A;
+                        error = flash0_write(1, buffer, DF_ACKNG_OFFSET, 2);
+                        Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
+                        Monitoreo[coid].flags &= ~ACKWDG_FLAG;
+                        Monitoreo[coid].wdogstate = WR3K_WDOG;
+                        //------------------------------------
+                        thisEvent.timestamp = SEC_TIMER;
+                        thisEvent.account = AccountToDigits(account);
+
+                        if(SystemFlag12 & E606SND_FLAG) {
+                            thisEvent.cid_qualifier = 1;
+                        } else
+                        if(SystemFlag12 & R606SND_FLAG) {
+                            thisEvent.cid_qualifier = 3;
+
+                        }
+                        thisEvent.cid_eventcode = EventCodeToDigits(606);
+                        thisEvent.cid_partition = PartitionToDigits(1);
+                        thisEvent.cid_zoneuser = ZoneCodeToDigits(0);
+
+                        currentEventPtr = (uint8_t *)(&thisEvent);
+                        for(i = 0, checksum = 0; i < 14; i++)	{
+                            checksum += *(currentEventPtr + i);
+                        }
+                        checksum &= 0x00FF;
+
+                        thisEvent.checksum = (uint8_t)checksum;
+                        thisEvent.ack_tag = 0;
+                        WriteEventToR3KBuffer(&thisEvent);
+                        //------------------------------------
+                    }
                 }
                 else if( coid == 1)	{
                     Monitoreo[0].flags &= ~E700_2_FLAG;
+                    if(SystemFlag12 & ACKNG_FLAG)    {
+                        SystemFlag12 &= ~ACKNG_FLAG;
+                        //logCidEvent(account, 3, 606, 0, (uint16_t)2);
+                        if(SystemFlag12 & R606SND_FLAG) {
+                            SystemFlag12 |= FORCESND_FLAG;
+                            SystemFlag12 |= R606SND_FLAG;
+                        }
+                        buffer[0] = 0xA5;
+                        buffer[1] = 0x5A;
+                        error = flash0_write(1, buffer, DF_ACKNG_OFFSET, 2);
+                        Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
+                        Monitoreo[coid].flags &= ~ACKWDG_FLAG;
+                        Monitoreo[coid].wdogstate = WR3K_WDOG;
+                        //------------------------------------
+                        thisEvent.timestamp = SEC_TIMER;
+                        thisEvent.account = AccountToDigits(account);
+
+                        if(SystemFlag12 & E606SND_FLAG) {
+                            thisEvent.cid_qualifier = 1;
+                        } else
+                        if(SystemFlag12 & R606SND_FLAG) {
+                            thisEvent.cid_qualifier = 3;
+
+                        }
+                        thisEvent.cid_eventcode = EventCodeToDigits(606);
+                        thisEvent.cid_partition = PartitionToDigits(1);
+                        thisEvent.cid_zoneuser = ZoneCodeToDigits(0);
+
+                        currentEventPtr = (uint8_t *)(&thisEvent);
+                        for(i = 0, checksum = 0; i < 14; i++)	{
+                            checksum += *(currentEventPtr + i);
+                        }
+                        checksum &= 0x00FF;
+
+                        thisEvent.checksum = (uint8_t)checksum;
+                        thisEvent.ack_tag = 0;
+                        WriteEventToR3KBuffer(&thisEvent);
+                        //------------------------------------
+                    }
                 }
             } else
             if( !(DebugFlag & NETRSTHAB_flag)) {

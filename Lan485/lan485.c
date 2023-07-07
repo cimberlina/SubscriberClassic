@@ -36,7 +36,10 @@ PBT_device	pbt_dcb[MAXPBTPTM];
 PTM_device ptm_dcb[MAXQTYPTM];
 uint8_t PTM_dev_status[MAXQTYPTM];
 uint8_t PDX_dev_status[3];
-uint8_t PDX_dev_alarm[3];
+
+uint16_t PDX_dev_alarm[18];
+time_t  PDX_dev_normtimer[18];
+uint8_t PDX_dev_normstate[18];
 
 unsigned int dlyedptm_zone[MAXQTYPTM];
 unsigned int dlyedevo_part;
@@ -246,6 +249,11 @@ void  LAN485_Task(void  *p_arg)
 		fsm_e401_volumetrica_p7();
 		fsm_e401_volumetrica_p8();
 		fsm_e401_volumetrica_p9();
+
+        if(Monitoreo[0].inuse == 1)
+            fsm_wdog_r3k(0);
+        else if(Monitoreo[1].inuse == 1)
+            fsm_wdog_r3k(1);
 
         if(numerozona != 1) {
             RFDLYBOR_flag &= ~RFDLYBOR_E393HAB_FLAG;
@@ -1202,13 +1210,13 @@ void ParsePtmCID_Event( unsigned char event_buffer[] )
 
 	//-----------------------------------------------------------------------------
 	// aca intercepto los PBT
-	pbtzone = ((event_buffer[16] - '0') * 0x100) + ((event_buffer[17] - '0') * 0x10) + (event_buffer[18] - '0');
-	retval = PBTinTable(ptm_dcb[eveindex].particion, pbtzone);
-	if(retval != -1)	{
-
-		logCidEvent(pbt_dcb[retval].cuenta, 1, REMOTEASALT_TRIGGER, 0, 0);
-		return;
-	}
+//	pbtzone = ((event_buffer[16] - '0') * 0x100) + ((event_buffer[17] - '0') * 0x10) + (event_buffer[18] - '0');
+//	retval = PBTinTable(ptm_dcb[eveindex].particion, pbtzone);
+//	if(retval != -1)	{
+//
+//		logCidEvent(pbt_dcb[retval].cuenta, 1, REMOTEASALT_TRIGGER, 0, 0);
+//		return;
+//	}
 
 	//-----------------------------------------------------------------------------
 
@@ -1848,10 +1856,10 @@ void ProcessEvents( unsigned char event_buffer[], unsigned char index )
 
 	//-----------------------------------------------------------------------------
 	// aca intercepto los PBT
-	retval = PBTinTable(ptm_dcb[index].particion, eventzone);
-	if(retval != -1)	{
-		return;
-	}
+//	retval = PBTinTable(ptm_dcb[index].particion, eventzone);
+//	if(retval != -1)	{
+//		return;
+//	}
 
     // No procesamos nada que venga de los PT que manejan el sistema de exclusas del HSBC
     if((ptm_dcb[index].rtuaddr == LOCKGATE_RTUADDR) && (eventcode != 0x145) && (eventcode != 0x627) && (eventcode != 0x628))
@@ -1968,11 +1976,22 @@ void ProcessEvents( unsigned char event_buffer[], unsigned char index )
                     recharge_alarm(ASAL_bit);
                     ASAL_timer = SEC_TIMER;
                 } else **/
-				if((ptm_dcb[index].particion == 79) || (ptm_dcb[index].particion == 89) || (ptm_dcb[index].particion == 89))	{
+				if((ptm_dcb[index].particion == 79) || (ptm_dcb[index].particion == 89) || (ptm_dcb[index].particion == 99))	{
 					SysFlag_AP_GenAlarm |= bitpat[INCE_bit];
 					recharge_alarm(INCE_bit);
 					INCE_timer = SEC_TIMER;
-				}
+				} else
+                if( (ptm_dcb[index].rtuaddr >= 240) && (ptm_dcb[index].rtuaddr < 242) ) {
+                    eventpartition += ptm_dcb[index].particion;
+                    if((eventpartition >= 70) && (eventpartition <= 78))    {
+                        PDX_dev_alarm[eventpartition - 70] |= EVEALRM_PANIC;
+                        PDX_dev_alarm[eventpartition - 70] |= PDX_PANICNORMAL;
+                    } else
+                    if((eventpartition >= 80) && (eventpartition <= 88))    {
+                        PDX_dev_alarm[eventpartition - 80 + 9] |= EVEALRM_PANIC;
+                        PDX_dev_alarm[eventpartition - 80 + 9] |= PDX_PANICNORMAL;
+                    }
+                }
 				switch(ptm_dcb[index].disparo)	{
                     case 'S':
                         TasFlags |= TASVANDAL_FLAG;
@@ -1981,7 +2000,7 @@ void ProcessEvents( unsigned char event_buffer[], unsigned char index )
                     default:
                         break;
 				}
-				ptm_dcb[index].event_alarm |= EVEALRM_PANIC;
+                ptm_dcb[index].event_alarm |= EVEALRM_PANIC;
 				break;
 	        case 128:
                 PTMSIGNAL_flag |= PTMSIG_PANIC;
@@ -2295,6 +2314,7 @@ void ProcessRestoreMainBoardEvents( void )
 {
 	unsigned char index;
 	OS_ERR os_err;
+    int i;
 
 	if(SysFlag2 & NORM_ASAL)	{
 		SysFlag2 &= ~NORM_ASAL;
@@ -2302,8 +2322,23 @@ void ProcessRestoreMainBoardEvents( void )
 		for(index = 0; index < MAXQTYPTM; index++)	{
 			if(ptm_dcb[index].rtuaddr == 0)
 				continue;
-			if( (ptm_dcb[index].rtuaddr >= 240) && (ptm_dcb[index].rtuaddr < 243) )
-				continue;
+            //-------------------
+            if( (ptm_dcb[index].rtuaddr >= 240) && (ptm_dcb[index].rtuaddr < 242) ) {
+                continue;
+//                for(i = 0; i <= 8; i++)  {
+//                    if(PDX_dev_alarm[i] & EVEALRM_PANIC)    {
+//                        logCidEvent(account, 3, 121, (70 + i), 0);
+//                        PDX_dev_alarm[i] &= ~EVEALRM_PANIC;
+//                    }
+//                }
+//                for(i = 9; i <= 17; i++)  {
+//                    if(PDX_dev_alarm[i] & EVEALRM_PANIC)    {
+//                        logCidEvent(account, 3, 121, (80 + i), 0);
+//                        PDX_dev_alarm[i] &= ~EVEALRM_PANIC;
+//                    }
+//                }
+            }
+            //-------------------
 
 			if( ptm_dcb[index].event_alarm & EVEALRM_PANIC )	{
 				GenerateCIDEventPTm(index, 'R', 121, 0);
@@ -2497,8 +2532,39 @@ void ProcessRestoreByTimeout(void)
 		}
 	}
 
-	//maquina para la gestion de normalizacion de los ptmacro
+	//maquina para la gestion de normalizacion de PANIC 121 de las EVO
 	for(index = 0; index < MAXQTYPTM; index++)	{
+        if((ptm_dcb[index].rtuaddr == 240) || (ptm_dcb[index].rtuaddr == 241))  {
+            for(i = 0; i < 18; i++) {
+                switch(PDX_dev_normstate[i])   {
+                    case PTNORM_IDLE:
+                        //PDX_dev_alarm[i] |= EVEALRM_PANIC;
+                        if(PDX_dev_alarm[i] & PDX_PANICNORMAL)  {
+                            PDX_dev_alarm[i] &= ~PDX_PANICNORMAL;
+                            PDX_dev_normtimer[i] = SEC_TIMER + 15*60;
+                            PDX_dev_normstate[i] = PTNORM_WAIT;
+                        }
+                        break;
+                    case PTNORM_WAIT:
+                        if(PDX_dev_normtimer[i] <= SEC_TIMER )  {
+                            PDX_dev_normstate[i] = PTNORM_IDLE;
+                            if(PDX_dev_alarm[i] & EVEALRM_PANIC)    {
+                                PDX_dev_alarm[i] &= ~EVEALRM_PANIC;
+                                if(i < 18) {
+                                    logCidEvent(account, 3, 121, (70 + i), 0);
+                                } else  {
+                                    logCidEvent(account, 3, 121, (80 + i), 0);
+                                }
+                            }
+                        }
+                        break;
+                    default:
+                        PDX_dev_normstate[i] = PTNORM_IDLE;
+                        break;
+                }
+            }
+        }
+        //maquina para la gestion de normalizacion de los ptmacro
 		if((ptm_dcb[index].particion >= 70) && (ptm_dcb[index].particion <= 98) && (ptm_dcb[index].particion != 89) && (ptm_dcb[index].particion != 79))
 			continue;
 		switch(ptm_dcb[index].normstate)	{

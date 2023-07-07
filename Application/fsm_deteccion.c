@@ -2439,6 +2439,8 @@ void  AlarmDetectTask(void  *p_arg)
     SystemFlag11 &= ~EV130P0_FLAG;
     SystemFlag11 &= ~EV130P4_FLAG;
 
+    FSM_ReadHistory();
+
 	while(DEF_ON)	{
 		WDT_Feed();
 		OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);		//previo timeinterval = 5
@@ -2690,12 +2692,12 @@ void fsm_rotura485( void )
                 }
             }
             if(Rot485_flag & ROT485CID_FLAG) {
-                if ((currtime.tm_hour == 23) && (currtime.tm_min == 25) && (currtime.tm_sec == 0) &&
+                if ((currtime.tm_hour == 1) && (currtime.tm_min == 25) && (currtime.tm_sec == 0) &&
                     (!(SystemFlag4 & RS485F220_DONE))) {
                     SystemFlag4 |= RS485F220_DONE;
                     SystemFlag3 |= NAPER_flag;
                 }
-                if ((currtime.tm_hour == 23) && (currtime.tm_min == 25) && (currtime.tm_sec == 10)) {
+                if ((currtime.tm_hour == 1) && (currtime.tm_min == 25) && (currtime.tm_sec == 10)) {
                     SystemFlag4 &= ~RS485F220_DONE;
                 }
             }
@@ -2716,6 +2718,10 @@ void fsm_roturaEVO( void )
 	struct tm currtime;
 
 	switch(fsm_rotEVO_state)	{
+        case FSM_ROT485_ENTRY:
+            FSM_ReadHistory();
+            fsm_rotEVO_state = FSM_ROT485_IDLE;
+            break;
 	case FSM_ROT485_IDLE:
         if(FSM_FLAG_1 & ROT943_FLAG)    {
             fsm_rotEVO_state = FSM_ROT485_ROT;
@@ -2766,8 +2772,10 @@ void fsm_roturaEVO( void )
 			SysFlag_AP_GenAlarm |= bitpat[ROTU_bit];
 			BaseAlarmPkt_alarm |= bitpat[ROTU_bit];
 			if((currtime.tm_hour == 1) && (currtime.tm_min == 25) && (currtime.tm_sec == 0) && (!(SystemFlag4 & RS485F220_DONE)))	{
-				SystemFlag4 |= RS485F220_DONE;
-				SystemFlag3 |= NAPER_flag;
+                if(!(Rot485_flag & ROT485CID_FLAG)) {
+                    SystemFlag4 |= RS485F220_DONE;
+                    SystemFlag3 |= NAPER_flag;
+                }
 			}
 			if((currtime.tm_hour == 1) && (currtime.tm_min == 25) && (currtime.tm_sec == 10) )	{
 				SystemFlag4 &= ~RS485F220_DONE;
@@ -2779,7 +2787,7 @@ void fsm_roturaEVO( void )
 //		}
 		break;
 	default:
-		fsm_rotEVO_state = FSM_ROT485_IDLE;
+		fsm_rotEVO_state = FSM_ROT485_ENTRY;
 		break;
 	}
 }
@@ -3429,7 +3437,14 @@ void FSM_ReadHistory(void)
         FSM_FLAG_1 = mybuffer[0];
         if(FSM_FLAG_1 & ROT943_FLAG)    {
             BaseAlarmPkt_alarm |= bitpat[ROTU_bit];
+            fsm_rotEVO_state = FSM_ROT485_ROT;
+            Rot485_flag |= ROTEVO_FLAG;
         }
+        if((mybuffer[2] == 0xFF) || (mybuffer[2] > 0x80))   {
+            FSM_WriteHistory();
+        } else
+        if(mybuffer[2] && bitpat[ROTU_bit])
+            BaseAlarmPkt_alarm |= bitpat[ROTU_bit];
     }
 }
 
@@ -3439,8 +3454,8 @@ void FSM_WriteHistory(void)
     uint8_t mybuffer[8], temp[8], i;
 
     mybuffer[0] = FSM_FLAG_1;
-    mybuffer[1] = 0x00;
-    mybuffer[2] = 0x00;
+    mybuffer[1] = fsm_rotEVO_state;
+    mybuffer[2] = BaseAlarmPkt_alarm;
     mybuffer[3] = 0x00;
     mybuffer[4] = 0x00;
     mybuffer[5] = 0x00;

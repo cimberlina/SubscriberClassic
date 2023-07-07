@@ -162,6 +162,7 @@ extern time_t ppon_wdog_timer;
 
 extern uint8_t fsm_rotrele485_state;
 extern uint8_t fsm_rot485_state;
+#define	FSM_ROT485_ENTRY	0x05
 #define	FSM_ROT485_IDLE		0x10
 #define	FSM_ROT485_WAIT		0x20
 #define	FSM_ROT485_PWAIT1	0x21

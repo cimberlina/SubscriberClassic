@@ -134,6 +134,7 @@ typedef struct	{
 #define DF_ACTINCE2_OFFSET      342     //2
 #define DF_MACROMODE_OFFSET     346     //2
 #define DF_NETRECOV_OFFSET      348     //2
+#define DF_ACKNG_OFFSET         350     //2
 
 #define	ACKRCVDMON0				0x01
 #define	ACKRCVDMON1				0x02

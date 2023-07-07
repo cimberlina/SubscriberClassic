@@ -270,7 +270,7 @@ uint8_t DowCRC( uint8_t * buffer )
 //	return 0;
 //}
 
-uint8_t check_id_2( uint8_t *idbuffer)
+int check_id_2( uint8_t *idbuffer)
 {
 	int i, j, retval;
 	int error;

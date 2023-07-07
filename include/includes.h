@@ -252,6 +252,10 @@ extern uint32_t SystemFlag11;
 
 extern uint32_t SystemFlag12;
 #define NETRECOVERY_FLAG    (1 << 0)
+#define ACKNG_FLAG          (1 << 1)
+#define FORCESND_FLAG       (1 << 2)
+#define E606SND_FLAG        (1 << 3)
+#define R606SND_FLAG        (1 << 4)
 
 extern uint8_t FSM_FLAG_1;
 #define WDEVO0_ALRM_FLAG    (1 << 0)
@@ -305,7 +309,7 @@ extern unsigned char RADAR2_flags;
 
 extern	uint8_t	EVOWD_Flag;
 
-extern uint8_t ibuttonid, lic_ibuttonid;
+extern int ibuttonid, lic_ibuttonid;
 
 
 
@@ -440,6 +444,7 @@ void fsm_strike2( void);
 void check_fidu_dflash( void );
 void fsm_console_enter(void);
 void fsm_gprs_detection(void);
+void fsm_login(uint8_t incharrx);
 
 void account_time(int basehour, int baseminute, int * ahour, int * amin);
 

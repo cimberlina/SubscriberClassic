@@ -8672,12 +8672,48 @@ int con_DeltaT(ConsoleState* state)
 int con_gencid(ConsoleState* state)
 {
     uint16_t devnum, evqual, event, particion, zone;
+    uint8_t event_buffer[32];
+    int temp, temp1;
 
     devnum = atoi( con_getparam(state->command, 1) );
     evqual = atoi( con_getparam(state->command, 2) );
     event = atoi( con_getparam(state->command, 3) );
     particion = atoi( con_getparam(state->command, 4) );
     zone = atoi( con_getparam(state->command, 5));
+
+    //-----------------------------------------------------------
+    if(evqual == 1)
+        event_buffer[8] = 'E';
+    else if(evqual == 3)
+        event_buffer[8] = 'R';
+
+    temp = event / 100;
+    temp1 = event % 100;
+    event_buffer[9] = temp + '0';
+    temp = temp1 / 10;
+    temp1 = event % 10;
+    event_buffer[10] = temp + '0';
+    event_buffer[11] = temp1 + '0';
+
+    temp = particion / 10;
+    temp1 = particion % 10;
+    event_buffer[13] = temp + '0';
+    event_buffer[14] = temp1 + '0';
+
+    temp = zone / 100;
+    temp1 = zone % 100;
+    event_buffer[16] = temp + '0';
+    temp = temp1 / 10;
+    temp1 = zone % 10;
+    event_buffer[17] = temp + '0';
+    event_buffer[18] = temp1 + '0';
+
+    ProcessEvents( event_buffer, devnum );
+
+//    eventcode = (event_buffer[9] - '0')*100 + (event_buffer[10] - '0')*10 +  (event_buffer[11] - '0');
+//    eventpartition = (event_buffer[13] - '0')*10 + (event_buffer[14] - '0');
+//    eventzone = (event_buffer[16] - '0')*100 + (event_buffer[17] - '0')*10 + (event_buffer[18] - '0');
+    //-----------------------------------------------------------
 
     logCidEvent(account, evqual, event, particion, zone);
 
