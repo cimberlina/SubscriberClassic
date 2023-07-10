@@ -2124,6 +2124,7 @@ static  void  App_Task_1 (void  *p_arg)
                 EVOWD_Flag |= (1 << 1);
                 EVOWD_Flag |= (1 << 2);
                 CommSendString(DEBUG_COMM, "w_");
+                SystemFlag12 |= CLEAR485_FLAG;
             }
 
         }

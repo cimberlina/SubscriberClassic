@@ -250,12 +250,17 @@ extern uint32_t SystemFlag11;
 #define GEV401P8_FLAG    (1 << 29)
 #define GEV401P9_FLAG    (1 << 30)
 
+
+
 extern uint32_t SystemFlag12;
 #define NETRECOVERY_FLAG    (1 << 0)
 #define ACKNG_FLAG          (1 << 1)
 #define FORCESND_FLAG       (1 << 2)
 #define E606SND_FLAG        (1 << 3)
 #define R606SND_FLAG        (1 << 4)
+#define CONSOLTESO_FLAG     (1 << 5)
+#define APERTESO_FLAG       (1 << 6)
+#define CLEAR485_FLAG       (1 << 7)
 
 extern uint8_t FSM_FLAG_1;
 #define WDEVO0_ALRM_FLAG    (1 << 0)

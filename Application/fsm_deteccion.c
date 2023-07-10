@@ -3414,6 +3414,7 @@ void AlarmWriteHistory(void)
 			break;
 		}
 	}
+    FSM_WriteHistory();
 }
 
 void FSM_ReadHistory(void)
@@ -3443,8 +3444,10 @@ void FSM_ReadHistory(void)
         if((mybuffer[2] == 0xFF) || (mybuffer[2] > 0x80))   {
             FSM_WriteHistory();
         } else
-        if(mybuffer[2] && bitpat[ROTU_bit])
+        if(mybuffer[2] & bitpat[ROTU_bit]) {
             BaseAlarmPkt_alarm |= bitpat[ROTU_bit];
+            BaseAlarm_alarm_1 |= bitpat[ROTU_bit];
+        }
     }
 }
 
@@ -4523,8 +4526,8 @@ void recharge_alarm(uint8_t alarm)
                             if(SystemFlag11 & CONSOLASAL_FLAG)  {
                                 asal_autorst_timer_min = 120 * 60;
                                 norm_asal_timer = 120*60;
-                            }
-                            else {
+                            } else
+                            {
                                 asal_autorst_timer_min = 25 * 60;
                                 norm_asal_timer = 25*60;
                             }
@@ -4562,7 +4565,8 @@ void recharge_alarm(uint8_t alarm)
                         if(SystemFlag11 & CONSOLASAL_FLAG)  {
                             asal_autorst_timer_min = 120 * 60;
                             norm_asal_timer = 120*60;
-                        } else  {
+                        }  else
+                        {
                             asal_autorst_timer_min = autorst_timer*60;
                             norm_asal_timer = autorst_timer*60;
                         }

@@ -450,13 +450,15 @@ void  LAN485_Task(void  *p_arg)
 					diag485[7] |= (1 << (temp_partition));
 				}
 				//- - - - - - - - - - - - - - - - - - - - -
-				if( ptm_dcb[ptm_index].com_error_counter == 0 )	{
+				if( (ptm_dcb[ptm_index].com_error_counter == 0) || (SystemFlag12 & CLEAR485_FLAG) )	{
+
 					//if(BaseAlarmPkt_alarm & bitpat[APER_bit])	{
-                    if(SysFlag_AP_Apertura & AP_APR_VALID)  {
+                    if((SysFlag_AP_Apertura & AP_APR_VALID) || (SystemFlag12 & CLEAR485_FLAG))  {
 						ptm_dcb[ptm_index].timeout485 = 180;
 					} else	{
 						ptm_dcb[ptm_index].timeout485 = 10800;
 					}
+
                     if( Rot485_flag & CIDRESET_FLAG )   {
                         Rot485_flag &= ~CIDRESET_FLAG;
                         ptm_dcb[ptm_index].timeout485 = 1;
@@ -481,6 +483,10 @@ void  LAN485_Task(void  *p_arg)
 				//- - - - - - - - - - - - - - - - - - - - -
                 if((ptm_dcb[ptm_index].timeout485 > 180) && (SysFlag_AP_Apertura & AP_APR_VALID))   {
                     ptm_dcb[ptm_index].timeout485 = 179;
+                }
+                if(SystemFlag12 & CLEAR485_FLAG)    {
+                    ptm_dcb[ptm_index].timeout485 = 0;
+                    SystemFlag12 &= ~CLEAR485_FLAG;
                 }
 				if(!(ptm_dcb[ptm_index].timeout485))	{
                     switch(ptm_dcb[ptm_index].particion)    {
