@@ -261,6 +261,8 @@ extern uint32_t SystemFlag12;
 #define CONSOLTESO_FLAG     (1 << 5)
 #define APERTESO_FLAG       (1 << 6)
 #define CLEAR485_FLAG       (1 << 7)
+#define E130TECNICO_FLAG    (1 << 8)
+#define E120TECNICO_FLAG    (1 << 9)
 
 extern uint8_t FSM_FLAG_1;
 #define WDEVO0_ALRM_FLAG    (1 << 0)

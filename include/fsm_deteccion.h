@@ -114,7 +114,7 @@ extern	uint16_t paparst_timer;
 extern int dualA_delay, DeltaT;
 
 extern uint32_t amr_timer;
-extern int norm_asal_timer;
+extern int norm_asal_timer, norm_teso_timer;
 
 extern uint8_t ppon_state;
 #define FSM_PPON_IDLE   0x10

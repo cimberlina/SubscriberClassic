@@ -467,12 +467,20 @@ void WriteEventToTxBuffer(int co_id, EventRecord *event)
         } else
         if((event->cid_eventcode == 0x120) && (event->cid_partition == 2)) {
             SystemFlag11 |= EV120P2_FLAG;
+            if((SystemFlag12 & E120TECNICO_FLAG) && (SystemFlag11 & MACROMODE_FLAG)) {
+                //SystemFlag12 &= ~E120TECNICO_FLAG;
+                EV120P2_temp.cid_partition = 1;
+            }
             Mem_Copy(&EV120P2_temp, event, sizeof(EventRecord));
             ReadOutEventMacro(0, event);
             return;
         } else
         if((event->cid_eventcode == 0x130) && (event->cid_partition == 4)) {
             SystemFlag11 |= EV130P4_FLAG;
+            if((SystemFlag12 & E130TECNICO_FLAG) && (SystemFlag11 & MACROMODE_FLAG)) {
+                //SystemFlag12 &= ~E130TECNICO_FLAG;
+                EV130P4_temp.cid_partition = 1;
+            }
             Mem_Copy(&EV130P4_temp, event, sizeof(EventRecord));
             ReadOutEventMacro(0, event);
             return;
@@ -723,6 +731,10 @@ void fsm_MEV120(void)
                 //aca tirar evento de particion 2
                 wrptr = Monitoreo[0].eventRec_writeptr++;
                 Monitoreo[0].eventRec_count++;
+                if((SystemFlag12 & E120TECNICO_FLAG) && (SystemFlag11 & MACROMODE_FLAG)) {
+                    SystemFlag12 &= ~E120TECNICO_FLAG;
+                    EV120P2_temp.cid_partition = 1;
+                }
                 Mem_Copy(&(Monitoreo[0].eventRecord[wrptr]), &EV120P2_temp, sizeof(EventRecord));
                 if (Monitoreo[0].eventRec_writeptr == TXEVENTBUFFERLEN) {
                     Monitoreo[0].eventRec_writeptr = 0;
@@ -811,6 +823,10 @@ void fsm_MEV130(void)
                 //aca tirar evento de particion 4
                 wrptr = Monitoreo[0].eventRec_writeptr++;
                 Monitoreo[0].eventRec_count++;
+                if((SystemFlag12 & E130TECNICO_FLAG) && (SystemFlag11 & MACROMODE_FLAG)) {
+                    SystemFlag12 &= ~E130TECNICO_FLAG;
+                    EV130P4_temp.cid_partition = 1;
+                }
                 Mem_Copy(&(Monitoreo[0].eventRecord[wrptr]), &EV130P4_temp, sizeof(EventRecord));
                 if (Monitoreo[0].eventRec_writeptr == TXEVENTBUFFERLEN) {
                     Monitoreo[0].eventRec_writeptr = 0;

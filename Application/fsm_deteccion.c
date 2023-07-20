@@ -19,7 +19,7 @@ uint16_t lowbatt_timer;
 int dualA_delay, DeltaT;
 //int papretries;
 
-int norm_asal_timer;
+int norm_asal_timer, norm_teso_timer;
 
 uint8_t fsm_npd_state;
 #define	NPD_IDLE	0x10
@@ -2035,7 +2035,7 @@ void autoreset_logo3d( void )
 			}
 			break;
 		case AUTR_ALRMED :
-			if( (teso_autr_counter == 0) && (SEC_TIMER > (teso_autr_timer + teso_autorst_timer_min)) )	{
+			if( (teso_autr_counter == 0) && (SEC_TIMER > (teso_autr_timer + teso_autorst_timer_min)) || (norm_teso_timer == 0))	{
 				teso_autr_counter = 0;
 				teso_state = AUTR_MEMALR;
 				SysFlag2 |= NORM_TESO;
@@ -2052,6 +2052,8 @@ void autoreset_logo3d( void )
 				BaseAlarmPkt_alarm &= ~bitpat[TESO_bit];
 				SysFlag3 |= SENDM_flag;
 				set_mem_alrm(TESO_bit);
+                SystemFlag12 &= ~APERTESO_FLAG;
+                SystemFlag12 &= ~CONSOLTESO_FLAG;
 			}
 			break;
 		case AUTR_MEMALR :
@@ -4483,8 +4485,21 @@ void recharge_alarm(uint8_t alarm)
 				}
 				else	{
 					if(paptslot == 0)	{
+                        //---------------------------------------
+                        if(SystemFlag12 & APERTESO_FLAG) {
+                            teso_autorst_timer_min = 75 * 60;
+                            norm_teso_timer = 75*60;
+                        } else
+                        if(SystemFlag12 & CONSOLTESO_FLAG)  {
+                            teso_autorst_timer_min = 120 * 60;
+                            norm_teso_timer = 120*60;
+                        } else
+                        {
+                            teso_autorst_timer_min = autorst_timer*60;
+                            norm_teso_timer = autorst_timer*60;
+                        }
+                        //---------------------------------------
 						teso_autr_counter = AUTORESET_POLL_COUNT;
-						teso_autorst_timer_min = autorst_timer*60;
 					} else	{
 						teso_autr_counter = 0;
 						teso_autorst_timer_min = paparst_timer*60;
@@ -4565,7 +4580,7 @@ void recharge_alarm(uint8_t alarm)
                         if(SystemFlag11 & CONSOLASAL_FLAG)  {
                             asal_autorst_timer_min = 120 * 60;
                             norm_asal_timer = 120*60;
-                        }  else
+                        } else
                         {
                             asal_autorst_timer_min = autorst_timer*60;
                             norm_asal_timer = autorst_timer*60;

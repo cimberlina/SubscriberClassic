@@ -284,8 +284,8 @@ void fsm_AP_apertura(void)
 		case AP_APER_IDLE :
             if(FSM_FLAG_1 & APERNG_ALRM_FLAG)   {
                 tout_AP_apertura = 60*6;
-                SystemFlag11 |= APERASAL_FLAG;
-                //SysFlag_AP_GenAlarm |= bitpat[ROTU_bit];
+                //SystemFlag11 |= APERASAL_FLAG;
+                SystemFlag12 |= APERTESO_FLAG;
                 AP_apertura_state = AP_APER_OP_PREVE;
                 fsmAperWriteHistory();
                 AP_Aper_led_dcb.led_cad = WAIT_PREVE_LED_CADENCE;
@@ -296,7 +296,8 @@ void fsm_AP_apertura(void)
                 SystemFlag4 |= ARSTOK_FLAG;
                 SysFlag_AP_Apertura &= ~AP_APR_IBUTTON_OK;
                 lic_ibuttonid = 0;
-                SystemFlag11 &= ~APERASAL_FLAG;
+                //SystemFlag11 &= ~APERASAL_FLAG;
+                SystemFlag12 &= ~APERTESO_FLAG;
                 SystemFlag11 &= ~FIRSTCMD_FLAG;
                 //SystemFlag11 &= ~CONSOLASAL_FLAG;
                 if (SysFlag_AP_Apertura & AP_APR_APRLINE) {
@@ -332,9 +333,12 @@ void fsm_AP_apertura(void)
 			} else
 			if(!tout_AP_apertura){
 				tout_AP_apertura = 60*6;
-				SysFlag_AP_GenAlarm |= bitpat[ASAL_bit];
-                SystemFlag11 |= APERASAL_FLAG;
-				//SysFlag_AP_GenAlarm |= bitpat[ROTU_bit];
+                SysFlag_AP_GenAlarm |= bitpat[TESO_bit];
+                SystemFlag12 |= APERTESO_FLAG;
+                SystemFlag12 |= E130TECNICO_FLAG;
+				//SysFlag_AP_GenAlarm |= bitpat[ASAL_bit];
+                //SystemFlag11 |= APERASAL_FLAG;
+				////SysFlag_AP_GenAlarm |= bitpat[ROTU_bit];
 				AP_apertura_state = AP_APER_OP_PREVE;
 				fsmAperWriteHistory();
 				AP_Aper_led_dcb.led_cad = WAIT_PREVE_LED_CADENCE;
@@ -435,11 +439,13 @@ void fsm_AP_apertura(void)
 			if(!tout_AP_apertura)	{
 				POWER_TX_ON();
 				SysFlag4 &= ~LOGICALPWRTXOFF;
-                SystemFlag11 &= ~APERASAL_FLAG;
+                //SystemFlag11 &= ~APERASAL_FLAG;
+                SystemFlag12 &= ~APERTESO_FLAG;
                 if(!(SysFlag_AP_Apertura & AP_APR_APRLINE)) {
                     POWER_TX_ON();
                     AP_apertura_state = AP_APER_OP_NORMAL;
-                    SystemFlag11 &= ~APERASAL_FLAG;
+                    //SystemFlag11 &= ~APERASAL_FLAG;
+                    SystemFlag12 &= ~APERTESO_FLAG;
                     SysFlag_AP_Apertura &= ~AP_APR_INPREVE;
                     fsmAperWriteHistory();
                     FSM_FLAG_1 &= ~APERNG_ALRM_FLAG;
@@ -450,7 +456,8 @@ void fsm_AP_apertura(void)
             if(!(SysFlag_AP_Apertura & AP_APR_APRLINE)) {
                 POWER_TX_ON();
                 AP_apertura_state = AP_APER_OP_NORMAL;
-                SystemFlag11 &= ~APERASAL_FLAG;
+                //SystemFlag11 &= ~APERASAL_FLAG;
+                SystemFlag12 &= ~APERTESO_FLAG;
                 SysFlag_AP_Apertura &= ~AP_APR_INPREVE;
                 fsmAperWriteHistory();
                 FSM_FLAG_1 &= ~APERNG_ALRM_FLAG;

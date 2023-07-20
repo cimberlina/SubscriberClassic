@@ -2760,6 +2760,9 @@ void RTC_IRQHandler(void)
         if(norm_asal_timer) {
             norm_asal_timer--;
         }
+        if(norm_teso_timer) {
+            norm_teso_timer--;
+        }
 
 		// Clear pending interrupt
 		RTC_ClearIntPending(LPC_RTC, RTC_INT_COUNTER_INCREASE);
@@ -4573,8 +4576,11 @@ void fsm_console_enter(void)
                 fsm_conent_state = FCS_CONIN;
                 logCidEvent(account, 1, 628, 0, 0);
                 if(!(SysFlag_AP_Apertura & AP_APR_VALID))    {
-                    SysFlag_AP_GenAlarm |= bitpat[ASAL_bit];
-                    SystemFlag11 |= CONSOLASAL_FLAG;
+                    //SysFlag_AP_GenAlarm |= bitpat[ASAL_bit];
+                    //SystemFlag11 |= CONSOLASAL_FLAG;
+                    SysFlag_AP_GenAlarm |= bitpat[TESO_bit];
+                    SystemFlag12 |= CONSOLTESO_FLAG;
+                    SystemFlag12 |= E130TECNICO_FLAG;
                     fsm_conent_state = FCS_ALRM;
                 }
             }
@@ -4607,6 +4613,7 @@ void fsm_console_enter(void)
                 RADAR_flags &= ~CONSOLE_CMDIN;
                 SysFlag_AP_GenAlarm |= bitpat[ASAL_bit];
                 SystemFlag11 |= FIRSTCMD_FLAG;
+                SystemFlag12 |= E120TECNICO_FLAG;
             }
             break;
         case FCS_ALRM:
