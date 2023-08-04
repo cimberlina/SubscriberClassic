@@ -4141,7 +4141,7 @@ void fsm_wdog_evo( uint8_t this, uint8_t partition )
                 }
                 FSM_WriteHistory();
             } else
-            if((currtime.tm_hour == 1) && (currtime.tm_min == 30) && ((currtime.tm_sec >= 0) && (currtime.tm_sec <= 7)))	{
+            if((currtime.tm_hour == 3) && (currtime.tm_min == 15) && ((currtime.tm_sec >= 0) && (currtime.tm_sec <= 7)))	{
                 //logCidEvent(account, 1, 943, partition, 0);
                 Rot485_flag |= ROTEVO_FLAG;
                 diag485[6] |= (1 << (5 + this));
@@ -4151,7 +4151,7 @@ void fsm_wdog_evo( uint8_t this, uint8_t partition )
                     SystemFlag3 |= NAPER_F220V;
                 }
             }
-            if ((SystemFlag4 & E943F220_DONE) && (currtime.tm_hour == 1) && (currtime.tm_min == 30) && ((currtime.tm_sec >= 10) && (currtime.tm_sec <= 15))) {
+            if ((SystemFlag4 & E943F220_DONE) && (currtime.tm_hour == 3) && (currtime.tm_min == 15) && ((currtime.tm_sec >= 10) && (currtime.tm_sec <= 15))) {
                 SystemFlag4 &= ~E943F220_DONE;
             }
             break;

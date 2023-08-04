@@ -42,8 +42,33 @@ typedef struct	{
 	time_t          rfalrmdly_timer;
 	unsigned char   rfalrmdly_state;
 
-
+    //--- tratamiento de disparos sismicos
+    uint8_t     sismic_state;
+    time_t      sismic_timer;
+    uint32_t    SISMIC_flag;
+    //------------------------------------
 } PTM_device;
+
+#define FSMSISM_IDLE                0x0010
+#define FSMSISM_UNPROTECTED_CLOSED  0x0020
+#define FSMSISM_UNPROTECTED_OPEN    0x0030
+#define FSMSISM_UNPROTECTED_TRIG    0x0035
+#define FSMSISM_PROTECTED           0x0040
+#define FSMSISM_UCWAIT              0x0025
+
+#define PTM_STATUS_ARMADO   (1 << 0)
+#define PTM_STATUS_TAMPER   (1 << 1)
+#define PTM_STATUS_ZTEMP    (1 << 2)
+#define PTM_STATUS_ZINMD    (1 << 3)
+#define PTM_EVENT_E401      (1 << 4)
+#define PTM_EVENT_R401      (1 << 5)
+#define PTM_EVENT_E130Z1    (1 << 6)
+#define PTM_EVENT_E130Z2    (1 << 7)
+#define STOPSISTRIGGERSEND  (1 << 8)
+#define TERMICTRIGGER_FLAG  (1 << 9)
+#define TERMICTRIGDLY_FLAG  (1 << 10)
+#define TERMICTRIGG2_FLAG   (1 << 11)
+#define PTM_STATUS_VALID    (1 << 31)
 
 typedef struct 
 {
@@ -191,6 +216,8 @@ void fsm_rfdlyptm( void );
 void fsm_rfdlybornera_teso( void );
 
 void fsm_ptmsignalling( void );
+
+void fsm_ptm_sismic(unsigned char index);
 
 void SendProblem386(uint8_t ptm_index, uint8_t erevent);
 

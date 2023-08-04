@@ -112,8 +112,8 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/mem_i2c/mem_i2c.c" "CMakeFiles/Subscriber.dir/mem_i2c/mem_i2c.c.obj" "gcc" "CMakeFiles/Subscriber.dir/mem_i2c/mem_i2c.c.obj.d"
   )
 
-# Targets to which this target links.
-set(CMAKE_TARGET_LINKED_INFO_FILES
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
   )
 
 # Fortran module output directory.

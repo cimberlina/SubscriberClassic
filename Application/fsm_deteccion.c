@@ -1933,8 +1933,17 @@ uint16_t paparst_timer;
 
 void autoreset_logo3d( void )
 {
+    int i;
+    uint8_t rotuflags;
+
 	//si el flag de reset de alarmas esta seteado, reseteo las alarmas policiales
 
+    rotuflags = 0;
+    for(i = 0; i < 8; i++) {
+        if(Status_Zonas[i] == ALRM_ROTU)    {
+            rotuflags = 1;
+        }
+    }
 	if( SysFlag0 & RSTALRM_flag )	{
 		if( asal_autr_counter < AUTORESET_POLL_COUNT )	{
 			asal_state = AUTR_NORMAL;
@@ -2134,7 +2143,7 @@ void autoreset_logo3d( void )
 			}
 			break;
 		case AUTR_ALRMED :
-            if( (rotu_autr_counter == 0) && (SEC_TIMER > (rotu_autr_timer + rotu_autorst_timer_min)) && (!(Rot485_flag & ROT485_FLAG)) )	{
+            if( (rotu_autr_counter == 0) && (rotuflags == 0) && (SEC_TIMER > (rotu_autr_timer + rotu_autorst_timer_min)) && (!(Rot485_flag & ROT485_FLAG)) )	{
                 rotu_autr_counter = 0;
                 rotu_state = AUTR_MEMALR;
                 led_dcb[ROTU_led].led_cad = AUTORESET_BLINK_CAD;
@@ -3999,13 +4008,16 @@ void rf_cortex_signature( void )
 			SystemFlag3 &= ~NAPER_RFPOLL;
 			csign_state = CSIGN_IDLE;
 			SystemFlag3 &= ~NAPER_F220V;
+            SystemFlag3 &= ~NAPER_flag;
 			if(VERSION_NUMBER >= 300)	{
 			    if(SystemFlag10 & F220INDICATION1P) {
                     csign_state = CSIGN_IDLE;
+                    SystemFlag3 &= ~NAPER_flag;
 			    } else {
                     //csign_state = CSIGN_RFP3;       // para dos indicaciones de f220
                     csign_state = CSIGN_IDLE;           // 4 octubre 2021, piden que solo indique con una sola f2200
                     signature_timer = 5*60;
+                    SystemFlag3 &= ~NAPER_flag;
                 }
 			}
 		}
@@ -4023,6 +4035,7 @@ void rf_cortex_signature( void )
 			SystemFlag3 &= ~NAPER_RFPOLL;
 			csign_state = CSIGN_IDLE;
 			SystemFlag3 &= ~NAPER_F220V;
+            SystemFlag3 &= ~NAPER_flag;
 		}
                 break;
 	default :
@@ -4478,23 +4491,28 @@ void recharge_alarm(uint8_t alarm)
 					if(paptslot == 0)	{
 						teso_autr_counter = 0;
 						teso_autorst_timer_min = 2*60;
+                        norm_teso_timer = autorst_timer*60;
 					} else	{
 						teso_autr_counter = 0;
 						teso_autorst_timer_min = 1*60;
+                        norm_teso_timer = autorst_timer*60;
 					}
 				}
 				else	{
 					if(paptslot == 0)	{
                         //---------------------------------------
                         if(SystemFlag12 & APERTESO_FLAG) {
+                            teso_autr_counter = 0;
                             teso_autorst_timer_min = 75 * 60;
                             norm_teso_timer = 75*60;
                         } else
                         if(SystemFlag12 & CONSOLTESO_FLAG)  {
+                            teso_autr_counter = 0;
                             teso_autorst_timer_min = 120 * 60;
                             norm_teso_timer = 120*60;
                         } else
                         {
+                            teso_autr_counter = 0;
                             teso_autorst_timer_min = autorst_timer*60;
                             norm_teso_timer = autorst_timer*60;
                         }
