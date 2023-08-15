@@ -2885,6 +2885,12 @@ int ReloadUnAckEvents25( int monid)
                 if((event.cid_zoneuser >= 0x189) && (event.cid_zoneuser <= 0x192))	{
                     discard++;
                 }
+                if((event.cid_zoneuser >= 0x389) && (event.cid_zoneuser <= 0x392))	{
+                    discard++;
+                }
+                if((event.cid_zoneuser >= 0x589) && (event.cid_zoneuser <= 0x592))	{
+                    discard++;
+                }
 
                 //filtro los eventos de zonas 5 a 8, de las evo, para los eventos entre 100 y 199
                 if((event.cid_zoneuser >= ASALPBT_FIRSTZONE) && (event.cid_zoneuser <= ASALPBT_LASTZONE))	{

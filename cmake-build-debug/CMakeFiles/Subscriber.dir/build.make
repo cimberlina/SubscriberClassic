@@ -43,10 +43,10 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2022.1.3\bin\cmake\win\x64\bin\cmake.exe"
+CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2023.2\bin\cmake\win\x64\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "C:\Program Files\JetBrains\CLion 2022.1.3\bin\cmake\win\x64\bin\cmake.exe" -E rm -f
+RM = "C:\Program Files\JetBrains\CLion 2023.2\bin\cmake\win\x64\bin\cmake.exe" -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -73,1530 +73,1530 @@ CMakeFiles/Subscriber.dir/Application/DHCP_client.c.obj: CMakeFiles/Subscriber.d
 CMakeFiles/Subscriber.dir/Application/DHCP_client.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Application/DHCP_client.c
 CMakeFiles/Subscriber.dir/Application/DHCP_client.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Subscriber.dir/Application/DHCP_client.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Application/DHCP_client.c.obj -MF CMakeFiles\Subscriber.dir\Application\DHCP_client.c.obj.d -o CMakeFiles\Subscriber.dir\Application\DHCP_client.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\DHCP_client.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Application/DHCP_client.c.obj -MF CMakeFiles\Subscriber.dir\Application\DHCP_client.c.obj.d -o CMakeFiles\Subscriber.dir\Application\DHCP_client.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\DHCP_client.c
 
 CMakeFiles/Subscriber.dir/Application/DHCP_client.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Application/DHCP_client.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\DHCP_client.c > CMakeFiles\Subscriber.dir\Application\DHCP_client.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\DHCP_client.c > CMakeFiles\Subscriber.dir\Application\DHCP_client.c.i
 
 CMakeFiles/Subscriber.dir/Application/DHCP_client.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Application/DHCP_client.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\DHCP_client.c -o CMakeFiles\Subscriber.dir\Application\DHCP_client.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\DHCP_client.c -o CMakeFiles\Subscriber.dir\Application\DHCP_client.c.s
 
 CMakeFiles/Subscriber.dir/Application/fsm_deteccion.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Application/fsm_deteccion.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Application/fsm_deteccion.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Application/fsm_deteccion.c
 CMakeFiles/Subscriber.dir/Application/fsm_deteccion.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/Subscriber.dir/Application/fsm_deteccion.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Application/fsm_deteccion.c.obj -MF CMakeFiles\Subscriber.dir\Application\fsm_deteccion.c.obj.d -o CMakeFiles\Subscriber.dir\Application\fsm_deteccion.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\fsm_deteccion.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Application/fsm_deteccion.c.obj -MF CMakeFiles\Subscriber.dir\Application\fsm_deteccion.c.obj.d -o CMakeFiles\Subscriber.dir\Application\fsm_deteccion.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\fsm_deteccion.c
 
 CMakeFiles/Subscriber.dir/Application/fsm_deteccion.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Application/fsm_deteccion.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\fsm_deteccion.c > CMakeFiles\Subscriber.dir\Application\fsm_deteccion.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\fsm_deteccion.c > CMakeFiles\Subscriber.dir\Application\fsm_deteccion.c.i
 
 CMakeFiles/Subscriber.dir/Application/fsm_deteccion.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Application/fsm_deteccion.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\fsm_deteccion.c -o CMakeFiles\Subscriber.dir\Application\fsm_deteccion.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\fsm_deteccion.c -o CMakeFiles\Subscriber.dir\Application\fsm_deteccion.c.s
 
 CMakeFiles/Subscriber.dir/Application/iButtons.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Application/iButtons.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Application/iButtons.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Application/iButtons.c
 CMakeFiles/Subscriber.dir/Application/iButtons.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/Subscriber.dir/Application/iButtons.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Application/iButtons.c.obj -MF CMakeFiles\Subscriber.dir\Application\iButtons.c.obj.d -o CMakeFiles\Subscriber.dir\Application\iButtons.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\iButtons.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Application/iButtons.c.obj -MF CMakeFiles\Subscriber.dir\Application\iButtons.c.obj.d -o CMakeFiles\Subscriber.dir\Application\iButtons.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\iButtons.c
 
 CMakeFiles/Subscriber.dir/Application/iButtons.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Application/iButtons.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\iButtons.c > CMakeFiles\Subscriber.dir\Application\iButtons.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\iButtons.c > CMakeFiles\Subscriber.dir\Application\iButtons.c.i
 
 CMakeFiles/Subscriber.dir/Application/iButtons.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Application/iButtons.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\iButtons.c -o CMakeFiles\Subscriber.dir\Application\iButtons.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\iButtons.c -o CMakeFiles\Subscriber.dir\Application\iButtons.c.s
 
 CMakeFiles/Subscriber.dir/Application/main.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Application/main.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Application/main.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Application/main.c
 CMakeFiles/Subscriber.dir/Application/main.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/Subscriber.dir/Application/main.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Application/main.c.obj -MF CMakeFiles\Subscriber.dir\Application\main.c.obj.d -o CMakeFiles\Subscriber.dir\Application\main.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\main.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Application/main.c.obj -MF CMakeFiles\Subscriber.dir\Application\main.c.obj.d -o CMakeFiles\Subscriber.dir\Application\main.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\main.c
 
 CMakeFiles/Subscriber.dir/Application/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Application/main.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\main.c > CMakeFiles\Subscriber.dir\Application\main.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\main.c > CMakeFiles\Subscriber.dir\Application\main.c.i
 
 CMakeFiles/Subscriber.dir/Application/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Application/main.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\main.c -o CMakeFiles\Subscriber.dir\Application\main.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\main.c -o CMakeFiles\Subscriber.dir\Application\main.c.s
 
 CMakeFiles/Subscriber.dir/Application/radar.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Application/radar.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Application/radar.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Application/radar.c
 CMakeFiles/Subscriber.dir/Application/radar.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/Subscriber.dir/Application/radar.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Application/radar.c.obj -MF CMakeFiles\Subscriber.dir\Application\radar.c.obj.d -o CMakeFiles\Subscriber.dir\Application\radar.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\radar.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Application/radar.c.obj -MF CMakeFiles\Subscriber.dir\Application\radar.c.obj.d -o CMakeFiles\Subscriber.dir\Application\radar.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\radar.c
 
 CMakeFiles/Subscriber.dir/Application/radar.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Application/radar.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\radar.c > CMakeFiles\Subscriber.dir\Application\radar.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\radar.c > CMakeFiles\Subscriber.dir\Application\radar.c.i
 
 CMakeFiles/Subscriber.dir/Application/radar.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Application/radar.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\radar.c -o CMakeFiles\Subscriber.dir\Application\radar.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\radar.c -o CMakeFiles\Subscriber.dir\Application\radar.c.s
 
 CMakeFiles/Subscriber.dir/Application/TI_aes.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Application/TI_aes.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Application/TI_aes.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Application/TI_aes.c
 CMakeFiles/Subscriber.dir/Application/TI_aes.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/Subscriber.dir/Application/TI_aes.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Application/TI_aes.c.obj -MF CMakeFiles\Subscriber.dir\Application\TI_aes.c.obj.d -o CMakeFiles\Subscriber.dir\Application\TI_aes.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\TI_aes.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Application/TI_aes.c.obj -MF CMakeFiles\Subscriber.dir\Application\TI_aes.c.obj.d -o CMakeFiles\Subscriber.dir\Application\TI_aes.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\TI_aes.c
 
 CMakeFiles/Subscriber.dir/Application/TI_aes.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Application/TI_aes.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\TI_aes.c > CMakeFiles\Subscriber.dir\Application\TI_aes.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\TI_aes.c > CMakeFiles\Subscriber.dir\Application\TI_aes.c.i
 
 CMakeFiles/Subscriber.dir/Application/TI_aes.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Application/TI_aes.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\TI_aes.c -o CMakeFiles\Subscriber.dir\Application\TI_aes.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\TI_aes.c -o CMakeFiles\Subscriber.dir\Application\TI_aes.c.s
 
 CMakeFiles/Subscriber.dir/Application/udpserver.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Application/udpserver.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Application/udpserver.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Application/udpserver.c
 CMakeFiles/Subscriber.dir/Application/udpserver.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/Subscriber.dir/Application/udpserver.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Application/udpserver.c.obj -MF CMakeFiles\Subscriber.dir\Application\udpserver.c.obj.d -o CMakeFiles\Subscriber.dir\Application\udpserver.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\udpserver.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Application/udpserver.c.obj -MF CMakeFiles\Subscriber.dir\Application\udpserver.c.obj.d -o CMakeFiles\Subscriber.dir\Application\udpserver.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\udpserver.c
 
 CMakeFiles/Subscriber.dir/Application/udpserver.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Application/udpserver.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\udpserver.c > CMakeFiles\Subscriber.dir\Application\udpserver.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\udpserver.c > CMakeFiles\Subscriber.dir\Application\udpserver.c.i
 
 CMakeFiles/Subscriber.dir/Application/udpserver.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Application/udpserver.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\udpserver.c -o CMakeFiles\Subscriber.dir\Application\udpserver.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\udpserver.c -o CMakeFiles\Subscriber.dir\Application\udpserver.c.s
 
 CMakeFiles/Subscriber.dir/Application/zonescan.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Application/zonescan.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Application/zonescan.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Application/zonescan.c
 CMakeFiles/Subscriber.dir/Application/zonescan.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/Subscriber.dir/Application/zonescan.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Application/zonescan.c.obj -MF CMakeFiles\Subscriber.dir\Application\zonescan.c.obj.d -o CMakeFiles\Subscriber.dir\Application\zonescan.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\zonescan.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Application/zonescan.c.obj -MF CMakeFiles\Subscriber.dir\Application\zonescan.c.obj.d -o CMakeFiles\Subscriber.dir\Application\zonescan.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\zonescan.c
 
 CMakeFiles/Subscriber.dir/Application/zonescan.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Application/zonescan.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\zonescan.c > CMakeFiles\Subscriber.dir\Application\zonescan.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\zonescan.c > CMakeFiles\Subscriber.dir\Application\zonescan.c.i
 
 CMakeFiles/Subscriber.dir/Application/zonescan.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Application/zonescan.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\zonescan.c -o CMakeFiles\Subscriber.dir\Application\zonescan.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Application\zonescan.c -o CMakeFiles\Subscriber.dir\Application\zonescan.c.s
 
 CMakeFiles/Subscriber.dir/Autoprotect/autoprotect.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Autoprotect/autoprotect.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Autoprotect/autoprotect.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Autoprotect/autoprotect.c
 CMakeFiles/Subscriber.dir/Autoprotect/autoprotect.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/Subscriber.dir/Autoprotect/autoprotect.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Autoprotect/autoprotect.c.obj -MF CMakeFiles\Subscriber.dir\Autoprotect\autoprotect.c.obj.d -o CMakeFiles\Subscriber.dir\Autoprotect\autoprotect.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Autoprotect\autoprotect.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Autoprotect/autoprotect.c.obj -MF CMakeFiles\Subscriber.dir\Autoprotect\autoprotect.c.obj.d -o CMakeFiles\Subscriber.dir\Autoprotect\autoprotect.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Autoprotect\autoprotect.c
 
 CMakeFiles/Subscriber.dir/Autoprotect/autoprotect.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Autoprotect/autoprotect.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Autoprotect\autoprotect.c > CMakeFiles\Subscriber.dir\Autoprotect\autoprotect.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Autoprotect\autoprotect.c > CMakeFiles\Subscriber.dir\Autoprotect\autoprotect.c.i
 
 CMakeFiles/Subscriber.dir/Autoprotect/autoprotect.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Autoprotect/autoprotect.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Autoprotect\autoprotect.c -o CMakeFiles\Subscriber.dir\Autoprotect\autoprotect.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Autoprotect\autoprotect.c -o CMakeFiles\Subscriber.dir\Autoprotect\autoprotect.c.s
 
 CMakeFiles/Subscriber.dir/BSP/cpu_bsp.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/BSP/cpu_bsp.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/BSP/cpu_bsp.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/BSP/cpu_bsp.c
 CMakeFiles/Subscriber.dir/BSP/cpu_bsp.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/Subscriber.dir/BSP/cpu_bsp.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/BSP/cpu_bsp.c.obj -MF CMakeFiles\Subscriber.dir\BSP\cpu_bsp.c.obj.d -o CMakeFiles\Subscriber.dir\BSP\cpu_bsp.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\BSP\cpu_bsp.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/BSP/cpu_bsp.c.obj -MF CMakeFiles\Subscriber.dir\BSP\cpu_bsp.c.obj.d -o CMakeFiles\Subscriber.dir\BSP\cpu_bsp.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\BSP\cpu_bsp.c
 
 CMakeFiles/Subscriber.dir/BSP/cpu_bsp.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/BSP/cpu_bsp.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\BSP\cpu_bsp.c > CMakeFiles\Subscriber.dir\BSP\cpu_bsp.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\BSP\cpu_bsp.c > CMakeFiles\Subscriber.dir\BSP\cpu_bsp.c.i
 
 CMakeFiles/Subscriber.dir/BSP/cpu_bsp.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/BSP/cpu_bsp.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\BSP\cpu_bsp.c -o CMakeFiles\Subscriber.dir\BSP\cpu_bsp.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\BSP\cpu_bsp.c -o CMakeFiles\Subscriber.dir\BSP\cpu_bsp.c.s
 
 CMakeFiles/Subscriber.dir/BSP/system_LPC17xx.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/BSP/system_LPC17xx.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/BSP/system_LPC17xx.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/BSP/system_LPC17xx.c
 CMakeFiles/Subscriber.dir/BSP/system_LPC17xx.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/Subscriber.dir/BSP/system_LPC17xx.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/BSP/system_LPC17xx.c.obj -MF CMakeFiles\Subscriber.dir\BSP\system_LPC17xx.c.obj.d -o CMakeFiles\Subscriber.dir\BSP\system_LPC17xx.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\BSP\system_LPC17xx.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/BSP/system_LPC17xx.c.obj -MF CMakeFiles\Subscriber.dir\BSP\system_LPC17xx.c.obj.d -o CMakeFiles\Subscriber.dir\BSP\system_LPC17xx.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\BSP\system_LPC17xx.c
 
 CMakeFiles/Subscriber.dir/BSP/system_LPC17xx.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/BSP/system_LPC17xx.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\BSP\system_LPC17xx.c > CMakeFiles\Subscriber.dir\BSP\system_LPC17xx.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\BSP\system_LPC17xx.c > CMakeFiles\Subscriber.dir\BSP\system_LPC17xx.c.i
 
 CMakeFiles/Subscriber.dir/BSP/system_LPC17xx.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/BSP/system_LPC17xx.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\BSP\system_LPC17xx.c -o CMakeFiles\Subscriber.dir\BSP\system_LPC17xx.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\BSP\system_LPC17xx.c -o CMakeFiles\Subscriber.dir\BSP\system_LPC17xx.c.s
 
 CMakeFiles/Subscriber.dir/Connection/protocols.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Connection/protocols.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Connection/protocols.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Connection/protocols.c
 CMakeFiles/Subscriber.dir/Connection/protocols.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/Subscriber.dir/Connection/protocols.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Connection/protocols.c.obj -MF CMakeFiles\Subscriber.dir\Connection\protocols.c.obj.d -o CMakeFiles\Subscriber.dir\Connection\protocols.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Connection\protocols.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Connection/protocols.c.obj -MF CMakeFiles\Subscriber.dir\Connection\protocols.c.obj.d -o CMakeFiles\Subscriber.dir\Connection\protocols.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Connection\protocols.c
 
 CMakeFiles/Subscriber.dir/Connection/protocols.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Connection/protocols.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Connection\protocols.c > CMakeFiles\Subscriber.dir\Connection\protocols.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Connection\protocols.c > CMakeFiles\Subscriber.dir\Connection\protocols.c.i
 
 CMakeFiles/Subscriber.dir/Connection/protocols.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Connection/protocols.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Connection\protocols.c -o CMakeFiles\Subscriber.dir\Connection\protocols.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Connection\protocols.c -o CMakeFiles\Subscriber.dir\Connection\protocols.c.s
 
 CMakeFiles/Subscriber.dir/Connection/rabbit.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Connection/rabbit.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Connection/rabbit.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Connection/rabbit.c
 CMakeFiles/Subscriber.dir/Connection/rabbit.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object CMakeFiles/Subscriber.dir/Connection/rabbit.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Connection/rabbit.c.obj -MF CMakeFiles\Subscriber.dir\Connection\rabbit.c.obj.d -o CMakeFiles\Subscriber.dir\Connection\rabbit.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Connection\rabbit.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Connection/rabbit.c.obj -MF CMakeFiles\Subscriber.dir\Connection\rabbit.c.obj.d -o CMakeFiles\Subscriber.dir\Connection\rabbit.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Connection\rabbit.c
 
 CMakeFiles/Subscriber.dir/Connection/rabbit.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Connection/rabbit.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Connection\rabbit.c > CMakeFiles\Subscriber.dir\Connection\rabbit.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Connection\rabbit.c > CMakeFiles\Subscriber.dir\Connection\rabbit.c.i
 
 CMakeFiles/Subscriber.dir/Connection/rabbit.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Connection/rabbit.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Connection\rabbit.c -o CMakeFiles\Subscriber.dir\Connection\rabbit.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Connection\rabbit.c -o CMakeFiles\Subscriber.dir\Connection\rabbit.c.s
 
 CMakeFiles/Subscriber.dir/Console/console.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Console/console.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Console/console.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Console/console.c
 CMakeFiles/Subscriber.dir/Console/console.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object CMakeFiles/Subscriber.dir/Console/console.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Console/console.c.obj -MF CMakeFiles\Subscriber.dir\Console\console.c.obj.d -o CMakeFiles\Subscriber.dir\Console\console.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Console\console.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Console/console.c.obj -MF CMakeFiles\Subscriber.dir\Console\console.c.obj.d -o CMakeFiles\Subscriber.dir\Console\console.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Console\console.c
 
 CMakeFiles/Subscriber.dir/Console/console.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Console/console.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Console\console.c > CMakeFiles\Subscriber.dir\Console\console.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Console\console.c > CMakeFiles\Subscriber.dir\Console\console.c.i
 
 CMakeFiles/Subscriber.dir/Console/console.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Console/console.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Console\console.c -o CMakeFiles\Subscriber.dir\Console\console.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Console\console.c -o CMakeFiles\Subscriber.dir\Console\console.c.s
 
 CMakeFiles/Subscriber.dir/Console/telnet_console.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Console/telnet_console.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Console/telnet_console.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Console/telnet_console.c
 CMakeFiles/Subscriber.dir/Console/telnet_console.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object CMakeFiles/Subscriber.dir/Console/telnet_console.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Console/telnet_console.c.obj -MF CMakeFiles\Subscriber.dir\Console\telnet_console.c.obj.d -o CMakeFiles\Subscriber.dir\Console\telnet_console.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Console\telnet_console.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Console/telnet_console.c.obj -MF CMakeFiles\Subscriber.dir\Console\telnet_console.c.obj.d -o CMakeFiles\Subscriber.dir\Console\telnet_console.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Console\telnet_console.c
 
 CMakeFiles/Subscriber.dir/Console/telnet_console.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Console/telnet_console.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Console\telnet_console.c > CMakeFiles\Subscriber.dir\Console\telnet_console.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Console\telnet_console.c > CMakeFiles\Subscriber.dir\Console\telnet_console.c.i
 
 CMakeFiles/Subscriber.dir/Console/telnet_console.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Console/telnet_console.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Console\telnet_console.c -o CMakeFiles\Subscriber.dir\Console\telnet_console.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Console\telnet_console.c -o CMakeFiles\Subscriber.dir\Console\telnet_console.c.s
 
 CMakeFiles/Subscriber.dir/DataFlash/DataFlash.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/DataFlash/DataFlash.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/DataFlash/DataFlash.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/DataFlash/DataFlash.c
 CMakeFiles/Subscriber.dir/DataFlash/DataFlash.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object CMakeFiles/Subscriber.dir/DataFlash/DataFlash.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/DataFlash/DataFlash.c.obj -MF CMakeFiles\Subscriber.dir\DataFlash\DataFlash.c.obj.d -o CMakeFiles\Subscriber.dir\DataFlash\DataFlash.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\DataFlash\DataFlash.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/DataFlash/DataFlash.c.obj -MF CMakeFiles\Subscriber.dir\DataFlash\DataFlash.c.obj.d -o CMakeFiles\Subscriber.dir\DataFlash\DataFlash.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\DataFlash\DataFlash.c
 
 CMakeFiles/Subscriber.dir/DataFlash/DataFlash.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/DataFlash/DataFlash.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\DataFlash\DataFlash.c > CMakeFiles\Subscriber.dir\DataFlash\DataFlash.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\DataFlash\DataFlash.c > CMakeFiles\Subscriber.dir\DataFlash\DataFlash.c.i
 
 CMakeFiles/Subscriber.dir/DataFlash/DataFlash.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/DataFlash/DataFlash.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\DataFlash\DataFlash.c -o CMakeFiles\Subscriber.dir\DataFlash\DataFlash.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\DataFlash\DataFlash.c -o CMakeFiles\Subscriber.dir\DataFlash\DataFlash.c.s
 
 CMakeFiles/Subscriber.dir/Lan485/lan485.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Lan485/lan485.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Lan485/lan485.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Lan485/lan485.c
 CMakeFiles/Subscriber.dir/Lan485/lan485.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object CMakeFiles/Subscriber.dir/Lan485/lan485.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Lan485/lan485.c.obj -MF CMakeFiles\Subscriber.dir\Lan485\lan485.c.obj.d -o CMakeFiles\Subscriber.dir\Lan485\lan485.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Lan485\lan485.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Lan485/lan485.c.obj -MF CMakeFiles\Subscriber.dir\Lan485\lan485.c.obj.d -o CMakeFiles\Subscriber.dir\Lan485\lan485.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Lan485\lan485.c
 
 CMakeFiles/Subscriber.dir/Lan485/lan485.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Lan485/lan485.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Lan485\lan485.c > CMakeFiles\Subscriber.dir\Lan485\lan485.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Lan485\lan485.c > CMakeFiles\Subscriber.dir\Lan485\lan485.c.i
 
 CMakeFiles/Subscriber.dir/Lan485/lan485.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Lan485/lan485.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Lan485\lan485.c -o CMakeFiles\Subscriber.dir\Lan485\lan485.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Lan485\lan485.c -o CMakeFiles\Subscriber.dir\Lan485\lan485.c.s
 
 CMakeFiles/Subscriber.dir/LogEventos/log_event.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LogEventos/log_event.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LogEventos/log_event.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LogEventos/log_event.c
 CMakeFiles/Subscriber.dir/LogEventos/log_event.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object CMakeFiles/Subscriber.dir/LogEventos/log_event.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LogEventos/log_event.c.obj -MF CMakeFiles\Subscriber.dir\LogEventos\log_event.c.obj.d -o CMakeFiles\Subscriber.dir\LogEventos\log_event.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LogEventos\log_event.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LogEventos/log_event.c.obj -MF CMakeFiles\Subscriber.dir\LogEventos\log_event.c.obj.d -o CMakeFiles\Subscriber.dir\LogEventos\log_event.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LogEventos\log_event.c
 
 CMakeFiles/Subscriber.dir/LogEventos/log_event.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LogEventos/log_event.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LogEventos\log_event.c > CMakeFiles\Subscriber.dir\LogEventos\log_event.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LogEventos\log_event.c > CMakeFiles\Subscriber.dir\LogEventos\log_event.c.i
 
 CMakeFiles/Subscriber.dir/LogEventos/log_event.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LogEventos/log_event.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LogEventos\log_event.c -o CMakeFiles\Subscriber.dir\LogEventos\log_event.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LogEventos\log_event.c -o CMakeFiles\Subscriber.dir\LogEventos\log_event.c.s
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/debug_frmwrk.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/debug_frmwrk.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/debug_frmwrk.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LPC1769_CMSIS_Driver/debug_frmwrk.c
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/debug_frmwrk.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building C object CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/debug_frmwrk.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/debug_frmwrk.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\debug_frmwrk.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\debug_frmwrk.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\debug_frmwrk.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/debug_frmwrk.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\debug_frmwrk.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\debug_frmwrk.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\debug_frmwrk.c
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/debug_frmwrk.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/debug_frmwrk.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\debug_frmwrk.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\debug_frmwrk.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\debug_frmwrk.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\debug_frmwrk.c.i
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/debug_frmwrk.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/debug_frmwrk.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\debug_frmwrk.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\debug_frmwrk.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\debug_frmwrk.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\debug_frmwrk.c.s
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_adc.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_adc.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_adc.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LPC1769_CMSIS_Driver/lpc17xx_adc.c
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_adc.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building C object CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_adc.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_adc.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_adc.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_adc.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_adc.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_adc.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_adc.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_adc.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_adc.c
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_adc.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_adc.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_adc.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_adc.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_adc.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_adc.c.i
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_adc.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_adc.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_adc.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_adc.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_adc.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_adc.c.s
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_can.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_can.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_can.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LPC1769_CMSIS_Driver/lpc17xx_can.c
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_can.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building C object CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_can.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_can.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_can.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_can.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_can.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_can.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_can.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_can.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_can.c
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_can.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_can.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_can.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_can.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_can.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_can.c.i
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_can.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_can.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_can.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_can.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_can.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_can.c.s
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_clkpwr.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_clkpwr.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_clkpwr.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LPC1769_CMSIS_Driver/lpc17xx_clkpwr.c
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_clkpwr.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building C object CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_clkpwr.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_clkpwr.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_clkpwr.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_clkpwr.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_clkpwr.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_clkpwr.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_clkpwr.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_clkpwr.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_clkpwr.c
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_clkpwr.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_clkpwr.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_clkpwr.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_clkpwr.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_clkpwr.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_clkpwr.c.i
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_clkpwr.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_clkpwr.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_clkpwr.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_clkpwr.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_clkpwr.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_clkpwr.c.s
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_dac.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_dac.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_dac.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LPC1769_CMSIS_Driver/lpc17xx_dac.c
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_dac.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building C object CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_dac.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_dac.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_dac.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_dac.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_dac.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_dac.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_dac.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_dac.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_dac.c
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_dac.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_dac.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_dac.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_dac.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_dac.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_dac.c.i
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_dac.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_dac.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_dac.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_dac.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_dac.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_dac.c.s
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_emac.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_emac.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_emac.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LPC1769_CMSIS_Driver/lpc17xx_emac.c
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_emac.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building C object CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_emac.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_emac.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_emac.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_emac.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_emac.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_emac.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_emac.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_emac.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_emac.c
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_emac.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_emac.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_emac.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_emac.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_emac.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_emac.c.i
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_emac.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_emac.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_emac.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_emac.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_emac.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_emac.c.s
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_exti.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_exti.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_exti.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LPC1769_CMSIS_Driver/lpc17xx_exti.c
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_exti.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building C object CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_exti.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_exti.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_exti.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_exti.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_exti.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_exti.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_exti.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_exti.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_exti.c
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_exti.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_exti.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_exti.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_exti.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_exti.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_exti.c.i
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_exti.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_exti.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_exti.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_exti.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_exti.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_exti.c.s
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_gpdma.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_gpdma.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_gpdma.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LPC1769_CMSIS_Driver/lpc17xx_gpdma.c
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_gpdma.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building C object CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_gpdma.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_gpdma.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_gpdma.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_gpdma.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_gpdma.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_gpdma.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_gpdma.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_gpdma.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_gpdma.c
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_gpdma.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_gpdma.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_gpdma.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_gpdma.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_gpdma.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_gpdma.c.i
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_gpdma.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_gpdma.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_gpdma.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_gpdma.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_gpdma.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_gpdma.c.s
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_gpio.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_gpio.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_gpio.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LPC1769_CMSIS_Driver/lpc17xx_gpio.c
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_gpio.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building C object CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_gpio.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_gpio.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_gpio.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_gpio.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_gpio.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_gpio.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_gpio.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_gpio.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_gpio.c
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_gpio.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_gpio.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_gpio.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_gpio.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_gpio.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_gpio.c.i
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_gpio.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_gpio.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_gpio.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_gpio.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_gpio.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_gpio.c.s
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_i2c.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_i2c.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_i2c.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LPC1769_CMSIS_Driver/lpc17xx_i2c.c
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_i2c.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building C object CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_i2c.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_i2c.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_i2c.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_i2c.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_i2c.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_i2c.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_i2c.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_i2c.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_i2c.c
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_i2c.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_i2c.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_i2c.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_i2c.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_i2c.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_i2c.c.i
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_i2c.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_i2c.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_i2c.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_i2c.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_i2c.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_i2c.c.s
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_i2s.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_i2s.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_i2s.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LPC1769_CMSIS_Driver/lpc17xx_i2s.c
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_i2s.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building C object CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_i2s.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_i2s.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_i2s.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_i2s.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_i2s.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_i2s.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_i2s.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_i2s.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_i2s.c
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_i2s.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_i2s.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_i2s.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_i2s.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_i2s.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_i2s.c.i
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_i2s.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_i2s.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_i2s.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_i2s.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_i2s.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_i2s.c.s
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_libcfg_default.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_libcfg_default.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_libcfg_default.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LPC1769_CMSIS_Driver/lpc17xx_libcfg_default.c
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_libcfg_default.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building C object CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_libcfg_default.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_libcfg_default.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_libcfg_default.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_libcfg_default.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_libcfg_default.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_libcfg_default.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_libcfg_default.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_libcfg_default.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_libcfg_default.c
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_libcfg_default.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_libcfg_default.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_libcfg_default.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_libcfg_default.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_libcfg_default.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_libcfg_default.c.i
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_libcfg_default.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_libcfg_default.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_libcfg_default.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_libcfg_default.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_libcfg_default.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_libcfg_default.c.s
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_mcpwm.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_mcpwm.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_mcpwm.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LPC1769_CMSIS_Driver/lpc17xx_mcpwm.c
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_mcpwm.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building C object CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_mcpwm.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_mcpwm.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_mcpwm.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_mcpwm.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_mcpwm.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_mcpwm.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_mcpwm.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_mcpwm.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_mcpwm.c
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_mcpwm.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_mcpwm.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_mcpwm.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_mcpwm.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_mcpwm.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_mcpwm.c.i
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_mcpwm.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_mcpwm.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_mcpwm.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_mcpwm.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_mcpwm.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_mcpwm.c.s
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_nvic.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_nvic.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_nvic.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LPC1769_CMSIS_Driver/lpc17xx_nvic.c
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_nvic.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building C object CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_nvic.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_nvic.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_nvic.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_nvic.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_nvic.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_nvic.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_nvic.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_nvic.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_nvic.c
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_nvic.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_nvic.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_nvic.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_nvic.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_nvic.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_nvic.c.i
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_nvic.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_nvic.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_nvic.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_nvic.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_nvic.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_nvic.c.s
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_pinsel.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_pinsel.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_pinsel.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LPC1769_CMSIS_Driver/lpc17xx_pinsel.c
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_pinsel.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building C object CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_pinsel.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_pinsel.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_pinsel.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_pinsel.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_pinsel.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_pinsel.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_pinsel.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_pinsel.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_pinsel.c
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_pinsel.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_pinsel.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_pinsel.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_pinsel.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_pinsel.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_pinsel.c.i
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_pinsel.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_pinsel.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_pinsel.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_pinsel.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_pinsel.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_pinsel.c.s
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_pwm.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_pwm.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_pwm.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LPC1769_CMSIS_Driver/lpc17xx_pwm.c
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_pwm.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building C object CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_pwm.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_pwm.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_pwm.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_pwm.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_pwm.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_pwm.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_pwm.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_pwm.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_pwm.c
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_pwm.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_pwm.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_pwm.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_pwm.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_pwm.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_pwm.c.i
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_pwm.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_pwm.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_pwm.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_pwm.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_pwm.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_pwm.c.s
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_qei.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_qei.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_qei.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LPC1769_CMSIS_Driver/lpc17xx_qei.c
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_qei.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building C object CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_qei.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_qei.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_qei.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_qei.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_qei.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_qei.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_qei.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_qei.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_qei.c
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_qei.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_qei.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_qei.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_qei.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_qei.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_qei.c.i
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_qei.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_qei.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_qei.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_qei.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_qei.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_qei.c.s
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_rit.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_rit.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_rit.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LPC1769_CMSIS_Driver/lpc17xx_rit.c
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_rit.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building C object CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_rit.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_rit.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_rit.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_rit.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_rit.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_rit.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_rit.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_rit.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_rit.c
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_rit.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_rit.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_rit.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_rit.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_rit.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_rit.c.i
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_rit.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_rit.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_rit.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_rit.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_rit.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_rit.c.s
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_rtc.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_rtc.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_rtc.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LPC1769_CMSIS_Driver/lpc17xx_rtc.c
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_rtc.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building C object CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_rtc.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_rtc.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_rtc.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_rtc.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_rtc.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_rtc.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_rtc.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_rtc.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_rtc.c
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_rtc.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_rtc.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_rtc.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_rtc.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_rtc.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_rtc.c.i
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_rtc.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_rtc.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_rtc.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_rtc.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_rtc.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_rtc.c.s
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_spi.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_spi.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_spi.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LPC1769_CMSIS_Driver/lpc17xx_spi.c
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_spi.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building C object CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_spi.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_spi.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_spi.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_spi.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_spi.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_spi.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_spi.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_spi.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_spi.c
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_spi.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_spi.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_spi.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_spi.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_spi.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_spi.c.i
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_spi.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_spi.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_spi.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_spi.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_spi.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_spi.c.s
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_ssp.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_ssp.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_ssp.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LPC1769_CMSIS_Driver/lpc17xx_ssp.c
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_ssp.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building C object CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_ssp.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_ssp.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_ssp.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_ssp.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_ssp.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_ssp.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_ssp.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_ssp.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_ssp.c
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_ssp.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_ssp.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_ssp.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_ssp.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_ssp.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_ssp.c.i
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_ssp.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_ssp.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_ssp.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_ssp.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_ssp.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_ssp.c.s
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_systick.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_systick.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_systick.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LPC1769_CMSIS_Driver/lpc17xx_systick.c
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_systick.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building C object CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_systick.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_systick.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_systick.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_systick.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_systick.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_systick.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_systick.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_systick.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_systick.c
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_systick.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_systick.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_systick.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_systick.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_systick.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_systick.c.i
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_systick.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_systick.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_systick.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_systick.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_systick.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_systick.c.s
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_timer.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_timer.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_timer.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LPC1769_CMSIS_Driver/lpc17xx_timer.c
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_timer.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building C object CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_timer.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_timer.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_timer.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_timer.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_timer.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_timer.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_timer.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_timer.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_timer.c
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_timer.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_timer.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_timer.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_timer.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_timer.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_timer.c.i
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_timer.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_timer.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_timer.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_timer.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_timer.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_timer.c.s
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_uart.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_uart.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_uart.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LPC1769_CMSIS_Driver/lpc17xx_uart.c
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_uart.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building C object CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_uart.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_uart.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_uart.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_uart.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_uart.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_uart.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_uart.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_uart.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_uart.c
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_uart.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_uart.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_uart.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_uart.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_uart.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_uart.c.i
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_uart.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_uart.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_uart.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_uart.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_uart.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_uart.c.s
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_wdt.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_wdt.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_wdt.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/LPC1769_CMSIS_Driver/lpc17xx_wdt.c
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_wdt.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building C object CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_wdt.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_wdt.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_wdt.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_wdt.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_wdt.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_wdt.c.obj -MF CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_wdt.c.obj.d -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_wdt.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_wdt.c
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_wdt.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_wdt.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_wdt.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_wdt.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_wdt.c > CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_wdt.c.i
 
 CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_wdt.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/LPC1769_CMSIS_Driver/lpc17xx_wdt.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_wdt.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_wdt.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\LPC1769_CMSIS_Driver\lpc17xx_wdt.c -o CMakeFiles\Subscriber.dir\LPC1769_CMSIS_Driver\lpc17xx_wdt.c.s
 
 CMakeFiles/Subscriber.dir/mem_i2c/mem_i2c.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/mem_i2c/mem_i2c.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/mem_i2c/mem_i2c.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/mem_i2c/mem_i2c.c
 CMakeFiles/Subscriber.dir/mem_i2c/mem_i2c.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building C object CMakeFiles/Subscriber.dir/mem_i2c/mem_i2c.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/mem_i2c/mem_i2c.c.obj -MF CMakeFiles\Subscriber.dir\mem_i2c\mem_i2c.c.obj.d -o CMakeFiles\Subscriber.dir\mem_i2c\mem_i2c.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\mem_i2c\mem_i2c.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/mem_i2c/mem_i2c.c.obj -MF CMakeFiles\Subscriber.dir\mem_i2c\mem_i2c.c.obj.d -o CMakeFiles\Subscriber.dir\mem_i2c\mem_i2c.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\mem_i2c\mem_i2c.c
 
 CMakeFiles/Subscriber.dir/mem_i2c/mem_i2c.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/mem_i2c/mem_i2c.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\mem_i2c\mem_i2c.c > CMakeFiles\Subscriber.dir\mem_i2c\mem_i2c.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\mem_i2c\mem_i2c.c > CMakeFiles\Subscriber.dir\mem_i2c\mem_i2c.c.i
 
 CMakeFiles/Subscriber.dir/mem_i2c/mem_i2c.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/mem_i2c/mem_i2c.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\mem_i2c\mem_i2c.c -o CMakeFiles\Subscriber.dir\mem_i2c\mem_i2c.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\mem_i2c\mem_i2c.c -o CMakeFiles\Subscriber.dir\mem_i2c\mem_i2c.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_CPU/cpu_c.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_CPU/cpu_c.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_CPU/cpu_c.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_CPU/cpu_c.c
 CMakeFiles/Subscriber.dir/Micrium/uC_CPU/cpu_c.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_CPU/cpu_c.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_CPU/cpu_c.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_CPU\cpu_c.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_CPU\cpu_c.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CPU\cpu_c.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_CPU/cpu_c.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_CPU\cpu_c.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_CPU\cpu_c.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CPU\cpu_c.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_CPU/cpu_c.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_CPU/cpu_c.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CPU\cpu_c.c > CMakeFiles\Subscriber.dir\Micrium\uC_CPU\cpu_c.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CPU\cpu_c.c > CMakeFiles\Subscriber.dir\Micrium\uC_CPU\cpu_c.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_CPU/cpu_c.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_CPU/cpu_c.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CPU\cpu_c.c -o CMakeFiles\Subscriber.dir\Micrium\uC_CPU\cpu_c.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CPU\cpu_c.c -o CMakeFiles\Subscriber.dir\Micrium\uC_CPU\cpu_c.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_CPU/cpu_core.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_CPU/cpu_core.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_CPU/cpu_core.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_CPU/cpu_core.c
 CMakeFiles/Subscriber.dir/Micrium/uC_CPU/cpu_core.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_46) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_CPU/cpu_core.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_CPU/cpu_core.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_CPU\cpu_core.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_CPU\cpu_core.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CPU\cpu_core.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_CPU/cpu_core.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_CPU\cpu_core.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_CPU\cpu_core.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CPU\cpu_core.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_CPU/cpu_core.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_CPU/cpu_core.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CPU\cpu_core.c > CMakeFiles\Subscriber.dir\Micrium\uC_CPU\cpu_core.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CPU\cpu_core.c > CMakeFiles\Subscriber.dir\Micrium\uC_CPU\cpu_core.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_CPU/cpu_core.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_CPU/cpu_core.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CPU\cpu_core.c -o CMakeFiles\Subscriber.dir\Micrium\uC_CPU\cpu_core.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CPU\cpu_core.c -o CMakeFiles\Subscriber.dir\Micrium\uC_CPU\cpu_core.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_dma.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_dma.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_dma.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_CSP/csp_dma.c
 CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_dma.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_47) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_dma.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_dma.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_dma.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_dma.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CSP\csp_dma.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_dma.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_dma.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_dma.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CSP\csp_dma.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_dma.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_dma.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CSP\csp_dma.c > CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_dma.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CSP\csp_dma.c > CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_dma.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_dma.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_dma.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CSP\csp_dma.c -o CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_dma.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CSP\csp_dma.c -o CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_dma.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_gpio.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_gpio.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_gpio.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_CSP/csp_gpio.c
 CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_gpio.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_gpio.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_gpio.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_gpio.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_gpio.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CSP\csp_gpio.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_gpio.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_gpio.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_gpio.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CSP\csp_gpio.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_gpio.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_gpio.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CSP\csp_gpio.c > CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_gpio.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CSP\csp_gpio.c > CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_gpio.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_gpio.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_gpio.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CSP\csp_gpio.c -o CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_gpio.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CSP\csp_gpio.c -o CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_gpio.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_int.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_int.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_int.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_CSP/csp_int.c
 CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_int.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_int.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_int.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_int.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_int.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CSP\csp_int.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_int.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_int.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_int.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CSP\csp_int.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_int.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_int.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CSP\csp_int.c > CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_int.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CSP\csp_int.c > CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_int.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_int.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_int.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CSP\csp_int.c -o CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_int.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CSP\csp_int.c -o CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_int.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_pm.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_pm.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_pm.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_CSP/csp_pm.c
 CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_pm.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_pm.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_pm.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_pm.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_pm.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CSP\csp_pm.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_pm.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_pm.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_pm.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CSP\csp_pm.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_pm.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_pm.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CSP\csp_pm.c > CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_pm.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CSP\csp_pm.c > CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_pm.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_pm.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_CSP/csp_pm.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CSP\csp_pm.c -o CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_pm.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_CSP\csp_pm.c -o CMakeFiles\Subscriber.dir\Micrium\uC_CSP\csp_pm.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_ascii.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_ascii.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_ascii.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_LIB/lib_ascii.c
 CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_ascii.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_ascii.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_ascii.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_ascii.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_ascii.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_LIB\lib_ascii.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_ascii.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_ascii.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_ascii.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_LIB\lib_ascii.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_ascii.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_ascii.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_LIB\lib_ascii.c > CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_ascii.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_LIB\lib_ascii.c > CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_ascii.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_ascii.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_ascii.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_LIB\lib_ascii.c -o CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_ascii.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_LIB\lib_ascii.c -o CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_ascii.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_math.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_math.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_math.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_LIB/lib_math.c
 CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_math.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_52) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_math.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_math.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_math.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_math.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_LIB\lib_math.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_math.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_math.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_math.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_LIB\lib_math.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_math.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_math.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_LIB\lib_math.c > CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_math.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_LIB\lib_math.c > CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_math.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_math.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_math.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_LIB\lib_math.c -o CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_math.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_LIB\lib_math.c -o CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_math.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_mem.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_mem.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_mem.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_LIB/lib_mem.c
 CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_mem.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_53) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_mem.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_mem.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_mem.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_mem.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_LIB\lib_mem.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_mem.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_mem.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_mem.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_LIB\lib_mem.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_mem.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_mem.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_LIB\lib_mem.c > CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_mem.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_LIB\lib_mem.c > CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_mem.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_mem.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_mem.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_LIB\lib_mem.c -o CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_mem.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_LIB\lib_mem.c -o CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_mem.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_str.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_str.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_str.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_LIB/lib_str.c
 CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_str.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_54) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_str.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_str.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_str.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_str.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_LIB\lib_str.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_str.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_str.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_str.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_LIB\lib_str.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_str.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_str.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_LIB\lib_str.c > CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_str.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_LIB\lib_str.c > CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_str.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_str.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_LIB/lib_str.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_LIB\lib_str.c -o CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_str.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_LIB\lib_str.c -o CMakeFiles\Subscriber.dir\Micrium\uC_LIB\lib_str.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_cfg_app.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_cfg_app.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_cfg_app.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_OS_III/os_cfg_app.c
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_cfg_app.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_55) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_cfg_app.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_cfg_app.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_cfg_app.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_cfg_app.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_cfg_app.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_cfg_app.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_cfg_app.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_cfg_app.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_cfg_app.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_cfg_app.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_cfg_app.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_cfg_app.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_cfg_app.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_cfg_app.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_cfg_app.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_cfg_app.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_cfg_app.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_cfg_app.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_cfg_app.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_cfg_app.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_cfg_app.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_core.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_core.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_core.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_OS_III/os_core.c
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_core.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_56) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_core.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_core.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_core.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_core.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_core.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_core.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_core.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_core.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_core.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_core.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_core.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_core.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_core.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_core.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_core.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_core.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_core.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_core.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_core.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_core.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_core.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_cpu_c.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_cpu_c.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_cpu_c.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_OS_III/os_cpu_c.c
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_cpu_c.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_57) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_cpu_c.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_cpu_c.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_cpu_c.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_cpu_c.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_cpu_c.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_cpu_c.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_cpu_c.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_cpu_c.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_cpu_c.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_cpu_c.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_cpu_c.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_cpu_c.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_cpu_c.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_cpu_c.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_cpu_c.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_cpu_c.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_cpu_c.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_cpu_c.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_cpu_c.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_cpu_c.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_cpu_c.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_csp.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_csp.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_csp.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_OS_III/os_csp.c
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_csp.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_58) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_csp.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_csp.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_csp.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_csp.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_csp.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_csp.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_csp.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_csp.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_csp.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_csp.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_csp.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_csp.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_csp.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_csp.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_csp.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_csp.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_csp.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_csp.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_csp.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_csp.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_csp.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_dbg.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_dbg.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_dbg.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_OS_III/os_dbg.c
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_dbg.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_59) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_dbg.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_dbg.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_dbg.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_dbg.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_dbg.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_dbg.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_dbg.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_dbg.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_dbg.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_dbg.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_dbg.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_dbg.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_dbg.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_dbg.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_dbg.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_dbg.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_dbg.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_dbg.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_dbg.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_dbg.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_dbg.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_flag.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_flag.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_flag.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_OS_III/os_flag.c
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_flag.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_60) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_flag.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_flag.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_flag.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_flag.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_flag.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_flag.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_flag.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_flag.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_flag.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_flag.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_flag.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_flag.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_flag.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_flag.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_flag.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_flag.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_flag.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_flag.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_flag.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_flag.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_flag.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_int.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_int.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_int.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_OS_III/os_int.c
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_int.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_61) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_int.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_int.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_int.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_int.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_int.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_int.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_int.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_int.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_int.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_int.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_int.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_int.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_int.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_int.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_int.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_int.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_int.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_int.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_int.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_int.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_int.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_mem.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_mem.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_mem.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_OS_III/os_mem.c
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_mem.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_62) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_mem.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_mem.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_mem.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_mem.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_mem.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_mem.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_mem.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_mem.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_mem.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_mem.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_mem.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_mem.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_mem.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_mem.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_mem.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_mem.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_mem.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_mem.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_mem.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_mem.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_mem.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_msg.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_msg.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_msg.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_OS_III/os_msg.c
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_msg.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_63) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_msg.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_msg.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_msg.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_msg.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_msg.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_msg.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_msg.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_msg.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_msg.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_msg.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_msg.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_msg.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_msg.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_msg.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_msg.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_msg.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_msg.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_msg.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_msg.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_msg.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_msg.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_mutex.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_mutex.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_mutex.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_OS_III/os_mutex.c
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_mutex.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_64) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_mutex.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_mutex.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_mutex.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_mutex.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_mutex.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_mutex.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_mutex.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_mutex.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_mutex.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_mutex.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_mutex.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_mutex.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_mutex.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_mutex.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_mutex.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_mutex.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_mutex.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_mutex.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_mutex.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_mutex.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_mutex.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_pend_multi.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_pend_multi.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_pend_multi.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_OS_III/os_pend_multi.c
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_pend_multi.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_65) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_pend_multi.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_pend_multi.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_pend_multi.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_pend_multi.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_pend_multi.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_pend_multi.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_pend_multi.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_pend_multi.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_pend_multi.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_pend_multi.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_pend_multi.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_pend_multi.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_pend_multi.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_pend_multi.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_pend_multi.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_pend_multi.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_pend_multi.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_pend_multi.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_pend_multi.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_pend_multi.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_pend_multi.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_prio.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_prio.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_prio.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_OS_III/os_prio.c
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_prio.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_66) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_prio.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_prio.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_prio.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_prio.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_prio.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_prio.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_prio.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_prio.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_prio.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_prio.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_prio.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_prio.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_prio.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_prio.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_prio.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_prio.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_prio.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_prio.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_prio.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_prio.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_prio.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_q.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_q.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_q.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_OS_III/os_q.c
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_q.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_67) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_q.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_q.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_q.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_q.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_q.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_q.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_q.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_q.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_q.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_q.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_q.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_q.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_q.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_q.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_q.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_q.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_q.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_q.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_q.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_q.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_q.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_sem.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_sem.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_sem.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_OS_III/os_sem.c
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_sem.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_68) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_sem.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_sem.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_sem.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_sem.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_sem.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_sem.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_sem.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_sem.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_sem.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_sem.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_sem.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_sem.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_sem.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_sem.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_sem.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_sem.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_sem.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_sem.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_sem.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_sem.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_sem.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_stat.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_stat.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_stat.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_OS_III/os_stat.c
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_stat.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_69) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_stat.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_stat.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_stat.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_stat.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_stat.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_stat.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_stat.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_stat.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_stat.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_stat.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_stat.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_stat.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_stat.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_stat.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_stat.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_stat.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_stat.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_stat.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_stat.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_stat.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_stat.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_task.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_task.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_task.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_OS_III/os_task.c
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_task.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_70) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_task.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_task.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_task.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_task.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_task.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_task.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_task.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_task.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_task.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_task.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_task.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_task.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_task.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_task.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_task.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_task.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_task.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_task.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_task.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_task.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_task.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_tick.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_tick.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_tick.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_OS_III/os_tick.c
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_tick.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_71) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_tick.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_tick.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_tick.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_tick.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_tick.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_tick.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_tick.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_tick.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_tick.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_tick.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_tick.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_tick.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_tick.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_tick.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_tick.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_tick.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_tick.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_tick.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_tick.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_tick.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_tick.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_time.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_time.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_time.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_OS_III/os_time.c
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_time.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_72) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_time.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_time.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_time.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_time.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_time.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_time.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_time.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_time.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_time.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_time.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_time.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_time.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_time.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_time.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_time.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_time.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_time.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_time.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_time.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_time.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_time.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_tmr.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_tmr.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_tmr.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_OS_III/os_tmr.c
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_tmr.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_73) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_tmr.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_tmr.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_tmr.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_tmr.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_tmr.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_tmr.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_tmr.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_tmr.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_tmr.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_tmr.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_tmr.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_tmr.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_tmr.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_tmr.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_tmr.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_tmr.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_tmr.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_tmr.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_tmr.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_tmr.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_tmr.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_var.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_var.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_var.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_OS_III/os_var.c
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_var.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_74) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_var.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_var.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_var.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_var.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_var.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_var.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_var.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_var.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_var.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_var.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_var.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_var.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_var.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_var.c > CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_var.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_var.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_OS_III/os_var.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_var.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_var.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_OS_III\os_var.c -o CMakeFiles\Subscriber.dir\Micrium\uC_OS_III\os_var.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/BSD_Socket_Layer/net_bsd.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/BSD_Socket_Layer/net_bsd.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/BSD_Socket_Layer/net_bsd.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_TCPIP/BSD_Socket_Layer/net_bsd.c
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/BSD_Socket_Layer/net_bsd.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_75) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/BSD_Socket_Layer/net_bsd.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/BSD_Socket_Layer/net_bsd.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\BSD_Socket_Layer\net_bsd.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\BSD_Socket_Layer\net_bsd.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\BSD_Socket_Layer\net_bsd.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/BSD_Socket_Layer/net_bsd.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\BSD_Socket_Layer\net_bsd.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\BSD_Socket_Layer\net_bsd.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\BSD_Socket_Layer\net_bsd.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/BSD_Socket_Layer/net_bsd.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/BSD_Socket_Layer/net_bsd.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\BSD_Socket_Layer\net_bsd.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\BSD_Socket_Layer\net_bsd.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\BSD_Socket_Layer\net_bsd.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\BSD_Socket_Layer\net_bsd.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/BSD_Socket_Layer/net_bsd.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/BSD_Socket_Layer/net_bsd.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\BSD_Socket_Layer\net_bsd.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\BSD_Socket_Layer\net_bsd.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\BSD_Socket_Layer\net_bsd.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\BSD_Socket_Layer\net_bsd.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/BSD_Socket_Layer/net_sock.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/BSD_Socket_Layer/net_sock.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/BSD_Socket_Layer/net_sock.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_TCPIP/BSD_Socket_Layer/net_sock.c
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/BSD_Socket_Layer/net_sock.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_76) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/BSD_Socket_Layer/net_sock.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/BSD_Socket_Layer/net_sock.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\BSD_Socket_Layer\net_sock.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\BSD_Socket_Layer\net_sock.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\BSD_Socket_Layer\net_sock.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/BSD_Socket_Layer/net_sock.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\BSD_Socket_Layer\net_sock.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\BSD_Socket_Layer\net_sock.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\BSD_Socket_Layer\net_sock.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/BSD_Socket_Layer/net_sock.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/BSD_Socket_Layer/net_sock.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\BSD_Socket_Layer\net_sock.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\BSD_Socket_Layer\net_sock.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\BSD_Socket_Layer\net_sock.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\BSD_Socket_Layer\net_sock.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/BSD_Socket_Layer/net_sock.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/BSD_Socket_Layer/net_sock.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\BSD_Socket_Layer\net_sock.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\BSD_Socket_Layer\net_sock.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\BSD_Socket_Layer\net_sock.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\BSD_Socket_Layer\net_sock.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/IF_Layer/net_if.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/IF_Layer/net_if.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/IF_Layer/net_if.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_TCPIP/IF_Layer/net_if.c
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/IF_Layer/net_if.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_77) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/IF_Layer/net_if.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/IF_Layer/net_if.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\IF_Layer\net_if.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\IF_Layer\net_if.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\IF_Layer\net_if.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/IF_Layer/net_if.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\IF_Layer\net_if.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\IF_Layer\net_if.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\IF_Layer\net_if.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/IF_Layer/net_if.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/IF_Layer/net_if.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\IF_Layer\net_if.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\IF_Layer\net_if.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\IF_Layer\net_if.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\IF_Layer\net_if.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/IF_Layer/net_if.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/IF_Layer/net_if.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\IF_Layer\net_if.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\IF_Layer\net_if.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\IF_Layer\net_if.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\IF_Layer\net_if.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/IF_Layer/net_if_pkt.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/IF_Layer/net_if_pkt.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/IF_Layer/net_if_pkt.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_TCPIP/IF_Layer/net_if_pkt.c
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/IF_Layer/net_if_pkt.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_78) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/IF_Layer/net_if_pkt.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/IF_Layer/net_if_pkt.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\IF_Layer\net_if_pkt.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\IF_Layer\net_if_pkt.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\IF_Layer\net_if_pkt.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/IF_Layer/net_if_pkt.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\IF_Layer\net_if_pkt.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\IF_Layer\net_if_pkt.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\IF_Layer\net_if_pkt.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/IF_Layer/net_if_pkt.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/IF_Layer/net_if_pkt.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\IF_Layer\net_if_pkt.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\IF_Layer\net_if_pkt.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\IF_Layer\net_if_pkt.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\IF_Layer\net_if_pkt.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/IF_Layer/net_if_pkt.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/IF_Layer/net_if_pkt.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\IF_Layer\net_if_pkt.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\IF_Layer\net_if_pkt.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\IF_Layer\net_if_pkt.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\IF_Layer\net_if_pkt.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_bsp.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_bsp.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_bsp.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_TCPIP/NIC_Layer/net_bsp.c
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_bsp.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_79) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_bsp.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_bsp.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\NIC_Layer\net_bsp.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\NIC_Layer\net_bsp.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\NIC_Layer\net_bsp.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_bsp.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\NIC_Layer\net_bsp.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\NIC_Layer\net_bsp.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\NIC_Layer\net_bsp.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_bsp.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_bsp.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\NIC_Layer\net_bsp.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\NIC_Layer\net_bsp.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\NIC_Layer\net_bsp.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\NIC_Layer\net_bsp.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_bsp.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_bsp.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\NIC_Layer\net_bsp.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\NIC_Layer\net_bsp.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\NIC_Layer\net_bsp.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\NIC_Layer\net_bsp.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_nic.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_nic.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_nic.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_TCPIP/NIC_Layer/net_nic.c
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_nic.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_80) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_nic.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_nic.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\NIC_Layer\net_nic.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\NIC_Layer\net_nic.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\NIC_Layer\net_nic.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_nic.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\NIC_Layer\net_nic.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\NIC_Layer\net_nic.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\NIC_Layer\net_nic.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_nic.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_nic.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\NIC_Layer\net_nic.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\NIC_Layer\net_nic.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\NIC_Layer\net_nic.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\NIC_Layer\net_nic.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_nic.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_nic.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\NIC_Layer\net_nic.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\NIC_Layer\net_nic.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\NIC_Layer\net_nic.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\NIC_Layer\net_nic.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_phy.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_phy.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_phy.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_TCPIP/NIC_Layer/net_phy.c
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_phy.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_81) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_phy.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_phy.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\NIC_Layer\net_phy.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\NIC_Layer\net_phy.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\NIC_Layer\net_phy.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_phy.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\NIC_Layer\net_phy.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\NIC_Layer\net_phy.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\NIC_Layer\net_phy.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_phy.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_phy.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\NIC_Layer\net_phy.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\NIC_Layer\net_phy.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\NIC_Layer\net_phy.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\NIC_Layer\net_phy.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_phy.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/NIC_Layer/net_phy.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\NIC_Layer\net_phy.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\NIC_Layer\net_phy.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\NIC_Layer\net_phy.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\NIC_Layer\net_phy.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_TCPIP/TCPIP_Layer/net.c
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_82) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_arp.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_arp.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_arp.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_TCPIP/TCPIP_Layer/net_arp.c
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_arp.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_83) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_arp.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_arp.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_arp.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_arp.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_arp.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_arp.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_arp.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_arp.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_arp.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_arp.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_arp.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_arp.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_arp.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_arp.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_arp.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_arp.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_arp.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_arp.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_arp.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_arp.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_arp.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ascii.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ascii.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ascii.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_TCPIP/TCPIP_Layer/net_ascii.c
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ascii.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_84) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ascii.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ascii.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_ascii.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_ascii.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_ascii.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ascii.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_ascii.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_ascii.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_ascii.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ascii.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ascii.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_ascii.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_ascii.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_ascii.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_ascii.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ascii.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ascii.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_ascii.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_ascii.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_ascii.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_ascii.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_buf.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_buf.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_buf.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_TCPIP/TCPIP_Layer/net_buf.c
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_buf.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_85) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_buf.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_buf.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_buf.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_buf.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_buf.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_buf.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_buf.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_buf.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_buf.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_buf.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_buf.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_buf.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_buf.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_buf.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_buf.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_buf.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_buf.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_buf.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_buf.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_buf.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_buf.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_conn.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_conn.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_conn.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_TCPIP/TCPIP_Layer/net_conn.c
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_conn.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_86) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_conn.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_conn.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_conn.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_conn.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_conn.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_conn.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_conn.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_conn.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_conn.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_conn.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_conn.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_conn.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_conn.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_conn.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_conn.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_conn.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_conn.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_conn.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_conn.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_conn.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_conn.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ctr.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ctr.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ctr.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_TCPIP/TCPIP_Layer/net_ctr.c
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ctr.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_87) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ctr.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ctr.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_ctr.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_ctr.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_ctr.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ctr.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_ctr.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_ctr.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_ctr.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ctr.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ctr.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_ctr.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_ctr.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_ctr.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_ctr.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ctr.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ctr.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_ctr.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_ctr.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_ctr.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_ctr.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_dbg.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_dbg.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_dbg.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_TCPIP/TCPIP_Layer/net_dbg.c
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_dbg.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_88) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_dbg.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_dbg.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_dbg.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_dbg.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_dbg.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_dbg.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_dbg.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_dbg.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_dbg.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_dbg.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_dbg.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_dbg.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_dbg.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_dbg.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_dbg.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_dbg.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_dbg.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_dbg.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_dbg.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_dbg.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_dbg.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_err.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_err.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_err.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_TCPIP/TCPIP_Layer/net_err.c
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_err.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_89) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_err.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_err.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_err.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_err.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_err.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_err.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_err.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_err.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_err.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_err.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_err.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_err.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_err.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_err.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_err.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_err.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_err.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_err.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_err.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_err.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_err.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_icmp.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_icmp.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_icmp.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_TCPIP/TCPIP_Layer/net_icmp.c
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_icmp.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_90) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_icmp.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_icmp.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_icmp.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_icmp.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_icmp.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_icmp.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_icmp.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_icmp.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_icmp.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_icmp.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_icmp.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_icmp.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_icmp.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_icmp.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_icmp.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_icmp.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_icmp.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_icmp.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_icmp.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_icmp.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_icmp.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ip.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ip.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ip.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_TCPIP/TCPIP_Layer/net_ip.c
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ip.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_91) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ip.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ip.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_ip.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_ip.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_ip.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ip.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_ip.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_ip.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_ip.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ip.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ip.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_ip.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_ip.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_ip.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_ip.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ip.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_ip.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_ip.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_ip.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_ip.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_ip.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_os.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_os.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_os.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_TCPIP/TCPIP_Layer/net_os.c
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_os.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_92) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_os.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_os.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_os.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_os.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_os.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_os.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_os.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_os.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_os.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_os.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_os.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_os.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_os.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_os.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_os.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_os.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_os.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_os.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_os.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_os.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_os.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_stat.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_stat.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_stat.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_TCPIP/TCPIP_Layer/net_stat.c
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_stat.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_93) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_stat.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_stat.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_stat.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_stat.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_stat.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_stat.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_stat.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_stat.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_stat.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_stat.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_stat.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_stat.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_stat.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_stat.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_stat.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_stat.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_stat.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_stat.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_stat.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_stat.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_stat.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_tcp.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_tcp.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_tcp.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_TCPIP/TCPIP_Layer/net_tcp.c
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_tcp.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_94) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_tcp.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_tcp.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_tcp.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_tcp.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_tcp.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_tcp.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_tcp.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_tcp.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_tcp.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_tcp.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_tcp.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_tcp.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_tcp.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_tcp.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_tcp.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_tcp.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_tcp.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_tcp.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_tcp.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_tcp.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_tcp.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_tmr.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_tmr.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_tmr.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_TCPIP/TCPIP_Layer/net_tmr.c
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_tmr.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_95) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_tmr.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_tmr.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_tmr.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_tmr.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_tmr.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_tmr.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_tmr.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_tmr.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_tmr.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_tmr.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_tmr.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_tmr.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_tmr.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_tmr.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_tmr.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_tmr.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_tmr.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_tmr.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_tmr.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_tmr.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_tmr.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_udp.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_udp.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_udp.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_TCPIP/TCPIP_Layer/net_udp.c
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_udp.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_96) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_udp.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_udp.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_udp.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_udp.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_udp.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_udp.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_udp.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_udp.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_udp.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_udp.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_udp.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_udp.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_udp.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_udp.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_udp.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_udp.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_udp.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_udp.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_udp.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_udp.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_udp.c.s
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_util.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_util.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_util.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Micrium/uC_TCPIP/TCPIP_Layer/net_util.c
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_util.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_97) "Building C object CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_util.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_util.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_util.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_util.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_util.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_util.c.obj -MF CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_util.c.obj.d -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_util.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_util.c
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_util.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_util.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_util.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_util.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_util.c > CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_util.c.i
 
 CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_util.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Micrium/uC_TCPIP/TCPIP_Layer/net_util.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_util.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_util.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Micrium\uC_TCPIP\TCPIP_Layer\net_util.c -o CMakeFiles\Subscriber.dir\Micrium\uC_TCPIP\TCPIP_Layer\net_util.c.s
 
 CMakeFiles/Subscriber.dir/Modem/modem.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Modem/modem.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Modem/modem.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Modem/modem.c
 CMakeFiles/Subscriber.dir/Modem/modem.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_98) "Building C object CMakeFiles/Subscriber.dir/Modem/modem.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Modem/modem.c.obj -MF CMakeFiles\Subscriber.dir\Modem\modem.c.obj.d -o CMakeFiles\Subscriber.dir\Modem\modem.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Modem\modem.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Modem/modem.c.obj -MF CMakeFiles\Subscriber.dir\Modem\modem.c.obj.d -o CMakeFiles\Subscriber.dir\Modem\modem.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Modem\modem.c
 
 CMakeFiles/Subscriber.dir/Modem/modem.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Modem/modem.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Modem\modem.c > CMakeFiles\Subscriber.dir\Modem\modem.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Modem\modem.c > CMakeFiles\Subscriber.dir\Modem\modem.c.i
 
 CMakeFiles/Subscriber.dir/Modem/modem.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Modem/modem.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Modem\modem.c -o CMakeFiles\Subscriber.dir\Modem\modem.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Modem\modem.c -o CMakeFiles\Subscriber.dir\Modem\modem.c.s
 
 CMakeFiles/Subscriber.dir/Serial/serial.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Serial/serial.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Serial/serial.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Serial/serial.c
 CMakeFiles/Subscriber.dir/Serial/serial.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_99) "Building C object CMakeFiles/Subscriber.dir/Serial/serial.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Serial/serial.c.obj -MF CMakeFiles\Subscriber.dir\Serial\serial.c.obj.d -o CMakeFiles\Subscriber.dir\Serial\serial.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Serial\serial.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Serial/serial.c.obj -MF CMakeFiles\Subscriber.dir\Serial\serial.c.obj.d -o CMakeFiles\Subscriber.dir\Serial\serial.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Serial\serial.c
 
 CMakeFiles/Subscriber.dir/Serial/serial.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Serial/serial.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Serial\serial.c > CMakeFiles\Subscriber.dir\Serial\serial.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Serial\serial.c > CMakeFiles\Subscriber.dir\Serial\serial.c.i
 
 CMakeFiles/Subscriber.dir/Serial/serial.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Serial/serial.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Serial\serial.c -o CMakeFiles\Subscriber.dir\Serial\serial.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Serial\serial.c -o CMakeFiles\Subscriber.dir\Serial\serial.c.s
 
 CMakeFiles/Subscriber.dir/Timestamp/time.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Timestamp/time.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Timestamp/time.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Timestamp/time.c
 CMakeFiles/Subscriber.dir/Timestamp/time.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_100) "Building C object CMakeFiles/Subscriber.dir/Timestamp/time.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Timestamp/time.c.obj -MF CMakeFiles\Subscriber.dir\Timestamp\time.c.obj.d -o CMakeFiles\Subscriber.dir\Timestamp\time.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Timestamp\time.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Timestamp/time.c.obj -MF CMakeFiles\Subscriber.dir\Timestamp\time.c.obj.d -o CMakeFiles\Subscriber.dir\Timestamp\time.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Timestamp\time.c
 
 CMakeFiles/Subscriber.dir/Timestamp/time.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Timestamp/time.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Timestamp\time.c > CMakeFiles\Subscriber.dir\Timestamp\time.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Timestamp\time.c > CMakeFiles\Subscriber.dir\Timestamp\time.c.i
 
 CMakeFiles/Subscriber.dir/Timestamp/time.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Timestamp/time.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Timestamp\time.c -o CMakeFiles\Subscriber.dir\Timestamp\time.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Timestamp\time.c -o CMakeFiles\Subscriber.dir\Timestamp\time.c.s
 
 CMakeFiles/Subscriber.dir/Iridium/IridiumSBD.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Iridium/IridiumSBD.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Iridium/IridiumSBD.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Iridium/IridiumSBD.c
 CMakeFiles/Subscriber.dir/Iridium/IridiumSBD.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_101) "Building C object CMakeFiles/Subscriber.dir/Iridium/IridiumSBD.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Iridium/IridiumSBD.c.obj -MF CMakeFiles\Subscriber.dir\Iridium\IridiumSBD.c.obj.d -o CMakeFiles\Subscriber.dir\Iridium\IridiumSBD.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Iridium\IridiumSBD.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Iridium/IridiumSBD.c.obj -MF CMakeFiles\Subscriber.dir\Iridium\IridiumSBD.c.obj.d -o CMakeFiles\Subscriber.dir\Iridium\IridiumSBD.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Iridium\IridiumSBD.c
 
 CMakeFiles/Subscriber.dir/Iridium/IridiumSBD.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Iridium/IridiumSBD.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Iridium\IridiumSBD.c > CMakeFiles\Subscriber.dir\Iridium\IridiumSBD.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Iridium\IridiumSBD.c > CMakeFiles\Subscriber.dir\Iridium\IridiumSBD.c.i
 
 CMakeFiles/Subscriber.dir/Iridium/IridiumSBD.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Iridium/IridiumSBD.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Iridium\IridiumSBD.c -o CMakeFiles\Subscriber.dir\Iridium\IridiumSBD.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Iridium\IridiumSBD.c -o CMakeFiles\Subscriber.dir\Iridium\IridiumSBD.c.s
 
 CMakeFiles/Subscriber.dir/Utils/utils.c.obj: CMakeFiles/Subscriber.dir/flags.make
 CMakeFiles/Subscriber.dir/Utils/utils.c.obj: CMakeFiles/Subscriber.dir/includes_C.rsp
 CMakeFiles/Subscriber.dir/Utils/utils.c.obj: C:/Projects/EYSE/Subscriber_Classic/SubscriberClassic/Utils/utils.c
 CMakeFiles/Subscriber.dir/Utils/utils.c.obj: CMakeFiles/Subscriber.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_102) "Building C object CMakeFiles/Subscriber.dir/Utils/utils.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Utils/utils.c.obj -MF CMakeFiles\Subscriber.dir\Utils\utils.c.obj.d -o CMakeFiles\Subscriber.dir\Utils\utils.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Utils\utils.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Subscriber.dir/Utils/utils.c.obj -MF CMakeFiles\Subscriber.dir\Utils\utils.c.obj.d -o CMakeFiles\Subscriber.dir\Utils\utils.c.obj -c C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Utils\utils.c
 
 CMakeFiles/Subscriber.dir/Utils/utils.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Subscriber.dir/Utils/utils.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Utils\utils.c > CMakeFiles\Subscriber.dir\Utils\utils.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Utils\utils.c > CMakeFiles\Subscriber.dir\Utils\utils.c.i
 
 CMakeFiles/Subscriber.dir/Utils/utils.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Subscriber.dir/Utils/utils.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Utils\utils.c -o CMakeFiles\Subscriber.dir\Utils\utils.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Projects\EYSE\Subscriber_Classic\SubscriberClassic\Utils\utils.c -o CMakeFiles\Subscriber.dir\Utils\utils.c.s
 
 # Object files for target Subscriber
 Subscriber_OBJECTS = \
