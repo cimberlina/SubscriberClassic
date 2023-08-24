@@ -2171,87 +2171,87 @@ int con_EvDF_format(ConsoleState* state)
 	}
 }
 
-int con_DumpEvMemory(ConsoleState* state)
-{
-	int index, index1, index2, i;
-	uint32_t dfindex;
-	uint8_t buffer[DF_EVELEN];
-	char tmpbuffer[16];
-	char tsndbuffer[132];
+//int con_DumpEvMemory(ConsoleState* state)
+//{
+//	int index, index1, index2, i;
+//	uint32_t dfindex;
+//	uint8_t buffer[DF_EVELEN];
+//	char tmpbuffer[16];
+//	char tsndbuffer[132];
+//
+//
+//	for( i = 0; i < 132; i++ )	{
+//		tsndbuffer[i] = 0;
+//	}
+//
+//	switch(state->numparams)	{
+//	case 2:
+//		index1 = atoi(con_getparam(state->command, 1));
+//		index2 = index1;
+//		break;
+//	case 3:
+//		index1 = atoi(con_getparam(state->command, 1));
+//		index2 = atoi(con_getparam(state->command, 2));
+//		break;
+//	}
+//
+//
+//
+//	if( (index1 >= DF_MAXEVENTS) || (index2 >= DF_MAXEVENTS))	{
+//		state->conio->puts("Indice espcificado fuera de rango\n\r");
+//		return -1;
+//	}
+//
+//	for( index = index1; index <= index2; index++)	{
+//		dfindex = DF_EVENT0 + (index * DF_EVELEN);
+//		flash0_read(buffer, dfindex, DF_EVELEN);
+//		Str_Cat((CPU_CHAR  *)tsndbuffer, (const CPU_CHAR  *)itoa(index));
+//		Str_Cat((CPU_CHAR  *)tsndbuffer, (const CPU_CHAR  *)";\t");
+//		Str_Cat((CPU_CHAR  *)tsndbuffer, (const CPU_CHAR  *)itoa(dfindex));
+//		Str_Cat((CPU_CHAR  *)tsndbuffer, (const CPU_CHAR  *)":\t ");
+//
+//
+//		for( i = 0; i < DF_EVELEN; i++)	{
+//			BuffPutHex( tmpbuffer, buffer[i]);
+//			Str_Cat(tmpbuffer, " ");
+//			Str_Cat((CPU_CHAR  *)tsndbuffer, (const CPU_CHAR  *)tmpbuffer);
+//
+//		}
+//		Str_Cat((CPU_CHAR  *)tsndbuffer, (const CPU_CHAR  *)"\r\n");
+//		state->conio->puts(tsndbuffer);
+//
+//		tsndbuffer[0] = 0;
+//
+//	}
+//	state->conio->puts("\r\n");
+//	return 1;
+//}
 
-
-	for( i = 0; i < 132; i++ )	{
-		tsndbuffer[i] = 0;
-	}
-
-	switch(state->numparams)	{
-	case 2:
-		index1 = atoi(con_getparam(state->command, 1));
-		index2 = index1;
-		break;
-	case 3:
-		index1 = atoi(con_getparam(state->command, 1));
-		index2 = atoi(con_getparam(state->command, 2));
-		break;
-	}
-
-
-
-	if( (index1 >= DF_MAXEVENTS) || (index2 >= DF_MAXEVENTS))	{
-		state->conio->puts("Indice espcificado fuera de rango\n\r");
-		return -1;
-	}
-
-	for( index = index1; index <= index2; index++)	{
-		dfindex = DF_EVENT0 + (index * DF_EVELEN);
-		flash0_read(buffer, dfindex, DF_EVELEN);
-		Str_Cat((CPU_CHAR  *)tsndbuffer, (const CPU_CHAR  *)itoa(index));
-		Str_Cat((CPU_CHAR  *)tsndbuffer, (const CPU_CHAR  *)";\t");
-		Str_Cat((CPU_CHAR  *)tsndbuffer, (const CPU_CHAR  *)itoa(dfindex));
-		Str_Cat((CPU_CHAR  *)tsndbuffer, (const CPU_CHAR  *)":\t ");
-
-
-		for( i = 0; i < DF_EVELEN; i++)	{
-			BuffPutHex( tmpbuffer, buffer[i]);
-			Str_Cat(tmpbuffer, " ");
-			Str_Cat((CPU_CHAR  *)tsndbuffer, (const CPU_CHAR  *)tmpbuffer);
-
-		}
-		Str_Cat((CPU_CHAR  *)tsndbuffer, (const CPU_CHAR  *)"\r\n");
-		state->conio->puts(tsndbuffer);
-
-		tsndbuffer[0] = 0;
-
-	}
-	state->conio->puts("\r\n");
-	return 1;
-}
-
-int con_DumpEvIndex(ConsoleState* state)
-{
-	int index, len;
-	EventRecord curr_event;
-	char buffer[128];
-
-	index = atoi(con_getparam(state->command, 1));
-
-	if( index >= DF_MAXEVENTS)	{
-		state->conio->puts("Indice especificado fuera de rango\n\r");
-		return -1;
-	}
-
-	len = 0;
-	if( ReadEventFromFlash( index, &curr_event ) )	{
-		len = BufPrintCidEvent( buffer, &curr_event, 128 );
-	}
-	if(len)	{
-		state->conio->puts(buffer);
-		return 1;
-	}
-
-	state->conio->puts("Error de lectura de evento\n\r");
-	return -1;
-}
+//int con_DumpEvIndex(ConsoleState* state)
+//{
+//	int index, len;
+//	EventRecord curr_event;
+//	char buffer[128];
+//
+//	index = atoi(con_getparam(state->command, 1));
+//
+//	if( index >= DF_MAXEVENTS)	{
+//		state->conio->puts("Indice especificado fuera de rango\n\r");
+//		return -1;
+//	}
+//
+//	len = 0;
+//	if( ReadEventFromFlash( index, &curr_event ) )	{
+//		len = BufPrintCidEvent( buffer, &curr_event, 128 );
+//	}
+//	if(len)	{
+//		state->conio->puts(buffer);
+//		return 1;
+//	}
+//
+//	state->conio->puts("Error de lectura de evento\n\r");
+//	return -1;
+//}
 
 int con_audit_dump(ConsoleState* state)
 {

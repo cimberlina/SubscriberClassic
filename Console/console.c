@@ -98,16 +98,16 @@ const ConsoleCommand console_commands[] =
 	{ "we2prom fmode", 	con_E2PROM_Write_fmode,	0,		MONI_LEVEL},
 	{ "we2prom fmodly", con_E2PROM_Write_fmodelay, 0,	MONI_LEVEL},
 	{ "we2prom zone", 	con_E2PROM_Write_zone, 	0,		MONI_LEVEL},
-	{ "debug rf", 		con_DBGRF_mode, 		0,		OPER_LEVEL},
-	{ "debug aborf", 	con_DBGABORF_mode,		0,		OPER_LEVEL},
-    { "debug lan", 	con_DBGLAN_mode,		0,		OPER_LEVEL},
+//	{ "debug rf", 		con_DBGRF_mode, 		0,		OPER_LEVEL},
+//	{ "debug aborf", 	con_DBGABORF_mode,		0,		OPER_LEVEL},
+//    { "debug lan", 	con_DBGLAN_mode,		0,		OPER_LEVEL},
 //	{ "RDCONFMEM", 		con_E2PROM_read1,		0,		OPER_LEVEL},    //-
 	{ "set prevetimer", con_set_prevetimer, 	0,		MONI_LEVEL},
 
 	//visualizacion de eventos
 	{ "eyse_df_format",	con_EvDF_format,	0,		MCMI_LEVEL},
-	{ "ev_hex_dump",	con_DumpEvMemory,		0,		MCMI_LEVEL},        //-
-	{ "ev_inx_dump",	con_DumpEvIndex,		0,		MCMI_LEVEL},        //-
+//	{ "ev_hex_dump",	con_DumpEvMemory,		0,		MCMI_LEVEL},        //-
+//	{ "ev_inx_dump",	con_DumpEvIndex,		0,		MCMI_LEVEL},        //-
 	{ "history",	con_DumpEventByTime,	0,		OPER_LEVEL},
 	{ "set rtc",		con_setrtc,				0,		MONI_LEVEL},
 	{ "...@#set rtc",	con_set1rtc,			0,		FREE_LEVEL},
@@ -118,7 +118,7 @@ const ConsoleCommand console_commands[] =
 	//configuracion de rabbit
 	{ "set numabo",		con_numabo,				0,		OPER_LEVEL},
 	{ "set numcen",		con_numcen,				0,		OPER_LEVEL},
-	{ "set nomsuc",		con_nomsuc,				0,		OPER_LEVEL},
+//	{ "set nomsuc",		con_nomsuc,				0,		OPER_LEVEL},
 	{ "set cuenta1",	con_cuenta1,			0,		MONI_LEVEL},
 	{ "set cuenta2",	con_cuenta2,			0,		MONI_LEVEL},
 	{ "set cuentar3k",	con_cuentaR3K,			0,		MONI_LEVEL},
@@ -1468,57 +1468,57 @@ int con_E2PROM_Write_zone(ConsoleState* state)
 	return 1;
 }
 
-int con_DBGRF_mode(ConsoleState* state)
-{
-	uint16_t fmodetype;
+//int con_DBGRF_mode(ConsoleState* state)
+//{
+//	uint16_t fmodetype;
+//
+//	if( state->numparams < 3 )	{
+//		state->conio->puts("DEBUG RF 0|1\n\r");
+//		return 1;
+//	}
+//	fmodetype = atoi(con_getparam(state->command, 2));
+//
+//	switch(fmodetype)	{
+//		case 0:
+//			DebugFlag &= ~DBGRF_ON_flag;
+//			break;
+//		case 1:
+//			DebugFlag |= DBGRF_ON_flag;
+//			break;
+//		default:
+//			state->conio->puts("*** DEBUG RF ERROR  ***\n\r");
+//			return -1;
+//			break;
+//	}
+//
+//	return 1;
+//}
 
-	if( state->numparams < 3 )	{
-		state->conio->puts("DEBUG RF 0|1\n\r");
-		return 1;
-	}
-	fmodetype = atoi(con_getparam(state->command, 2));
-
-	switch(fmodetype)	{
-		case 0:
-			DebugFlag &= ~DBGRF_ON_flag;
-			break;
-		case 1:
-			DebugFlag |= DBGRF_ON_flag;
-			break;
-		default:
-			state->conio->puts("*** DEBUG RF ERROR  ***\n\r");
-			return -1;
-			break;
-	}
-
-	return 1;
-}
-
-int con_DBGLAN_mode(ConsoleState* state)
-{
-    uint16_t fmodetype;
-
-    if( state->numparams < 3 )	{
-        state->conio->puts("DEBUG LAN 0|1\n\r");
-        return 1;
-    }
-    fmodetype = atoi(con_getparam(state->command, 2));
-
-    switch(fmodetype)	{
-        case 0:
-            DebugFlag &= ~LAN485DBG_flag;
-            break;
-        case 1:
-            DebugFlag |= LAN485DBG_flag;
-            break;
-        default:
-            state->conio->puts("*** DEBUG LAN ERROR  ***\n\r");
-            return -1;
-            break;
-    }
-
-    return 1;
-}
+//int con_DBGLAN_mode(ConsoleState* state)
+//{
+//    uint16_t fmodetype;
+//
+//    if( state->numparams < 3 )	{
+//        state->conio->puts("DEBUG LAN 0|1\n\r");
+//        return 1;
+//    }
+//    fmodetype = atoi(con_getparam(state->command, 2));
+//
+//    switch(fmodetype)	{
+//        case 0:
+//            DebugFlag &= ~LAN485DBG_flag;
+//            break;
+//        case 1:
+//            DebugFlag |= LAN485DBG_flag;
+//            break;
+//        default:
+//            state->conio->puts("*** DEBUG LAN ERROR  ***\n\r");
+//            return -1;
+//            break;
+//    }
+//
+//    return 1;
+//}
 
 //int con_perifpwr(ConsoleState* state)
 //{
@@ -1546,31 +1546,31 @@ int con_DBGLAN_mode(ConsoleState* state)
 //    return 1;
 //}
 
-int con_DBGABORF_mode(ConsoleState* state)
-{
-	uint16_t fmodetype;
-
-	if( state->numparams < 3 )	{
-		state->conio->puts("DEBUG ABORF 0|1\n\r");
-		return 1;
-	}
-	fmodetype = atoi(con_getparam(state->command, 2));
-
-	switch(fmodetype)	{
-		case 0:
-			DebugFlag &= ~DBGABORF_flag;
-			break;
-		case 1:
-			DebugFlag |= DBGABORF_flag;
-			break;
-		default:
-			state->conio->puts("*** DEBUG RF ERROR  ***\n\r");
-			return -1;
-			break;
-	}
-
-	return 1;
-}
+//int con_DBGABORF_mode(ConsoleState* state)
+//{
+//	uint16_t fmodetype;
+//
+//	if( state->numparams < 3 )	{
+//		state->conio->puts("DEBUG ABORF 0|1\n\r");
+//		return 1;
+//	}
+//	fmodetype = atoi(con_getparam(state->command, 2));
+//
+//	switch(fmodetype)	{
+//		case 0:
+//			DebugFlag &= ~DBGABORF_flag;
+//			break;
+//		case 1:
+//			DebugFlag |= DBGABORF_flag;
+//			break;
+//		default:
+//			state->conio->puts("*** DEBUG RF ERROR  ***\n\r");
+//			return -1;
+//			break;
+//	}
+//
+//	return 1;
+//}
 /////////////////////////////////////////////////////////////////////////////////////
 // Funciones de configuracion de rabbit
 
@@ -1661,61 +1661,61 @@ int con_numcen(ConsoleState* state)
 	return 1;
 }
 
-int con_nomsuc(ConsoleState* state)
-{
-	int len, error, i;
-	char buffer[33];
-
-
-	if( state->numparams < 3 )	{
-		state->conio->puts("set nomsuc \"nombre de sucursal\"\n\r");
-		EepromReadBuffer(NOMSUC_E2P_ADDR, buffer, 32, &error);
-		state->conio->puts("PGMD NOMSUC: ");
-		for(i = 0; i < 33; i++ )	{
-			if(buffer[i] == 0x00 )
-				break;
-			if(buffer[i] > 127)	{
-				state->conio->puts("\n\r");
-				return 1;
-			}
-		}
-		buffer[32] = 0;
-		state->conio->puts(buffer);
-		state->conio->puts("\n\r");
-		return 1;
-	}
-
-	len = strlen( con_getparam(state->command, 2) ) + 1;
-
-	if( len > 32 )	{
-		state->conio->puts("ERROR *** El nombre de la sucursal no debe ser mayor a 32 caracteres\n\r");
-		return 1;
-	}
-
-
-	EepromWriteBuffer(NOMSUC_E2P_ADDR, con_getparam(state->command, 2), len, &error);
-	EepromReadBuffer(NOMSUC_E2P_ADDR, buffer, len, &error);
-	buffer[32] = 0;
-
-	//state->conio->puts(buffer);
-
-	state->conio->puts("PGMD NOMSUC: ");
-	for(i = 0; i < len; i++ )	{
-		if(buffer[i] == 0x00 )
-			break;
-		if(buffer[i] > 127)	{
-			state->conio->puts("\n\r");
-			return 1;
-		}
-	}
-
-	state->conio->puts(buffer);
-	state->conio->puts("\n\r");
-
-	//Str_Copy_N(NomSuc, buffer, len);
-
-	return 1;
-}
+//int con_nomsuc(ConsoleState* state)
+//{
+//	int len, error, i;
+//	char buffer[33];
+//
+//
+//	if( state->numparams < 3 )	{
+//		state->conio->puts("set nomsuc \"nombre de sucursal\"\n\r");
+//		EepromReadBuffer(NOMSUC_E2P_ADDR, buffer, 32, &error);
+//		state->conio->puts("PGMD NOMSUC: ");
+//		for(i = 0; i < 33; i++ )	{
+//			if(buffer[i] == 0x00 )
+//				break;
+//			if(buffer[i] > 127)	{
+//				state->conio->puts("\n\r");
+//				return 1;
+//			}
+//		}
+//		buffer[32] = 0;
+//		state->conio->puts(buffer);
+//		state->conio->puts("\n\r");
+//		return 1;
+//	}
+//
+//	len = strlen( con_getparam(state->command, 2) ) + 1;
+//
+//	if( len > 32 )	{
+//		state->conio->puts("ERROR *** El nombre de la sucursal no debe ser mayor a 32 caracteres\n\r");
+//		return 1;
+//	}
+//
+//
+//	EepromWriteBuffer(NOMSUC_E2P_ADDR, con_getparam(state->command, 2), len, &error);
+//	EepromReadBuffer(NOMSUC_E2P_ADDR, buffer, len, &error);
+//	buffer[32] = 0;
+//
+//	//state->conio->puts(buffer);
+//
+//	state->conio->puts("PGMD NOMSUC: ");
+//	for(i = 0; i < len; i++ )	{
+//		if(buffer[i] == 0x00 )
+//			break;
+//		if(buffer[i] > 127)	{
+//			state->conio->puts("\n\r");
+//			return 1;
+//		}
+//	}
+//
+//	state->conio->puts(buffer);
+//	state->conio->puts("\n\r");
+//
+//	//Str_Copy_N(NomSuc, buffer, len);
+//
+//	return 1;
+//}
 
 int con_cuenta1(ConsoleState* state)
 {

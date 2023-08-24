@@ -38,7 +38,7 @@ typedef struct	{
 	unsigned char	normstate;
 	unsigned char	version;
 
-	unsigned char   RFALRMDLY_flag;
+	uint32_t  RFALRMDLY_flag;
 	time_t          rfalrmdly_timer;
 	unsigned char   rfalrmdly_state;
 
@@ -46,6 +46,10 @@ typedef struct	{
     uint8_t     sismic_state;
     time_t      sismic_timer;
     uint32_t    SISMIC_flag;
+
+    uint8_t     sistuple_state;
+    time_t      sistuple_timer;
+    uint8_t tuple[3];
     //------------------------------------
 } PTM_device;
 
@@ -55,6 +59,11 @@ typedef struct	{
 #define FSMSISM_UNPROTECTED_TRIG    0x0035
 #define FSMSISM_PROTECTED           0x0040
 #define FSMSISM_UCWAIT              0x0025
+
+#define FSMSISTUPLE_IDLE            10
+#define FSMSISTUPLE_ECID            20
+#define FSMSISTUPLE_EBOR            30
+#define FSMSISTUPLE_USED            40
 
 #define PTM_STATUS_ARMADO   (1 << 0)
 #define PTM_STATUS_TAMPER   (1 << 1)
@@ -133,8 +142,10 @@ extern uint8_t         ptmsignal_state;
 #define RFALRMDLY_EVOZ24_FLAG   0x20
 #define PTMTERMICOTRIGG         0x40
 #define PTMSIG_OLDPANIC         0x80
+#define ALRMDLY_TESOINMD_FLAG     (1 << 8)
+#define VALIDTUPLE_FLAG         (1 << 9)
 
-extern uint8_t RFDLYBOR_flag;
+extern uint32_t RFDLYBOR_flag;
 #define RFDLYBOR_TESO_FLAG      0x01
 #define RFDLYBOR_TDONEI_FLAG    0x02
 #define RFDLYBOR_TDONE_FLAG     0x04
@@ -143,6 +154,9 @@ extern uint8_t RFDLYBOR_flag;
 #define RFDLYBOR_TESOGAP_FLAG   0x20
 #define RFDLYBOR_LLOP_FLAG      0x40
 #define RFDLYBOR_TDONEP_FLAG    0x80
+#define DLYBOR_SISIMD_FLAG    (1 << 8)
+#define DLYBOR_TESOINMD_FLAG    (1 << 9)
+
 
 extern uint32_t fsmhlock_timer;
 extern uint8_t fsmhsbclock_state;
@@ -224,6 +238,7 @@ void fsm_ptmsignalling( void );
 
 void fsm_ptm_sismic(unsigned char index);
 int IsSismicPartition(int index);
+void fsm_inmdtuple(int index);
 
 void SendProblem386(uint8_t ptm_index, uint8_t erevent);
 

@@ -1011,12 +1011,38 @@ void fsm_deteccion_asalto( void )
 void fsm_deteccion_tesoro( void )
 {
 	int16_t vreal;
+    int index;
+    uint32_t sismicflag;
 
     if(Rot485_flag & NOZSCAN_FLAG)  {
         return;
     }
 
-	if(SysFlag_AP_GenAlarm & bitpat[TESO_bit])	{
+    sismicflag = 0;
+    for( index = 0; index < MAXQTYPTM; index++) {
+        if (ptm_dcb[index].rtuaddr == 0x00) {
+            continue;
+        }
+        if (!IsSismicPartition(index)) {
+            continue;
+        }
+        if ((!(ptm_dcb[index].SISMIC_flag & PTM_STATUS_ARMADO)) &&
+            (ptm_dcb[index].SISMIC_flag & PTM_STATUS_DESARMADO) && (ptm_dcb[index].rtuaddr != 240) &&
+            (ptm_dcb[index].rtuaddr != 241)) {
+            if (!(ptm_dcb[index].SISMIC_flag & HABTRIGGER_FLAG)) {
+                sismicflag |= STOPSISTRIGGERSEND;
+            } else {
+                sismicflag |= HABTRIGGER_FLAG;
+            }
+        } else {
+            sismicflag |= HABTRIGGER_FLAG;
+        }
+
+
+    }
+
+
+        if(SysFlag_AP_GenAlarm & bitpat[TESO_bit])	{
 		SysFlag_AP_GenAlarm &= ~bitpat[TESO_bit];
 		if( !(BaseAlarmPkt_alarm & bitpat[TESO_bit]) )	{
 			BaseAlarmPkt_alarm |= bitpat[TESO_bit];
@@ -1042,8 +1068,17 @@ void fsm_deteccion_tesoro( void )
 			break;
 		case TESORO_WAIT:
 			if(!dbnc_teso_timer)	{
-                RFDLYBOR_flag |= RFDLYBOR_TESO_FLAG;
-				dteso_state = TESORO_ALRM;
+
+                if(sismicflag & HABTRIGGER_FLAG) {
+                    RFDLYBOR_flag |= RFDLYBOR_TESO_FLAG;
+                    dteso_state = TESORO_ALRM;
+                } else  {
+                    dteso_state = TESORO_IDLE;
+                }
+                RFDLYBOR_flag |= DLYBOR_TESOINMD_FLAG;
+                for(index = 0; index < MAXQTYPTM; index++)  {
+                    fsm_inmdtuple(index);
+                }
 
 //				if( !(BaseAlarmPkt_alarm & bitpat[TESO_bit]) )	{
 //					BaseAlarmPkt_alarm |= bitpat[TESO_bit];
