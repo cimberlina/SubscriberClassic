@@ -68,6 +68,11 @@ typedef struct	{
 #define TERMICTRIGGER_FLAG  (1 << 9)
 #define TERMICTRIGDLY_FLAG  (1 << 10)
 #define TERMICTRIGG2_FLAG   (1 << 11)
+#define CLEARSTOP_FLAG      (1 << 12)
+#define HABTRIGGER_FLAG     (1 << 13)
+#define PTM_STATUS_DESARMADO   (1 << 14)
+#define STOPTRIGCIDSEND     (1 << 15)
+#define FIRSTTRIGGER        (1 << 16)
 #define PTM_STATUS_VALID    (1 << 31)
 
 typedef struct 
@@ -218,6 +223,7 @@ void fsm_rfdlybornera_teso( void );
 void fsm_ptmsignalling( void );
 
 void fsm_ptm_sismic(unsigned char index);
+int IsSismicPartition(int index);
 
 void SendProblem386(uint8_t ptm_index, uint8_t erevent);
 

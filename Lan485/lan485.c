@@ -781,10 +781,13 @@ void PTm_process_answer( int nread, unsigned char * rxbuffer, unsigned char inde
 				switch(rxbuffer[4])	{
 					case 0x5A :
                         //--------------------------------------------------------------
-                        if(rxbuffer[3] & PTM_STATUS_ARMADO)
+                        if (rxbuffer[3] & PTM_STATUS_ARMADO) {
                             ptm_dcb[index].SISMIC_flag &= ~PTM_STATUS_ARMADO;
-                        else
+                            ptm_dcb[index].SISMIC_flag |= PTM_STATUS_DESARMADO;
+                        } else {
                             ptm_dcb[index].SISMIC_flag |= PTM_STATUS_ARMADO;
+                            ptm_dcb[index].SISMIC_flag &= ~PTM_STATUS_DESARMADO;
+                        }
 
                         if(rxbuffer[3] & PTM_STATUS_ZTEMP)
                             ptm_dcb[index].SISMIC_flag |= PTM_STATUS_ZTEMP;
@@ -961,8 +964,10 @@ void PTm_process_answer( int nread, unsigned char * rxbuffer, unsigned char inde
 					ptm_dcb[index].com_error_counter = 0;
 					SendPtmACK( index );
 					eveindex = index;
+
+                    ProcessEvents( &(rxbuffer[4]), index );
 					ParsePtmCID_Event( &(rxbuffer[4]) );
-					ProcessEvents( &(rxbuffer[4]), index );
+
 					if((ptm_dcb[index].rtuaddr >= 230) && (ptm_dcb[index].rtuaddr <= 239) && (!(ptm_dcb[index].flags & RELESIGNAL)))	{
 						releindex = ptm_dcb[index].rtuaddr - 230;
 						relepulse[releindex] = 0x00;
@@ -976,8 +981,10 @@ void PTm_process_answer( int nread, unsigned char * rxbuffer, unsigned char inde
 					//ptm_dcb[index].curr_command = 0x00;
 					SendPtmACK( index );
 					eveindex = index;
+
+                    ProcessEvents( &(rxbuffer[4]), index );
 					ParsePtmCID_Event( &(rxbuffer[4]) );
-					ProcessEvents( &(rxbuffer[4]), index );
+
 					//CommSendString(DEBUG_COMM,"E3\n\r");
 				}
 			}
@@ -2144,20 +2151,32 @@ void ProcessEvents( unsigned char event_buffer[], unsigned char index )
 							//recharge_alarm(TESO_bit);
                             //TESO_timer = SEC_TIMER;
                             if((eventzone == 1) || (eventzone == 0))  {
-                                if((!(ptm_dcb[index].SISMIC_flag & STOPSISTRIGGERSEND)) || (ptm_dcb[index].SISMIC_flag & TERMICTRIGGER_FLAG)) {
+                                if(IsSismicPartition(index)) {
+                                    fsm_ptm_sismic(index);
+                                    //---------------------------------------
+                                    if (((ptm_dcb[index].SISMIC_flag & HABTRIGGER_FLAG) && (!(ptm_dcb[index].SISMIC_flag & FIRSTTRIGGER))) || \
+                                        (ptm_dcb[index].SISMIC_flag & TERMICTRIGGER_FLAG) ) {
 
+                                        SysFlag_AP_GenAlarm |= bitpat[TESO_bit];
+                                        recharge_alarm(TESO_bit);
+                                        TESO_timer = SEC_TIMER;
+                                        RFDLYBOR_flag |= RFDLYBOR_TDONEI_FLAG;
+                                        RFDLYBOR_flag |= RFDLYBOR_TESO_FLAG;
+                                        //ptm_dcb[index].RFALRMDLY_flag |= RFALRMDLY_TESO_FLAG;
+                                    }
+                                    //---------------------------------------
+                                    if (ptm_dcb[index].SISMIC_flag & TERMICTRIGGER_FLAG) {
+                                        ptm_dcb[index].SISMIC_flag &= ~TERMICTRIGGER_FLAG;
+                                    } else {
+                                        ptm_dcb[index].SISMIC_flag |= PTM_EVENT_E130Z1;
+                                    }
+                                    //---------------------------------------
+                                } else  {
                                     SysFlag_AP_GenAlarm |= bitpat[TESO_bit];
                                     recharge_alarm(TESO_bit);
                                     TESO_timer = SEC_TIMER;
                                     RFDLYBOR_flag |= RFDLYBOR_TDONEI_FLAG;
                                 }
-                                //---------------------------------------
-                                if(ptm_dcb[index].SISMIC_flag & TERMICTRIGGER_FLAG) {
-                                    ptm_dcb[index].SISMIC_flag &= ~TERMICTRIGGER_FLAG;
-                                } else {
-                                    ptm_dcb[index].SISMIC_flag |= PTM_EVENT_E130Z1;
-                                }
-                                //---------------------------------------
                             } else
                             if(eventzone == 2)  {
                                 if(ptm_dcb[eveindex].RFALRMDLY_flag & PTMSIG_OLDPANIC)  {
@@ -3579,14 +3598,43 @@ uint8_t RFDLYBOR_flag;
 
 void fsm_rfdlybornera_teso( void )
 {
-    int index, ptm;
+    int ptm, i;
+    uint32_t sismicflag;
+
+    sismicflag = 0;
+
+    for( i = 0; i < MAXQTYPTM; i++) {
+        if(ptm_dcb[i].rtuaddr == 0x00)  {
+            continue;
+        }
+        if(!IsSismicPartition(i))   {
+            continue;
+        }
+        if((!(ptm_dcb[i].SISMIC_flag & PTM_STATUS_ARMADO)) && (ptm_dcb[i].SISMIC_flag & PTM_STATUS_DESARMADO) && (ptm_dcb[i].rtuaddr != 240) && (ptm_dcb[i].rtuaddr != 241))  {
+            if(!(ptm_dcb[i].SISMIC_flag & HABTRIGGER_FLAG)) {
+                sismicflag |= STOPSISTRIGGERSEND;
+            } else  {
+                sismicflag |= HABTRIGGER_FLAG;
+            }
+        } else  {
+            sismicflag |= HABTRIGGER_FLAG;
+        }
+        if(ptm_dcb[i].SISMIC_flag & TERMICTRIGDLY_FLAG) {
+            sismicflag |= TERMICTRIGDLY_FLAG;
+        }
+        if(ptm_dcb[i].SISMIC_flag & CLEARSTOP_FLAG) {
+            sismicflag &= ~STOPSISTRIGGERSEND;
+            ptm_dcb[i].SISMIC_flag &= ~CLEARSTOP_FLAG;
+        }
+    }
+
 
     switch(rfdlybornera_teso_state)  {
         case BORRFDLY_ST_IDLE:
             RFDLYBOR_flag &= ~RFDLYBOR_TDONE_FLAG;
-            if((!(ptm_dcb[index].SISMIC_flag & STOPSISTRIGGERSEND)) || (ptm_dcb[index].SISMIC_flag & TERMICTRIGDLY_FLAG)) {
-                if(ptm_dcb[index].SISMIC_flag & TERMICTRIGDLY_FLAG) {
-                    ptm_dcb[index].SISMIC_flag &= ~TERMICTRIGDLY_FLAG;
+            if((sismicflag & HABTRIGGER_FLAG) || (sismicflag & TERMICTRIGDLY_FLAG)) {
+                if(sismicflag & TERMICTRIGDLY_FLAG) {
+                    sismicflag &= ~TERMICTRIGDLY_FLAG;
                 }
                 if (RFDLYBOR_flag & RFDLYBOR_TESOGAP_FLAG) {
                     RFDLYBOR_flag &= ~RFDLYBOR_TESOGAP_FLAG;
@@ -3595,81 +3643,17 @@ void fsm_rfdlybornera_teso( void )
                 } else if (RFDLYBOR_flag & RFDLYBOR_TESO_FLAG) {
                     rfdlybor_teso_timer = SEC_TIMER + DlyBor_time;
                     rfdlybornera_teso_state = BORRFDLY_ST_WAITTRIG;
-                    //rfdlybornera_teso_state = BORRFDLY_ST_WAIT2ND;
                     RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
                 }
             }
             break;
-        case BORRFDLY_ST_WAIT2ND:
-            if(RFDLYBOR_flag & RFDLYBOR_TESO_FLAG)  {
-                rfdlybor_teso_timer = SEC_TIMER + DlyBor_time;
-                rfdlybornera_teso_state = BORRFDLY_ST_WAIT3RD;
-                RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
-            } else
-            if(SEC_TIMER > rfdlybor_teso_timer) {
-                RFDLYBOR_flag &= ~RFDLYBOR_TDONE_FLAG;
-                RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
-                RFDLYBOR_flag &= ~RFDLYBOR_TESOGAP_FLAG;
-                rfdlybornera_teso_state = BORRFDLY_ST_IDLE;
-            }
-            break;
-        case BORRFDLY_ST_WAIT3RD:
-            if(RFDLYBOR_flag & RFDLYBOR_TESO_FLAG)  {
-                rfdlybor_teso_timer = SEC_TIMER + DlyBor_time;
-                rfdlybornera_teso_state = BORRFDLY_ST_WAIT4TH;
-            } else
-            if(SEC_TIMER > rfdlybor_teso_timer) {
-                RFDLYBOR_flag &= ~RFDLYBOR_TDONE_FLAG;
-                RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
-                RFDLYBOR_flag &= ~RFDLYBOR_TESOGAP_FLAG;
-                rfdlybornera_teso_state = BORRFDLY_ST_IDLE;
-            }
-            break;
-        case BORRFDLY_ST_WAIT4TH:
-            if(RFDLYBOR_flag & RFDLYBOR_TESO_FLAG)  {
-                rfdlybor_teso_timer = SEC_TIMER + DlyBor_time;
-                rfdlybornera_teso_state = BORRFDLY_ST_WAIT5TH;
-                RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
-            } else
-            if(SEC_TIMER > rfdlybor_teso_timer) {
-                RFDLYBOR_flag &= ~RFDLYBOR_TDONE_FLAG;
-                RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
-                RFDLYBOR_flag &= ~RFDLYBOR_TESOGAP_FLAG;
-                rfdlybornera_teso_state = BORRFDLY_ST_IDLE;
-            }
-            break;
-        case BORRFDLY_ST_WAIT5TH:
-            if(RFDLYBOR_flag & RFDLYBOR_TESO_FLAG)  {
-                rfdlybor_teso_timer = SEC_TIMER + DlyBor_time;
-                rfdlybornera_teso_state = BORRFDLY_ST_WAIT6TH;
-                RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
-            } else
-            if(SEC_TIMER > rfdlybor_teso_timer) {
-                RFDLYBOR_flag &= ~RFDLYBOR_TDONE_FLAG;
-                RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
-                RFDLYBOR_flag &= ~RFDLYBOR_TESOGAP_FLAG;
-                rfdlybornera_teso_state = BORRFDLY_ST_IDLE;
-            }
-            break;
-        case BORRFDLY_ST_WAIT6TH:
-            if(RFDLYBOR_flag & RFDLYBOR_TESO_FLAG)  {
-                rfdlybor_teso_timer = SEC_TIMER + DlyBor_time;
-                rfdlybornera_teso_state = BORRFDLY_ST_WAITTRIG;
-                RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
-            } else
-            if(SEC_TIMER > rfdlybor_teso_timer) {
-                RFDLYBOR_flag &= ~RFDLYBOR_TDONE_FLAG;
-                RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
-                RFDLYBOR_flag &= ~RFDLYBOR_TESOGAP_FLAG;
-                rfdlybornera_teso_state = BORRFDLY_ST_IDLE;
-            }
-            break;
+
         case BORRFDLY_ST_WAITTRIG:
             if(SEC_TIMER > rfdlybor_teso_timer)  {
                 RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
                 ptm = 0;
-                for(index = 0; index < MAXQTYPTM; index++)  {
-                    if(ptm_dcb[index].RFALRMDLY_flag & RFALRMDLY_BORNERA_FLAG)  {
+                for(i = 0; i < MAXQTYPTM; i++)  {
+                    if(ptm_dcb[i].RFALRMDLY_flag & RFALRMDLY_BORNERA_FLAG)  {
                         ptm++;
                     }
                 }
@@ -3777,16 +3761,29 @@ void fsm_ptm_sismic( unsigned char index)
     static int trigcount;
     static time_t timeout;
 
+    if(!IsSismicPartition(index))   {
+        return;
+    }
 
     switch(ptm_dcb[index].sismic_state) {
         case FSMSISM_IDLE:
-            if((!(ptm_dcb[index].SISMIC_flag & PTM_STATUS_ARMADO)) && (ptm_dcb[index].SISMIC_flag & PTM_STATUS_VALID))  {
+            if((!(ptm_dcb[index].SISMIC_flag & PTM_STATUS_ARMADO)) && (ptm_dcb[index].SISMIC_flag & PTM_STATUS_DESARMADO) && (ptm_dcb[index].SISMIC_flag & PTM_STATUS_VALID))  {
                 ptm_dcb[index].sismic_state = FSMSISM_UNPROTECTED_CLOSED;
                 trigcount = 0;
                 ptm_dcb[index].SISMIC_flag |= STOPSISTRIGGERSEND;
+                ptm_dcb[index].SISMIC_flag |= HABTRIGGER_FLAG;
+                ptm_dcb[index].SISMIC_flag &= ~PTM_EVENT_E130Z1;
+                ptm_dcb[index].SISMIC_flag |= FIRSTTRIGGER;
+
 #ifdef DEBUG_SISMIC
                 CommSendString(DEBUG_COMM, "PTM Desarmado\n\r");
 #endif
+            } else
+            if((ptm_dcb[index].SISMIC_flag & PTM_STATUS_ARMADO) && (!(ptm_dcb[index].SISMIC_flag & PTM_STATUS_DESARMADO) ) && (ptm_dcb[index].SISMIC_flag & PTM_STATUS_VALID))  {
+                ptm_dcb[index].SISMIC_flag &= ~STOPSISTRIGGERSEND;
+                ptm_dcb[index].SISMIC_flag |= CLEARSTOP_FLAG;
+                ptm_dcb[index].SISMIC_flag |= HABTRIGGER_FLAG;
+                ptm_dcb[index].SISMIC_flag &= ~FIRSTTRIGGER;
             }
             break;
         case FSMSISM_UNPROTECTED_TRIG:
@@ -3796,9 +3793,12 @@ void fsm_ptm_sismic( unsigned char index)
                 CommSendString(DEBUG_COMM, "Disparo SISMICO pasante\n\r");
 #endif
             } else
-            if((ptm_dcb[index].SISMIC_flag & PTM_STATUS_ARMADO) && (ptm_dcb[index].SISMIC_flag & PTM_STATUS_VALID)) {
+            if((ptm_dcb[index].SISMIC_flag & PTM_STATUS_ARMADO) && (!(ptm_dcb[index].SISMIC_flag & PTM_STATUS_DESARMADO) ) && (ptm_dcb[index].SISMIC_flag & PTM_STATUS_VALID)) {
                 ptm_dcb[index].sismic_state = FSMSISM_IDLE;
                 ptm_dcb[index].SISMIC_flag &= ~STOPSISTRIGGERSEND;
+                ptm_dcb[index].SISMIC_flag |= CLEARSTOP_FLAG;
+                ptm_dcb[index].SISMIC_flag |= HABTRIGGER_FLAG;
+                ptm_dcb[index].SISMIC_flag &= ~FIRSTTRIGGER;
                 RFDLYBOR_flag &= ~RFDLYBOR_TDONE_FLAG;
                 RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
                 RFDLYBOR_flag &= ~RFDLYBOR_TESOGAP_FLAG;
@@ -3810,6 +3810,13 @@ void fsm_ptm_sismic( unsigned char index)
         case FSMSISM_UNPROTECTED_CLOSED:
             if(((ptm_dcb[index].SISMIC_flag & PTM_STATUS_ZTEMP) || (ptm_dcb[index].SISMIC_flag & PTM_EVENT_E401)) && (ptm_dcb[index].SISMIC_flag & PTM_STATUS_VALID))   {
                 ptm_dcb[index].SISMIC_flag &= ~PTM_EVENT_E401;
+
+
+                ptm_dcb[index].SISMIC_flag |= STOPSISTRIGGERSEND;
+                ptm_dcb[index].SISMIC_flag |= HABTRIGGER_FLAG;
+                ptm_dcb[index].SISMIC_flag &= ~PTM_EVENT_E130Z1;
+                ptm_dcb[index].SISMIC_flag |= FIRSTTRIGGER;
+
                 ptm_dcb[index].sismic_state = FSMSISM_UNPROTECTED_OPEN;
                 trigcount = 0;
 #ifdef DEBUG_SISMIC
@@ -3818,23 +3825,40 @@ void fsm_ptm_sismic( unsigned char index)
             } else
             if((ptm_dcb[index].SISMIC_flag & PTM_EVENT_E130Z1) && (ptm_dcb[index].SISMIC_flag & PTM_STATUS_VALID))   {
                 ptm_dcb[index].SISMIC_flag &= ~PTM_EVENT_E130Z1;
+
+                RFDLYBOR_flag |= RFDLYBOR_TDONE_FLAG;
+                RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
+                RFDLYBOR_flag &= ~RFDLYBOR_TESOGAP_FLAG;
+
+                if(trigcount == 0) {
+                    ptm_dcb[index].SISMIC_flag |= STOPSISTRIGGERSEND;
+                    ptm_dcb[index].SISMIC_flag &= ~HABTRIGGER_FLAG;
+                    ptm_dcb[index].SISMIC_flag &= ~FIRSTTRIGGER;
+                }
+
                 trigcount++;
 #ifdef DEBUG_SISMIC
                 CommSendString(DEBUG_COMM, "SISMICO entrante\n\r");
 #endif
                 if(trigcount > 2)   {
-                    timeout = SEC_TIMER + 10;
+                    timeout = SEC_TIMER + 2;
                     ptm_dcb[index].sismic_state = FSMSISM_UCWAIT;
                     //ptm_dcb[index].SISMIC_flag &= ~STOPSISTRIGGERSEND;
+                    RFDLYBOR_flag &= ~RFDLYBOR_TDONE_FLAG;
+                    RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
+                    RFDLYBOR_flag &= ~RFDLYBOR_TESOGAP_FLAG;
 
 #ifdef DEBUG_SISMIC
                     CommSendString(DEBUG_COMM, "SISMICO pasante\n\r");
 #endif
                 }
             } else
-            if((ptm_dcb[index].SISMIC_flag & PTM_STATUS_ARMADO) && (ptm_dcb[index].SISMIC_flag & PTM_STATUS_VALID)) {
+            if((ptm_dcb[index].SISMIC_flag & PTM_STATUS_ARMADO) && (!(ptm_dcb[index].SISMIC_flag & PTM_STATUS_DESARMADO) ) && (ptm_dcb[index].SISMIC_flag & PTM_STATUS_VALID)) {
                 ptm_dcb[index].sismic_state = FSMSISM_IDLE;
                 ptm_dcb[index].SISMIC_flag &= ~STOPSISTRIGGERSEND;
+                ptm_dcb[index].SISMIC_flag |= CLEARSTOP_FLAG;
+                ptm_dcb[index].SISMIC_flag |= HABTRIGGER_FLAG;
+                ptm_dcb[index].SISMIC_flag &= ~FIRSTTRIGGER;
                 RFDLYBOR_flag &= ~RFDLYBOR_TDONE_FLAG;
                 RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
                 RFDLYBOR_flag &= ~RFDLYBOR_TESOGAP_FLAG;
@@ -3847,9 +3871,13 @@ void fsm_ptm_sismic( unsigned char index)
             if(SEC_TIMER > timeout) {
                 ptm_dcb[index].sismic_state = FSMSISM_UNPROTECTED_TRIG;
                 ptm_dcb[index].SISMIC_flag &= ~STOPSISTRIGGERSEND;
+                ptm_dcb[index].SISMIC_flag |= CLEARSTOP_FLAG;
+                ptm_dcb[index].SISMIC_flag |= HABTRIGGER_FLAG;
+                ptm_dcb[index].SISMIC_flag &= ~FIRSTTRIGGER;
                 RFDLYBOR_flag &= ~RFDLYBOR_TDONE_FLAG;
                 RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
                 RFDLYBOR_flag &= ~RFDLYBOR_TESOGAP_FLAG;
+                ptm_dcb[index].SISMIC_flag &= ~PTM_EVENT_E130Z1;
             }
             break;
         case FSMSISM_UNPROTECTED_OPEN:
@@ -3861,23 +3889,40 @@ void fsm_ptm_sismic( unsigned char index)
             } else
             if((ptm_dcb[index].SISMIC_flag & PTM_EVENT_E130Z1) && (ptm_dcb[index].SISMIC_flag & PTM_STATUS_VALID))   {
                 ptm_dcb[index].SISMIC_flag &= ~PTM_EVENT_E130Z1;
+
+                RFDLYBOR_flag |= RFDLYBOR_TDONE_FLAG;
+                RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
+                RFDLYBOR_flag &= ~RFDLYBOR_TESOGAP_FLAG;
+
+                if(trigcount == 0) {
+                    ptm_dcb[index].SISMIC_flag |= STOPSISTRIGGERSEND;
+                    ptm_dcb[index].SISMIC_flag &= ~HABTRIGGER_FLAG;
+                    ptm_dcb[index].SISMIC_flag &= ~FIRSTTRIGGER;
+                }
+
                 trigcount++;
 #ifdef DEBUG_SISMIC
                 CommSendString(DEBUG_COMM, "SISMICO entrante\n\r");
 #endif
-                if(trigcount >= 1)   {
+                if(trigcount > 1)   {
                     timeout = SEC_TIMER + 10;
                     ptm_dcb[index].sismic_state = FSMSISM_UCWAIT;
                     //ptm_dcb[index].SISMIC_flag &= ~STOPSISTRIGGERSEND;
+                    RFDLYBOR_flag &= ~RFDLYBOR_TDONE_FLAG;
+                    RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
+                    RFDLYBOR_flag &= ~RFDLYBOR_TESOGAP_FLAG;
 
 #ifdef DEBUG_SISMIC
                     CommSendString(DEBUG_COMM, "SISMICO pasante\n\r");
 #endif
                 }
             } else
-            if((ptm_dcb[index].SISMIC_flag & PTM_STATUS_ARMADO) && (ptm_dcb[index].SISMIC_flag & PTM_STATUS_VALID)) {
+            if((ptm_dcb[index].SISMIC_flag & PTM_STATUS_ARMADO) && (!(ptm_dcb[index].SISMIC_flag & PTM_STATUS_DESARMADO) ) && (ptm_dcb[index].SISMIC_flag & PTM_STATUS_VALID)) {
                 ptm_dcb[index].sismic_state = FSMSISM_IDLE;
                 ptm_dcb[index].SISMIC_flag &= ~STOPSISTRIGGERSEND;
+                ptm_dcb[index].SISMIC_flag |= CLEARSTOP_FLAG;
+                ptm_dcb[index].SISMIC_flag |= HABTRIGGER_FLAG;
+                ptm_dcb[index].SISMIC_flag &= ~FIRSTTRIGGER;
                 RFDLYBOR_flag &= ~RFDLYBOR_TDONE_FLAG;
                 RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
                 RFDLYBOR_flag &= ~RFDLYBOR_TESOGAP_FLAG;
@@ -3889,9 +3934,24 @@ void fsm_ptm_sismic( unsigned char index)
         default:
             ptm_dcb[index].sismic_state = FSMSISM_IDLE;
             ptm_dcb[index].SISMIC_flag &= ~STOPSISTRIGGERSEND;
+            ptm_dcb[index].SISMIC_flag |= CLEARSTOP_FLAG;
+            ptm_dcb[index].SISMIC_flag |= HABTRIGGER_FLAG;
+            ptm_dcb[index].SISMIC_flag &= ~FIRSTTRIGGER;
             RFDLYBOR_flag &= ~RFDLYBOR_TDONE_FLAG;
             RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
             RFDLYBOR_flag &= ~RFDLYBOR_TESOGAP_FLAG;
             break;
+    }
+}
+
+int IsSismicPartition(int index)
+{
+    if((ptm_dcb[index].particion >= 10) && (ptm_dcb[index].particion <= 19)) {
+        return 1;
+    } else
+    if((ptm_dcb[index].particion >= 40) && (ptm_dcb[index].particion <= 49)) {
+        return 1;
+    } else  {
+        return 0;
     }
 }

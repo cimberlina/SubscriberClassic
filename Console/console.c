@@ -106,7 +106,7 @@ const ConsoleCommand console_commands[] =
 
 	//visualizacion de eventos
 	{ "eyse_df_format",	con_EvDF_format,	0,		MCMI_LEVEL},
-	{ "ev_hex_dump",	con_DumpEvMemory,		0,		MCMI_LEVEL},        //-
+//	{ "ev_hex_dump",	con_DumpEvMemory,		0,		MCMI_LEVEL},        //-
 	{ "ev_inx_dump",	con_DumpEvIndex,		0,		MCMI_LEVEL},        //-
 	{ "history",	con_DumpEventByTime,	0,		OPER_LEVEL},
 	{ "set rtc",		con_setrtc,				0,		MONI_LEVEL},
