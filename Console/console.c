@@ -107,7 +107,7 @@ const ConsoleCommand console_commands[] =
 	//visualizacion de eventos
 	{ "eyse_df_format",	con_EvDF_format,	0,		MCMI_LEVEL},
 //	{ "ev_hex_dump",	con_DumpEvMemory,		0,		MCMI_LEVEL},        //-
-	{ "ev_inx_dump",	con_DumpEvIndex,		0,		MCMI_LEVEL},        //-
+//	{ "ev_inx_dump",	con_DumpEvIndex,		0,		MCMI_LEVEL},        //-
 	{ "history",	con_DumpEventByTime,	0,		OPER_LEVEL},
 	{ "set rtc",		con_setrtc,				0,		MONI_LEVEL},
 	{ "...@#set rtc",	con_set1rtc,			0,		FREE_LEVEL},
@@ -3173,6 +3173,14 @@ int cfg3_ptmdev(ConsoleState* state)
 
 	address = PTM00DCB_E2P_ADDR + devnum*5;
 	EepromWriteBuffer(address, buffer, 5, &error);
+
+    howmuchptm = 0;
+    for(cuenta = 0; cuenta < MAXQTYPTM; cuenta++)  {
+        if(ptm_dcb[cuenta].rtuaddr != 0) {
+            howmuchptm++;
+        }
+
+    }
 
 	return 1;
 }

@@ -28,7 +28,7 @@ uint8_t PartDec_group[10];
 uint8_t hsbc_lock_partition;
 int lan485errorpkt, lan485errorcurrent;
 long accumulated_errors, totalpakets;
-int howmuchdev;
+int howmuchdev, howmuchptm;
 
 PBT_device	pbt_dcb[MAXPBTPTM];
 
@@ -147,7 +147,15 @@ void  LAN485_Task(void  *p_arg)
 	for( i = 0; i < 32; i++ )	{
 		devfound[i] = 0x00;
 	}
+    howmuchptm = 0;
 	howmuchdev = 0;
+    for(i = 0; i < MAXQTYPTM; i++)  {
+        if(ptm_dcb[i].rtuaddr != 0) {
+            howmuchptm++;
+        }
+
+    }
+
 	for( i = 0; i <= 253; i++ )	{
 		WDT_Feed();
 		databuffer[0] = 0x0A;
@@ -163,6 +171,7 @@ void  LAN485_Task(void  *p_arg)
 		    if(rxbuffer[2] == (uint8_t)i) {
                 LAN485_Send( databuffer, 5 );
                 OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);
+                nread = 0;
                 nread = ComGetBuff(COMM2, 10, rxbuffer, 64);
 
                 if((nread == 7) || (nread == 15) || (nread == 26)) {
@@ -184,10 +193,10 @@ void  LAN485_Task(void  *p_arg)
 	} else
 	if ( howmuchdev <= 12)	{
 		tslotsec = 0;
-		tslotms = 250;      //175
+		tslotms = 2505;      //250
 	} else	{
 		tslotsec = 0;
-		tslotms = 250;      //135
+		tslotms = 250;      //250
 	}
 
 	currtime.tm_sec = RTC_GetTime (LPC_RTC, RTC_TIMETYPE_SECOND);
@@ -1621,8 +1630,11 @@ void ParsePtmCID_Event( unsigned char event_buffer[] )
 	}
 
 #ifdef R3K_SERIAL
-	WriteEventToR3KBuffer(&currentEvent);
-
+	//WriteEventToR3KBuffer(&currentEvent);
+    tempzone = (event_buffer[18] - '0');
+    if(!(((ptm_dcb[eveindex].SISMIC_flag & STOPSISTRIGGERSEND)) && ( tempzone == 1) && (currentEvent.cid_eventcode == 0x130) && (currentEvent.cid_zoneuser != 0x909))) {
+        WriteEventToR3KBuffer(&currentEvent);
+    }
 #endif
 
 
@@ -3641,7 +3653,8 @@ void fsm_rfdlybornera_teso( void )
                     rfdlybor_teso_timer = SEC_TIMER + 10;
                     rfdlybornera_teso_state = BORRFDLY_ST_TESOGAP;
                 } else if (RFDLYBOR_flag & RFDLYBOR_TESO_FLAG) {
-                    rfdlybor_teso_timer = SEC_TIMER + DlyBor_time;
+                    //rfdlybor_teso_timer = SEC_TIMER + DlyBor_time;
+                    rfdlybor_teso_timer = SEC_TIMER + 40;
                     rfdlybornera_teso_state = BORRFDLY_ST_WAITTRIG;
                     RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
                 }
@@ -3752,7 +3765,7 @@ void fsm_ptmsignalling( void )
     }
 }
 
-#define DEBUG_SISMIC    1
+//#define DEBUG_SISMIC    1
 
 
 
@@ -3760,6 +3773,7 @@ void fsm_ptm_sismic( unsigned char index)
 {
     static int trigcount;
     static time_t timeout;
+    int i;
 
     if(!IsSismicPartition(index))   {
         return;
@@ -3789,8 +3803,15 @@ void fsm_ptm_sismic( unsigned char index)
         case FSMSISM_UNPROTECTED_TRIG:
             if((ptm_dcb[index].SISMIC_flag & PTM_EVENT_E130Z1) && (ptm_dcb[index].SISMIC_flag & PTM_STATUS_VALID))   {
                 ptm_dcb[index].SISMIC_flag &= ~PTM_EVENT_E130Z1;
+
+                for(i = 0; i < MAXQTYPTM; i++)  {
+                    if(IsSismicPartition(i))    {
+                        ptm_dcb[i].RFALRMDLY_flag &= ~RFALRMDLY_BORNERA_FLAG;
+                    }
+                }
 #ifdef DEBUG_SISMIC
                 CommSendString(DEBUG_COMM, "Disparo SISMICO pasante\n\r");
+
 #endif
             } else
             if((ptm_dcb[index].SISMIC_flag & PTM_STATUS_ARMADO) && (!(ptm_dcb[index].SISMIC_flag & PTM_STATUS_DESARMADO) ) && (ptm_dcb[index].SISMIC_flag & PTM_STATUS_VALID)) {
@@ -3802,12 +3823,18 @@ void fsm_ptm_sismic( unsigned char index)
                 RFDLYBOR_flag &= ~RFDLYBOR_TDONE_FLAG;
                 RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
                 RFDLYBOR_flag &= ~RFDLYBOR_TESOGAP_FLAG;
+                ptm_dcb[index].RFALRMDLY_flag &= ~RFALRMDLY_BORNERA_FLAG;
 #ifdef DEBUG_SISMIC
                 CommSendString(DEBUG_COMM, "PTM Armado\n\r");
 #endif
             }
             break;
         case FSMSISM_UNPROTECTED_CLOSED:
+//            if(ptm_dcb[index].SISMIC_flag & STOPSISTRIGGERSEND) {
+//                RFDLYBOR_flag |= RFDLYBOR_TDONE_FLAG;
+//                RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
+//                RFDLYBOR_flag &= ~RFDLYBOR_TESOGAP_FLAG;
+//            }
             if(((ptm_dcb[index].SISMIC_flag & PTM_STATUS_ZTEMP) || (ptm_dcb[index].SISMIC_flag & PTM_EVENT_E401)) && (ptm_dcb[index].SISMIC_flag & PTM_STATUS_VALID))   {
                 ptm_dcb[index].SISMIC_flag &= ~PTM_EVENT_E401;
 
@@ -3829,24 +3856,29 @@ void fsm_ptm_sismic( unsigned char index)
                 RFDLYBOR_flag |= RFDLYBOR_TDONE_FLAG;
                 RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
                 RFDLYBOR_flag &= ~RFDLYBOR_TESOGAP_FLAG;
+                //ptm_dcb[index].RFALRMDLY_flag |= RFALRMDLY_BORNERA_FLAG;
+                ptm_dcb[index].RFALRMDLY_flag &= ~RFALRMDLY_BORNERA_FLAG;
 
                 if(trigcount == 0) {
                     ptm_dcb[index].SISMIC_flag |= STOPSISTRIGGERSEND;
                     ptm_dcb[index].SISMIC_flag &= ~HABTRIGGER_FLAG;
                     ptm_dcb[index].SISMIC_flag &= ~FIRSTTRIGGER;
                 }
+                logCidEvent(account, 1, 897, (uint16_t)ptm_dcb[index].particion, 1);
 
                 trigcount++;
 #ifdef DEBUG_SISMIC
                 CommSendString(DEBUG_COMM, "SISMICO entrante\n\r");
 #endif
-                if(trigcount > 2)   {
-                    timeout = SEC_TIMER + 2;
+                if(trigcount >= 1)   {
+                    //timeout = SEC_TIMER + howmuchptm + 15;
+                    timeout = SEC_TIMER + 6;
                     ptm_dcb[index].sismic_state = FSMSISM_UCWAIT;
-                    //ptm_dcb[index].SISMIC_flag &= ~STOPSISTRIGGERSEND;
-                    RFDLYBOR_flag &= ~RFDLYBOR_TDONE_FLAG;
+
+                    RFDLYBOR_flag |= RFDLYBOR_TDONE_FLAG;
                     RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
                     RFDLYBOR_flag &= ~RFDLYBOR_TESOGAP_FLAG;
+                    ptm_dcb[index].RFALRMDLY_flag &= ~RFALRMDLY_BORNERA_FLAG;
 
 #ifdef DEBUG_SISMIC
                     CommSendString(DEBUG_COMM, "SISMICO pasante\n\r");
@@ -3862,12 +3894,16 @@ void fsm_ptm_sismic( unsigned char index)
                 RFDLYBOR_flag &= ~RFDLYBOR_TDONE_FLAG;
                 RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
                 RFDLYBOR_flag &= ~RFDLYBOR_TESOGAP_FLAG;
+                ptm_dcb[index].RFALRMDLY_flag &= ~RFALRMDLY_BORNERA_FLAG;
 #ifdef DEBUG_SISMIC
                 CommSendString(DEBUG_COMM, "PTM Armado\n\r");
 #endif
             }
             break;
         case FSMSISM_UCWAIT:
+            RFDLYBOR_flag &= ~RFDLYBOR_TDONE_FLAG;
+            RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
+            RFDLYBOR_flag &= ~RFDLYBOR_TESOGAP_FLAG;
             if(SEC_TIMER > timeout) {
                 ptm_dcb[index].sismic_state = FSMSISM_UNPROTECTED_TRIG;
                 ptm_dcb[index].SISMIC_flag &= ~STOPSISTRIGGERSEND;
@@ -3878,6 +3914,11 @@ void fsm_ptm_sismic( unsigned char index)
                 RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
                 RFDLYBOR_flag &= ~RFDLYBOR_TESOGAP_FLAG;
                 ptm_dcb[index].SISMIC_flag &= ~PTM_EVENT_E130Z1;
+                for(i = 0; i < MAXQTYPTM; i++)  {
+                    if(IsSismicPartition(i))    {
+                        ptm_dcb[i].RFALRMDLY_flag &= ~RFALRMDLY_BORNERA_FLAG;
+                    }
+                }
             }
             break;
         case FSMSISM_UNPROTECTED_OPEN:
@@ -3893,22 +3934,25 @@ void fsm_ptm_sismic( unsigned char index)
                 RFDLYBOR_flag |= RFDLYBOR_TDONE_FLAG;
                 RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
                 RFDLYBOR_flag &= ~RFDLYBOR_TESOGAP_FLAG;
+                ptm_dcb[index].RFALRMDLY_flag |= RFALRMDLY_BORNERA_FLAG;
 
                 if(trigcount == 0) {
                     ptm_dcb[index].SISMIC_flag |= STOPSISTRIGGERSEND;
                     ptm_dcb[index].SISMIC_flag &= ~HABTRIGGER_FLAG;
                     ptm_dcb[index].SISMIC_flag &= ~FIRSTTRIGGER;
                 }
+                logCidEvent(account, 1, 897,  (uint16_t)ptm_dcb[index].particion, 1);
 
                 trigcount++;
 #ifdef DEBUG_SISMIC
                 CommSendString(DEBUG_COMM, "SISMICO entrante\n\r");
 #endif
-                if(trigcount > 1)   {
-                    timeout = SEC_TIMER + 10;
+                if(trigcount >= 1)   {
+                    //timeout = SEC_TIMER + howmuchptm + 15;
+                    timeout = SEC_TIMER + 4;
                     ptm_dcb[index].sismic_state = FSMSISM_UCWAIT;
-                    //ptm_dcb[index].SISMIC_flag &= ~STOPSISTRIGGERSEND;
-                    RFDLYBOR_flag &= ~RFDLYBOR_TDONE_FLAG;
+
+                    RFDLYBOR_flag |= RFDLYBOR_TDONE_FLAG;
                     RFDLYBOR_flag &= ~RFDLYBOR_TESO_FLAG;
                     RFDLYBOR_flag &= ~RFDLYBOR_TESOGAP_FLAG;
 
@@ -3947,6 +3991,9 @@ void fsm_ptm_sismic( unsigned char index)
 int IsSismicPartition(int index)
 {
     if((ptm_dcb[index].particion >= 10) && (ptm_dcb[index].particion <= 19)) {
+        return 1;
+    } else
+    if((ptm_dcb[index].particion >= 20) && (ptm_dcb[index].particion <= 29)) {
         return 1;
     } else
     if((ptm_dcb[index].particion >= 40) && (ptm_dcb[index].particion <= 49)) {

@@ -206,7 +206,7 @@ time_t ConvTimestamp(char *contimestamp);
 #define EVSET_TECNICO       8
 #define EVSET_ALL           99
 
-#define EVSET_LEN           106
+#define EVSET_LEN           107
 #define EVSET_TYPE_LEN      9
 
 #define MACROEVENTS_LEN     30

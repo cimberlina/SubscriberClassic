@@ -83,7 +83,7 @@ typedef struct
 } PBT_device;
 
 extern int lan485errorpkt;
-extern int howmuchdev;
+extern int howmuchdev, howmuchptm;
 extern long accumulated_errors, totalpakets;
 
 extern PTM_device ptm_dcb[MAXQTYPTM];

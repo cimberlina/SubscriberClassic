@@ -1070,6 +1070,7 @@ void fsm_deteccion_tesoro( void )
                 if(sismicflag & HABTRIGGER_FLAG) {
                     RFDLYBOR_flag |= RFDLYBOR_TESO_FLAG;
                     dteso_state = TESORO_ALRM;
+
                 } else  {
                     dteso_state = TESORO_IDLE;
                 }
