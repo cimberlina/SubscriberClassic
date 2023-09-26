@@ -443,4 +443,7 @@ int IsWrightTimePoll( void );
 void FSM_WriteHistory(void);
 void FSM_ReadHistory(void);
 
+void Write_PTM_termic(void);
+void Read_PTM_termic(void);
+
 #endif /* FSM_DETECCION_H_ */

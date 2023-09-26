@@ -1415,7 +1415,7 @@ void fsm_deteccion_apertura( void )
 		case APER_IDLE :
 			if( (SysInputs & APER_sbit) || (RADAR_flags & AP_RADAR_FLAG)  )	{
 				daper_state = APER_WAIT;
-				timerdbncaper = 1000;
+				timerdbncaper = 800;
 			}
 			else
 			if(SystemFlag2 & APE1WDOG_FLAG)	{
@@ -1612,7 +1612,7 @@ void fsm_deteccion_apertura2( void )
                 }
                 if (SystemFlag2 & APE2_sbit) {
                     daper2_state = APER_WAIT;
-                    timerdbncaper = 1000;
+                    timerdbncaper = 800;
                 } else if (SystemFlag2 & APE2WDOG_FLAG) {
                     SystemFlag2 &= ~APE2WDOG_FLAG;
                 }
@@ -3494,6 +3494,41 @@ void FSM_ReadHistory(void)
         }
     }
 }
+void Read_PTM_termic(void)
+{
+    uint8_t mybuffer[MAXQTYPTM];
+    int len, i;
+
+    len = flash0_read(mybuffer, DF_PTMTERMIC_OFFSET, MAXQTYPTM);
+
+    for( i = 0; i < MAXQTYPTM; i++ )    {
+        if( mybuffer[i] == FSMTERM_TRIGGERED)
+            ptm_dcb[i].termic_state = mybuffer[i];
+        else
+            ptm_dcb[i].termic_state = FSMTERM_IDLE;
+    }
+}
+
+void Write_PTM_termic(void)
+{
+    uint8_t mybuffer[MAXQTYPTM], temp[MAXQTYPTM];
+    int i;
+    int len;
+
+    for(i = 0; i < MAXQTYPTM; i++)
+        mybuffer[i] = ptm_dcb[i].termic_state;
+
+    len = flash0_write(1, mybuffer, DF_PTMTERMIC_OFFSET, MAXQTYPTM);
+
+    len = flash0_read(temp, DF_PTMTERMIC_OFFSET, MAXQTYPTM);
+
+    for( i = 0; i < MAXQTYPTM; i++ )	{
+        if( mybuffer[i] != temp[i] )	{
+            len = flash0_write(1, mybuffer, DF_PTMTERMIC_OFFSET, MAXQTYPTM);
+            break;
+        }
+    }
+}
 
 void FSM_WriteHistory(void)
 {
@@ -4554,6 +4589,7 @@ void recharge_alarm(uint8_t alarm)
 					} else	{
 						teso_autr_counter = 0;
 						teso_autorst_timer_min = paparst_timer*60;
+                        norm_teso_timer = paparst_timer*60;
 					}
 				}
 				led_dcb[TESO_led].led_cad = 255*0x100 + 0;

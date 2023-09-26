@@ -98,9 +98,9 @@ const ConsoleCommand console_commands[] =
 	{ "we2prom fmode", 	con_E2PROM_Write_fmode,	0,		MONI_LEVEL},
 	{ "we2prom fmodly", con_E2PROM_Write_fmodelay, 0,	MONI_LEVEL},
 	{ "we2prom zone", 	con_E2PROM_Write_zone, 	0,		MONI_LEVEL},
-	{ "debug rf", 		con_DBGRF_mode, 		0,		OPER_LEVEL},
-	{ "debug aborf", 	con_DBGABORF_mode,		0,		OPER_LEVEL},
-    { "debug lan", 	con_DBGLAN_mode,		0,		OPER_LEVEL},
+//	{ "debug rf", 		con_DBGRF_mode, 		0,		OPER_LEVEL},
+//	{ "debug aborf", 	con_DBGABORF_mode,		0,		OPER_LEVEL},
+//    { "debug lan", 	con_DBGLAN_mode,		0,		OPER_LEVEL},
 //	{ "RDCONFMEM", 		con_E2PROM_read1,		0,		OPER_LEVEL},    //-
 	{ "set prevetimer", con_set_prevetimer, 	0,		MONI_LEVEL},
 
@@ -117,8 +117,8 @@ const ConsoleCommand console_commands[] =
 
 	//configuracion de rabbit
 	{ "set numabo",		con_numabo,				0,		OPER_LEVEL},
-	{ "set numcen",		con_numcen,				0,		OPER_LEVEL},
-	{ "set nomsuc",		con_nomsuc,				0,		OPER_LEVEL},
+//	{ "set numcen",		con_numcen,				0,		OPER_LEVEL},
+//	{ "set nomsuc",		con_nomsuc,				0,		OPER_LEVEL},
 	{ "set cuenta1",	con_cuenta1,			0,		MONI_LEVEL},
 	{ "set cuenta2",	con_cuenta2,			0,		MONI_LEVEL},
 	{ "set cuentar3k",	con_cuentaR3K,			0,		MONI_LEVEL},
@@ -147,7 +147,7 @@ const ConsoleCommand console_commands[] =
 	{ "del ptmdev",		del_ptmdev,				0,		MCMI_LEVEL},
 	{ "config ptm",		cfg3_ptmdev,			0,		PROD_LEVEL},
 	{ "format ptmtbl",	format_lan_cfgfile,		0,		MCMI_LEVEL},
-    { "help",           helpcmd,                0,		OPER_LEVEL},
+//    { "help",           helpcmd,                0,		OPER_LEVEL},
     { "factory",        factorycmd,             0,		MCMI_LEVEL},
     { "set r3kmode",   	con_rs232,   	        0,		OPER_LEVEL},
 //    { "redbox",   		con_redbox,   	        0,		MONI_LEVEL},    //-
@@ -171,8 +171,8 @@ const ConsoleCommand console_commands[] =
     //{ "manual_event",	send_manual_event,		0,		MCMI_LEVEL},
     //{ "LIC",			set_license,			0,		FREE_LEVEL},
     { "set NPEVENT",	con_set_npmed,			0,		MONI_LEVEL},
-    { "medir NP",		measure_np, 			0,		MONI_LEVEL},
-    { "medir BAT",		measure_bat, 			0,		MONI_LEVEL},    //-
+//    { "medir NP",		measure_np, 			0,		MONI_LEVEL},
+//    { "medir BAT",		measure_bat, 			0,		MONI_LEVEL},    //-
     { "set BOOT",		con_set_bootmode, 		0,		MONI_LEVEL},
     { "calib",			con_calib,		 		0,		MONI_LEVEL},
     { "replicar",		con_replicar,	 		0,		OPER_LEVEL},
@@ -242,7 +242,7 @@ const ConsoleCommand console_commands[] =
 //    { "DeactEvLic",    con_evsend_deactivation,0,		MCMI_LEVEL},
     { "set NETRSTHAB",	con_netrsthab,		    0,		MCMI_LEVEL},
     { "set HIGRSTHAB",	con_higrsthab,		    0,		MCMI_LEVEL},
-    { "gencid",	con_gencid,		    0,		MCMI_LEVEL},        //-
+//    { "gencid",	con_gencid,		    0,		MCMI_LEVEL},        //-
 //    { "closerst",	con_closerst,		    0,		MCMI_LEVEL},    //-
 //    { "closesoc",	con_closesoc,		    0,		MCMI_LEVEL},    //-
     { "w",             con_evowdog,               0,		MONI_LEVEL},
@@ -1468,57 +1468,57 @@ int con_E2PROM_Write_zone(ConsoleState* state)
 	return 1;
 }
 
-int con_DBGRF_mode(ConsoleState* state)
-{
-	uint16_t fmodetype;
+//int con_DBGRF_mode(ConsoleState* state)
+//{
+//	uint16_t fmodetype;
+//
+//	if( state->numparams < 3 )	{
+//		state->conio->puts("DEBUG RF 0|1\n\r");
+//		return 1;
+//	}
+//	fmodetype = atoi(con_getparam(state->command, 2));
+//
+//	switch(fmodetype)	{
+//		case 0:
+//			DebugFlag &= ~DBGRF_ON_flag;
+//			break;
+//		case 1:
+//			DebugFlag |= DBGRF_ON_flag;
+//			break;
+//		default:
+//			state->conio->puts("*** DEBUG RF ERROR  ***\n\r");
+//			return -1;
+//			break;
+//	}
+//
+//	return 1;
+//}
 
-	if( state->numparams < 3 )	{
-		state->conio->puts("DEBUG RF 0|1\n\r");
-		return 1;
-	}
-	fmodetype = atoi(con_getparam(state->command, 2));
-
-	switch(fmodetype)	{
-		case 0:
-			DebugFlag &= ~DBGRF_ON_flag;
-			break;
-		case 1:
-			DebugFlag |= DBGRF_ON_flag;
-			break;
-		default:
-			state->conio->puts("*** DEBUG RF ERROR  ***\n\r");
-			return -1;
-			break;
-	}
-
-	return 1;
-}
-
-int con_DBGLAN_mode(ConsoleState* state)
-{
-    uint16_t fmodetype;
-
-    if( state->numparams < 3 )	{
-        state->conio->puts("DEBUG LAN 0|1\n\r");
-        return 1;
-    }
-    fmodetype = atoi(con_getparam(state->command, 2));
-
-    switch(fmodetype)	{
-        case 0:
-            DebugFlag &= ~LAN485DBG_flag;
-            break;
-        case 1:
-            DebugFlag |= LAN485DBG_flag;
-            break;
-        default:
-            state->conio->puts("*** DEBUG LAN ERROR  ***\n\r");
-            return -1;
-            break;
-    }
-
-    return 1;
-}
+//int con_DBGLAN_mode(ConsoleState* state)
+//{
+//    uint16_t fmodetype;
+//
+//    if( state->numparams < 3 )	{
+//        state->conio->puts("DEBUG LAN 0|1\n\r");
+//        return 1;
+//    }
+//    fmodetype = atoi(con_getparam(state->command, 2));
+//
+//    switch(fmodetype)	{
+//        case 0:
+//            DebugFlag &= ~LAN485DBG_flag;
+//            break;
+//        case 1:
+//            DebugFlag |= LAN485DBG_flag;
+//            break;
+//        default:
+//            state->conio->puts("*** DEBUG LAN ERROR  ***\n\r");
+//            return -1;
+//            break;
+//    }
+//
+//    return 1;
+//}
 
 //int con_perifpwr(ConsoleState* state)
 //{
@@ -1546,31 +1546,31 @@ int con_DBGLAN_mode(ConsoleState* state)
 //    return 1;
 //}
 
-int con_DBGABORF_mode(ConsoleState* state)
-{
-	uint16_t fmodetype;
-
-	if( state->numparams < 3 )	{
-		state->conio->puts("DEBUG ABORF 0|1\n\r");
-		return 1;
-	}
-	fmodetype = atoi(con_getparam(state->command, 2));
-
-	switch(fmodetype)	{
-		case 0:
-			DebugFlag &= ~DBGABORF_flag;
-			break;
-		case 1:
-			DebugFlag |= DBGABORF_flag;
-			break;
-		default:
-			state->conio->puts("*** DEBUG RF ERROR  ***\n\r");
-			return -1;
-			break;
-	}
-
-	return 1;
-}
+//int con_DBGABORF_mode(ConsoleState* state)
+//{
+//	uint16_t fmodetype;
+//
+//	if( state->numparams < 3 )	{
+//		state->conio->puts("DEBUG ABORF 0|1\n\r");
+//		return 1;
+//	}
+//	fmodetype = atoi(con_getparam(state->command, 2));
+//
+//	switch(fmodetype)	{
+//		case 0:
+//			DebugFlag &= ~DBGABORF_flag;
+//			break;
+//		case 1:
+//			DebugFlag |= DBGABORF_flag;
+//			break;
+//		default:
+//			state->conio->puts("*** DEBUG RF ERROR  ***\n\r");
+//			return -1;
+//			break;
+//	}
+//
+//	return 1;
+//}
 /////////////////////////////////////////////////////////////////////////////////////
 // Funciones de configuracion de rabbit
 
@@ -1618,104 +1618,104 @@ int con_numabo(ConsoleState* state)
 	return 1;
 }
 
-int con_numcen(ConsoleState* state)
-{
-	uint16_t numcen;
-	uint8_t retval;
-	int error;
-	char *tmpbuf;
-	char buffer[32];
-
-	buffer[0] = 0;
-
-	if( state->numparams < 3 )	{
-		state->conio->puts("set numcen nro_central\n\r");
-		retval = EepromReadByte(RFNUMCEN_E2P_ADDR, &error);
-			Str_Cat(buffer, "PGMD MON NUMCEN = ");
-			//sprintHexWord(tmpbuf, retval);
-			tmpbuf = itoa(retval);
-			Str_Cat(buffer, tmpbuf);
-			Str_Cat(buffer, "\n\r");
-			state->conio->puts(buffer);
-		return 1;
-	}
-	numcen = atoi(con_getparam(state->command, 2));
-	if((numcen > 0) && (numcen < 200))
-		EepromWriteByte(RFNUMCEN_E2P_ADDR, (uint8_t)numcen, &error);
-	else	{
-		state->conio->puts("*** MON CENTRAL NUMBER ERROR  ***\n\r");
-		return -1;
-	}
-	retval = EepromReadByte(RFNUMCEN_E2P_ADDR, &error);
-	Str_Cat(buffer, "PGMD MON NUMCEN = ");
-	//sprintHexWord(tmpbuf, retval);
-	tmpbuf = itoa(retval);
-	Str_Cat(buffer, tmpbuf);
-	Str_Cat(buffer, "\n\r");
-	state->conio->puts(buffer);
-
-	if(retval == numcen)
-		NumCen = numcen;
-
-
-	return 1;
-}
-
-int con_nomsuc(ConsoleState* state)
-{
-	int len, error, i;
-	char buffer[33];
-
-
-	if( state->numparams < 3 )	{
-		state->conio->puts("set nomsuc \"nombre de sucursal\"\n\r");
-		EepromReadBuffer(NOMSUC_E2P_ADDR, buffer, 32, &error);
-		state->conio->puts("PGMD NOMSUC: ");
-		for(i = 0; i < 33; i++ )	{
-			if(buffer[i] == 0x00 )
-				break;
-			if(buffer[i] > 127)	{
-				state->conio->puts("\n\r");
-				return 1;
-			}
-		}
-		buffer[32] = 0;
-		state->conio->puts(buffer);
-		state->conio->puts("\n\r");
-		return 1;
-	}
-
-	len = strlen( con_getparam(state->command, 2) ) + 1;
-
-	if( len > 32 )	{
-		state->conio->puts("ERROR *** El nombre de la sucursal no debe ser mayor a 32 caracteres\n\r");
-		return 1;
-	}
-
-
-	EepromWriteBuffer(NOMSUC_E2P_ADDR, con_getparam(state->command, 2), len, &error);
-	EepromReadBuffer(NOMSUC_E2P_ADDR, buffer, len, &error);
-	buffer[32] = 0;
-
-	//state->conio->puts(buffer);
-
-	state->conio->puts("PGMD NOMSUC: ");
-	for(i = 0; i < len; i++ )	{
-		if(buffer[i] == 0x00 )
-			break;
-		if(buffer[i] > 127)	{
-			state->conio->puts("\n\r");
-			return 1;
-		}
-	}
-
-	state->conio->puts(buffer);
-	state->conio->puts("\n\r");
-
-	//Str_Copy_N(NomSuc, buffer, len);
-
-	return 1;
-}
+//int con_numcen(ConsoleState* state)
+//{
+//	uint16_t numcen;
+//	uint8_t retval;
+//	int error;
+//	char *tmpbuf;
+//	char buffer[32];
+//
+//	buffer[0] = 0;
+//
+//	if( state->numparams < 3 )	{
+//		state->conio->puts("set numcen nro_central\n\r");
+//		retval = EepromReadByte(RFNUMCEN_E2P_ADDR, &error);
+//			Str_Cat(buffer, "PGMD MON NUMCEN = ");
+//			//sprintHexWord(tmpbuf, retval);
+//			tmpbuf = itoa(retval);
+//			Str_Cat(buffer, tmpbuf);
+//			Str_Cat(buffer, "\n\r");
+//			state->conio->puts(buffer);
+//		return 1;
+//	}
+//	numcen = atoi(con_getparam(state->command, 2));
+//	if((numcen > 0) && (numcen < 200))
+//		EepromWriteByte(RFNUMCEN_E2P_ADDR, (uint8_t)numcen, &error);
+//	else	{
+//		state->conio->puts("*** MON CENTRAL NUMBER ERROR  ***\n\r");
+//		return -1;
+//	}
+//	retval = EepromReadByte(RFNUMCEN_E2P_ADDR, &error);
+//	Str_Cat(buffer, "PGMD MON NUMCEN = ");
+//	//sprintHexWord(tmpbuf, retval);
+//	tmpbuf = itoa(retval);
+//	Str_Cat(buffer, tmpbuf);
+//	Str_Cat(buffer, "\n\r");
+//	state->conio->puts(buffer);
+//
+//	if(retval == numcen)
+//		NumCen = numcen;
+//
+//
+//	return 1;
+//}
+//
+//int con_nomsuc(ConsoleState* state)
+//{
+//	int len, error, i;
+//	char buffer[33];
+//
+//
+//	if( state->numparams < 3 )	{
+//		state->conio->puts("set nomsuc \"nombre de sucursal\"\n\r");
+//		EepromReadBuffer(NOMSUC_E2P_ADDR, buffer, 32, &error);
+//		state->conio->puts("PGMD NOMSUC: ");
+//		for(i = 0; i < 33; i++ )	{
+//			if(buffer[i] == 0x00 )
+//				break;
+//			if(buffer[i] > 127)	{
+//				state->conio->puts("\n\r");
+//				return 1;
+//			}
+//		}
+//		buffer[32] = 0;
+//		state->conio->puts(buffer);
+//		state->conio->puts("\n\r");
+//		return 1;
+//	}
+//
+//	len = strlen( con_getparam(state->command, 2) ) + 1;
+//
+//	if( len > 32 )	{
+//		state->conio->puts("ERROR *** El nombre de la sucursal no debe ser mayor a 32 caracteres\n\r");
+//		return 1;
+//	}
+//
+//
+//	EepromWriteBuffer(NOMSUC_E2P_ADDR, con_getparam(state->command, 2), len, &error);
+//	EepromReadBuffer(NOMSUC_E2P_ADDR, buffer, len, &error);
+//	buffer[32] = 0;
+//
+//	//state->conio->puts(buffer);
+//
+//	state->conio->puts("PGMD NOMSUC: ");
+//	for(i = 0; i < len; i++ )	{
+//		if(buffer[i] == 0x00 )
+//			break;
+//		if(buffer[i] > 127)	{
+//			state->conio->puts("\n\r");
+//			return 1;
+//		}
+//	}
+//
+//	state->conio->puts(buffer);
+//	state->conio->puts("\n\r");
+//
+//	//Str_Copy_N(NomSuc, buffer, len);
+//
+//	return 1;
+//}
 
 int con_cuenta1(ConsoleState* state)
 {
@@ -3185,20 +3185,20 @@ int cfg3_ptmdev(ConsoleState* state)
 	return 1;
 }
 
-int helpcmd(ConsoleState* state)
-{
-    int i;
-    OS_ERR os_err;
-    
-    for( i = 0; help_commands[i][0] != '~'; i++)    {
-        state->conio->puts( help_commands[i] );
-        state->conio->puts( "\n\r" );
-        WDT_Feed();
-        //OSTimeDlyHMSM(0, 0, 0, 300, OS_OPT_TIME_HMSM_STRICT, &os_err);
-    }
-    return 1;
-    
-}
+//int helpcmd(ConsoleState* state)
+//{
+//    int i;
+//    OS_ERR os_err;
+//
+//    for( i = 0; help_commands[i][0] != '~'; i++)    {
+//        state->conio->puts( help_commands[i] );
+//        state->conio->puts( "\n\r" );
+//        WDT_Feed();
+//        //OSTimeDlyHMSM(0, 0, 0, 300, OS_OPT_TIME_HMSM_STRICT, &os_err);
+//    }
+//    return 1;
+//
+//}
 
 int dump_ptmdev(ConsoleState* state)
 {
@@ -5804,46 +5804,46 @@ int con_set_radar(ConsoleState* state)
 }
 
 
-int measure_np(ConsoleState* state)
-{
-	int i;
-	float m, v, v1, v2, x1, x2, x;
-	char *bufferptr, buffer[128];
-
-	for(i = 0; i < 128; i++)
-		buffer[i] = 0;
-
-	for(i = 0; i < 26; i++)	{
-		if(np_med1 < npscale[i][1])
-			break;
-	}
-
-	x1 = npscale[i-1][1];
-	x2 = npscale[i][1];
-	v1 = npscale[i-1][0];
-	v2 = npscale[i][0];
-	x = np_med1;
-
-	m = (v2 - v1)/(x2-x1);
-
-	v = v1 + m*(x-x1);
-
-	bufferptr = itoa((int)v);
-
-	state->conio->puts("\n\r");
-	Str_Cat(buffer,"Nivel de Portadora = ");
-	buffer[21] = bufferptr[0];
-	buffer[22] = '.';
-
-	for(i = 0; bufferptr[i+1] != 0; i++)	{
-		buffer[i+23] = bufferptr[i+1];
-	}
-	buffer[i+23] = 0;
-	Str_Cat(buffer, " Volts");
-
-	state->conio->puts(buffer);
-	return 1;
-}
+//int measure_np(ConsoleState* state)
+//{
+//	int i;
+//	float m, v, v1, v2, x1, x2, x;
+//	char *bufferptr, buffer[128];
+//
+//	for(i = 0; i < 128; i++)
+//		buffer[i] = 0;
+//
+//	for(i = 0; i < 26; i++)	{
+//		if(np_med1 < npscale[i][1])
+//			break;
+//	}
+//
+//	x1 = npscale[i-1][1];
+//	x2 = npscale[i][1];
+//	v1 = npscale[i-1][0];
+//	v2 = npscale[i][0];
+//	x = np_med1;
+//
+//	m = (v2 - v1)/(x2-x1);
+//
+//	v = v1 + m*(x-x1);
+//
+//	bufferptr = itoa((int)v);
+//
+//	state->conio->puts("\n\r");
+//	Str_Cat(buffer,"Nivel de Portadora = ");
+//	buffer[21] = bufferptr[0];
+//	buffer[22] = '.';
+//
+//	for(i = 0; bufferptr[i+1] != 0; i++)	{
+//		buffer[i+23] = bufferptr[i+1];
+//	}
+//	buffer[i+23] = 0;
+//	Str_Cat(buffer, " Volts");
+//
+//	state->conio->puts(buffer);
+//	return 1;
+//}
 
 void log_nivel_portadora(void)
 {
@@ -5876,71 +5876,71 @@ void log_nivel_portadora(void)
 
 }
 
-int measure_bat(ConsoleState* state)
-{
-	int i;
-	float m, v, v1, v2, x1, x2, x;
-	char *bufferptr, buffer[128];
-
-	for(i = 0; i < 128; i++)
-		buffer[i] = 0;
-
-	for(i = 0; i < 21; i++)	{
-		if(bat_med1 < batscale[i][1])
-			break;
-	}
-
-
-
-	x1 = batscale[i-1][1];
-	x2 = batscale[i][1];
-	v1 = batscale[i-1][0];
-	v2 = batscale[i][0];
-	x = bat_med1;
-
-	m = (v2 - v1)/(x2-x1);
-
-	v = v1 + m*(x-x1);
-
-	bufferptr = itoa((int)v);
-
-	state->conio->puts("\n\r");
-	Str_Cat(buffer,bufferptr);
-	state->conio->puts(buffer);
-
-	if(bat_med1 >= 3360)	{
-		state->conio->puts("Tension de bateria mayor a 12V\n\r ");
-		return 1;
-	}
-
-	for(i = 0; i < 128; i++)
-		buffer[i] = 0;
-	state->conio->puts("\n\r");
-	Str_Cat(buffer,"Tension de bateria = ");
-	if(v >= 1000)	{
-		buffer[21] = bufferptr[0];
-		buffer[22] = bufferptr[1];
-		buffer[23] = '.';
-		for(i = 0; bufferptr[i+2] != 0; i++)	{
-			buffer[i+24] = bufferptr[i+2];
-		}
-		buffer[i+24] = 0;
-	} else	{
-		buffer[21] = bufferptr[0];
-		buffer[22] = '.';
-		for(i = 0; bufferptr[i+1] != 0; i++)	{
-			buffer[i+23] = bufferptr[i+1];
-		}
-		buffer[i+23] = 0;
-	}
-
-
-
-	Str_Cat(buffer, " Volts");
-
-	state->conio->puts(buffer);
-	return 1;
-}
+//int measure_bat(ConsoleState* state)
+//{
+//	int i;
+//	float m, v, v1, v2, x1, x2, x;
+//	char *bufferptr, buffer[128];
+//
+//	for(i = 0; i < 128; i++)
+//		buffer[i] = 0;
+//
+//	for(i = 0; i < 21; i++)	{
+//		if(bat_med1 < batscale[i][1])
+//			break;
+//	}
+//
+//
+//
+//	x1 = batscale[i-1][1];
+//	x2 = batscale[i][1];
+//	v1 = batscale[i-1][0];
+//	v2 = batscale[i][0];
+//	x = bat_med1;
+//
+//	m = (v2 - v1)/(x2-x1);
+//
+//	v = v1 + m*(x-x1);
+//
+//	bufferptr = itoa((int)v);
+//
+//	state->conio->puts("\n\r");
+//	Str_Cat(buffer,bufferptr);
+//	state->conio->puts(buffer);
+//
+//	if(bat_med1 >= 3360)	{
+//		state->conio->puts("Tension de bateria mayor a 12V\n\r ");
+//		return 1;
+//	}
+//
+//	for(i = 0; i < 128; i++)
+//		buffer[i] = 0;
+//	state->conio->puts("\n\r");
+//	Str_Cat(buffer,"Tension de bateria = ");
+//	if(v >= 1000)	{
+//		buffer[21] = bufferptr[0];
+//		buffer[22] = bufferptr[1];
+//		buffer[23] = '.';
+//		for(i = 0; bufferptr[i+2] != 0; i++)	{
+//			buffer[i+24] = bufferptr[i+2];
+//		}
+//		buffer[i+24] = 0;
+//	} else	{
+//		buffer[21] = bufferptr[0];
+//		buffer[22] = '.';
+//		for(i = 0; bufferptr[i+1] != 0; i++)	{
+//			buffer[i+23] = bufferptr[i+1];
+//		}
+//		buffer[i+23] = 0;
+//	}
+//
+//
+//
+//	Str_Cat(buffer, " Volts");
+//
+//	state->conio->puts(buffer);
+//	return 1;
+//}
 
 
 int con_set_bootmode(ConsoleState* state)
@@ -8677,56 +8677,52 @@ int con_DeltaT(ConsoleState* state)
     return 1;
 }
 
-int con_gencid(ConsoleState* state)
-{
-    uint16_t devnum, evqual, event, particion, zone;
-    uint8_t event_buffer[32];
-    int temp, temp1;
-
-    devnum = atoi( con_getparam(state->command, 1) );
-    evqual = atoi( con_getparam(state->command, 2) );
-    event = atoi( con_getparam(state->command, 3) );
-    particion = atoi( con_getparam(state->command, 4) );
-    zone = atoi( con_getparam(state->command, 5));
-
-    //-----------------------------------------------------------
-    if(evqual == 1)
-        event_buffer[8] = 'E';
-    else if(evqual == 3)
-        event_buffer[8] = 'R';
-
-    temp = event / 100;
-    temp1 = event % 100;
-    event_buffer[9] = temp + '0';
-    temp = temp1 / 10;
-    temp1 = event % 10;
-    event_buffer[10] = temp + '0';
-    event_buffer[11] = temp1 + '0';
-
-    temp = particion / 10;
-    temp1 = particion % 10;
-    event_buffer[13] = temp + '0';
-    event_buffer[14] = temp1 + '0';
-
-    temp = zone / 100;
-    temp1 = zone % 100;
-    event_buffer[16] = temp + '0';
-    temp = temp1 / 10;
-    temp1 = zone % 10;
-    event_buffer[17] = temp + '0';
-    event_buffer[18] = temp1 + '0';
-
-    ProcessEvents( event_buffer, devnum );
-
-//    eventcode = (event_buffer[9] - '0')*100 + (event_buffer[10] - '0')*10 +  (event_buffer[11] - '0');
-//    eventpartition = (event_buffer[13] - '0')*10 + (event_buffer[14] - '0');
-//    eventzone = (event_buffer[16] - '0')*100 + (event_buffer[17] - '0')*10 + (event_buffer[18] - '0');
-    //-----------------------------------------------------------
-
-    logCidEvent(account, evqual, event, particion, zone);
-
-    return 1;
-}
+//int con_gencid(ConsoleState* state)
+//{
+//    uint16_t devnum, evqual, event, particion, zone;
+//    uint8_t event_buffer[32];
+//    int temp, temp1;
+//
+//    devnum = atoi( con_getparam(state->command, 1) );
+//    evqual = atoi( con_getparam(state->command, 2) );
+//    event = atoi( con_getparam(state->command, 3) );
+//    particion = atoi( con_getparam(state->command, 4) );
+//    zone = atoi( con_getparam(state->command, 5));
+//
+//    //-----------------------------------------------------------
+//    if(evqual == 1)
+//        event_buffer[8] = 'E';
+//    else if(evqual == 3)
+//        event_buffer[8] = 'R';
+//
+//    temp = event / 100;
+//    temp1 = event % 100;
+//    event_buffer[9] = temp + '0';
+//    temp = temp1 / 10;
+//    temp1 = event % 10;
+//    event_buffer[10] = temp + '0';
+//    event_buffer[11] = temp1 + '0';
+//
+//    temp = particion / 10;
+//    temp1 = particion % 10;
+//    event_buffer[13] = temp + '0';
+//    event_buffer[14] = temp1 + '0';
+//
+//    temp = zone / 100;
+//    temp1 = zone % 100;
+//    event_buffer[16] = temp + '0';
+//    temp = temp1 / 10;
+//    temp1 = zone % 10;
+//    event_buffer[17] = temp + '0';
+//    event_buffer[18] = temp1 + '0';
+//
+//    ProcessEvents( event_buffer, devnum );
+//
+//
+//    logCidEvent(account, evqual, event, particion, zone);
+//
+//    return 1;
+//}
 
 //int con_closerst(ConsoleState* state)
 //{

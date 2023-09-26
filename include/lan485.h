@@ -46,7 +46,10 @@ typedef struct	{
     uint8_t     sismic_state;
     time_t      sismic_timer;
     uint32_t    SISMIC_flag;
+    uint8_t     trigcount;
     //------------------------------------
+    uint8_t     termic_state;
+    time_t      termic_timer;
 } PTM_device;
 
 #define FSMSISM_IDLE                0x0010
@@ -55,6 +58,11 @@ typedef struct	{
 #define FSMSISM_UNPROTECTED_TRIG    0x0035
 #define FSMSISM_PROTECTED           0x0040
 #define FSMSISM_UCWAIT              0x0025
+
+#define FSMTERM_IDLE                0x10
+#define FSMTERM_ON_WAIT             0x20
+#define FSMTERM_ON_WAIT2            0x25
+#define FSMTERM_TRIGGERED           0x30
 
 #define PTM_STATUS_ARMADO   (1 << 0)
 #define PTM_STATUS_TAMPER   (1 << 1)
@@ -73,6 +81,11 @@ typedef struct	{
 #define PTM_STATUS_DESARMADO   (1 << 14)
 #define STOPTRIGCIDSEND     (1 << 15)
 #define FIRSTTRIGGER        (1 << 16)
+#define PTM_FROM_OPEN      (1 << 17)
+#define PTM_FROM_CLOSE      (1 << 18)
+#define PTM_CLOSE_OPEN      (1 << 19)
+#define PTM_OPEN_CLOSE      (1 << 20)
+#define PTM_OPEN_TRIGG      (1 << 21)
 #define PTM_STATUS_VALID    (1 << 31)
 
 typedef struct 
@@ -224,8 +237,8 @@ void fsm_ptmsignalling( void );
 
 void fsm_ptm_sismic(unsigned char index);
 int IsSismicPartition(int index);
+void fsm_ptm_termic(uint8_t index);
 
-void SendProblem386(uint8_t ptm_index, uint8_t erevent);
 
 
 //eventos de alarmas que necesitan normalizacion
