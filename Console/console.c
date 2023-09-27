@@ -3228,27 +3228,30 @@ int dump_ptmdev(ConsoleState* state)
 		sprintByte(tmpbuffer, ptm_dcb[i].particion);
 		Str_Cat(buffer,"PARTICION: "); Str_Cat(buffer,itoa(ptm_dcb[i].particion)); Str_Cat(buffer, "(0x");Str_Cat(buffer, tmpbuffer) ;Str_Cat(buffer, ")\t");
 
-		Str_Cat(buffer,"DISP: ");
-		switch(ptm_dcb[i].disparo)	{
-		case 'A':
-			Str_Cat(buffer,"ASALTO\n\r");
-			break;
-		case 'I':
-			Str_Cat(buffer,"INCENDIO\n\r");
-			break;
-		case 'T':
-			Str_Cat(buffer,"TESORO\n\r");
-			break;
-		case '-':
-			Str_Cat(buffer,"NINGUNO\n\r");
-			break;
-		case 'S':
-			Str_Cat(buffer,"TAS\n\r");
-			break;
-		default:
-			Str_Cat(buffer,"\n\r");
-			break;
-		}
+//		Str_Cat(buffer,"DISP: ");
+//		switch(ptm_dcb[i].disparo)	{
+//		case 'A':
+//			Str_Cat(buffer,"ASALTO\n\r");
+//			break;
+//		case 'I':
+//			Str_Cat(buffer,"INCENDIO\n\r");
+//			break;
+//		case 'T':
+//			Str_Cat(buffer,"TESORO\n\r");
+//			break;
+//		case '-':
+//			Str_Cat(buffer,"NINGUNO\n\r");
+//			break;
+//		case 'S':
+//			Str_Cat(buffer,"TAS\n\r");
+//			break;
+//		default:
+//			Str_Cat(buffer,"\n\r");
+//			break;
+//		}
+
+        Str_Cat(buffer,"Version: ");
+        Str_Cat(buffer,itoa(ptm_dcb[i].version)); Str_Cat(buffer,"\n\r");
 
 		state->conio->puts(buffer);
 	}
