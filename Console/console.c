@@ -116,7 +116,7 @@ const ConsoleCommand console_commands[] =
 	{ "rtc?",			con_dumprtc2,			0,		OPER_LEVEL},
 
 	//configuracion de rabbit
-	{ "set numabo",		con_numabo,				0,		OPER_LEVEL},
+	{ "set admabonum",		con_admabonum,				0,		OPER_LEVEL},
 //	{ "set numcen",		con_numcen,				0,		OPER_LEVEL},
 //	{ "set nomsuc",		con_nomsuc,				0,		OPER_LEVEL},
 	{ "set cuenta1",	con_cuenta1,			0,		MONI_LEVEL},
@@ -211,8 +211,8 @@ const ConsoleCommand console_commands[] =
 	{ "set RHBCAST",	con_timerhbcast,		0,		MCMI_LEVEL},
 	{ "ptmbuzzon",		con_ptmbuzzon,			0,		MCMI_LEVEL},
 	{ "ptmbuzzoff",	con_ptmbuzzoff,			0,		MCMI_LEVEL},
-	{ "conf_pbt",		cfg3_pbttbl,			0,		MCMI_LEVEL},
-	{ "dump pbt",		dump_pbttbl,			0,		MCMI_LEVEL},
+//	{ "conf_pbt",		cfg3_pbttbl,			0,		MCMI_LEVEL},
+//	{ "dump pbt",		dump_pbttbl,			0,		MCMI_LEVEL},
     { "IP150_CHECK",	con_IP150_activation,	0,		MCMI_LEVEL},
     { "IP150_UNCHECK",	con_IP150_deactivation,	0,		MCMI_LEVEL},
 	{ "INPATT_CHECK",	con_INPATTERN_activation,	0,	MCMI_LEVEL},
@@ -1575,48 +1575,48 @@ int con_E2PROM_Write_zone(ConsoleState* state)
 // Funciones de configuracion de rabbit
 
 
-int con_numabo(ConsoleState* state)
-{
-	uint16_t cnumabo;
-	uint8_t retval;
-	int error;
-	char *tmpbuf;
-	char buffer[32];
-
-	buffer[0] = 0;
-
-	if( state->numparams < 3 )	{
-		state->conio->puts("set numabo nro_abonado\n\r");
-		retval = EepromReadByte(MON_NUMABO_E2P_ADDR, &error);
-			Str_Cat(buffer, "PGMD MON NUMABO = ");
-			//sprintHexWord(tmpbuf, retval);
-			tmpbuf = itoa(retval);
-			Str_Cat(buffer, tmpbuf);
-			Str_Cat(buffer, "\n\r");
-			state->conio->puts(buffer);
-		return 1;
-	}
-	cnumabo = atoi(con_getparam(state->command, 2));
-	if((cnumabo > 0) && (cnumabo < 200))
-		EepromWriteByte(MON_NUMABO_E2P_ADDR, (uint8_t)cnumabo, &error);
-	else	{
-		state->conio->puts("*** MON SUBSCRIBER NUMBER ERROR  ***\n\r");
-		return -1;
-	}
-	retval = EepromReadByte(MON_NUMABO_E2P_ADDR, &error);
-	Str_Cat(buffer, "PGMD MON NUMABO = ");
-	//sprintHexWord(tmpbuf, retval);
-	tmpbuf = itoa(retval);
-	Str_Cat(buffer, tmpbuf);
-	Str_Cat(buffer, "\n\r");
-	state->conio->puts(buffer);
-
-	if(retval == cnumabo)
-		NumAbo = cnumabo;
-
-
-	return 1;
-}
+//int con_numabo(ConsoleState* state)
+//{
+//	uint16_t cnumabo;
+//	uint8_t retval;
+//	int error;
+//	char *tmpbuf;
+//	char buffer[32];
+//
+//	buffer[0] = 0;
+//
+//	if( state->numparams < 3 )	{
+//		state->conio->puts("set numabo nro_abonado\n\r");
+//		retval = EepromReadByte(MON_NUMABO_E2P_ADDR, &error);
+//			Str_Cat(buffer, "PGMD MON NUMABO = ");
+//			//sprintHexWord(tmpbuf, retval);
+//			tmpbuf = itoa(retval);
+//			Str_Cat(buffer, tmpbuf);
+//			Str_Cat(buffer, "\n\r");
+//			state->conio->puts(buffer);
+//		return 1;
+//	}
+//	cnumabo = atoi(con_getparam(state->command, 2));
+//	if((cnumabo > 0) && (cnumabo < 200))
+//		EepromWriteByte(MON_NUMABO_E2P_ADDR, (uint8_t)cnumabo, &error);
+//	else	{
+//		state->conio->puts("*** MON SUBSCRIBER NUMBER ERROR  ***\n\r");
+//		return -1;
+//	}
+//	retval = EepromReadByte(MON_NUMABO_E2P_ADDR, &error);
+//	Str_Cat(buffer, "PGMD MON NUMABO = ");
+//	//sprintHexWord(tmpbuf, retval);
+//	tmpbuf = itoa(retval);
+//	Str_Cat(buffer, tmpbuf);
+//	Str_Cat(buffer, "\n\r");
+//	state->conio->puts(buffer);
+//
+//	if(retval == cnumabo)
+//		NumAbo = cnumabo;
+//
+//
+//	return 1;
+//}
 
 //int con_numcen(ConsoleState* state)
 //{
@@ -3026,83 +3026,83 @@ int con_inuse2(ConsoleState* state)
 }
 
 //configuracion de los ptm que funcionan como switch remotos
-int cfg3_pbttbl(ConsoleState* state)
-{
-	uint8_t tblindex, particion, prevparticion;
-	uint16_t zona, cuenta;
-	uint8_t buffer[16];
-	int i, chksum;
-	uint32_t address;
+//int cfg3_pbttbl(ConsoleState* state)
+//{
+//	uint8_t tblindex, particion, prevparticion;
+//	uint16_t zona, cuenta;
+//	uint8_t buffer[16];
+//	int i, chksum;
+//	uint32_t address;
+//
+//	tblindex = atoi( con_getparam(state->command, 1) );
+//	particion = atoi( con_getparam(state->command, 2) );
+//	zona = atoi( con_getparam(state->command, 3) );
+//	cuenta = atoi( con_getparam(state->command, 4) );
+//
+//	if((tblindex < 0) || (tblindex > 7))
+//		return 1;
+//
+//	buffer[0] = (uint8_t)particion;
+//	buffer[1] = (uint8_t)( (zona >> 8) & 0x00FF );
+//	buffer[2] = (uint8_t)( zona & 0x00FF );
+//	buffer[3] = (uint8_t)( (cuenta >> 8) & 0x00FF );
+//	buffer[4] = (uint8_t)( cuenta & 0x00FF );
+//
+//	chksum = 0;
+//	for(i = 0; i < 5; i++)
+//		chksum += buffer[i];
+//	buffer[5] = (uint8_t)( chksum & 0x00FF);
+//
+//	address = DF_PBTTBL0 + tblindex*DF_PBTREGLEN;
+//	flash0_write(1, buffer, address, 6 );
+//
+//	prevparticion = pbt_dcb[tblindex].particion;
+//	pbt_dcb[tblindex].particion = particion;
+//	pbt_dcb[tblindex].zona = zona;
+//	pbt_dcb[tblindex].cuenta = cuenta;
+//
+//	if(particion)
+//		logCidEvent(account, 1, 890, 0, particion );
+//	else
+//		logCidEvent(account, 3, 890, 0, prevparticion );
+//
+//	return 1;
+//}
 
-	tblindex = atoi( con_getparam(state->command, 1) );
-	particion = atoi( con_getparam(state->command, 2) );
-	zona = atoi( con_getparam(state->command, 3) );
-	cuenta = atoi( con_getparam(state->command, 4) );
-
-	if((tblindex < 0) || (tblindex > 7))
-		return 1;
-
-	buffer[0] = (uint8_t)particion;
-	buffer[1] = (uint8_t)( (zona >> 8) & 0x00FF );
-	buffer[2] = (uint8_t)( zona & 0x00FF );
-	buffer[3] = (uint8_t)( (cuenta >> 8) & 0x00FF );
-	buffer[4] = (uint8_t)( cuenta & 0x00FF );
-
-	chksum = 0;
-	for(i = 0; i < 5; i++)
-		chksum += buffer[i];
-	buffer[5] = (uint8_t)( chksum & 0x00FF);
-
-	address = DF_PBTTBL0 + tblindex*DF_PBTREGLEN;
-	flash0_write(1, buffer, address, 6 );
-
-	prevparticion = pbt_dcb[tblindex].particion;
-	pbt_dcb[tblindex].particion = particion;
-	pbt_dcb[tblindex].zona = zona;
-	pbt_dcb[tblindex].cuenta = cuenta;	
-
-	if(particion)
-		logCidEvent(account, 1, 890, 0, particion );
-	else
-		logCidEvent(account, 3, 890, 0, prevparticion );
-
-	return 1;
-}
-
-int dump_pbttbl(ConsoleState* state)
-{
-	uint8_t tblindex, particion;
-	uint16_t zona, cuenta;
-	int i, chksum;
-	uint32_t address;
-	char buffer[128], tmpbuffer[6];
-
-	state->conio->puts( "\n\rTabla de Data Control Block de los Pulsadores\n\r" );
-	state->conio->puts(     "---------------------------------------------\n\r\n" );
-
-	for( i = 0; i < MAXPBTPTM; i++)	{
-		buffer[0] = 0;
-		Str_Cat(buffer,"DEV: "); Str_Cat(buffer,itoa(i)); Str_Cat(buffer, ",\t");
-		if(i < 10)
-			Str_Cat(buffer,"\t");
-
-		sprintByte(tmpbuffer, pbt_dcb[i].particion);
-		Str_Cat(buffer,"PARTICION: "); Str_Cat(buffer,itoa(pbt_dcb[i].particion)); Str_Cat(buffer, "(0x");Str_Cat(buffer, tmpbuffer) ;Str_Cat(buffer, ")\t");
-
-		sprintByte(tmpbuffer, pbt_dcb[i].zona);
-		Str_Cat(buffer,"ZONA: "); Str_Cat(buffer,itoa(pbt_dcb[i].zona)); Str_Cat(buffer, "(0x");Str_Cat(buffer, tmpbuffer) ;Str_Cat(buffer, ")\t");
-
-		sprintHexWord(tmpbuffer, pbt_dcb[i].cuenta);
-		Str_Cat(buffer," CUENTA: "); Str_Cat(buffer,itoa(pbt_dcb[i].cuenta)); Str_Cat(buffer, "(0x");Str_Cat(buffer, tmpbuffer) ;Str_Cat(buffer, "),\t");
-
-		Str_Cat(buffer,"\n\r");
-		state->conio->puts(buffer);
-
-	}
-
-	state->conio->puts( "\n\r");
-	return 1;
-}
+//int dump_pbttbl(ConsoleState* state)
+//{
+//	uint8_t tblindex, particion;
+//	uint16_t zona, cuenta;
+//	int i, chksum;
+//	uint32_t address;
+//	char buffer[128], tmpbuffer[6];
+//
+//	state->conio->puts( "\n\rTabla de Data Control Block de los Pulsadores\n\r" );
+//	state->conio->puts(     "---------------------------------------------\n\r\n" );
+//
+//	for( i = 0; i < MAXPBTPTM; i++)	{
+//		buffer[0] = 0;
+//		Str_Cat(buffer,"DEV: "); Str_Cat(buffer,itoa(i)); Str_Cat(buffer, ",\t");
+//		if(i < 10)
+//			Str_Cat(buffer,"\t");
+//
+//		sprintByte(tmpbuffer, pbt_dcb[i].particion);
+//		Str_Cat(buffer,"PARTICION: "); Str_Cat(buffer,itoa(pbt_dcb[i].particion)); Str_Cat(buffer, "(0x");Str_Cat(buffer, tmpbuffer) ;Str_Cat(buffer, ")\t");
+//
+//		sprintByte(tmpbuffer, pbt_dcb[i].zona);
+//		Str_Cat(buffer,"ZONA: "); Str_Cat(buffer,itoa(pbt_dcb[i].zona)); Str_Cat(buffer, "(0x");Str_Cat(buffer, tmpbuffer) ;Str_Cat(buffer, ")\t");
+//
+//		sprintHexWord(tmpbuffer, pbt_dcb[i].cuenta);
+//		Str_Cat(buffer," CUENTA: "); Str_Cat(buffer,itoa(pbt_dcb[i].cuenta)); Str_Cat(buffer, "(0x");Str_Cat(buffer, tmpbuffer) ;Str_Cat(buffer, "),\t");
+//
+//		Str_Cat(buffer,"\n\r");
+//		state->conio->puts(buffer);
+//
+//	}
+//
+//	state->conio->puts( "\n\r");
+//	return 1;
+//}
 
 //------------------------------------------------------------------------------------------------
 //de la configuracion de los ptm
@@ -3202,8 +3202,24 @@ int cfg3_ptmdev(ConsoleState* state)
 
 int dump_ptmdev(ConsoleState* state)
 {
-	int i;
-	char buffer[128], tmpbuffer[6];
+	int i, error;
+	char buffer[128], tmpbuffer[8];
+    struct tm mytime;
+    time_t timestamp;
+
+    timestamp = SEC_TIMER;
+    gmtime((const time_t *) &(timestamp), &mytime);
+
+    state->conio->puts(asctime(&mytime));
+    state->conio->puts("\n\r");
+
+    state->conio->puts(VERSION_ABO);
+    EepromReadBuffer(ADMABONUM_E2P_ADDR, (uint8_t  *)tmpbuffer, 6, &error);
+    buffer[0] = 0; tmpbuffer[6] = 0;
+    Str_Cat(buffer, "Nro Adm Abonado: ");
+    Str_Cat(buffer, tmpbuffer);
+    state->conio->puts(buffer);
+    state->conio->puts("\n\r");
 
 	state->conio->puts( "\n\rTabla de Data Control Block de los PTm\n\r" );
 	state->conio->puts( "--------------------------------------\n\r\n" );
@@ -3251,7 +3267,16 @@ int dump_ptmdev(ConsoleState* state)
 //		}
 
         Str_Cat(buffer,"Version: ");
-        Str_Cat(buffer,itoa(ptm_dcb[i].version)); Str_Cat(buffer,"\n\r");
+        Str_Cat(buffer,itoa(ptm_dcb[i].version));Str_Cat(buffer, "\t");
+
+        Str_Cat(buffer,"Jumper: ");
+        if(PTM_dev_status[i] & 0x40)    {
+            Str_Cat(buffer,"1");
+        } else  {
+            Str_Cat(buffer,"0");
+        }
+
+        Str_Cat(buffer,"\n\r");
 
 		state->conio->puts(buffer);
 	}
@@ -3509,6 +3534,10 @@ void FactoryPgm(void)
     WDT_Feed();
     
     EepromWriteBuffer(SERIALNUM_E2P_ADDR, "00000000", 8, &error);
+    OSTimeDlyHMSM(0, 0, 0, 300, OS_OPT_TIME_HMSM_STRICT, &os_err);
+    WDT_Feed();
+
+    EepromWriteBuffer(ADMABONUM_E2P_ADDR, "000000", 6, &error);
     OSTimeDlyHMSM(0, 0, 0, 300, OS_OPT_TIME_HMSM_STRICT, &os_err);
     WDT_Feed();
 
@@ -3967,6 +3996,86 @@ int con_serialnum(ConsoleState* state)
 
 	return 1;
 }
+
+int con_admabonum(ConsoleState* state)
+{
+    int len, error, i;
+    char buffer[16], *admabonum;
+
+
+    if( state->numparams < 3 )	{
+        state->conio->puts("set admabonum \"numero de abonado\"\n\r");
+        EepromReadBuffer(ADMABONUM_E2P_ADDR, buffer, 6, &error);
+        state->conio->puts("PGMD ADMABONUM: ");
+        for(i = 0; i < 6; i++ )	{
+            if(buffer[i] == 0x00 )
+                break;
+            if(buffer[i] > 127)	{
+                state->conio->puts("\n\r");
+                return 1;
+            }
+        }
+        buffer[6] = 0;
+        state->conio->puts(buffer);
+        state->conio->puts("\n\r");
+        return 1;
+    }
+
+    len = strlen( con_getparam(state->command, 2) );
+    admabonum = con_getparam(state->command, 2);
+
+    for(i = 0; i < 6; i++ )	{
+        if((admabonum[i] < '0') || (admabonum[i] > '9'))	{
+            state->conio->puts("ERROR *** El numero de abonado debe ser de 6 caracteres numericos\n\r");
+            return 1;
+        }
+    }
+    if( len != 6 )	{
+        state->conio->puts("ERROR *** El numero de abonado debe ser de hasta 6 caracteres numericos\n\r");
+        return 1;
+    }
+
+    error = 0;
+    for(i = 0; i < 8; i++)  {               //detecto que no sea igual a cero
+        if( admabonum[i] != '0' )
+            error = 1;
+    }
+
+    if(error == 0)	{
+        state->conio->puts("ERROR *** El numero de abonado no puede ser 000000\n\r");
+        return 1;
+    }
+
+    logCidEvent(account, 1, 924, 0, 0 );
+
+    //buffer[0] = 0x5A;
+    //error = flash0_write(1, buffer, DF_BLOCKCODE_OFFSET, 1);
+    WDT_Feed();
+
+    EepromWriteBuffer(ADMABONUM_E2P_ADDR, con_getparam(state->command, 2), len, &error);
+    EepromReadBuffer(ADMABONUM_E2P_ADDR, buffer, len, &error);
+    //flash0_write(1, buffer, DF_SERIALNUM_OFFSET, len );
+    buffer[len] = 0;
+
+    //state->conio->puts(buffer);
+
+    state->conio->puts("PGMD ADMABONUM: ");
+    for(i = 0; i < len; i++ )	{
+        if(buffer[i] == 0x00 )
+            break;
+        if(buffer[i] > 127)	{
+            state->conio->puts("\n\r");
+            return 1;
+        }
+    }
+
+    //logCidEvent(account, 1, 682, 0, 0);
+    state->conio->puts(buffer);
+    state->conio->puts("\n\r");
+
+    return 1;
+}
+
 
 int con_paptslot(ConsoleState* state)
 {
@@ -4542,6 +4651,8 @@ int con_conf_ticket(ConsoleState* state)
  	state->conio->puts(buffer);
 	state->conio->puts("\n\r");
 
+
+
 	OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);
 	for(i = 0; i < 16; i++ )
 		buffer[i] = 0;
@@ -4628,6 +4739,14 @@ int con_conf_ticket(ConsoleState* state)
         state->conio->puts("OPENPTM = OFF\n\r");
     }
 
+    state->conio->puts(VERSION_ABO);
+
+    EepromReadBuffer(ADMABONUM_E2P_ADDR, tmpbuffer, 6, &error);
+    buffer[0] = 0; tmpbuffer[6] = 0;
+    Str_Cat(buffer, "\n\rADMABONUM: ");
+    Str_Cat(buffer, tmpbuffer);
+    state->conio->puts(buffer);
+    state->conio->puts("\n\r");
 
 	//Imprimo la tabla de los PTM
 	state->conio->puts( "\n\rTabla de Data Control Block de los PTm\n\r" );
@@ -4654,27 +4773,17 @@ int con_conf_ticket(ConsoleState* state)
 		sprintByte(tmpbuffer, ptm_dcb[i].particion);
 		Str_Cat(buffer,"PARTICION: "); Str_Cat(buffer,itoa(ptm_dcb[i].particion)); Str_Cat(buffer, "(0x");Str_Cat(buffer, tmpbuffer) ;Str_Cat(buffer, ")\t");
 
-		Str_Cat(buffer,"DISP: ");
-		switch(ptm_dcb[i].disparo)	{
-		case 'A':
-			Str_Cat(buffer,"ASALTO\n\r");
-			break;
-		case 'I':
-			Str_Cat(buffer,"INCENDIO\n\r");
-			break;
-		case 'T':
-			Str_Cat(buffer,"TESORO\n\r");
-			break;
-		case '-':
-			Str_Cat(buffer,"NINGUNO\n\r");
-			break;
-		case 'S':
-			Str_Cat(buffer,"TAS\n\r");
-			break;
-		default:
-			Str_Cat(buffer,"\n\r");
-			break;
-		}
+        Str_Cat(buffer,"Version: ");
+        Str_Cat(buffer,itoa(ptm_dcb[i].version));Str_Cat(buffer, "\t");
+
+        Str_Cat(buffer,"Jumper: ");
+        if(PTM_dev_status[i] & 0x40)    {
+            Str_Cat(buffer,"1");
+        } else  {
+            Str_Cat(buffer,"0");
+        }
+
+        Str_Cat(buffer,"\n\r");
 
 		state->conio->puts(buffer);
 	}

@@ -1115,11 +1115,11 @@ void fsm_wdog_r3k(int coid)
     switch(Monitoreo[coid].wdogstate)	{
         case WR3K_IDLE:
             if( Monitoreo[coid].flags & ACKWDG_FLAG )	{
-                Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
+                Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (8 * Monitoreo[coid].HeartBeatTime);
                 Monitoreo[coid].wdogstate = WR3K_WDOG;
                 Monitoreo[coid].flags &= ~ACKWDG_FLAG;
             } else 	{
-                Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (5 * Monitoreo[coid].HeartBeatTime);
+                Monitoreo[coid].wdogr3kTimer = SEC_TIMER + (8 * Monitoreo[coid].HeartBeatTime);
                 Monitoreo[coid].wdogstate = WR3K_WDOG;
                 Monitoreo[coid].flags &= ~ACKWDG_FLAG;
             }

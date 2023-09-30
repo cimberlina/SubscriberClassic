@@ -1050,6 +1050,9 @@ void GenerateCIDEventPTm( unsigned char index, unsigned char eventtype, unsigned
         return;
     if((ptm_dcb[index].rtuaddr == SKIMMING3_RTUADDR) && (eventtype != 145) && (eventtype != 627) && (eventtype != 628))
         return;
+    if((ptm_dcb[index].rtuaddr == 55) && (eventcode == 130))  {
+        return;
+    }
 
 //	currentEvent.index = eventIndex++;
 //	if(eventIndex == 0xFFFF)
