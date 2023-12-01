@@ -34,12 +34,12 @@ extern uint8_t	r3kmode;
 -----------------------------------------\r\n\
 NXP LPC1769 Cortex-M3 System-UP by C.M.I.\r\n\
 EYSE (C) 2023 Abonado - EYSE Ingenieria\r\n\
-Version: 7.00CB                  20230929\r\n\
+Version: 7.02CB                  20231121\r\n\
 -----------------------------------------\r\n"
 
-#define	VERSION_ABO		"Version: 7.00CB            20230929\r\n"
+#define	VERSION_ABO		"Version: 7.02CB            20231121\r\n"
 
-#define VERSION_NUMBER  700
+#define VERSION_NUMBER  702
 
 #define VERSION_YEAR	2021
 
@@ -408,6 +408,7 @@ int con_bell1pulse(ConsoleState* state);
 int con_bell2pulse(ConsoleState* state);
 int con_macromode(ConsoleState* state);
 int con_netrecov(ConsoleState* state);
+int con_clear485(ConsoleState* state);
 
 void fsm_pwr1_pulse( void );
 void fsm_pwr2_pulse( void );

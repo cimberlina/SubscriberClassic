@@ -257,6 +257,7 @@ const ConsoleCommand console_commands[] =
     { "PWR2_PULSE",             con_bell2pulse,               0,		MONI_LEVEL},
     { "MACRO_MODE",             con_macromode,               0,		MONI_LEVEL},
     { "NETRECOV",             con_netrecov,               0,		MONI_LEVEL},
+    { "CLEAR485",             con_clear485,               0,		MONI_LEVEL},
 	{ "P",             con_poll,               0,		MONI_LEVEL}
 };
 
@@ -1074,6 +1075,12 @@ int con_poll(ConsoleState* state)
 	SysFlag0 |= FSMTX_flag;
 	SystemFlag3 |= NAPER_RFPOLL;
 	return 1;
+}
+
+int con_clear485(ConsoleState* state)
+{
+    SystemFlag12 |= CLEAR485_FLAG;
+    return 1;
 }
 
 int con_evowdog(ConsoleState* state)

@@ -413,7 +413,8 @@ void  LAN485_Task(void  *p_arg)
 					diag485[7] &= ~(1 << (temp_partition));
 				}
 				//- - - - - - - - - - - - - - - - - - - - -
-				if( ((ptm_dcb[ptm_index].com_error_counter >= 90) && (ptm_dcb[ptm_index].particion < 240) ) || ((ptm_dcb[ptm_index].particion >= 240) && (ptm_dcb[ptm_index].particion <= 242) && (ptm_dcb[ptm_index].com_error_counter >= 90)) )	{
+                if( ptm_dcb[ptm_index].com_error_counter >= 90) {
+				//if( ((ptm_dcb[ptm_index].com_error_counter >= 90) && (ptm_dcb[ptm_index].rtuaddr < 240) ) || ((ptm_dcb[ptm_index].rtuaddr >= 240) && (ptm_dcb[ptm_index].rtuaddr <= 242) && (ptm_dcb[ptm_index].com_error_counter >= 90)) )	{
 					switch(ptm_dcb[ptm_index].particion)    {
                         case 10:
                         case 55:
@@ -522,6 +523,8 @@ void  LAN485_Task(void  *p_arg)
                             GenerateCIDEventPTm(ptm_index, 'R', 386,0);
                             ptm_dcb[ptm_index].state485 = P485_IDLE;
                             PTM_dev_status[ptm_index] = 0x00;
+                            //20231113
+                            ptm_dcb[ptm_index].flags &= ~COMM_TROUBLE;
                             break;
                         default:
 
@@ -540,7 +543,8 @@ void  LAN485_Task(void  *p_arg)
 					}
 					//- - - - - - - - - - - - - - - - - - - - -
 				} else
-				if( ((ptm_dcb[ptm_index].com_error_counter >= 90) && (ptm_dcb[ptm_index].particion < 240) ) || ((ptm_dcb[ptm_index].particion >= 240) && (ptm_dcb[ptm_index].particion <= 242) && (ptm_dcb[ptm_index].com_error_counter >= 90)) )	{
+                if( ptm_dcb[ptm_index].com_error_counter >= 90)   {
+				//if( ((ptm_dcb[ptm_index].com_error_counter >= 90) && (ptm_dcb[ptm_index].particion < 240) ) || ((ptm_dcb[ptm_index].particion >= 240) && (ptm_dcb[ptm_index].particion <= 242) && (ptm_dcb[ptm_index].com_error_counter >= 90)) )	{
                     switch(ptm_dcb[ptm_index].particion)    {
                         case 10:
                         case 55:
@@ -1042,13 +1046,13 @@ void GenerateCIDEventPTm( unsigned char index, unsigned char eventtype, unsigned
 	uint8_t *currentEventPtr;
 	OS_ERR err;
 
-    if((ptm_dcb[index].rtuaddr == LOCKGATE_RTUADDR) && (eventtype != 145) && (eventtype != 627) && (eventtype != 628))
+    if((ptm_dcb[index].rtuaddr == LOCKGATE_RTUADDR) && (eventcode != 145) && (eventcode != 627) && (eventcode != 628) && (eventcode != 386) && (eventcode != 350))
         return;
-    if((ptm_dcb[index].rtuaddr == SKIMMING1_RTUADDR) && (eventtype != 145) && (eventtype != 627) && (eventtype != 628))
+    if((ptm_dcb[index].rtuaddr == SKIMMING1_RTUADDR) && (eventcode != 145) && (eventcode != 627) && (eventcode != 628) && (eventcode != 386) && (eventcode != 350))
         return;
-    if((ptm_dcb[index].rtuaddr == SKIMMING2_RTUADDR) && (eventtype != 145) && (eventtype != 627) && (eventtype != 628))
+    if((ptm_dcb[index].rtuaddr == SKIMMING2_RTUADDR) && (eventcode != 145) && (eventcode != 627) && (eventcode != 628) && (eventcode != 386) && (eventcode != 350))
         return;
-    if((ptm_dcb[index].rtuaddr == SKIMMING3_RTUADDR) && (eventtype != 145) && (eventtype != 627) && (eventtype != 628))
+    if((ptm_dcb[index].rtuaddr == SKIMMING3_RTUADDR) && (eventcode != 145) && (eventcode != 627) && (eventcode != 628) && (eventcode != 386) && (eventcode != 350))
         return;
     if((ptm_dcb[index].rtuaddr == 55) && (eventcode == 130))  {
         return;
@@ -1223,13 +1227,13 @@ void ParsePtmCID_Event( unsigned char event_buffer[] )
 	}
 
     // No procesamos nada que venga de los PT que manejan el sistema de exclusas del HSBC
-    if((ptm_dcb[eveindex].rtuaddr == LOCKGATE_RTUADDR) && (currentEvent.cid_eventcode != 0x145)&& (currentEvent.cid_eventcode != 0x627) && (currentEvent.cid_eventcode != 0x628))
+    if((ptm_dcb[eveindex].rtuaddr == LOCKGATE_RTUADDR) && (currentEvent.cid_eventcode != 0x145)&& (currentEvent.cid_eventcode != 0x627) && (currentEvent.cid_eventcode != 0x628) && (currentEvent.cid_eventcode != 0x350) && (currentEvent.cid_eventcode != 0x386))
         return;
-    if((ptm_dcb[eveindex].rtuaddr == SKIMMING1_RTUADDR) && (currentEvent.cid_eventcode != 0x145)&& (currentEvent.cid_eventcode != 0x627) && (currentEvent.cid_eventcode != 0x628))
+    if((ptm_dcb[eveindex].rtuaddr == SKIMMING1_RTUADDR) && (currentEvent.cid_eventcode != 0x145)&& (currentEvent.cid_eventcode != 0x627) && (currentEvent.cid_eventcode != 0x628) && (currentEvent.cid_eventcode != 0x350) && (currentEvent.cid_eventcode != 0x386))
         return;
-    if((ptm_dcb[eveindex].rtuaddr == SKIMMING2_RTUADDR) && (currentEvent.cid_eventcode != 0x145)&& (currentEvent.cid_eventcode != 0x627) && (currentEvent.cid_eventcode != 0x628))
+    if((ptm_dcb[eveindex].rtuaddr == SKIMMING2_RTUADDR) && (currentEvent.cid_eventcode != 0x145)&& (currentEvent.cid_eventcode != 0x627) && (currentEvent.cid_eventcode != 0x628) && (currentEvent.cid_eventcode != 0x350) && (currentEvent.cid_eventcode != 0x386))
         return;
-    if((ptm_dcb[eveindex].rtuaddr == SKIMMING3_RTUADDR) && (currentEvent.cid_eventcode != 0x145)&& (currentEvent.cid_eventcode != 0x627) && (currentEvent.cid_eventcode != 0x628))
+    if((ptm_dcb[eveindex].rtuaddr == SKIMMING3_RTUADDR) && (currentEvent.cid_eventcode != 0x145)&& (currentEvent.cid_eventcode != 0x627) && (currentEvent.cid_eventcode != 0x628) && (currentEvent.cid_eventcode != 0x350) && (currentEvent.cid_eventcode != 0x386))
         return;
 	//--------------------------------------------------------------------------------------
 
@@ -1927,13 +1931,13 @@ void ProcessEvents( unsigned char event_buffer[], unsigned char index )
 //	}
 
     // No procesamos nada que venga de los PT que manejan el sistema de exclusas del HSBC
-    if((ptm_dcb[index].rtuaddr == LOCKGATE_RTUADDR) && (eventcode != 0x145) && (eventcode != 0x627) && (eventcode != 0x628))
+    if((ptm_dcb[index].rtuaddr == LOCKGATE_RTUADDR) && (eventcode != 0x145) && (eventcode != 0x627) && (eventcode != 0x628) && (eventcode != 0x350) && (eventcode != 0x386))
         return;
-    if((ptm_dcb[index].rtuaddr == SKIMMING1_RTUADDR) && (eventcode != 0x145) && (eventcode != 0x627) && (eventcode != 0x628))
+    if((ptm_dcb[index].rtuaddr == SKIMMING1_RTUADDR) && (eventcode != 0x145) && (eventcode != 0x627) && (eventcode != 0x628) && (eventcode != 0x350) && (eventcode != 0x386))
         return;
-    if((ptm_dcb[index].rtuaddr == SKIMMING2_RTUADDR) && (eventcode != 0x145) && (eventcode != 0x627) && (eventcode != 0x628))
+    if((ptm_dcb[index].rtuaddr == SKIMMING2_RTUADDR) && (eventcode != 0x145) && (eventcode != 0x627) && (eventcode != 0x628) && (eventcode != 0x350) && (eventcode != 0x386))
         return;
-    if((ptm_dcb[index].rtuaddr == SKIMMING3_RTUADDR) && (eventcode != 0x145) && (eventcode != 0x627) && (eventcode != 0x628))
+    if((ptm_dcb[index].rtuaddr == SKIMMING3_RTUADDR) && (eventcode != 0x145) && (eventcode != 0x627) && (eventcode != 0x628) && (eventcode != 0x350) && (eventcode != 0x386))
         return;
 
 	if(event_buffer[8] == 'E')	{
@@ -3622,12 +3626,16 @@ void fsm_rfdlybornera_teso( void )
 {
     int ptm, i;
     uint32_t sismicflag;
+    int16_t vreal;
 
     sismicflag = 0;
-
+    vreal = 0;
     for( i = 0; i < MAXQTYPTM; i++) {
         if(ptm_dcb[i].rtuaddr == 0x00)  {
             continue;
+        }
+        if ((ptm_dcb[i].rtuaddr != 240) && (ptm_dcb[i].rtuaddr != 241)) {
+            vreal++;
         }
         if(!IsSismicPartition(i))   {
             continue;
@@ -3649,6 +3657,11 @@ void fsm_rfdlybornera_teso( void )
             ptm_dcb[i].SISMIC_flag &= ~CLEARSTOP_FLAG;
         }
     }
+    //--------------------------------------------------------------
+    if(vreal == 0)  {
+        sismicflag |= HABTRIGGER_FLAG;
+    }
+    //--------------------------------------------------------------
 
 
     switch(rfdlybornera_teso_state)  {

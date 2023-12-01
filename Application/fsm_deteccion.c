@@ -1019,9 +1019,13 @@ void fsm_deteccion_tesoro( void )
     }
 
     sismicflag = 0;
+    vreal = 0;
     for( index = 0; index < MAXQTYPTM; index++) {
         if (ptm_dcb[index].rtuaddr == 0x00) {
             continue;
+        }
+        if ((ptm_dcb[index].rtuaddr != 240) && (ptm_dcb[index].rtuaddr != 241)) {
+            vreal++;
         }
         if (!IsSismicPartition(index)) {
             continue;
@@ -1037,9 +1041,12 @@ void fsm_deteccion_tesoro( void )
         } else {
             sismicflag |= HABTRIGGER_FLAG;
         }
-
-
     }
+    //--------------------------------------------------------------
+    if(vreal == 0)  {
+        sismicflag |= HABTRIGGER_FLAG;
+    }
+    //--------------------------------------------------------------
 
 	if(SysFlag_AP_GenAlarm & bitpat[TESO_bit])	{
 		SysFlag_AP_GenAlarm &= ~bitpat[TESO_bit];
@@ -2156,7 +2163,7 @@ void autoreset_logo3d( void )
 				rotu_autr_timer = SEC_TIMER;
 				if(SysFlag_AP_Apertura & AP_APR_VALID)	{
 					if(paptslot == 0)	{
-						rotu_autr_counter = 3;
+						rotu_autr_counter = 1;
 						rotu_autorst_timer_min = 5*60;
 					} else	{
 						rotu_autr_counter = 0;
@@ -2198,7 +2205,7 @@ void autoreset_logo3d( void )
 				rotu_autr_timer = SEC_TIMER;
 				if(SysFlag_AP_Apertura & AP_APR_VALID)	{
 					if(paptslot == 0)	{
-						rotu_autr_counter = 3;
+						rotu_autr_counter = 1;
 						rotu_autorst_timer_min = 2*60;
 					} else	{
 						rotu_autr_counter = 0;
@@ -3582,7 +3589,7 @@ void PTM485NG_HistoryWrite(void)
 void PTM485NG_HistoryRead(void)
 {
 	uint8_t mybuffer[MAXQTYPTM + 3], temp[MAXQTYPTM + 3], i;
-	int ptindex;
+	int ptindex, ptmngqty;
 	uint32_t len;
 
 	len = flash0_read(mybuffer, DF_PTM485NG_OFFSET, MAXQTYPTM + 3);
@@ -3596,23 +3603,31 @@ void PTM485NG_HistoryRead(void)
 		}
 	}
 
+    ptmngqty = 0;
 	if((mybuffer[MAXQTYPTM + 1] == 0xAA) && (mybuffer[MAXQTYPTM + 2] == 0x55))	{
 		for( ptindex = 0; ptindex < MAXQTYPTM; ptindex++)	{
 			if(mybuffer[ptindex] == P485_NG)	{
 				ptm_dcb[ptindex].state485 = P485_NG;
 				ptm_dcb[ptindex].com_error_counter = 254;
 				ptm_dcb[ptindex].flags |= COMM_TROUBLE;
+                ptm_dcb[ptindex].timeout485 = 180;
+                ptmngqty++;
 			} else	{
 				ptm_dcb[ptindex].state485 = P485_IDLE;
 				ptm_dcb[ptindex].flags &= ~COMM_TROUBLE;
 				ptm_dcb[ptindex].com_error_counter = 0;
+                ptm_dcb[ptindex].timeout485 = 0;
 			}
 		}
 		if( mybuffer[MAXQTYPTM] == FSM_ROT485_ROT )	{
 			fsm_rot485_state = FSM_ROT485_ROT;
 			Rot485_flag |= ROT485_FLAG;
 		}
+        if(ptmngqty == 0)    {
+            SystemFlag12 |= CLEAR485_FLAG;
+        }
 	}
+
 }
 
 void AlarmReadHistory(void)
