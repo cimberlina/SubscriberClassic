@@ -153,32 +153,34 @@ void  LogT_Task(void  *p_arg)
             buffer[15] = (uint8_t)(chksum & 0x00FF);
 
             //-----------------------------------------------------------------------
-            dfindex = DF_EVENT0 + (evflash_wrptr * DF_EVELEN);
-            error = flash0_write(2, buffer, dfindex, DF_EVELEN);
-            if( (error = verify_event_wr( buffer, dfindex)) == FALSE )
+            if((event.cid_eventcode <= 0x999) && (event.cid_eventcode != 0x000)) {
+                dfindex = DF_EVENT0 + (evflash_wrptr * DF_EVELEN);
                 error = flash0_write(2, buffer, dfindex, DF_EVELEN);
+                if ((error = verify_event_wr(buffer, dfindex)) == FALSE)
+                    error = flash0_write(2, buffer, dfindex, DF_EVELEN);
 
-            if( (error = verify_event_wr( buffer, dfindex)) == TRUE )	{
-                currentEvent.index = eventIndex++;
-                if(eventIndex == 0xFFFF)
-                    eventIndex = 0x0000;
+                if ((error = verify_event_wr(buffer, dfindex)) == TRUE) {
+                    currentEvent.index = eventIndex++;
+                    if (eventIndex == 0xFFFF)
+                        eventIndex = 0x0000;
 
-                evflash_wrptr++;
-                if( evflash_wrptr == DF_MAXEVENTS)
-                    evflash_wrptr = 0;
-                Set_evwrptr(evflash_wrptr);
+                    evflash_wrptr++;
+                    if (evflash_wrptr == DF_MAXEVENTS)
+                        evflash_wrptr = 0;
+                    Set_evwrptr(evflash_wrptr);
 
-                LogT_eventRec_readptr++;
-                LogT_eventRec_count--;
-                if(LogT_eventRec_readptr == LogT_BUFFLEN)	{
-                    LogT_eventRec_readptr = 0;
+                    LogT_eventRec_readptr++;
+                    LogT_eventRec_count--;
+                    if (LogT_eventRec_readptr == LogT_BUFFLEN) {
+                        LogT_eventRec_readptr = 0;
+                    }
                 }
             }
 
             //----------------------------------------------------------------------
             event.index = eventIndex-1;
             event.checksum = buffer[15];
-            if(event.cid_eventcode < 0x999)	{
+            if((event.cid_eventcode <= 0x999) && (event.cid_eventcode != 0x000))	{
                 for( i = 0; i < CENTRALOFFICEMAX; i++ )	{
                     if((Monitoreo[i].inuse == TRUE) && (!(SystemFlag11 & DONTSENDEVENTS)) )	{
                         switch(Monitoreo[i].protocol)	{

@@ -1121,7 +1121,7 @@ int con_set_prevetimer(ConsoleState* state)
 	if((numabo >= 0) && (numabo <= 45))
 		EepromWriteByte(PREVETIMER_E2P_ADDR, (uint8_t)numabo, &error);
 	else	{
-		state->conio->puts("*** PREVETIMER debe estar entre 0 y 17 minutos ***\n\r");
+		state->conio->puts("*** PREVETIMER debe estar entre 5 y 30 minutos ***\n\r");
 		return -1;
 	}
 	OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);
@@ -3548,7 +3548,7 @@ void FactoryPgm(void)
     OSTimeDlyHMSM(0, 0, 0, 300, OS_OPT_TIME_HMSM_STRICT, &os_err);
     WDT_Feed();
 
-    EepromWriteByte(PREVETIMER_E2P_ADDR, (uint8_t)17, &error);
+    EepromWriteByte(PREVETIMER_E2P_ADDR, (uint8_t)10, &error);
     OSTimeDlyHMSM(0, 0, 0, 300, OS_OPT_TIME_HMSM_STRICT, &os_err);
     WDT_Feed();
 

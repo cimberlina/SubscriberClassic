@@ -2791,8 +2791,8 @@ void fsm_event_preve(void)
                     prevetimer = 0;
                 } else {
                     prevetimer = (time_t) (EepromReadByte(PREVETIMER_E2P_ADDR, &error) * 60);
-                    if ((prevetimer > (time_t) (15 * 60)) || (prevetimer < (time_t) (2 * 60))) {
-                        prevetimer = (time_t) (7 * 60);
+                    if ((prevetimer > (time_t) (30 * 60)) || (prevetimer < (time_t) (5 * 60))) {
+                        prevetimer = (time_t) (10 * 60);
                     }
                 }
 			}

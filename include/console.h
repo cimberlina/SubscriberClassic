@@ -33,13 +33,13 @@ extern uint8_t	r3kmode;
 #define CON_INIT_MESSAGE 	"\
 -----------------------------------------\r\n\
 NXP LPC1769 Cortex-M3 System-UP by C.M.I.\r\n\
-EYSE (C) 2023 Abonado - EYSE Ingenieria\r\n\
-Version: 7.02CB                  20231121\r\n\
+EYSE (C) 2024 Abonado - EYSE Ingenieria\r\n\
+Version: 7.03CB                  20240109\r\n\
 -----------------------------------------\r\n"
 
-#define	VERSION_ABO		"Version: 7.02CB            20231121\r\n"
+#define	VERSION_ABO		"Version: 7.03CB            20240109\r\n"
 
-#define VERSION_NUMBER  702
+#define VERSION_NUMBER  703
 
 #define VERSION_YEAR	2021
 

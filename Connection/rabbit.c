@@ -472,58 +472,67 @@ void  RabbitTask(void  *p_arg)
 
                     } else {
                         preReadEvent(monid, &thisEvent);
+                        if((thisEvent.cid_eventcode != 0x000) && (thisEvent.cid_eventcode <= 0x999)) {
+                            SystemFlag12 |= GOODEVENT_FLAG;
+                        } else  {
+                            SystemFlag12 &= ~GOODEVENT_FLAG;
+                            ReadOutEvent(monid, &thisEvent);
+                        }
                     }
+                    if(SystemFlag12 & GOODEVENT_FLAG) {
+                        SystemFlag12 &= ~GOODEVENT_FLAG;
+                        //--------------------------------------------------------------
+                        // inserto el envio del paquete encriptado
+    /*					buf_len = ProtocolEncoder(monid, Monitoreo[monid].HBaccount, AP_NTSEC6E, &thisEvent, sendbuffer);
+                        retval = NetSock_TxDataTo(	(NET_SOCK_ID)			Monitoreo[monid].monsock,
+                                (void *)				sendbuffer,
+                                (CPU_INT16S)			buf_len,
+                                (CPU_INT16S)			NET_SOCK_FLAG_NONE,
+                                (NET_SOCK_ADDR *)		&(Monitoreo[monid].server_sock_addr_ip),
+                                (NET_SOCK_ADDR_LEN)		sizeof(Monitoreo[monid].server_sock_addr_ip),
+                                (NET_ERR *)				&err );
+                        OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);*/
+                        //--------------------------------------------------------------
 
-					//--------------------------------------------------------------
-					// inserto el envio del paquete encriptado
-/*					buf_len = ProtocolEncoder(monid, Monitoreo[monid].HBaccount, AP_NTSEC6E, &thisEvent, sendbuffer);
-					retval = NetSock_TxDataTo(	(NET_SOCK_ID)			Monitoreo[monid].monsock,
-							(void *)				sendbuffer,
-							(CPU_INT16S)			buf_len,
-							(CPU_INT16S)			NET_SOCK_FLAG_NONE,
-							(NET_SOCK_ADDR *)		&(Monitoreo[monid].server_sock_addr_ip),
-							(NET_SOCK_ADDR_LEN)		sizeof(Monitoreo[monid].server_sock_addr_ip),
-							(NET_ERR *)				&err );
-					OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &os_err);*/
-					//--------------------------------------------------------------
-					
-					buf_len = ProtocolEncoder(monid, Monitoreo[monid].HBaccount, Monitoreo[monid].protocol, &thisEvent, sendbuffer);
+                        buf_len = ProtocolEncoder(monid, Monitoreo[monid].HBaccount, Monitoreo[monid].protocol,
+                                                  &thisEvent, sendbuffer);
 
-					retval = NetSock_TxDataTo(	(NET_SOCK_ID)			Monitoreo[monid].monsock,
-												(void *)				sendbuffer,
-												(CPU_INT16S)			buf_len,
-												(CPU_INT16S)			NET_SOCK_FLAG_NONE,
-												(NET_SOCK_ADDR *)		&(Monitoreo[monid].server_sock_addr_ip),
-												(NET_SOCK_ADDR_LEN)		sizeof(Monitoreo[monid].server_sock_addr_ip),
-												(NET_ERR *)				&err );
-					if( err != NET_SOCK_ERR_NONE)	{
-						//NetSock_Close(Monitoreo[monid].monsock, &err);
-						Monitoreo[monid].state = SM_WAIT_CLOSE;
-						Monitoreo[monid].timer = SEC_TIMER;
-						break;
-					}
-					Monitoreo[monid].retries = 1;
-					Monitoreo[monid].state = SM_SOCK_WAITACK;
-                    timeout = SEC_TIMER + (5 * Monitoreo[monid].HeartBeatTime);
-					Monitoreo[monid].flags |= EVESND_FLAG;
-					Monitoreo[monid].timer = SEC_TIMER;
-					aboactual[0] = sendbuffer[4];
-					aboactual[1] = sendbuffer[13];
-					aboactual[2] = sendbuffer[14];
+                        retval = NetSock_TxDataTo((NET_SOCK_ID) Monitoreo[monid].monsock,
+                                                  (void *) sendbuffer,
+                                                  (CPU_INT16S) buf_len,
+                                                  (CPU_INT16S) NET_SOCK_FLAG_NONE,
+                                                  (NET_SOCK_ADDR *) &(Monitoreo[monid].server_sock_addr_ip),
+                                                  (NET_SOCK_ADDR_LEN) sizeof(Monitoreo[monid].server_sock_addr_ip),
+                                                  (NET_ERR *) &err);
+                        if (err != NET_SOCK_ERR_NONE) {
+                            //NetSock_Close(Monitoreo[monid].monsock, &err);
+                            Monitoreo[monid].state = SM_WAIT_CLOSE;
+                            Monitoreo[monid].timer = SEC_TIMER;
+                            break;
+                        }
+                        Monitoreo[monid].retries = 1;
+                        Monitoreo[monid].state = SM_SOCK_WAITACK;
+                        timeout = SEC_TIMER + (5 * Monitoreo[monid].HeartBeatTime);
+                        Monitoreo[monid].flags |= EVESND_FLAG;
+                        Monitoreo[monid].timer = SEC_TIMER;
+                        aboactual[0] = sendbuffer[4];
+                        aboactual[1] = sendbuffer[13];
+                        aboactual[2] = sendbuffer[14];
 
-					ScreenLedBlink(8, (7 - monid), 7, 3, 1);
-					//ScreenLedBlink(8, 7, 3, 3, 1);
-					if(OptoInputs == 0x81)	{
-						Buzzer_dcb.led_cad = 2*0x100 + 255;
-						Buzzer_dcb.led_state = LED_IDLE;
-						Buzzer_dcb.led_blink = 1;
-					}
-                    if(thisEvent.cid_eventcode == 0x606) {
-                        SystemFlag12 &= ~FORCESND_FLAG;
-                        //ReadOutEvent(monid, &thisEvent);
-                        Monitoreo[monid].flags &= ~EVESND_FLAG;
-                        Monitoreo[monid].state = SM_SOCK_READY;
-                        Monitoreo[monid].flags &= ~SNDHBT_FLAG;
+                        ScreenLedBlink(8, (7 - monid), 7, 3, 1);
+                        //ScreenLedBlink(8, 7, 3, 3, 1);
+                        if (OptoInputs == 0x81) {
+                            Buzzer_dcb.led_cad = 2 * 0x100 + 255;
+                            Buzzer_dcb.led_state = LED_IDLE;
+                            Buzzer_dcb.led_blink = 1;
+                        }
+                        if (thisEvent.cid_eventcode == 0x606) {
+                            SystemFlag12 &= ~FORCESND_FLAG;
+                            //ReadOutEvent(monid, &thisEvent);
+                            Monitoreo[monid].flags &= ~EVESND_FLAG;
+                            Monitoreo[monid].state = SM_SOCK_READY;
+                            Monitoreo[monid].flags &= ~SNDHBT_FLAG;
+                        }
                     }
 				} else
 				    if(SEC_TIMER >= (Monitoreo[monid].timer + Monitoreo[monid].HeartBeatTime))	{
@@ -547,6 +556,7 @@ void  RabbitTask(void  *p_arg)
 					retval = 0;
 					OSTimeDlyHMSM(0, 0, 0, 10, OS_OPT_TIME_HMSM_STRICT, &os_err);
 					//-----------------------------------------------
+                    SystemFlag12 &= ~GOODEVENT_FLAG;
 					buf_len = heartbeat(monid, sendbuffer);
 					retval = NetSock_TxDataTo(	(NET_SOCK_ID)			Monitoreo[monid].monsock,
 												(void *)				sendbuffer,
