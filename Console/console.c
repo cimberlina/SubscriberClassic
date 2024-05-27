@@ -100,7 +100,7 @@ const ConsoleCommand console_commands[] =
 	{ "we2prom zone", 	con_E2PROM_Write_zone, 	0,		MONI_LEVEL},
 //	{ "debug rf", 		con_DBGRF_mode, 		0,		OPER_LEVEL},
 //	{ "debug aborf", 	con_DBGABORF_mode,		0,		OPER_LEVEL},
-//    { "debug lan", 	con_DBGLAN_mode,		0,		OPER_LEVEL},
+    { "debug lan", 	con_DBGLAN_mode,		0,		OPER_LEVEL},
 //	{ "RDCONFMEM", 		con_E2PROM_read1,		0,		OPER_LEVEL},    //-
 	{ "set prevetimer", con_set_prevetimer, 	0,		MONI_LEVEL},
 
@@ -1501,31 +1501,31 @@ int con_E2PROM_Write_zone(ConsoleState* state)
 //	return 1;
 //}
 
-//int con_DBGLAN_mode(ConsoleState* state)
-//{
-//    uint16_t fmodetype;
-//
-//    if( state->numparams < 3 )	{
-//        state->conio->puts("DEBUG LAN 0|1\n\r");
-//        return 1;
-//    }
-//    fmodetype = atoi(con_getparam(state->command, 2));
-//
-//    switch(fmodetype)	{
-//        case 0:
-//            DebugFlag &= ~LAN485DBG_flag;
-//            break;
-//        case 1:
-//            DebugFlag |= LAN485DBG_flag;
-//            break;
-//        default:
-//            state->conio->puts("*** DEBUG LAN ERROR  ***\n\r");
-//            return -1;
-//            break;
-//    }
-//
-//    return 1;
-//}
+int con_DBGLAN_mode(ConsoleState* state)
+{
+    uint16_t fmodetype;
+
+    if( state->numparams < 3 )	{
+        state->conio->puts("DEBUG LAN 0|1\n\r");
+        return 1;
+    }
+    fmodetype = atoi(con_getparam(state->command, 2));
+
+    switch(fmodetype)	{
+        case 0:
+            DebugFlag &= ~LAN485DBG_flag;
+            break;
+        case 1:
+            DebugFlag |= LAN485DBG_flag;
+            break;
+        default:
+            state->conio->puts("*** DEBUG LAN ERROR  ***\n\r");
+            return -1;
+            break;
+    }
+
+    return 1;
+}
 
 //int con_perifpwr(ConsoleState* state)
 //{

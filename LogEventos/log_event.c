@@ -108,7 +108,7 @@ void  LogT_Task(void  *p_arg)
 
     while(DEF_ON) {
         WDT_Feed();
-        OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &os_err);
+        OSTimeDlyHMSM(0, 0, 0, 500, OS_OPT_TIME_HMSM_STRICT, &os_err);
 
         if(LogT_eventRec_count)   {
             rdptr = LogT_eventRec_readptr;

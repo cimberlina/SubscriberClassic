@@ -189,14 +189,14 @@ void  LAN485_Task(void  *p_arg)
 
 	if( howmuchdev <= 4)	{
 		tslotsec = 0;
-		tslotms = 250;      //250
+		tslotms = 350;      //250
 	} else
 	if ( howmuchdev <= 12)	{
 		tslotsec = 0;
-		tslotms = 2505;      //250
+		tslotms = 350;      //250
 	} else	{
 		tslotsec = 0;
-		tslotms = 250;      //250
+		tslotms = 350;      //250
 	}
 
 	currtime.tm_sec = RTC_GetTime (LPC_RTC, RTC_TIMETYPE_SECOND);
@@ -326,8 +326,8 @@ void  LAN485_Task(void  *p_arg)
 			reset_array_bit(ptm_dcb[ptm_index].rtuaddr, devfound);
 
 			device_poll( ptm_index );
-			OSTimeDlyHMSM(0, 0, 0, 30, OS_OPT_TIME_HMSM_STRICT, &os_err);   //30ms
-			nread = ComGetBuff(COMM2, 30, rxbuffer, 64);    //30ms
+			OSTimeDlyHMSM(0, 0, 0, 60, OS_OPT_TIME_HMSM_STRICT, &os_err);   //30ms
+			nread = ComGetBuff(COMM2, 60, rxbuffer, 64);    //30ms
 			rxbuffer[nread] = 0;
 
 			PTm_process_answer( nread, rxbuffer, ptm_index );
